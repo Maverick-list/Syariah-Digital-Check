@@ -7,10 +7,20 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "backgroundColor": "#F8F7F0",
+    "backgroundColor": "#FAF8F5",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#064E3B"
+    },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "id.syls.syariahdigitalcheck"
+      "bundleIdentifier": "id.syls.syariahdigitalcheck",
+      "infoPlist": {
+        "CFBundleDisplayName": "Syariah Check",
+        "UIStatusBarStyle": "UIStatusBarStyleLightContent",
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "id.syls.syariahdigitalcheck",
