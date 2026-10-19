@@ -4,12 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Syariah Digital Check — Cerdas Sebelum Transaksi, Bijak dalam Pilihan</title>
-  <meta name="description" content="Platform edukasi literasi keuangan dan evaluasi kesesuaian prinsip syariah pada transaksi finansial digital modern.">
+  <meta name="description" content="Platform edukasi literasi keuangan dan evaluasi kesesuaian prinsip syariah pada transaksi finansial digital modern Indonesia.">
+  <meta name="theme-color" content="#064E3B">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  
   <style>
     :root {
+      /* Primary Brand: Deep Emerald Green */
       --emerald-950: #032115;
       --emerald-900: #064E3B;
       --emerald-800: #065F46;
@@ -18,50 +22,60 @@
       --emerald-100: #D1FAE5;
       --emerald-50:  #ECFDF5;
 
+      /* Neutral Canvas: Warm Ivory & Alabaster */
       --ivory-base:  #FAF8F5;
       --ivory-card:  #FFFFFF;
       --ivory-warm:  #F4EFE6;
       --ivory-border:#E7E2D6;
 
+      /* Secondary Surfaces: Muted Sage */
       --sage-900:    #1F3529;
       --sage-700:    #385444;
+      --sage-300:    #B2C4B8;
       --sage-200:    #D5DFD8;
       --sage-100:    #E7EDE9;
       --sage-50:     #F2F6F3;
 
+      /* Restrained Accent: Champagne Gold */
       --gold-700:    #8C6A28;
       --gold-600:    #B28834;
       --gold-500:    #C89D42;
       --gold-100:    #F7EED8;
       --gold-50:     #FDF9F0;
 
+      /* High-Legibility Typography Colors (WCAG AAA) */
       --text-primary:   #0D281E;
-      --text-secondary: #3D5347;
-      --text-muted:     #667D71;
-      --text-light:     #889E92;
+      --text-secondary: #2C4337;
+      --text-muted:     #577063;
+      --text-light:     #7F968B;
+      --text-inverse:   #FFFFFF;
 
-      --danger-bg:   #FDF2F2;
+      /* Semantic Status Surfaces */
+      --danger-bg:     #FDF2F2;
       --danger-border: #F8B4B4;
-      --danger-text: #9B1C1C;
+      --danger-text:   #9B1C1C;
+      --warn-bg:       #FEF9EC;
+      --warn-border:   #F7DA99;
+      --warn-text:     #8C6A28;
+      --good-bg:       #EDF9F1;
+      --good-border:   #A7F3D0;
+      --good-text:     #065F46;
 
-      --warn-bg:     #FEF9EC;
-      --warn-border: #F7DA99;
-      --warn-text:   #8C6A28;
-
-      --good-bg:     #EDF9F1;
-      --good-border: #A7F3D0;
-      --good-text:   #065F46;
-
+      /* Radii */
       --radius-sm: 8px;
       --radius-md: 12px;
       --radius-lg: 16px;
       --radius-xl: 22px;
+      --radius-2xl: 28px;
       --radius-pill: 9999px;
 
+      /* Shadows */
       --shadow-subtle: 0 1px 3px rgba(13, 40, 30, 0.04), 0 1px 2px rgba(13, 40, 30, 0.02);
       --shadow-card:   0 4px 16px rgba(13, 40, 30, 0.05), 0 1px 3px rgba(13, 40, 30, 0.03);
       --shadow-float:  0 12px 32px rgba(13, 40, 30, 0.08), 0 4px 12px rgba(13, 40, 30, 0.04);
       --shadow-modal:  0 20px 48px rgba(3, 33, 21, 0.16);
+
+      --touch-target: 48px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -78,6 +92,22 @@
       justify-content: flex-start;
       -webkit-font-smoothing: antialiased;
       padding: 0;
+    }
+
+    /* Accessibility Focus Indicator */
+    button:focus-visible, input:focus-visible, a:focus-visible {
+      outline: 2px solid var(--emerald-700);
+      outline-offset: 2px;
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
 
     /* Top Global Controller Bar (Responsive Switcher & Branding) */
@@ -98,15 +128,20 @@
     .controller-brand {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       font-weight: 700;
       letter-spacing: 0.02em;
+    }
+    .controller-brand-icon {
+      width: 22px;
+      height: 22px;
+      color: var(--gold-500);
     }
     .controller-badge {
       font-size: 11px;
       padding: 3px 8px;
       background: rgba(200, 157, 66, 0.18);
-      color: var(--gold-400);
+      color: var(--gold-500);
       border-radius: var(--radius-pill);
       border: 1px solid rgba(200, 157, 66, 0.3);
       font-weight: 600;
@@ -123,7 +158,7 @@
       background: transparent;
       border: none;
       color: #9EC0AF;
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: var(--radius-pill);
       font-size: 12px;
       font-weight: 600;
@@ -132,6 +167,7 @@
       align-items: center;
       gap: 6px;
       transition: all 0.2s ease;
+      min-height: 32px;
     }
     .mode-btn:hover { color: #fff; }
     .mode-btn.active {
@@ -147,8 +183,8 @@
     .btn-ds-trigger {
       background: transparent;
       border: 1px solid rgba(200, 157, 66, 0.5);
-      color: var(--gold-400);
-      padding: 5px 12px;
+      color: var(--gold-500);
+      padding: 6px 14px;
       border-radius: var(--radius-pill);
       font-size: 12px;
       font-weight: 600;
@@ -157,13 +193,14 @@
       align-items: center;
       gap: 6px;
       transition: all 0.2s;
+      min-height: 32px;
     }
     .btn-ds-trigger:hover {
       background: var(--gold-500);
       color: var(--emerald-950);
     }
 
-    /* Outer Wrapper for responsive device framing */
+    /* Canvas Container */
     .canvas-container {
       width: 100%;
       display: flex;
@@ -176,7 +213,7 @@
     /* Device Framing */
     .device-frame {
       width: 100%;
-      max-width: 414px; /* Default Mobile Viewport: 390-414px */
+      max-width: 414px; /* Mobile viewport standard */
       min-height: 844px;
       background: var(--ivory-base);
       border-radius: 40px;
@@ -199,13 +236,13 @@
       padding: 0;
     }
     .canvas-container.mode-desktop .device-frame {
-      max-width: 1080px;
+      max-width: 1024px;
       min-height: 100vh;
       border-radius: 0;
       box-shadow: none;
     }
 
-    /* Speaker notch on mobile mockup */
+    /* Speaker notch on desktop mockup */
     .mockup-notch {
       position: absolute;
       top: 10px;
@@ -238,7 +275,49 @@
       display: none;
     }
 
-    /* Screen Container & Scrollable Area */
+    /* ========================================================= */
+    /* RESPONSIVE MEDIA QUERY: NATIVE MOBILE VIEWPORT (< 600px) */
+    /* Strip fake bezel & double-padding on real mobile screens  */
+    /* ========================================================= */
+    @media (max-width: 600px) {
+      body {
+        background-color: var(--ivory-base);
+        padding: 0;
+      }
+      .viewport-controller {
+        display: none !important;
+      }
+      .canvas-container {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+      }
+      .device-frame {
+        max-width: 100vw !important;
+        width: 100vw !important;
+        min-height: 100vh !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+      }
+      .mockup-notch {
+        display: none !important;
+      }
+      .screen-scroller {
+        padding-bottom: calc(76px + max(16px, env(safe-area-inset-bottom))) !important;
+      }
+      .bottom-nav {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        padding-bottom: max(12px, env(safe-area-inset-bottom)) !important;
+        border-radius: 0 !important;
+      }
+    }
+
+    /* Screen Scroller */
     .screen-scroller {
       flex: 1;
       overflow-y: auto;
@@ -248,24 +327,25 @@
       position: relative;
     }
 
-    /* Screens Switching */
+    /* Screen View Transitions */
     .screen {
       display: none;
-      animation: fadeIn 0.25s ease-out;
+      animation: fadeIn 0.22s ease-out;
     }
     .screen.active {
       display: block;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Common Components & Elements */
+    /* Typography & Hierarchy */
     .serif-title {
       font-family: 'Playfair Display', Georgia, serif;
       letter-spacing: -0.01em;
       font-weight: 700;
+      color: var(--emerald-950);
     }
     .eyebrow {
       font-size: 11px;
@@ -278,8 +358,10 @@
       align-items: center;
       gap: 6px;
     }
+    .eyebrow svg { width: 14px; height: 14px; stroke-width: 2.2; }
     .eyebrow.gold { color: var(--gold-600); }
 
+    /* Header Emerald Banner */
     .header-emerald {
       background: linear-gradient(155deg, var(--emerald-950) 0%, var(--emerald-900) 65%, var(--emerald-800) 100%);
       color: #fff;
@@ -303,22 +385,27 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       background: rgba(255, 255, 255, 0.1);
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: var(--radius-pill);
       color: #D3EBDD;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
     }
     .user-profile-badge {
       display: flex;
       align-items: center;
       gap: 8px;
       background: rgba(255, 255, 255, 0.12);
-      padding: 4px 10px 4px 4px;
+      padding: 4px 12px 4px 5px;
       border-radius: var(--radius-pill);
       cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       font-size: 12px;
       font-weight: 600;
+      color: #fff;
+      transition: background 0.18s;
+    }
+    .user-profile-badge:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
     .user-avatar {
       width: 28px;
@@ -344,11 +431,12 @@
       padding: 18px;
       margin-bottom: 16px;
       box-shadow: var(--shadow-card);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
     }
     .card.hoverable:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-float);
+      border-color: var(--emerald-600);
     }
     .card-hero-check {
       background: linear-gradient(135deg, #F3F8F5 0%, #FFFDF8 100%);
@@ -363,9 +451,9 @@
       position: absolute;
       top: -30px;
       right: -30px;
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle, rgba(200, 157, 66, 0.12) 0%, transparent 70%);
+      width: 130px;
+      height: 130px;
+      background: radial-gradient(circle, rgba(200, 157, 66, 0.14) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
     }
@@ -377,7 +465,7 @@
       justify-content: center;
       gap: 8px;
       padding: 13px 20px;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
       border-radius: var(--radius-lg);
       border: none;
@@ -385,6 +473,7 @@
       text-decoration: none;
       transition: all 0.18s ease;
       font-family: inherit;
+      min-height: var(--touch-target);
     }
     .btn:active { transform: scale(0.98); }
     .btn-primary {
@@ -394,6 +483,7 @@
     }
     .btn-primary:hover {
       background: var(--emerald-800);
+      box-shadow: 0 6px 18px rgba(6, 78, 59, 0.35);
     }
     .btn-gold {
       background: var(--gold-500);
@@ -425,9 +515,10 @@
       padding: 8px 14px;
       font-size: 12px;
       border-radius: var(--radius-md);
+      min-height: 38px;
     }
 
-    /* Icon Box */
+    /* Icon Box (Standard SVG Icon Holder) */
     .icon-box {
       width: 44px;
       height: 44px;
@@ -444,6 +535,11 @@
       background: var(--gold-50);
       color: var(--gold-700);
       border-color: rgba(200, 157, 66, 0.3);
+    }
+    .icon-box.sage {
+      background: var(--sage-100);
+      color: var(--sage-900);
+      border-color: var(--sage-200);
     }
 
     /* Pills & Badges */
@@ -496,14 +592,14 @@
       color: var(--good-text);
     }
 
-    /* Bottom Navigation */
+    /* Persistent Bottom Navigation */
     .bottom-nav {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
       height: 76px;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-top: 1px solid var(--ivory-border);
@@ -520,13 +616,14 @@
       align-items: center;
       justify-content: center;
       gap: 4px;
-      color: #7A9084;
+      color: #6E877B;
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
       padding: 4px 0;
       transition: color 0.18s ease;
       font-family: inherit;
+      min-height: var(--touch-target);
     }
     .nav-item svg { width: 22px; height: 22px; stroke-width: 1.8; transition: transform 0.18s; }
     .nav-item:hover { color: var(--emerald-900); }
@@ -536,7 +633,7 @@
     }
     .nav-item.active svg { transform: translateY(-1px); stroke-width: 2.2; stroke: var(--emerald-900); }
 
-    /* Top Navigation for back buttons */
+    /* Top Subnavigation */
     .top-subnav {
       display: flex;
       align-items: center;
@@ -554,9 +651,10 @@
       gap: 6px;
       cursor: pointer;
       padding: 6px 0;
+      min-height: 38px;
     }
 
-    /* Onboarding Carousel */
+    /* Onboarding Screen */
     .onboarding-screen {
       padding: 36px 24px 24px;
       display: flex;
@@ -601,7 +699,7 @@
       background: var(--emerald-900);
     }
 
-    /* 3-Pillar Step Badges (PAUSE - CHECK - CHOOSE) */
+    /* 3-Pillar Step Badges (PAUSE - CHECK - CHOOSE) with Bespoke SVG Icons */
     .pillar-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -612,14 +710,26 @@
       background: var(--ivory-card);
       border: 1px solid var(--ivory-border);
       border-radius: var(--radius-lg);
-      padding: 12px 6px;
+      padding: 14px 8px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      box-shadow: var(--shadow-subtle);
     }
-    .pillar-icon {
-      font-size: 18px;
+    .pillar-icon-box {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--emerald-50);
+      color: var(--emerald-800);
+      display: grid;
+      place-items: center;
       margin-bottom: 4px;
-      display: block;
+      border: 1px solid rgba(4, 120, 87, 0.12);
     }
+    .pillar-icon-box svg { width: 18px; height: 18px; stroke-width: 2.2; }
     .pillar-title {
       font-size: 12px;
       font-weight: 800;
@@ -627,12 +737,11 @@
       color: var(--emerald-900);
     }
     .pillar-subtitle {
-      font-size: 10px;
+      font-size: 10.5px;
       color: var(--text-muted);
-      margin-top: 2px;
     }
 
-    /* Checklist Screen Custom Form */
+    /* Checklist Screen Stepper */
     .step-progress-bar {
       height: 6px;
       background: var(--sage-100);
@@ -665,6 +774,7 @@
       cursor: pointer;
       transition: all 0.18s ease;
       background: #FFFFFF;
+      min-height: var(--touch-target);
     }
     .option-radio:hover {
       border-color: var(--emerald-600);
@@ -702,21 +812,22 @@
       display: block;
     }
     .option-label {
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 600;
       color: var(--text-primary);
       line-height: 1.4;
     }
     .option-hint {
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--text-muted);
       margin-top: 3px;
       font-weight: 400;
+      line-height: 1.4;
     }
 
     /* Expandable Tooltip / Educational Callout */
     .edu-drawer-toggle {
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 700;
       color: var(--emerald-800);
       background: transparent;
@@ -724,53 +835,77 @@
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       margin-top: 10px;
+      min-height: 32px;
     }
     .edu-callout {
       background: var(--sage-50);
       border: 1px solid var(--sage-200);
       border-radius: var(--radius-md);
-      padding: 12px 14px;
-      font-size: 12px;
+      padding: 14px 16px;
+      font-size: 12.5px;
       color: var(--sage-900);
-      line-height: 1.5;
+      line-height: 1.55;
       margin-top: 10px;
       display: none;
     }
     .edu-callout.open { display: block; }
 
-    /* Results Screen */
+    /* Results Screen: Animated SVG Progress Dial */
     .score-dial-card {
       text-align: center;
-      padding: 28px 20px;
+      padding: 32px 20px;
       background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F3 100%);
       border: 1px solid var(--ivory-border);
       border-radius: 26px;
       box-shadow: var(--shadow-card);
       margin-bottom: 20px;
     }
-    .score-circle {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: var(--emerald-50);
-      border: 4px solid var(--emerald-800);
+    .score-circle-svg-wrap {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 16px;
       display: grid;
       place-items: center;
-      margin: 0 auto 16px;
-      position: relative;
     }
-    .score-circle.warn {
-      border-color: var(--gold-500);
-      background: var(--warn-bg);
+    .score-ring-svg {
+      transform: rotate(-90deg);
+      width: 120px;
+      height: 120px;
+    }
+    .score-ring-bg {
+      fill: none;
+      stroke: var(--sage-100);
+    }
+    .score-ring-fill {
+      fill: none;
+      stroke: var(--emerald-800);
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.3s;
+    }
+    .score-ring-center {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     .score-number {
       font-size: 32px;
       font-weight: 800;
       color: var(--emerald-900);
+      line-height: 1;
     }
-    .score-circle.warn .score-number { color: var(--gold-700); }
+    .score-sublabel {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
 
     /* Category Cards Grid */
     .category-grid {
@@ -789,7 +924,8 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 130px;
+      min-height: 140px;
+      box-shadow: var(--shadow-subtle);
     }
     .cat-card:hover {
       border-color: var(--emerald-700);
@@ -802,14 +938,14 @@
       box-shadow: 0 0 0 1px var(--emerald-800);
     }
     .cat-card h4 {
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--text-primary);
       margin: 10px 0 4px;
       line-height: 1.3;
     }
     .cat-card p {
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--text-muted);
       line-height: 1.4;
     }
@@ -821,15 +957,16 @@
     }
     .search-input {
       width: 100%;
-      padding: 12px 14px 12px 40px;
+      padding: 12px 14px 12px 42px;
       border: 1px solid var(--ivory-border);
       border-radius: var(--radius-lg);
       background: #FFFFFF;
-      font-size: 13px;
+      font-size: 13.5px;
       font-family: inherit;
       color: var(--text-primary);
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: var(--touch-target);
     }
     .search-input:focus {
       border-color: var(--emerald-800);
@@ -858,13 +995,16 @@
       background: #FFFFFF;
       border: 1px solid var(--ivory-border);
       border-radius: var(--radius-pill);
-      padding: 6px 14px;
-      font-size: 11px;
+      padding: 8px 16px;
+      font-size: 11.5px;
       font-weight: 600;
       color: var(--text-secondary);
       white-space: nowrap;
       cursor: pointer;
       transition: all 0.15s ease;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
     }
     .filter-chip:hover { border-color: var(--emerald-700); }
     .filter-chip.active {
@@ -873,7 +1013,7 @@
       border-color: var(--emerald-900);
     }
 
-    /* Quiz Container */
+    /* Quiz Card */
     .quiz-card {
       background: #FFFFFF;
       border: 1px solid var(--ivory-border);
@@ -885,13 +1025,13 @@
     .quiz-feedback-box {
       border-radius: var(--radius-lg);
       padding: 14px 16px;
-      font-size: 12px;
+      font-size: 12.5px;
       line-height: 1.55;
       margin-top: 14px;
       display: none;
     }
 
-    /* Modal / Drawer */
+    /* Modals & Drawers */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -916,7 +1056,7 @@
     .modal-sheet {
       background: var(--ivory-base);
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
       border-radius: 28px 28px 0 0;
       max-height: 85vh;
       overflow-y: auto;
@@ -936,7 +1076,7 @@
       margin: 0 auto 18px;
     }
 
-    /* Design System Inspector Modal Specific */
+    /* Design System Modal Specific */
     .ds-modal .modal-sheet {
       max-width: 800px;
       border-radius: 28px;
@@ -953,18 +1093,19 @@
       transform: translateX(-50%) translateY(20px);
       background: var(--emerald-950);
       color: #fff;
-      padding: 10px 18px;
+      padding: 12px 20px;
       border-radius: var(--radius-pill);
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 600;
       box-shadow: 0 8px 24px rgba(0,0,0,0.25);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       opacity: 0;
       pointer-events: none;
-      transition: all 0.25s ease;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 300;
+      border: 1px solid rgba(200, 157, 66, 0.3);
     }
     .toast-msg.show {
       transform: translateX(-50%) translateY(0);
@@ -977,22 +1118,19 @@
     .gap-2 { gap: 8px; }
     .gap-3 { gap: 12px; }
     .gap-4 { gap: 16px; }
+    .mt-1 { margin-top: 4px; }
     .mt-2 { margin-top: 8px; }
     .mt-3 { margin-top: 12px; }
     .mt-4 { margin-top: 16px; }
     .mt-6 { margin-top: 24px; }
+    .mb-1 { margin-bottom: 4px; }
     .mb-2 { margin-bottom: 8px; }
     .mb-3 { margin-bottom: 12px; }
     .mb-4 { margin-bottom: 16px; }
     .text-center { text-align: center; }
     .text-muted { color: var(--text-muted); font-size: 12px; }
     .text-xs { font-size: 11px; }
-
-    /* Accessibility focus indicators */
-    button:focus-visible, input:focus-visible, a:focus-visible {
-      outline: 2px solid var(--gold-500);
-      outline-offset: 2px;
-    }
+    .gold-sparkle { color: var(--gold-500); font-size: 18px; vertical-align: middle; }
   </style>
 </head>
 <body>
@@ -1000,7 +1138,7 @@
   <!-- Top Controller Bar: Viewport Switcher & Design System Toggle -->
   <header class="viewport-controller">
     <div class="controller-brand">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C89D42" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      <svg class="controller-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
       <span>Syariah Digital Check</span>
       <span class="controller-badge">Fintech UX v2.4</span>
     </div>
@@ -1033,7 +1171,7 @@
   <main class="canvas-container" id="canvasContainer">
     <div class="device-frame" id="deviceFrame">
       
-      <!-- Top Speaker Notch for Mobile Realism -->
+      <!-- Top Speaker Notch for Mobile Realism (Hidden on native mobile) -->
       <div class="mockup-notch">
         <div class="notch-camera"></div>
         <div class="notch-speaker"></div>
@@ -1061,7 +1199,7 @@
             <!-- Dynamic Step Card -->
             <div class="onboard-step-card" id="onboardStepCard">
               <div class="onboard-icon-large" id="onboardIconBox">
-                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                <!-- SVG dynamically injected -->
               </div>
               <div class="pill pill-emerald" id="onboardStepPill">LANGKAH 1 : BERHENTI SEJENAK</div>
               <h2 class="serif-title mt-3" style="font-size: 20px;" id="onboardTitle">PAUSE: Jeda Sejenak</h2>
@@ -1105,14 +1243,14 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C89D42" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 <span>SYARIAH DIGITAL CHECK</span>
               </div>
-              <div class="user-profile-badge" onclick="navigateTo('screenProfile')">
+              <div class="user-profile-badge" onclick="navigateTo('screenProfile')" title="Buka Profil">
                 <div class="user-avatar" id="homeUserAvatar">FP</div>
-                <span id="homeUserName">Fikri P.</span>
+                <span id="homeUserName">Fikri</span>
               </div>
             </div>
 
-            <h1 class="serif-title" style="font-size: 24px; line-height: 1.25;">
-              Assalamu’alaikum, <br><span id="homeGreetingName">Fikri</span> 👋
+            <h1 class="serif-title" style="font-size: 24px; line-height: 1.25; color: #fff;">
+              Assalamu’alaikum, <br><span id="homeGreetingName">Fikri</span> <span class="gold-sparkle">✦</span>
             </h1>
             <p style="color: #CEE4D8; font-size: 13px; margin-top: 6px;">
               Cerdas sebelum transaksi, bijak dalam pilihan.
@@ -1123,13 +1261,13 @@
             <!-- 30-Second Check Hero Card -->
             <div class="card-hero-check">
               <div class="flex-between">
-                <span class="eyebrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 30-SECOND FAST CHECK</span>
+                <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 30-SECOND FAST CHECK</span>
                 <span class="pill pill-gold">Rekomendasi</span>
               </div>
               <h2 class="serif-title mt-2" style="font-size: 19px; color: var(--emerald-950); line-height: 1.3;">
                 Ingin transaksi sekarang? Periksa akad & biayanya!
               </h2>
-              <p class="text-muted mt-2" style="font-size: 12px; line-height: 1.55;">
+              <p class="text-muted mt-2" style="font-size: 12.5px; line-height: 1.55;">
                 Pahami hak dan kewajiban, hindari denda tersembunyi, dan pastikan transaksi sesuai nilai muamalah syariah.
               </p>
               <button class="btn btn-primary btn-full mt-3" onclick="navigateTo('screenCategorySelect')">
@@ -1138,20 +1276,26 @@
               </button>
             </div>
 
-            <!-- 3 Core Pillars -->
+            <!-- 3 Core Pillars with Bespoke SVG Icons (Zero Childish Emojis) -->
             <div class="pillar-row">
               <div class="pillar-card">
-                <span class="pillar-icon">⏸</span>
+                <div class="pillar-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+                </div>
                 <div class="pillar-title">PAUSE</div>
                 <div class="pillar-subtitle">Tunda 30 detik</div>
               </div>
               <div class="pillar-card">
-                <span class="pillar-icon">🔍</span>
+                <div class="pillar-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                </div>
                 <div class="pillar-title">CHECK</div>
                 <div class="pillar-subtitle">Telaah akad</div>
               </div>
               <div class="pillar-card">
-                <span class="pillar-icon">✓</span>
+                <div class="pillar-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
                 <div class="pillar-title">CHOOSE</div>
                 <div class="pillar-subtitle">Putuskan bijak</div>
               </div>
@@ -1175,7 +1319,7 @@
               </div>
 
               <div class="flex-between mt-2 text-xs" style="color: var(--text-muted);">
-                <span>5 Evaluasi Selesai</span>
+                <span id="homeChecksBadge">5 Evaluasi Selesai</span>
                 <span>6 Modul Dibaca</span>
                 <span>Skor Kuis: 5/5</span>
               </div>
@@ -1192,7 +1336,7 @@
               </button>
             </div>
 
-            <!-- Case Study Mini Cards -->
+            <!-- Case Study Mini Cards with Custom SVGs -->
             <div class="card hoverable flex-row gap-3" style="padding: 14px;" onclick="openCaseDetail(0)">
               <div class="icon-box">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
@@ -1225,11 +1369,11 @@
 
             <!-- Featured Educational Bite -->
             <div class="card mt-3" style="background: var(--sage-50); border-color: var(--sage-200);">
-              <span class="eyebrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> MODUL UNGGULAN HARI INI</span>
+              <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> MODUL UNGGULAN HARI INI</span>
               <h4 style="font-size: 14px; margin-top: 6px; color: var(--emerald-950);">
                 Mengenal Perbedaan Esensial Murabahah vs Pinjaman Berbunga
               </h4>
-              <p class="text-muted mt-1" style="font-size: 12px;">
+              <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.55;">
                 Pelajari mengapa jual beli margin laba disepakati di awal berbeda secara fundamental dari utang-piutang berbunga.
               </p>
               <div class="flex-between mt-3">
@@ -1258,45 +1402,45 @@
               Pilih Jenis Transaksi yang Ingin Diperiksa
             </h2>
             <p class="text-muted mt-1" style="font-size: 13px;">
-              Tiap kategori memiliki titik kritis kesesuaian syariah dan klausul perlindungan konsumen yang berbeda.
+              Tiap kategori memiliki titik kritis hukum muamalah dan potensi risiko tersembunyi yang berbeda.
             </p>
 
-            <!-- 6 Realistic Category Cards -->
+            <!-- 6 Real-World Transaction Categories with Clean SVGs -->
             <div class="category-grid">
               <!-- Cat 1 -->
-              <div class="cat-card" onclick="selectCategory('Belanja Online & E-Commerce', 'Akad Salam / Murabahah / Khiyar', 0)">
+              <div class="cat-card" onclick="selectCategory('PayLater & Cicilan Digital', 'Qardh / Murabahah / Hawalah', 0)">
+                <div class="icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/><path d="M6 15h4"/></svg>
+                </div>
+                <div>
+                  <h4>PayLater & Cicilan</h4>
+                  <p>Skema beli sekarang bayar nanti, denda, dan bunga terselubung.</p>
+                </div>
+                <span class="pill pill-warn" style="font-size: 9.5px; align-self: flex-start; margin-top: 6px;">Titik Kritis: Denda Ta'zir</span>
+              </div>
+
+              <!-- Cat 2 -->
+              <div class="cat-card" onclick="selectCategory('Belanja Online & Marketplace', 'Bai\' / Salam / Wakalah bil Ujrah', 1)">
                 <div class="icon-box">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
                 </div>
                 <div>
-                  <h4>Belanja Online & E-Commerce</h4>
-                  <p>Flash sale, COD, dropshipping & promo diskon.</p>
+                  <h4>Belanja E-Commerce</h4>
+                  <p>Dropshipping, pre-order, promo cashback bersyarat & garansi.</p>
                 </div>
-                <span class="pill pill-emerald" style="font-size: 9px; align-self: flex-start; margin-top: 6px;">Kejelasan Objek</span>
-              </div>
-
-              <!-- Cat 2 -->
-              <div class="cat-card" onclick="selectCategory('PayLater & Cicilan Digital', 'Qardh / Murabahah / Hawalah', 1)">
-                <div class="icon-box gold">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-                </div>
-                <div>
-                  <h4>PayLater & Cicilan Digital</h4>
-                  <p>BNPL, biaya langganan, dan denda keterlambatan.</p>
-                </div>
-                <span class="pill pill-danger" style="font-size: 9px; align-self: flex-start; margin-top: 6px;">Risiko Denda Riba</span>
+                <span class="pill pill-emerald" style="font-size: 9.5px; align-self: flex-start; margin-top: 6px;">Kejelasan Objek & Serah Terima</span>
               </div>
 
               <!-- Cat 3 -->
-              <div class="cat-card" onclick="selectCategory('Investasi Emas Digital', 'Sharf & Wadiah / Titipan Fisik', 2)">
-                <div class="icon-box">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+              <div class="cat-card" onclick="selectCategory('Emas & Investasi Digital', 'Sharf / Qabdh Hukmi', 2)">
+                <div class="icon-box gold">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <div>
-                  <h4>Investasi Emas Digital</h4>
-                  <p>Tabungan emas, serah terima tunai & cetak fisik.</p>
+                  <h4>Emas & Investasi</h4>
+                  <p>Kustodian fisik emas, serah terima non-tunai (Qabdh Hukmi).</p>
                 </div>
-                <span class="pill pill-gold" style="font-size: 9px; align-self: flex-start; margin-top: 6px;">Qabdh / Serah Terima</span>
+                <span class="pill pill-gold" style="font-size: 9.5px; align-self: flex-start; margin-top: 6px;">Fisik Riil di Kustodian</span>
               </div>
 
               <!-- Cat 4 -->
@@ -1308,7 +1452,7 @@
                   <h4>Tabungan Digital</h4>
                   <p>Rekening neo-bank, bagi hasil & proteksi simpanan.</p>
                 </div>
-                <span class="pill pill-emerald" style="font-size: 9px; align-self: flex-start; margin-top: 6px;">Bagi Hasil vs Bunga</span>
+                <span class="pill pill-emerald" style="font-size: 9.5px; align-self: flex-start; margin-top: 6px;">Bagi Hasil vs Bunga</span>
               </div>
 
               <!-- Cat 5 -->
@@ -1320,7 +1464,7 @@
                   <h4>Langganan Berulang</h4>
                   <p>Auto-debit, free-trial otomatis berbayar & kuota.</p>
                 </div>
-                <span class="pill pill-warn" style="font-size: 9px; align-self: flex-start; margin-top: 6px;">Gharar Masa Aktif</span>
+                <span class="pill pill-warn" style="font-size: 9.5px; align-self: flex-start; margin-top: 6px;">Gharar Masa Aktif</span>
               </div>
 
               <!-- Cat 6 -->
@@ -1332,7 +1476,7 @@
                   <h4>Donasi & Ziswaf Digital</h4>
                   <p>Crowdfunding sosial, transparansi amil & potongan fee.</p>
                 </div>
-                <span class="pill pill-emerald" style="font-size: 9px; align-self: flex-start; margin-top: 6px;">Transparansi Amil</span>
+                <span class="pill pill-emerald" style="font-size: 9.5px; align-self: flex-start; margin-top: 6px;">Transparansi Amil</span>
               </div>
             </div>
 
@@ -1431,13 +1575,21 @@
           </div>
 
           <div class="main-content">
-            <!-- Score Dial Card -->
+            <!-- Animated SVG Score Dial Card -->
             <div class="score-dial-card">
-              <div class="score-circle" id="resultScoreCircle">
-                <span class="score-number" id="resultScoreNum">80%</span>
+              <div class="score-circle-svg-wrap">
+                <svg class="score-ring-svg" viewBox="0 0 120 120">
+                  <circle class="score-ring-bg" cx="60" cy="60" r="50" stroke-width="8" />
+                  <circle class="score-ring-fill" id="resultScoreRing" cx="60" cy="60" r="50" stroke-width="8" stroke-dasharray="314.159" stroke-dashoffset="62.8" />
+                </svg>
+                <div class="score-ring-center">
+                  <span class="score-number" id="resultScoreNum">80%</span>
+                  <span class="score-sublabel">Transparansi</span>
+                </div>
               </div>
+
               <div class="pill pill-emerald" id="resultStatusBadge">TINGKAT KEJELASAN : TINGGI</div>
-              <h2 class="serif-title mt-2" style="font-size: 22px; color: var(--emerald-950);" id="resultHeading">
+              <h2 class="serif-title mt-3" style="font-size: 22px; color: var(--emerald-950);" id="resultHeading">
                 Informasi Utama Transaksi Cukup Transparan
               </h2>
               <p class="text-muted mt-2" style="max-width: 320px; margin-left: auto; margin-right: auto; line-height: 1.55;" id="resultSummaryText">
@@ -1448,7 +1600,7 @@
             <!-- Items Requiring Verification -->
             <div class="card">
               <div class="flex-between mb-2">
-                <span class="eyebrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> POIN VERIFIKASI LANJUTAN</span>
+                <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> POIN VERIFIKASI LANJUTAN</span>
                 <span class="pill pill-warn" id="resultVerifyCount">2 Perlu Cek</span>
               </div>
               <div id="resultVerificationList">
@@ -1456,20 +1608,20 @@
               </div>
             </div>
 
-            <!-- Recommended Questions to Merchant -->
+            <!-- Recommended Questions to Merchant with Toast Feedback -->
             <div class="card" style="background: var(--sage-50); border-color: var(--sage-200);">
-              <span class="eyebrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> PERTANYAAN KRITIS UNTUK MERCHANT / CS</span>
+              <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> PERTANYAAN KRITIS UNTUK MERCHANT / CS</span>
               <h3 style="font-size: 14px; font-weight: 700; color: var(--emerald-950); margin-top: 4px;">
                 Tanyakan Hal Ini Sebelum Menekan Tombol Persetujuan:
               </h3>
-              <ul style="padding-left: 18px; margin-top: 8px; font-size: 12px; color: var(--sage-900); line-height: 1.6;" id="resultQuestionsList">
+              <ul style="padding-left: 18px; margin-top: 8px; font-size: 12.5px; color: var(--sage-900); line-height: 1.6;" id="resultQuestionsList">
                 <li>"Apakah ada denda jika terlambat membayar, dan apakah dana denda disalurkan ke pos kebajikan (ta'zir) atau pendapatan perusahaan?"</li>
                 <li>"Kapan hak kepemilikan barang secara sah berpindah ke tangan saya?"</li>
                 <li>"Bisa saya minta salinan dokumen akad resmi yang telah ditandatangani?"</li>
               </ul>
               <button class="btn btn-secondary btn-sm mt-3" onclick="copyQuestionsToClipboard()">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                <span>Salin Pertanyaan Kritis</span>
+                <span id="btnCopyLabel">Salin Pertanyaan Kritis</span>
               </button>
             </div>
 
@@ -1555,14 +1707,14 @@
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C89D42" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
                 <span>LEARNING HUB</span>
               </div>
-              <button class="btn-ds-trigger" style="padding: 3px 10px; font-size: 11px;" onclick="openSourceRefModal()">
+              <button class="btn-ds-trigger" style="padding: 4px 12px; font-size: 11px;" onclick="openSourceRefModal()">
                 <span>Daftar Fatwa DSN-MUI</span>
               </button>
             </div>
-            <h2 class="serif-title mt-2" style="font-size: 22px; line-height: 1.25;">
+            <h2 class="serif-title mt-2" style="font-size: 22px; line-height: 1.25; color: #fff;">
               Ensiklopedia Muamalah Finansial
             </h2>
-            <p style="color: #CEE4D8; font-size: 12px; margin-top: 4px;">
+            <p style="color: #CEE4D8; font-size: 12.5px; margin-top: 4px;">
               Konsep dasar, fatwa otoritatif, dan panduan praktis transaksi modern.
             </p>
           </header>
@@ -1571,7 +1723,7 @@
             <!-- Search bar -->
             <div class="search-input-wrap">
               <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" class="search-input" id="searchLessonInput" placeholder="Cari modul (contoh: Riba, Murabahah, Emas)..." oninput="filterLessons()">
+              <input type="text" class="search-input" id="searchLessonInput" placeholder="Cari modul (contoh: Riba, Murabahah, Emas)..." oninput="filterLessons()" aria-label="Cari modul edukasi">
             </div>
 
             <!-- Category Chips -->
@@ -1604,18 +1756,21 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
               <span>Beranda</span>
             </button>
-            <span class="pill pill-gold" id="quizStreakPill">Streak: 3 🔥</span>
+            <span class="pill pill-gold" id="quizStreakPill">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2c1 3.5 3 5 3 8 0 3-2 5-3 5s-3-2-3-5c0-3 2-4.5 3-8z"/><path d="M12 12c.5 1.5 1.5 2 1.5 3.5 0 1.5-1 2.5-1.5 2.5s-1.5-1-1.5-2.5c0-1.5 1-2 1.5-3.5z"/></svg>
+              <span>Streak: 3</span>
+            </span>
           </div>
 
           <div class="main-content">
             <div class="flex-between">
-              <span class="eyebrow" id="quizProgressLabel">PERTANYAAN 1 DARI 5</span>
+              <span class="eyebrow" id="quizProgressLabel">PERTANYAAN 1 DARI 4</span>
               <span class="pill pill-emerald" id="quizScoreBadge">Skor: 0</span>
             </div>
 
             <!-- Quiz Stepper Bar -->
             <div class="step-progress-bar">
-              <div class="step-progress-fill" id="quizProgressBar" style="width: 20%;"></div>
+              <div class="step-progress-fill" id="quizProgressBar" style="width: 25%;"></div>
             </div>
 
             <!-- Quiz Card -->
@@ -1630,10 +1785,13 @@
                 <!-- Dynamically rendered options -->
               </div>
 
-              <!-- Instant Feedback Explanation -->
+              <!-- Instant Feedback Explanation with SVG Icons -->
               <div class="quiz-feedback-box" id="quizFeedbackBox">
-                <strong id="quizFeedbackTitle">Pembahasan:</strong>
-                <p class="mt-1" id="quizFeedbackText" style="line-height: 1.55;"></p>
+                <div class="flex-row gap-2 mb-1" id="quizFeedbackHeader">
+                  <!-- Injected check / alert icon -->
+                  <strong id="quizFeedbackTitle" style="font-size: 13.5px;">Pembahasan:</strong>
+                </div>
+                <p class="mt-1" id="quizFeedbackText" style="line-height: 1.55; font-size: 12.5px;"></p>
               </div>
             </div>
 
@@ -1688,7 +1846,7 @@
               </div>
               <div class="card" style="margin-bottom: 0; padding: 16px;">
                 <span class="eyebrow">LEVEL</span>
-                <div style="font-size: 22px; font-weight: 800; color: var(--emerald-900);">Konsumen Sadar</div>
+                <div style="font-size: 18px; font-weight: 800; color: var(--emerald-900); margin-top: 4px;">Konsumen Sadar</div>
                 <span class="text-muted">Tingkat Literasi</span>
               </div>
             </div>
@@ -1745,7 +1903,7 @@
               </div>
             </div>
 
-            <!-- Recent Activity Timeline -->
+            <!-- Recent Activity Timeline with SVG Icons -->
             <div class="card">
               <span class="eyebrow">CATATAN RIWAYAT TERAKHIR</span>
               <h4 style="font-size: 14px; font-weight: 700; margin-top: 4px; margin-bottom: 12px;">
@@ -1798,9 +1956,9 @@
               </h3>
               <p class="text-muted text-xs mt-1">Pengguna Terverifikasi Lokal</p>
 
-              <!-- Edit Name Input -->
+              <!-- Edit Name Input with Persistent LocalStorage Save -->
               <div class="mt-3" style="text-align: left;">
-                <label style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">Ubah Nama Panggilan</label>
+                <label for="inputProfileName" style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">Ubah Nama Panggilan</label>
                 <div class="flex-row gap-2 mt-1">
                   <input type="text" class="search-input" id="inputProfileName" placeholder="Masukkan nama..." value="Fikri Pratama" style="padding: 10px 14px;">
                   <button class="btn btn-primary btn-sm" onclick="saveProfileName()">Simpan</button>
@@ -1810,7 +1968,7 @@
 
             <!-- Privacy & Storage Safeguard Card -->
             <div class="card">
-              <span class="eyebrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> PRIVASI & KEAMANAN DATA</span>
+              <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> PRIVASI & KEAMANAN DATA</span>
               <h4 style="font-size: 14px; font-weight: 700; margin-top: 4px;">
                 Penyimpanan 100% di Perangkat Kamu (Client-Side)
               </h4>
@@ -1825,7 +1983,7 @@
 
             <!-- Educational Boundary Disclaimer -->
             <div class="card" style="background: var(--ivory-warm); border-color: var(--ivory-border);">
-              <span class="eyebrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> BATASAN LEGAL & OTORITAS</span>
+              <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> BATASAN LEGAL & OTORITAS</span>
               <h4 style="font-size: 14px; font-weight: 700; margin-top: 4px; color: var(--emerald-950);">
                 Bukan Dewan Syariah Nasional atau Penasihat Finansial
               </h4>
@@ -1838,7 +1996,7 @@
             <div class="card">
               <div class="flex-between">
                 <div>
-                  <h4 style="font-size: 13px; font-weight: 700;">Syariah Digital Check</h4>
+                  <h4 style="font-size: 13.5px; font-weight: 700;">Syariah Digital Check</h4>
                   <span class="text-muted text-xs">Versi 2.4.0 Production Build</span>
                 </div>
                 <button class="btn-ds-trigger" onclick="openDesignSystemModal()">
@@ -1855,23 +2013,23 @@
       <!-- PERSISTENT MOBILE BOTTOM NAVIGATION -->
       <!-- ========================================== -->
       <nav class="bottom-nav" id="bottomNav">
-        <button class="nav-item active" id="navHome" onclick="navigateTo('screenHome')">
+        <button class="nav-item active" id="navHome" onclick="navigateTo('screenHome')" aria-label="Beranda">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           <span>Beranda</span>
         </button>
-        <button class="nav-item" id="navCheck" onclick="navigateTo('screenCategorySelect')">
+        <button class="nav-item" id="navCheck" onclick="navigateTo('screenCategorySelect')" aria-label="Cek Transaksi">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           <span>Cek</span>
         </button>
-        <button class="nav-item" id="navLearn" onclick="navigateTo('screenLearn')">
+        <button class="nav-item" id="navLearn" onclick="navigateTo('screenLearn')" aria-label="Belajar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           <span>Belajar</span>
         </button>
-        <button class="nav-item" id="navQuiz" onclick="navigateTo('screenQuiz')">
+        <button class="nav-item" id="navQuiz" onclick="navigateTo('screenQuiz')" aria-label="Kuis Syariah">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <span>Kuis</span>
         </button>
-        <button class="nav-item" id="navProfile" onclick="navigateTo('screenProfile')">
+        <button class="nav-item" id="navProfile" onclick="navigateTo('screenProfile')" aria-label="Profil Pengguna">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <span>Profil</span>
         </button>
@@ -1946,14 +2104,14 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- MODAL 3: DESIGN SYSTEM INSPECTOR -->
+  <!-- MODAL 3: DESIGN SYSTEM & SOURCE REFERENCES -->
   <!-- ========================================== -->
   <div class="modal-overlay ds-modal" id="modalDesignSystem" onclick="closeModalOnOverlay(event, 'modalDesignSystem')">
     <div class="modal-sheet">
       <div class="sheet-handle"></div>
       <div class="flex-between">
         <div class="flex-row gap-2">
-          <span class="pill pill-gold">DESIGN SYSTEM AUDIT</span>
+          <span class="pill pill-gold">DESIGN SYSTEM & FATWA SPEC</span>
           <strong style="font-size: 16px; color: var(--emerald-950);">Fintech UX Specification</strong>
         </div>
         <button class="btn-back" onclick="closeModal('modalDesignSystem')" style="font-size: 18px; padding: 0;">✕</button>
@@ -1992,8 +2150,21 @@
         <div><strong>Elevation & Radii:</strong> Cards 16-24px radius, Pills 9999px, Subtle 2-stage shadow</div>
       </div>
 
+      <!-- Authoritative Fatwa Sources List -->
+      <h4 style="font-size: 14px; margin-top: 18px; color: var(--emerald-950);">3. Rujukan Fatwa DSN-MUI & Regulasi OJK</h4>
+      <div class="card mt-2" style="font-size: 12px; line-height: 1.6;">
+        <ul style="padding-left: 16px;">
+          <li><strong>Fatwa DSN-MUI No. 04/DSN-MUI/IV/2000:</strong> Murabahah (Jual Beli dengan Penegasan Margin Keuntungan).</li>
+          <li><strong>Fatwa DSN-MUI No. 43/DSN-MUI/VIII/2004:</strong> Ganti Rugi (Ta'widh) dan Sanksi (Ta'zir) atas Keterlambatan.</li>
+          <li><strong>Fatwa DSN-MUI No. 77/DSN-MUI/V/2010:</strong> Jual Beli Emas secara Tidak Tunai dan Syarat Qabdh Hukmi.</li>
+          <li><strong>Fatwa DSN-MUI No. 116/DSN-MUI/IX/2017:</strong> Uang Elektronik Syariah (E-Money).</li>
+          <li><strong>Fatwa DSN-MUI No. 117/DSN-MUI/II/2018:</strong> Layanan Pembiayaan Berbasis Teknologi Informasi Syariah (Fintech P2P).</li>
+          <li><strong>POJK No. 10/POJK.05/2022:</strong> Layanan Pendanaan Bersama Berbasis Teknologi Informasi.</li>
+        </ul>
+      </div>
+
       <!-- Safety Rules -->
-      <h4 style="font-size: 14px; margin-top: 18px; color: var(--emerald-950);">3. Ethical & Legal UX Guardrails</h4>
+      <h4 style="font-size: 14px; margin-top: 18px; color: var(--emerald-950);">4. Ethical & Legal UX Guardrails</h4>
       <div class="notice-box notice-disclaimer mt-2">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
         <span><strong>Pedoman Batasan Edukasi:</strong> Hindari klaim mutlak halal/haram tanpa verifikasi dokumen resmi perbankan atau fatwa lembaga berwenang. Selalu sajikan dalam bentuk panduan pemikiran kritis.</span>
@@ -2006,8 +2177,8 @@
   </div>
 
   <!-- Interactive Toast Notification -->
-  <div class="toast-msg" id="toastMsg">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C89D42" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+  <div class="toast-msg" id="toastMsg" role="status" aria-live="polite">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C89D42" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
     <span id="toastText">Aktivitas berhasil disimpan!</span>
   </div>
 
@@ -2024,7 +2195,7 @@
       currentCategory: {
         name: "PayLater & Cicilan Digital",
         contractBasis: "Qardh / Murabahah / Hawalah",
-        index: 1
+        index: 0
       },
       checkStep: 0,
       checkAnswers: [null, null, null, null, null],
@@ -2036,25 +2207,55 @@
       onboardStep: 0
     };
 
-    // --- Onboarding Data ---
+    // Load persisted state from localStorage if available
+    function loadPersistedState() {
+      try {
+        const stored = localStorage.getItem('syariah_digital_check_profile');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed.name) {
+            appState.user.name = parsed.name;
+            appState.user.initials = parsed.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'FP';
+          }
+          if (parsed.checksCount !== undefined) {
+            appState.stats.checksCount = parsed.checksCount;
+          }
+        }
+      } catch (e) {
+        console.warn('LocalStorage not accessible', e);
+      }
+    }
+
+    function savePersistedState() {
+      try {
+        localStorage.setItem('syariah_digital_check_profile', JSON.stringify({
+          name: appState.user.name,
+          checksCount: appState.stats.checksCount
+        }));
+      } catch (e) {
+        console.warn('LocalStorage save failed', e);
+      }
+    }
+
+    // --- Onboarding Data with Clean SVGs ---
     const onboardData = [
       {
         pill: "LANGKAH 1 : BERHENTI SEJENAK",
         title: "PAUSE: Jeda Sejenak",
         desc: "Jangan tergesa-gesa tergiur promo instan atau diskon flash sale. Beri jeda 30 detik untuk menelaah kesiapan finansial dan kebutuhan riil.",
-        icon: '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>'
+        icon: '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>'
       },
       {
         pill: "LANGKAH 2 : TELAAH KLAUSUL",
         title: "CHECK: Periksa 5 Poin Krusial",
         desc: "Periksa struktur akad, transparansi biaya tersembunyi, mekanisme serah terima (qabdh), serta kesesuaian prinsip bebas riba, gharar, dan maysir.",
-        icon: '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>'
+        icon: '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>'
       },
       {
         pill: "LANGKAH 3 : PUTUSKAN BIJAK",
         title: "CHOOSE: Putuskan dengan Sadar",
         desc: "Lanjutkan transaksi jika jelas dan adil, atau pilih alternatif syariah yang lebih transparan jika ditemukan klausul yang meragukan.",
-        icon: '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>'
+        icon: '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>'
       }
     ];
 
@@ -2288,7 +2489,8 @@
       const targetScreen = document.getElementById(screenId);
       if (targetScreen) {
         targetScreen.classList.add('active');
-        document.getElementById('screenScroller').scrollTo({ top: 0, behavior: 'smooth' });
+        const scroller = document.getElementById('screenScroller');
+        if (scroller) scroller.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
       // Update Bottom Navigation active state
@@ -2363,7 +2565,7 @@
     // --- Category Selection Logic ---
     function selectCategory(catName, basis, idx) {
       appState.currentCategory = { name: catName, contractBasis: basis, index: idx };
-      document.getElementById('checkActiveCatPill').textContent = catName;
+      document.getElementById('checkActiveCatPill').textContent = catName.split('&')[0].trim();
       appState.checkStep = 0;
       appState.checkAnswers = [null, null, null, null, null];
       renderCheckStage();
@@ -2450,25 +2652,30 @@
       const score = Math.round(((clearCount * 1.0 + partialCount * 0.5) / 5) * 100);
 
       document.getElementById('resultScoreNum').textContent = `${score}%`;
-      const circle = document.getElementById('resultScoreCircle');
+      const ring = document.getElementById('resultScoreRing');
       const badge = document.getElementById('resultStatusBadge');
       const heading = document.getElementById('resultHeading');
       const summary = document.getElementById('resultSummaryText');
 
+      // Circumference of radius 50 is 2 * PI * 50 = 314.159
+      const circumference = 314.159;
+      const offset = circumference - (score / 100) * circumference;
+      ring.style.strokeDashoffset = offset;
+
       if (score >= 80) {
-        circle.className = 'score-circle';
+        ring.style.stroke = 'var(--emerald-800)';
         badge.className = 'pill pill-emerald';
         badge.textContent = 'TINGKAT KEJELASAN : TINGGI';
         heading.textContent = 'Informasi Transaksi Transparan & Cukup Jelas';
         summary.textContent = 'Aspek akad, biaya pokok, dan mekanisme serah terima sudah kamu pahami dengan baik. Tetap simpan salinan tanda terima dan periksa rekening secara berkala.';
       } else if (score >= 50) {
-        circle.className = 'score-circle warn';
+        ring.style.stroke = 'var(--gold-500)';
         badge.className = 'pill pill-gold';
         badge.textContent = 'PERLU VERIFIKASI LANJUTAN';
         heading.textContent = 'Terdapat Klausul yang Masih Abu-Abu / Ragu';
         summary.textContent = 'Ada beberapa ketentuan biaya atau skema serah terima yang belum sepenuhnya jelas. Ambil jeda sebelum menandatangani persetujuan digital.';
       } else {
-        circle.className = 'score-circle warn';
+        ring.style.stroke = 'var(--danger-text)';
         badge.className = 'pill pill-danger';
         badge.textContent = 'POTENSI RISIKO TINGGI';
         heading.textContent = 'Banyak Hal Penting Belum Terverifikasi';
@@ -2494,7 +2701,7 @@
         `;
       } else {
         verifyList.innerHTML = items.map(it => `
-          <div class="flex-row gap-2 mt-2" style="font-size: 12px; color: var(--text-secondary); align-items: flex-start;">
+          <div class="flex-row gap-2 mt-2" style="font-size: 12.5px; color: var(--text-secondary); align-items: flex-start;">
             <span style="color: var(--gold-600); font-weight: 800;">•</span>
             <span>${it}</span>
           </div>
@@ -2503,6 +2710,9 @@
 
       appState.stats.checksCount++;
       document.getElementById('statChecksCount').textContent = appState.stats.checksCount;
+      document.getElementById('homeChecksBadge').textContent = `${appState.stats.checksCount} Evaluasi Selesai`;
+      savePersistedState();
+
       navigateTo('screenResult');
       showToast("Hasil evaluasi transaksi berhasil dihitung!");
     }
@@ -2510,7 +2720,12 @@
     function copyQuestionsToClipboard() {
       const questions = "1. Apakah ada denda jika terlambat membayar, dan apakah dana denda disalurkan ke pos kebajikan sosial atau keuntungan perusahaan?\n2. Kapan hak kepemilikan barang secara sah berpindah ke tangan saya?\n3. Bisakah saya memperoleh dokumen akad resmi?";
       if (navigator.clipboard) {
-        navigator.clipboard.writeText(questions);
+        navigator.clipboard.writeText(questions).then(() => {
+          document.getElementById('btnCopyLabel').textContent = "Pertanyaan Tersalin ✓";
+          setTimeout(() => {
+            document.getElementById('btnCopyLabel').textContent = "Salin Pertanyaan Kritis";
+          }, 2500);
+        });
       }
       showToast("Pertanyaan kritis berhasil disalin ke clipboard!");
     }
@@ -2677,10 +2892,16 @@
 
         if (isCorrect) {
           fbBox.className = 'quiz-feedback-box notice-success';
-          document.getElementById('quizFeedbackTitle').textContent = "✓ Jawaban Benar!";
+          document.getElementById('quizFeedbackHeader').innerHTML = `
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <strong id="quizFeedbackTitle">Jawaban Benar!</strong>
+          `;
         } else {
           fbBox.className = 'quiz-feedback-box notice-danger';
-          document.getElementById('quizFeedbackTitle').textContent = "✗ Kurang Tepat.";
+          document.getElementById('quizFeedbackHeader').innerHTML = `
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <strong id="quizFeedbackTitle">Kurang Tepat.</strong>
+          `;
         }
         document.getElementById('quizFeedbackText').textContent = q.explanation + " " + q.opts[selectedQuizIndex].note;
 
@@ -2708,7 +2929,7 @@
       const newName = document.getElementById('inputProfileName').value.trim();
       if (!newName) return;
       appState.user.name = newName;
-      const initials = newName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+      const initials = newName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'FP';
       appState.user.initials = initials;
 
       document.getElementById('homeUserName').textContent = newName.split(' ')[0];
@@ -2717,6 +2938,7 @@
       document.getElementById('profileAvatarLarge').textContent = initials;
       document.getElementById('profileDisplayName').textContent = newName;
 
+      savePersistedState();
       showToast("Nama profil berhasil diperbarui!");
     }
 
@@ -2725,6 +2947,8 @@
         appState.stats.checksCount = 0;
         appState.checkAnswers = [null, null, null, null, null];
         document.getElementById('statChecksCount').textContent = '0';
+        document.getElementById('homeChecksBadge').textContent = '0 Evaluasi Selesai';
+        savePersistedState();
         showToast("Seluruh riwayat lokal telah direset bersih.");
       }
     }
@@ -2766,6 +2990,19 @@
 
     // --- Initialize App ---
     window.addEventListener('DOMContentLoaded', () => {
+      loadPersistedState();
+      
+      // Update UI with loaded profile
+      const firstName = appState.user.name.split(' ')[0];
+      document.getElementById('homeUserName').textContent = firstName;
+      document.getElementById('homeGreetingName').textContent = firstName;
+      document.getElementById('homeUserAvatar').textContent = appState.user.initials;
+      document.getElementById('profileAvatarLarge').textContent = appState.user.initials;
+      document.getElementById('profileDisplayName').textContent = appState.user.name;
+      document.getElementById('inputProfileName').value = appState.user.name;
+      document.getElementById('statChecksCount').textContent = appState.stats.checksCount;
+      document.getElementById('homeChecksBadge').textContent = `${appState.stats.checksCount} Evaluasi Selesai`;
+
       renderOnboardStep();
       renderCaseStudies();
       renderLessonsList();

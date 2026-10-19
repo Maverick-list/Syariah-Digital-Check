@@ -11,7 +11,9 @@
 
 <p align="center">
   <a href="https://digitalchecksyariah.vercel.app"><img src="https://img.shields.io/badge/Live%20Demo-digitalchecksyariah.vercel.app-065F46?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" /></a>
-  <a href="DESIGN_SYSTEM_AND_UX_SPEC.md"><img src="https://img.shields.io/badge/Design%20System-Fintech%20Spec-C89D42?style=for-the-badge" alt="Design System Spec" /></a>
+  <a href="docs/DESIGN.md"><img src="https://img.shields.io/badge/Design%20System-Fintech%20Spec-C89D42?style=for-the-badge" alt="Design System Spec" /></a>
+  <a href="docs/design-audit.md"><img src="https://img.shields.io/badge/UX%20Audit-Evidence--Based-065F46?style=for-the-badge" alt="Design Audit" /></a>
+  <a href="docs/design-qa-report.md"><img src="https://img.shields.io/badge/QA%20Report-Verified-059669?style=for-the-badge" alt="QA Report" /></a>
   <img src="https://img.shields.io/badge/Platform-Mobile%20%7C%20Tablet%20%7C%20Desktop-047857?style=for-the-badge" alt="Responsive" />
   <img src="https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge" alt="License" />
 </p>
@@ -22,8 +24,11 @@
 Aplikasi ini sudah live dan dapat diakses langsung secara publik via browser desktop maupun smartphone (iOS Safari / Android Chrome):  
 👉 **[https://digitalchecksyariah.vercel.app](https://digitalchecksyariah.vercel.app)**
 
-Dokumentasi lengkap sistem desain dan arsitektur UX dapat dibaca di:  
-📄 **[`DESIGN_SYSTEM_AND_UX_SPEC.md`](./DESIGN_SYSTEM_AND_UX_SPEC.md)**
+Dokumentasi lengkap sistem desain, audit, dan jaminan mutu dapat dibaca di:  
+- 📄 **[`docs/DESIGN.md`](./docs/DESIGN.md)** (Spesifikasi Desain & Token)  
+- 🔍 **[`docs/design-audit.md`](./docs/design-audit.md)** (Temuan Audit Desain & Aksesibilitas)  
+- 📋 **[`docs/design-qa-report.md`](./docs/design-qa-report.md)** (Laporan QA & Verifikasi)  
+- 📜 **[`docs/session-history.md`](./docs/session-history.md)** (Riwayat Sesi Kerja & Eksekusi)  
 
 ---
 
