@@ -11,10 +11,11 @@
 
 <p align="center">
   <a href="https://digitalchecksyariah.vercel.app"><img src="https://img.shields.io/badge/Live%20Demo-digitalchecksyariah.vercel.app-065F46?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" /></a>
+  <a href="SyariahDigitalCheck_iOS/"><img src="https://img.shields.io/badge/Native%20iOS-Swift%20%26%20SwiftUI-F05138?style=for-the-badge&logo=swift&logoColor=white" alt="Native Swift iOS" /></a>
   <a href="docs/DESIGN.md"><img src="https://img.shields.io/badge/Design%20System-Fintech%20Spec-C89D42?style=for-the-badge" alt="Design System Spec" /></a>
   <a href="docs/design-audit.md"><img src="https://img.shields.io/badge/UX%20Audit-Evidence--Based-065F46?style=for-the-badge" alt="Design Audit" /></a>
   <a href="docs/design-qa-report.md"><img src="https://img.shields.io/badge/QA%20Report-Verified-059669?style=for-the-badge" alt="QA Report" /></a>
-  <img src="https://img.shields.io/badge/Platform-Mobile%20%7C%20Tablet%20%7C%20Desktop-047857?style=for-the-badge" alt="Responsive" />
+  <img src="https://img.shields.io/badge/Platform-iOS%20%7C%20Mobile%20%7C%20Desktop-047857?style=for-the-badge" alt="Responsive" />
   <img src="https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge" alt="License" />
 </p>
 
@@ -86,6 +87,10 @@ Syariah_Digital_Check_Design_and_Prototype/
 ├── README.md                                            # Main Repository Documentation
 ├── a_wide_clean_presentation_board_ui_design_mocku.png  # Visual Presentation Board
 ├── Syariah_Digital_Check_UI_UX_Design_Guide.pdf         # UI/UX Specification & Guidelines
+├── SyariahDigitalCheck_iOS/                             # 100% Native Swift & SwiftUI iOS App
+│   ├── Package.swift                                    # SPM Manifest (Target iOS 16+, macOS 13+)
+│   ├── README.md                                        # Xcode Setup & Architecture Guide
+│   └── Sources/SyariahDigitalCheck/                     # App, Models, ViewModels, Views & Components
 └── Digital_Check/                                       # Cross-platform Expo React Native App & Web Build
     ├── web-build/                                       # Production Web Build (Deployed to Vercel)
     │   ├── index.html                                   # Production build entry point
