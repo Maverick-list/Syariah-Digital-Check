@@ -4851,6 +4851,23 @@
   <!-- JAVASCRIPT LOGIC & STATE MACHINE -->
   <!-- ========================================== -->
   <script>
+    // --- Phase 14: XSS Defense & Input Sanitization Engine ---
+    function escapeHTML(str) {
+      if (str === null || str === undefined) return '';
+      return String(str).replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      }[tag] || tag));
+    }
+
+    function sanitizeInput(str, maxLength = 250) {
+      if (typeof str !== 'string') return '';
+      return escapeHTML(str.trim().slice(0, maxLength));
+    }
+
     // --- Application State ---
     const appState = {
       user: {
@@ -7443,10 +7460,10 @@
         <div class="history-card-item" onclick="loadPastAssessment(${i})">
           <div style="flex: 1;">
             <div class="flex-row gap-2" style="align-items: center; margin-bottom: 2px;">
-              <span class="${rec.badgeClass}" style="font-size: 9.5px; padding: 1px 7px;">${rec.score}% Skor</span>
-              <strong style="font-size: 13px; color: var(--emerald-950);">${rec.categoryName}</strong>
+              <span class="${escapeHTML(rec.badgeClass)}" style="font-size: 9.5px; padding: 1px 7px;">${parseInt(rec.score, 10) || 0}% Skor</span>
+              <strong style="font-size: 13px; color: var(--emerald-950);">${escapeHTML(rec.categoryName)}</strong>
             </div>
-            <span class="text-muted text-xs">${rec.date} · ${rec.statusLabel}</span>
+            <span class="text-muted text-xs">${escapeHTML(rec.date)} · ${escapeHTML(rec.statusLabel)}</span>
           </div>
           <button class="btn btn-ghost btn-sm" style="font-size: 11px; padding: 4px 10px;" onclick="event.stopPropagation(); loadPastAssessment(${i});">
             Buka Hasil →
@@ -8501,16 +8518,42 @@
 
           const d = (parsed.application === "Syariah Digital Check" && parsed.data) ? parsed.data : parsed;
 
-          if (d.displayName) {
-            appState.user.name = d.displayName;
-            appState.user.initials = d.displayName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'FP';
+          if (d.displayName && typeof d.displayName === 'string') {
+            const cleanName = d.displayName.trim().slice(0, 80);
+            appState.user.name = cleanName;
+            appState.user.initials = cleanName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'FP';
           }
-          if (Array.isArray(d.assessmentsHistory)) appState.assessmentsHistory = d.assessmentsHistory;
-          if (Array.isArray(d.lessonsRead)) appState.lessonsRead = d.lessonsRead;
-          if (Array.isArray(d.bookmarkedLessons)) appState.bookmarkedLessons = d.bookmarkedLessons;
-          if (Array.isArray(d.scenariosDone)) appState.scenariosDone = d.scenariosDone;
-          if (Array.isArray(d.quizAttempts)) appState.quizAttempts = d.quizAttempts;
-          if (Array.isArray(d.activity)) appState.activity = d.activity;
+          if (Array.isArray(d.assessmentsHistory)) {
+            appState.assessmentsHistory = d.assessmentsHistory.map(rec => ({
+              ...rec,
+              categoryName: typeof rec.categoryName === 'string' ? rec.categoryName.slice(0, 100) : '',
+              statusLabel: typeof rec.statusLabel === 'string' ? rec.statusLabel.slice(0, 100) : '',
+              date: typeof rec.date === 'string' ? rec.date.slice(0, 50) : '',
+              badgeClass: typeof rec.badgeClass === 'string' ? rec.badgeClass.slice(0, 50) : 'pill pill-emerald',
+              score: Math.max(0, Math.min(100, parseInt(rec.score, 10) || 0))
+            }));
+          }
+          if (Array.isArray(d.lessonsRead)) {
+            appState.lessonsRead = d.lessonsRead.filter(id => typeof id === 'string' && id.length < 50);
+          }
+          if (Array.isArray(d.bookmarkedLessons)) {
+            appState.bookmarkedLessons = d.bookmarkedLessons.filter(id => typeof id === 'string' && id.length < 50);
+          }
+          if (Array.isArray(d.scenariosDone)) {
+            appState.scenariosDone = d.scenariosDone.filter(id => typeof id === 'string' && id.length < 50);
+          }
+          if (Array.isArray(d.quizAttempts)) {
+            appState.quizAttempts = d.quizAttempts.map(q => ({
+              ...q,
+              local_id: typeof q.local_id === 'string' ? q.local_id.slice(0, 64) : 'qz_' + Math.random().toString(36).substring(2, 9),
+              score: Math.max(0, parseInt(q.score, 10) || 0),
+              percentage: Math.max(0, Math.min(100, parseFloat(q.percentage) || 0)),
+              grade: typeof q.grade === 'string' ? q.grade.slice(0, 50) : 'Peserta'
+            }));
+          }
+          if (Array.isArray(d.activity)) {
+            appState.activity = d.activity.slice(0, 50);
+          }
 
           savePersistedState();
           updateReadingProgressUI();
@@ -8644,8 +8687,8 @@
         const lastSync = localStorage.getItem(CLOUD_LAST_SYNC_KEY) || 'Baru saja';
         infoBox.innerHTML = `
           <div style="font-size: 12.5px; line-height: 1.5; color: var(--emerald-950);">
-            <div>Tersambung sebagai: <strong>${session.user.email}</strong></div>
-            <div class="text-xs text-muted mt-1">Status Sinkronisasi: <strong>Aktif</strong> · Terakhir disinkron: ${lastSync}</div>
+            <div>Tersambung sebagai: <strong>${escapeHTML(session.user.email)}</strong></div>
+            <div class="text-xs text-muted mt-1">Status Sinkronisasi: <strong>Aktif</strong> · Terakhir disinkron: ${escapeHTML(lastSync)}</div>
           </div>
           <div class="flex-row gap-2 mt-3">
             <button type="button" class="btn btn-primary btn-sm" onclick="triggerManualCloudSync()" style="flex: 1;">
@@ -9146,12 +9189,24 @@
       updateOnlineState();
       updateCloudSyncUI();
 
-      // Phase 8: Window Error Trap to Prevent Internal Stack Trace Exposure
+      // Phase 14: Structured Safe Error Logging (Zero PII Leakage)
+      function sanitizeErrorLog(err) {
+        if (!err) return 'Unknown runtime anomaly';
+        const raw = (typeof err === 'object' && err.message) ? err.message : String(err);
+        return raw
+          .replace(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/g, '[EMAIL_REDACTED]')
+          .replace(/jwt_[a-zA-Z0-9_-]+/g, '[TOKEN_REDACTED]')
+          .replace(/bearer\s+[a-zA-Z0-9._-]+/gi, 'Bearer [TOKEN_REDACTED]')
+          .replace(/password[:=]\s*[^\s&]+/gi, 'password=[REDACTED]');
+      }
+
       window.addEventListener('error', (event) => {
-        console.error('Terjadi anomali runtime:', event.error || event.message);
+        const safeMsg = sanitizeErrorLog(event.error || event.message);
+        console.error('Terjadi anomali runtime:', safeMsg);
       });
       window.addEventListener('unhandledrejection', (event) => {
-        console.error('Unhandled Promise Rejection:', event.reason);
+        const safeReason = sanitizeErrorLog(event.reason);
+        console.error('Unhandled Promise Rejection:', safeReason);
       });
     });
   </script>

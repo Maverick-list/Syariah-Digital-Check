@@ -89,11 +89,15 @@ Syariah_Digital_Check_Main/
 ├── Digital_Check/                                       # Basis kode React Native / Expo & Mesin Pengujian Otomatis
 │   ├── src/                                             # Modul data, logika skoring, store reducer, dan layanan
 │   │   └── services/cloudSync.ts                        # Mesin Rekonsiliasi & Resolusi Konflik Sinkronisasi Cloud
-│   └── src/tests/                                       # 11 Test Suites Otomatis (115/115 Tests Passing)
+│   └── src/tests/                                       # 12 Test Suites Otomatis (126/126 Tests Passing)
 ├── supabase/                                            # Infrastruktur Cloud & Skema PostgreSQL (Fase 13)
 │   ├── migrations/                                      # Skrip Migrasi DDL Relasional & Kebijakan RLS
 │   └── seed.sql                                         # Data Inisialisasi Lingkungan Pengembangan
 ├── docs/                                                # Dokumentasi Resmi, Audit, dan Tata Kelola
+│   ├── PHASE_14_SECURITY_AUDIT.md                       # Audit Keamanan DevSecOps & Evaluasi OWASP Top 10 (Fase 14)
+│   ├── PHASE_14_RELIABILITY_REPORT.md                   # Laporan Ketahanan, Degradasi Elegan & Penanganan Galat (Fase 14)
+│   ├── PHASE_14_BACKUP_AND_RECOVERY.md                  # Prosedur Cadangan Multi-Lapis & Verifikasi Pemulihan (Fase 14)
+│   ├── PHASE_14_INCIDENT_RESPONSE.md                    # Buku Panduan Tanggap Insiden Keamanan & Eskalasi (Fase 14)
 │   ├── PHASE_13_BACKEND_ARCHITECTURE.md                 # Arsitektur Hybrid Privacy-First Cloud Infrastructure (Fase 13)
 │   ├── PHASE_13_DATABASE_DESIGN.md                      # Desain Relasional Database PostgreSQL & Skema 3NF (Fase 13)
 │   ├── PHASE_13_SECURITY_AND_RLS.md                     # Matriks Kebijakan Row Level Security & Minimisasi Data (Fase 13)
@@ -119,8 +123,9 @@ Syariah_Digital_Check_Main/
 │   ├── CONTENT_GOVERNANCE.md                            # Standar Redaksional & Kebijakan Verifikasi
 │   ├── BACKEND_AND_SYNC_ARCHITECTURE.md                 # Spesifikasi Sinkronisasi Cloud Zero-Knowledge RLS
 │   └── PHASE_7_QA_SECURITY_REPORT.md                    # Laporan Komprehensif QA & Keamanan
-└── scripts/                                             # Skrip Otomasi Pengujian & Audit Headless Browser
-    └── qa_audit_runner.py                               # Runner Audit Responsivitas, DOM, & Aksesibilitas
+└── scripts/                                             # Skrip Otomasi Pengujian, Keandalan & Audit
+    ├── qa_audit_runner.py                               # Runner Audit Responsivitas, DOM, & Aksesibilitas
+    └── verify_backup_recovery.py                        # Verifikator Otomatis Integritas Cadangan & Pemulihan (Fase 14)
 ```
 
 ---
