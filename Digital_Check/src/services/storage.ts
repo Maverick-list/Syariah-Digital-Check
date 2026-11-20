@@ -62,9 +62,22 @@ export function validateAndParseBackupJSON(
   jsonString: string,
 ): { ok: true; state: PersistedState } | { ok: false; error: string } {
   try {
-    const parsed = JSON.parse(jsonString);
-    if (!parsed || typeof parsed !== 'object') {
+    if (!jsonString || typeof jsonString !== 'string') {
       return { ok: false, error: 'Format berkas JSON tidak valid.' };
+    }
+    const parsed = JSON.parse(jsonString);
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return { ok: false, error: 'Format berkas JSON tidak valid.' };
+    }
+
+    // Validasi metadata jika mengusung format ExportPackage resmi
+    if ('application' in parsed) {
+      if (parsed.application !== 'Syariah Digital Check') {
+        return { ok: false, error: 'Bukan berkas cadangan resmi Syariah Digital Check.' };
+      }
+      if (parsed.formatVersion !== 1) {
+        return { ok: false, error: 'Versi format cadangan tidak didukung.' };
+      }
     }
 
     // Mendukung baik format ExportPackage resmi maupun direct PersistedState
@@ -73,8 +86,13 @@ export function validateAndParseBackupJSON(
         ? parsed.data
         : parsed;
 
-    if (!rawState || typeof rawState !== 'object') {
+    if (!rawState || typeof rawState !== 'object' || Array.isArray(rawState)) {
       return { ok: false, error: 'Struktur data cadangan tidak dikenali.' };
+    }
+
+    // Perlindungan prototype pollution
+    if (Object.prototype.hasOwnProperty.call(rawState, '__proto__')) {
+      return { ok: false, error: 'Terdeteksi struktur berkas yang mencurigakan.' };
     }
 
     const state = parsePersisted(rawState);

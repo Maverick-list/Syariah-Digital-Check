@@ -57,7 +57,14 @@ function parsePreferences(v: unknown): UserPreferences {
 
 /** Memvalidasi & menormalkan data mentah dari penyimpanan; data rusak -> default aman. */
 export function parsePersisted(raw: unknown): PersistedState {
-  if (!raw || typeof raw !== 'object') return { ...initialState };
+  if (typeof raw === 'string') {
+    try {
+      raw = JSON.parse(raw);
+    } catch {
+      return { ...initialState };
+    }
+  }
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return { ...initialState };
   const o = raw as Record<string, unknown>;
   if (o.version !== 1) return { ...initialState };
 
@@ -148,8 +155,10 @@ export function reducer(state: PersistedState, action: Action): PersistedState {
       return action.state;
     case 'COMPLETE_ONBOARDING':
       return { ...state, onboardingDone: true };
-    case 'SET_NAME':
-      return { ...state, displayName: action.name };
+    case 'SET_NAME': {
+      const sanitized = (action.name || '').trim().slice(0, 100);
+      return { ...state, displayName: sanitized };
+    }
     case 'UPDATE_PREFERENCES':
       return {
         ...state,
