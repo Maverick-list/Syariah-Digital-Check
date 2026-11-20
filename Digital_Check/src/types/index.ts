@@ -1,10 +1,13 @@
 export type TransactionCategory =
-  | 'shopping'
   | 'paylater'
+  | 'lending'
+  | 'shopping'
+  | 'subscription'
   | 'gold'
   | 'savings'
-  | 'subscription'
-  | 'donation';
+  | 'investment'
+  | 'donation'
+  | 'other';
 
 export type StepId =
   | 'structure'
@@ -44,10 +47,54 @@ export interface ChecklistDraft {
 
 export type ResultState = 'understood' | 'needs_checking' | 'not_understood';
 
+export type ClarityLevel = 'Tinggi' | 'Sedang' | 'Perlu Verifikasi' | 'Belum Cukup Informasi';
+
 export interface MissingItem {
   stepId: StepId;
   label: string;
   hint: string;
+}
+
+export interface EvaluatedRisk {
+  severity: 'high' | 'medium' | 'low';
+  title: string;
+  description: string;
+}
+
+export interface ContractObservation {
+  dimension: string;
+  finding: string;
+  guidance: string;
+}
+
+export interface FiqhPrinciple {
+  arabic: string;
+  transliteration: string;
+  meaning: string;
+  application: string;
+}
+
+export interface UserResponseSummary {
+  stepId: StepId;
+  stageTag: string;
+  question: string;
+  selectedOptionLabel: string;
+  status: AnswerStatus;
+}
+
+export interface NextStepGuidance {
+  pauseAdvice: string;
+  checkAdvice: string;
+  chooseAdvice: string;
+}
+
+export interface TransactionOverview {
+  category: TransactionCategory;
+  categoryLabel: string;
+  clarityLevel: ClarityLevel;
+  score: number;
+  evaluatedAt: string;
+  summary: string;
 }
 
 export interface CheckResult {
@@ -58,6 +105,19 @@ export interface CheckResult {
   questions: string[];
   lessonIds: string[];
   sourceIds: string[];
+  score: number;
+  clarityLevel: ClarityLevel;
+  category: TransactionCategory;
+  categoryLabel: string;
+  evaluatedAt: string;
+  overview: TransactionOverview;
+  userResponses: UserResponseSummary[];
+  identifiedRisks: EvaluatedRisk[];
+  observations: ContractObservation[];
+  principles: FiqhPrinciple[];
+  sources?: SourceRef[];
+  questionsToProvider: string[];
+  nextSteps: NextStepGuidance;
 }
 
 export interface CheckRecord {
