@@ -94,6 +94,12 @@ Syariah_Digital_Check_Main/
 │   ├── migrations/                                      # Skrip Migrasi DDL Relasional & Kebijakan RLS
 │   └── seed.sql                                         # Data Inisialisasi Lingkungan Pengembangan
 ├── docs/                                                # Dokumentasi Resmi, Audit, dan Tata Kelola
+│   ├── PHASE_16_FINAL_ACCEPTANCE_REPORT.md              # Laporan Akseptansi Final Produksi & Tanda Tangan Rilis (Fase 16)
+│   ├── PHASE_16_FINAL_SYSTEM_AUDIT.md                   # Audit Sistem Menyeluruh Fase 0–15 & Verifikasi Lingkungan (Fase 16)
+│   ├── PHASE_16_RELEASE_CHECKLIST.md                    # Daftar Periksa Kesiapan Rilis 35 Poin 100% Lulus (Fase 16)
+│   ├── PHASE_16_PRODUCTION_DEPLOYMENT.md                # Topologi Penerapan Produksi Vercel Edge & DNS (Fase 16)
+│   ├── PHASE_16_OPERATIONAL_RUNBOOK.md                  # Prosedur Operasional Standar, Pemantauan & Rollback (Fase 16)
+│   ├── PHASE_16_KNOWN_LIMITATIONS.md                    # Batasan Yuridis, Batasan Algoritma & Perangkat (Fase 16)
 │   ├── PHASE_15_PRODUCT_EXPERIENCE_AUDIT.md             # Audit Pengalaman Pengguna, Desain & Lokalisasi ID/EN (Fase 15)
 │   ├── PHASE_15_ACCESSIBILITY_REPORT.md                 # Laporan Kepatuhan Aksesibilitas WCAG 2.2 AA (Fase 15)
 │   ├── PHASE_15_PERFORMANCE_REPORT.md                   # Tolok Ukur Kinerja Web Vitals & Optimasi Aset (Fase 15)
