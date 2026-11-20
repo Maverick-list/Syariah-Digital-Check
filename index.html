@@ -1640,6 +1640,68 @@
       margin-top: 14px;
       display: none;
     }
+    .quiz-topic-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin: 12px 0 16px;
+      scrollbar-width: none;
+    }
+    .quiz-topic-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .quiz-topic-btn {
+      white-space: nowrap;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--ivory-border);
+      background: #FFFFFF;
+      color: var(--emerald-900);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .quiz-topic-btn:hover {
+      background: var(--ivory-subtle);
+      border-color: var(--emerald-300);
+    }
+    .quiz-topic-btn.active {
+      background: var(--emerald-800);
+      color: #FFFFFF;
+      border-color: var(--emerald-800);
+      box-shadow: 0 2px 6px rgba(4, 40, 24, 0.2);
+    }
+    .quiz-result-card {
+      background: #FFFFFF;
+      border: 1px solid var(--ivory-border);
+      border-radius: 24px;
+      padding: 24px 20px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 16px;
+      text-align: center;
+      display: none;
+    }
+    .quiz-review-item {
+      text-align: left;
+      padding: 12px 14px;
+      border: 1px solid var(--ivory-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 10px;
+      background: var(--ivory-base);
+    }
+    .progress-empty-banner {
+      background: linear-gradient(135deg, #F4F8F5 0%, #E8F2EC 100%);
+      border: 1px dashed var(--emerald-300);
+      border-radius: 20px;
+      padding: 20px 18px;
+      text-align: center;
+      margin-bottom: 18px;
+    }
 
     /* Modals & Drawers */
     .modal-overlay {
@@ -2692,28 +2754,65 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
               <span>Beranda</span>
             </button>
-            <span class="pill pill-gold" id="quizStreakPill">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2c1 3.5 3 5 3 8 0 3-2 5-3 5s-3-2-3-5c0-3 2-4.5 3-8z"/><path d="M12 12c.5 1.5 1.5 2 1.5 3.5 0 1.5-1 2.5-1.5 2.5s-1.5-1-1.5-2.5c0-1.5 1-2 1.5-3.5z"/></svg>
-              <span>Streak: 3</span>
-            </span>
+            <div class="flex-row gap-2">
+              <button class="pill pill-sage hoverable" style="font-size: 11px; cursor: pointer;" onclick="retakeCurrentQuiz()" title="Mulai ulang kuis saat ini">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                <span>Reset</span>
+              </button>
+              <span class="pill pill-gold" id="quizStreakPill">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2c1 3.5 3 5 3 8 0 3-2 5-3 5s-3-2-3-5c0-3 2-4.5 3-8z"/></svg>
+                <span id="quizStreakText">Streak: 0</span>
+              </span>
+            </div>
           </div>
 
           <div class="main-content">
-            <div class="flex-between">
-              <span class="eyebrow" id="quizProgressLabel">PERTANYAAN 1 DARI 4</span>
-              <span class="pill pill-emerald" id="quizScoreBadge">Skor: 0</span>
+            <span class="eyebrow">UJI KOMPETENSI MUAMALAH</span>
+            <h2 class="serif-title" style="font-size: 22px; color: var(--emerald-950);">
+              Kuis Literasi Finansial Syariah
+            </h2>
+            <p class="text-muted mt-1" style="font-size: 13px;">
+              Asah daya kritis terhadap klausul akad, biaya tersembunyi, dan rujukan fatwa resmi.
+            </p>
+
+            <!-- Topic Filter Carousel / Pills -->
+            <div class="quiz-topic-scroll" id="quizTopicFilterBar">
+              <button class="quiz-topic-btn active" onclick="setQuizTopicFilter('Semua Topik')">Semua Topik</button>
+              <button class="quiz-topic-btn" onclick="setQuizTopicFilter('Akad')">Akad & Fiqih</button>
+              <button class="quiz-topic-btn" onclick="setQuizTopicFilter('Riba')">Riba & Denda</button>
+              <button class="quiz-topic-btn" onclick="setQuizTopicFilter('PayLater')">PayLater</button>
+              <button class="quiz-topic-btn" onclick="setQuizTopicFilter('Emas')">Emas Digital</button>
+              <button class="quiz-topic-btn" onclick="setQuizTopicFilter('Dropship')">Dropshipping</button>
+              <button class="quiz-topic-btn" onclick="setQuizTopicFilter('Etika')">Etika PAUSE</button>
+            </div>
+
+            <!-- Quiz Stepper Meta -->
+            <div class="flex-between mt-2" id="quizMetaHeader">
+              <div class="flex-row gap-2 align-center">
+                <span class="eyebrow" id="quizProgressLabel">PERTANYAAN 1 DARI 14</span>
+                <span class="pill pill-sage" style="font-size: 10px; padding: 2px 7px;" id="quizDifficultyBadge">Sedang</span>
+              </div>
+              <div class="flex-row gap-2 align-center">
+                <button class="pill pill-sage hoverable" style="font-size: 11px; cursor: pointer;" onclick="toggleQuizShuffle()" id="btnQuizShuffle">
+                  🔀 Acak: Off
+                </button>
+                <span class="pill pill-emerald" id="quizScoreBadge">Skor: 0</span>
+              </div>
             </div>
 
             <!-- Quiz Stepper Bar -->
-            <div class="step-progress-bar">
-              <div class="step-progress-fill" id="quizProgressBar" style="width: 25%;"></div>
+            <div class="step-progress-bar" id="quizProgressBarWrap">
+              <div class="step-progress-fill" id="quizProgressBar" style="width: 7%;"></div>
             </div>
 
-            <!-- Quiz Card -->
+            <!-- Active Quiz Card -->
             <div class="quiz-card" id="quizCardWrap">
-              <span class="pill pill-warn" style="font-size: 10px;" id="quizTopicTag">KASUS SITUASIONAL</span>
-              <h2 class="serif-title mt-2" style="font-size: 18px; color: var(--emerald-950); line-height: 1.35;" id="quizQuestionText">
-                Jika sebuah aplikasi PayLater menetapkan biaya keterlambatan berupa persentase harian yang bertambah terus tanpa batas, apa status syariahnya?
+              <div class="flex-between mb-2">
+                <span class="pill pill-warn" style="font-size: 10px;" id="quizTopicTag">AKAD & FIQIH DASAR</span>
+                <span class="text-xs text-muted" id="quizCategorySubtitle">Fatwa DSN-MUI Terkait</span>
+              </div>
+              <h2 class="serif-title mt-2" style="font-size: 17.5px; color: var(--emerald-950); line-height: 1.4;" id="quizQuestionText">
+                Memuat pertanyaan kuis...
               </h2>
 
               <!-- Options -->
@@ -2728,6 +2827,11 @@
                   <strong id="quizFeedbackTitle" style="font-size: 13.5px;">Pembahasan:</strong>
                 </div>
                 <p class="mt-1" id="quizFeedbackText" style="line-height: 1.55; font-size: 12.5px;"></p>
+                <div class="mt-2 pt-2" style="border-top: 1px dashed var(--ivory-border); display: flex; justify-content: flex-end;" id="quizSourceActionWrap">
+                  <button class="pill pill-emerald hoverable" style="font-size: 11px; cursor: pointer;" onclick="openSourceRefModal()">
+                    📖 Lihat Rujukan Fatwa Terkait →
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -2736,11 +2840,57 @@
               <span>Periksa Jawaban</span>
             </button>
 
+            <!-- Quiz Result Summary Card (Shown when finished) -->
+            <div class="quiz-result-card" id="quizResultSummaryCard">
+              <div style="font-size: 40px; margin-bottom: 8px;">🏆</div>
+              <span class="pill pill-emerald" style="font-size: 11px;">KUIS SELESAI</span>
+              <h2 class="serif-title mt-2" style="font-size: 24px; color: var(--emerald-950);" id="quizResultTitle">
+                Skor Akhir: 100%
+              </h2>
+              <p class="text-muted text-xs mt-1" id="quizResultSubtitle">
+                Kamu menjawab 4 dari 4 pertanyaan dengan benar pada topik ini.
+              </p>
+
+              <!-- Performance Badge & Advice -->
+              <div class="notice-box notice-success mt-3" style="text-align: left;" id="quizResultAdviceBox">
+                <strong id="quizResultBadgeText" style="font-size: 13px;">Sangat Baik (Mumtaz)</strong>
+                <p id="quizResultAdviceText" class="mt-1" style="font-size: 12px; line-height: 1.5;">
+                  Pemahamanmu terhadap kaidah fiqih muamalah kontemporer sangat mendalam.
+                </p>
+              </div>
+
+              <!-- Breakdown of questions review -->
+              <div class="mt-4" style="text-align: left;">
+                <h4 style="font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--emerald-950);">
+                  Ringkasan Jawaban Soal:
+                </h4>
+                <div id="quizResultReviewList">
+                  <!-- Injected review list -->
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="flex-column gap-2 mt-4">
+                <button class="btn btn-primary btn-full" onclick="retakeCurrentQuiz()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                  <span>Ulangi Kuis Topik Ini</span>
+                </button>
+                <div class="flex-row gap-2">
+                  <button class="btn btn-secondary" style="flex: 1;" onclick="setQuizTopicFilter('Semua Topik')">
+                    Pilih Topik Lain
+                  </button>
+                  <button class="btn btn-secondary" style="flex: 1;" onclick="navigateTo('screenProgress')">
+                    Lihat Dashboard →
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <p class="text-center text-muted text-xs mt-3">
-              Latihan kuis bertujuan mengasah nalar kritis, bukan sertifikasi formal.
+              Kuis ini adalah sarana edukasi nalar kritis mandiri, bukan sertifikasi kepatuhan syariah formal lembaga otoritas.
             </p>
           </div>
-        </div></section>
+        </section>
 
         <!-- ========================================== -->
         <!-- SCREEN 9: LEARNING PROGRESS DASHBOARD -->
@@ -2763,80 +2913,117 @@
               Pantau perkembangan pemahaman konsep muamalah dan kebiasaan berpikir kritis sebelum bertransaksi.
             </p>
 
+            <!-- Honest First-time User Onboarding Banner -->
+            <div class="progress-empty-banner" id="progressEmptyBanner" style="display: none;">
+              <div style="font-size: 32px; margin-bottom: 6px;">🌱</div>
+              <h4 style="font-size: 15px; font-weight: 700; color: var(--emerald-950);">
+                Mulai Perjalanan Literasi Syariahmu
+              </h4>
+              <p class="text-muted text-xs mt-1 mb-3" style="line-height: 1.5;">
+                Belum ada aktivitas pembelajaran yang tersimpan. Pelajari modul pertama atau lakukan evaluasi transaksi untuk mulai membangun indeks literasimu secara transparan.
+              </p>
+              <div class="flex-row gap-2 justify-center">
+                <button class="btn btn-primary btn-sm" onclick="navigateTo('screenChecklist')">
+                  🔍 Cek Transaksi
+                </button>
+                <button class="btn btn-secondary btn-sm" onclick="navigateTo('screenLearn')">
+                  📖 Buka Modul Belajar
+                </button>
+              </div>
+            </div>
+
             <!-- Big Stat Grid -->
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 18px 0;">
               <div class="card" style="margin-bottom: 0; padding: 16px;">
                 <span class="eyebrow">CHECKLIST</span>
-                <div style="font-size: 28px; font-weight: 800; color: var(--emerald-900);" id="statChecksCount">5</div>
+                <div style="font-size: 28px; font-weight: 800; color: var(--emerald-900);" id="statChecksCount">0</div>
                 <span class="text-muted">Transaksi Diperiksa</span>
               </div>
               <div class="card" style="margin-bottom: 0; padding: 16px;">
                 <span class="eyebrow">MODUL</span>
-                <div style="font-size: 28px; font-weight: 800; color: var(--emerald-900);" id="statLessonsCount">6</div>
+                <div style="font-size: 28px; font-weight: 800; color: var(--emerald-900);" id="statLessonsCount">0 / 9</div>
                 <span class="text-muted">Materi Dipelajari</span>
               </div>
               <div class="card" style="margin-bottom: 0; padding: 16px;">
                 <span class="eyebrow">KUIS</span>
-                <div style="font-size: 28px; font-weight: 800; color: var(--gold-600);" id="statQuizzesCount">100%</div>
-                <span class="text-muted">Akurasi Rata-rata</span>
+                <div style="font-size: 28px; font-weight: 800; color: var(--gold-600);" id="statQuizzesCount">0%</div>
+                <span class="text-muted">Akurasi Terbaik</span>
               </div>
               <div class="card" style="margin-bottom: 0; padding: 16px;">
                 <span class="eyebrow">LEVEL</span>
-                <div style="font-size: 18px; font-weight: 800; color: var(--emerald-900); margin-top: 4px;">Konsumen Sadar</div>
+                <div style="font-size: 16px; font-weight: 800; color: var(--emerald-900); margin-top: 4px;" id="statLiteracyLevel">Pemula Sadar</div>
                 <span class="text-muted">Tingkat Literasi</span>
               </div>
             </div>
 
             <!-- 4 Core Pillars Competency Progress -->
             <div class="card">
-              <span class="eyebrow">DISTRIBUSI KOMPETENSI</span>
+              <div class="flex-between mb-1">
+                <span class="eyebrow">DISTRIBUSI KOMPETENSI</span>
+                <span class="pill pill-sage" style="font-size: 10px;" id="pillarsStatusBadge">Aktivitas Nyata</span>
+              </div>
               <h4 style="font-size: 14px; font-weight: 700; margin-top: 4px; margin-bottom: 12px;">
-                Cakupan Pilar Keuangan Syariah
+                Cakupan 4 Pilar Keuangan Syariah
               </h4>
 
-              <!-- Pillar 1 -->
+              <!-- Pillar 1: Akad -->
               <div class="mb-3">
                 <div class="flex-between text-xs mb-1">
                   <strong>Pemahaman Akad & Perjanjian</strong>
-                  <span style="color: var(--emerald-800); font-weight: 700;">88%</span>
+                  <span style="color: var(--emerald-800); font-weight: 700;" id="pillarAkadPct">0%</span>
                 </div>
                 <div class="step-progress-bar" style="margin: 0; height: 6px;">
-                  <div class="step-progress-fill" style="width: 88%;"></div>
+                  <div class="step-progress-fill" style="width: 0%;" id="pillarAkadBar"></div>
                 </div>
               </div>
 
-              <!-- Pillar 2 -->
+              <!-- Pillar 2: Riba -->
               <div class="mb-3">
                 <div class="flex-between text-xs mb-1">
                   <strong>Deteksi Biaya & Denda Riba</strong>
-                  <span style="color: var(--emerald-800); font-weight: 700;">92%</span>
+                  <span style="color: var(--emerald-800); font-weight: 700;" id="pillarRibaPct">0%</span>
                 </div>
                 <div class="step-progress-bar" style="margin: 0; height: 6px;">
-                  <div class="step-progress-fill" style="width: 92%;"></div>
+                  <div class="step-progress-fill" style="width: 0%;" id="pillarRibaBar"></div>
                 </div>
               </div>
 
-              <!-- Pillar 3 -->
+              <!-- Pillar 3: Qabdh / Gharar -->
               <div class="mb-3">
                 <div class="flex-between text-xs mb-1">
-                  <strong>Mitigasi Gharar & Spekulasi</strong>
-                  <span style="color: var(--emerald-800); font-weight: 700;">75%</span>
+                  <strong>Kepemilikan, Serah Terima & Qabdh</strong>
+                  <span style="color: var(--emerald-800); font-weight: 700;" id="pillarQabdhPct">0%</span>
                 </div>
                 <div class="step-progress-bar" style="margin: 0; height: 6px;">
-                  <div class="step-progress-fill" style="width: 75%;"></div>
+                  <div class="step-progress-fill" style="width: 0%;" id="pillarQabdhBar"></div>
                 </div>
               </div>
 
-              <!-- Pillar 4 -->
+              <!-- Pillar 4: Etika -->
               <div>
                 <div class="flex-between text-xs mb-1">
                   <strong>Etika Konsumsi & Kemandirian</strong>
-                  <span style="color: var(--emerald-800); font-weight: 700;">82%</span>
+                  <span style="color: var(--emerald-800); font-weight: 700;" id="pillarEtikaPct">0%</span>
                 </div>
                 <div class="step-progress-bar" style="margin: 0; height: 6px;">
-                  <div class="step-progress-fill" style="width: 82%;"></div>
+                  <div class="step-progress-fill" style="width: 0%;" id="pillarEtikaBar"></div>
                 </div>
               </div>
+            </div>
+
+            <!-- Transparency Methodology Card -->
+            <div class="notice-box notice-disclaimer mb-3">
+              <div class="flex-row gap-2 mb-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="18" height="18"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                <strong style="font-size: 13px;">Transparansi Formula Indeks Literasi:</strong>
+              </div>
+              <p style="font-size: 12px; line-height: 1.5; color: var(--text-secondary); margin-bottom: 6px;">
+                Indeks dihitung secara proporsional dari 4 sumber belajar:
+                <strong>Checklist Transaksi (25%)</strong>, <strong>Modul Pelajaran (35%)</strong>, <strong>Studi Kasus (15%)</strong>, dan <strong>Akurasi Kuis (25%)</strong>.
+              </p>
+              <p style="font-size: 11.5px; line-height: 1.45; color: var(--emerald-900); font-style: italic;">
+                Indeks ini dirancang sebagai panduan edukasi mandiri untuk menumbuhkan nalar kritis, BUKAN sertifikasi kepatuhan syariah resmi dewan pengawas.
+              </p>
             </div>
 
             <!-- Assessment History Section -->
@@ -2863,19 +3050,9 @@
                 Aktivitas Terkini
               </h4>
               <div id="activityTimelineList">
-                <div class="flex-row gap-3 mb-3 pb-3" style="border-bottom: 1px solid var(--ivory-border);">
-                  <div class="icon-box" style="width: 36px; height: 36px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
-                  </div>
-                  <div style="flex: 1;">
-                    <strong style="font-size: 12px; display: block;">Menyelesaikan Cek Transaksi: PayLater</strong>
-                    <span class="text-muted text-xs">Hari ini · Tingkat kejelasan: Tinggi</span>
-                  </div>
-                </div>
-                <div class="flex-row gap-3">
-                  <div class="icon-box gold" style="width: 36px; height: 36px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                  </div>
+                <!-- Dynamically populated -->
+              </div>
+            </div>
                   <div style="flex: 1;">
                     <strong style="font-size: 12px; display: block;">Menyelesaikan Modul: Syarat Emas Digital</strong>
                     <span class="text-muted text-xs">Kemarin · Durasi baca 5 menit</span>
@@ -5420,53 +5597,201 @@
       }
     ];
 
-    // --- Quiz Dataset ---
-    const quizData = [
+    // --- Quiz Dataset (Phase 5 Question Bank - Traceable to Source Registry) ---
+    const quizMasterData = [
       {
-        topic: "STUDI KASUS DENDA",
-        q: "Sebuah aplikasi cicilan menetapkan denda keterlambatan sebesar 1% per hari yang bertambah terus dan dimasukkan ke dalam pendapatan laba perusahaan. Bagaimana tinjauan syariahnya?",
+        id: "q1",
+        topic: "Akad & Fiqih Dasar",
+        difficulty: "mudah",
+        q: "Apa rukun utama dalam akad jual beli (Murabahah) yang membedakannya secara mutlak dari pinjaman uang berbunga?",
         opts: [
-          { text: "Boleh, karena sudah disetujui di syarat dan ketentuan awal.", correct: false, note: "Persetujuan nasabah tidak melegalkan klausul yang melanggar prinsip dasar syariah." },
-          { text: "Mengandung unsur Riba Nasi'ah karena menghasilkan pertambahan uang atas utang.", correct: true, note: "Tepat! Denda berlipat ganda yang dijadikan keuntungan kreditur merupakan esensi riba jahiliyyah." },
-          { text: "Boleh, selama tidak melebihi harga pokok barang.", correct: false, note: "Tambahan uang berbasis waktu pembayaran utang tetap merupakan riba." }
+          { text: "Adanya komoditas atau aset riil yang dimiliki penjual sebelum dijual ke pembeli.", correct: true, note: "Tepat! Kepemilikan aset riil adalah fondasi pembeda jual beli sah dari pinjaman uang berbunga (la tabi' ma laisa 'indak)." },
+          { text: "Pembeli wajib melunasi pembayaran dalam waktu 24 jam tanpa cicilan.", correct: false, note: "Kurang tepat. Murabahah diperbolehkan secara cicilan/tangguh (bi tsamanin aajil)." },
+          { text: "Harga barang harus mengikuti rekomendasi harga pasar pemerintah.", correct: false, note: "Kurang tepat. Penjual dan pembeli bebas menyepakati margin keuntungan yang wajar dan transparan." }
         ],
-        explanation: "Dalam syariah, denda finansial atas keterlambatan hanya dibolehkan sebagai instrumen disiplin (ta'zir) jika disalurkan 100% untuk dana sosial kebajikan, bukan pendapatan kreditur."
+        explanation: "Dalam murabahah harus ada objek riil yang sah dimiliki penjual sebelum dialihkan kepada pembeli.",
+        sourceIds: ["dsnmui-04-2000", "dsnmui-111-2017"]
       },
       {
-        topic: "AKAD & HAK MILIK",
-        q: "Apa rukun utama dalam akad jual beli (Murabahah) yang membedakannya secara mutlak dari pinjaman uang tunai?",
+        id: "q2",
+        topic: "Akad & Fiqih Dasar",
+        difficulty: "sedang",
+        q: "Dua aplikasi pinjaman daring memiliki nama menu yang sama: 'Cicilan Fleksibel'. Apakah struktur akad dan kepatuhan syariahnya pasti identik?",
         opts: [
-          { text: "Adanya komoditas/barang riil yang dimiliki penjual sebelum dijual ke pembeli.", correct: true, note: "Benar sekali! Harus ada objek riil yang sah berpindah kepemilikan." },
-          { text: "Pembeli harus membayar lunas di depan tanpa cicilan.", correct: false, note: "Murabahah boleh dicicil bertahap." },
-          { text: "Harga barang harus sama persis dengan harga pasaran.", correct: false, note: "Penjual berhak menentukan margin laba yang wajar dan disepakati." }
+          { text: "Ya, nama produk yang sama di industri fintech selalu mencerminkan akad yang identik.", correct: false, note: "Keliru. Istilah pemasaran tidak menjamin kesesuaian syariah maupun kesamaan struktur akad." },
+          { text: "Tidak; nama komersial bisa serupa, namun substansi akad, hak-kewajiban, dan biayanya bisa sangat berbeda.", correct: true, note: "Tepat! Kaidah Al-'Ibrah fil 'uqud lil maqaashid wal ma'ani menegaskan substansi akad yang diakui, bukan istilah promosi." }
         ],
-        explanation: "Rasulullah SAW melarang seseorang menjual apa yang tidak dimilikinya (la tabi' ma laisa 'indak). Kepemilikan aset riil adalah fondasi pembeda jual beli dari riba."
+        explanation: "Penilaian syariah bergantung pada substansi klausul dan hak para pihak, bukan kemasan istilah promosi.",
+        sourceIds: ["dsnmui-117-2018", "ojk-pojk-40-2024"]
       },
       {
-        topic: "EMAS DIGITAL",
-        q: "Kapan tabungan emas digital dianggap memenuhi kaidah serah terima sah (Qabdh Hukmi) menurut Fatwa DSN-MUI No. 77?",
+        id: "q3",
+        topic: "Riba & Denda Keterlambatan",
+        difficulty: "mudah",
+        q: "Berdasarkan Fatwa DSN-MUI No. 17/2000, dana denda keterlambatan (ta'zir) boleh dialokasikan ke mana?",
         opts: [
-          { text: "Cukup dengan adanya grafik pergerakan harga emas tanpa fisik riil.", correct: false, note: "Ini termasuk perdagangan margin spekulatif yang dilarang." },
-          { text: "Ketika emas fisiknya benar-benar ada di kustodian dan nasabah memiliki hak cetak fisik kapan saja.", correct: true, note: "Tepat! Saldo digital harus didukung (underlying) emas fisik nyata di brankas terdaftar." },
-          { text: "Hanya jika emas fisik dikirimkan dalam waktu 1 jam ke rumah pembeli.", correct: false, note: "Qabdh hukmi (yuridis) sah tanpa harus menunggu pengiriman fisik seketika." }
+          { text: "Seluruhnya dialokasikan ke pos dana kebajikan sosial (Qardhul Hasan / dana sosial).", correct: true, note: "Tepat! Ta'zir bertujuan mendisiplinkan nasabah mampu yang menunda bayar, bukan sebagai sumber laba kreditur." },
+          { text: "Diakui sebagai pendapatan laba operasional perusahaan kreditur.", correct: false, note: "Keliru. Jika denda dijadikan laba kreditur, transaksi jatuh ke dalam riba nasi'ah." },
+          { text: "Dibagikan sebagai bonus insentif tim penagihan aplikasi.", correct: false, note: "Keliru. Menjadikan denda sebagai insentif penagih melanggar kaidah pemisahan dana sosial." }
         ],
-        explanation: "Qabdh Hukmi sah jika pembeli secara hukum dapat mengontrol kepemilikannya dan emas fisik nyata tersimpan aman di kustodian resmi berizin."
+        explanation: "Fatwa DSN-MUI No. 17/2000 menegaskan sanksi denda finansial keterlambatan tidak boleh menjadi pos pendapatan kreditur.",
+        sourceIds: ["dsnmui-17-2000"]
       },
       {
-        topic: "PERILAKU KONSUMEN",
-        q: "Apa tujuan utama prinsip 'PAUSE → CHECK → CHOOSE' sebelum bertransaksi digital?",
+        id: "q4",
+        topic: "Riba & Denda Keterlambatan",
+        difficulty: "sedang",
+        q: "Apa perbedaan mendasar antara Ta'zir (Fatwa DSN-MUI No. 17/2000) dan Ta'widh (Fatwa DSN-MUI No. 43/2004)?",
         opts: [
-          { text: "Melarang masyarakat menggunakan segala bentuk aplikasi teknologi.", correct: false, note: "Teknologi finansial adalah instrumen muamalah yang sangat bermanfaat jika digunakan secara syar'i." },
-          { text: "Membangun jeda kritis untuk meneliti akad, biaya, dan urgensi kebutuhan riil.", correct: true, note: "Tepat! Mencegah keputusan impulsif dan jebakan klausul tidak adil." },
-          { text: "Menunggu sampai promo diskon bertambah besar.", correct: false, note: "Fokusnya adalah pada literasi dan perlindungan hak konsumen." }
+          { text: "Ta'zir adalah sanksi disiplin untuk dana sosial, sedangkan Ta'widh adalah ganti rugi atas biaya riil yang boleh diterima kreditur.", correct: true, note: "Tepat! Perbedaan peruntukan dan justifikasi biaya riil adalah batas tegas antara Ta'zir dan Ta'widh." },
+          { text: "Ta'zir hanya untuk perbankan, sedangkan Ta'widh khusus untuk fintech pinjaman daring.", correct: false, note: "Kurang tepat. Kedua fatwa berlaku umum untuk seluruh Lembaga Keuangan Syariah." },
+          { text: "Keduanya sama persis dan boleh diakui sebagai laba dividen pemegang saham.", correct: false, note: "Keliru. Mengakui ta'zir sebagai laba dividen bertentangan secara langsung dengan fatwa." }
         ],
-        explanation: "Jeda kritis 30 detik membantu mengalihkan emosi belanja impulsif ke pertimbangan rasional berbasis nilai hifzhul maal (penjagaan harta)."
+        explanation: "Ta'zir adalah sanksi finansial untuk pos kebajikan sosial, sedangkan Ta'widh adalah kompensasi atas kerugian riil yang dialami kreditur.",
+        sourceIds: ["dsnmui-17-2000", "dsnmui-43-2004"]
+      },
+      {
+        id: "q5",
+        topic: "Riba & Denda Keterlambatan",
+        difficulty: "sulit",
+        q: "Sebuah platform cicilan menetapkan denda keterlambatan 1.5% per hari yang bertambah terus tanpa batas dan masuk ke laba platform. Apa konsekuensi hukum syariahnya?",
+        opts: [
+          { text: "Sah, karena pengguna telah menandatangani persetujuan di lembar syarat & ketentuan.", correct: false, note: "Keliru. Persetujuan nasabah (ridha) tidak dapat membatalkan atau melegalkan larangan riba syar'i." },
+          { text: "Mengandung Riba Nasi'ah yang jelas karena menghasilkan pertambahan uang atas utang seiring berjalannya waktu.", correct: true, note: "Tepat! Bertambahnya kewajiban uang semata-mata karena tenggat waktu yang menjadi laba kreditur adalah riba jahiliyyah." },
+          { text: "Sah, asalkan total akumulasi denda tidak melebihi dua kali lipat harga barang awal.", correct: false, note: "Keliru. Riba tetap dilarang tanpa memandang batasan kelipatan nilai pokok." }
+        ],
+        explanation: "Tambahan uang bersyarat atas penundaan pembayaran utang yang dinikmati oleh kreditur merupakan esensi riba nasi'ah.",
+        sourceIds: ["dsnmui-17-2000", "ojk-seojk-19-2023"]
+      },
+      {
+        id: "q6",
+        topic: "PayLater & P2P Lending",
+        difficulty: "sedang",
+        q: "Bagaimana status regulasi POJK No. 10/POJK.05/2022 tentang Layanan Pendanaan Bersama Berbasis Teknologi Informasi (LPBBTI)?",
+        opts: [
+          { text: "Telah resmi dicabut dan dinyatakan tidak berlaku oleh POJK No. 40 Tahun 2024.", correct: true, note: "Tepat! POJK 40 Tahun 2024 mencabut POJK 10/2022 dan menyempurnakan tata kelola industri LPBBTI secara komprehensif." },
+          { text: "Masih berlaku penuh dan menjadi satu-satunya dasar hukum fintech lending di Indonesia.", correct: false, note: "Keliru. Mengutip POJK 10/2022 sebagai regulasi aktif adalah informasi usang yang menyesatkan." },
+          { text: "Hanya berlaku khusus bagi platform konvensional di pulau Jawa.", correct: false, note: "Keliru. POJK berlaku secara nasional untuk seluruh entitas berizin OJK." }
+        ],
+        explanation: "POJK No. 10/POJK.05/2022 telah resmi dicabut dan digantikan oleh POJK No. 40 Tahun 2024.",
+        sourceIds: ["ojk-pojk-40-2024", "ojk-pojk-10-2022"]
+      },
+      {
+        id: "q7",
+        topic: "PayLater & P2P Lending",
+        difficulty: "sedang",
+        q: "Dalam pembiayaan PayLater syariah berbasis Wakalah bil Ujrah, apa peran dan hak yang boleh diterima platform?",
+        opts: [
+          { text: "Platform menjadi wakil nasabah untuk melunasi ke merchant dan berhak atas upah jasa (ujrah) bernilai nominal tetap atau disepakati.", correct: true, note: "Tepat! Ujrah harus transparan, mencerminkan nilai jasa layanan nyata, dan tidak bertambah seiring bertambahnya waktu keterlambatan." },
+          { text: "Platform meminjamkan uang berbunga harian kepada pengguna untuk dibelanjakan bebas.", correct: false, note: "Keliru. Pinjaman berbunga harian melanggar prinsip qardh syariah." },
+          { text: "Platform menyita barang pengguna secara sepihak jika pembayaran telat 1 hari.", correct: false, note: "Keliru. Penyitaan sepihak tanpa mekanisme hukum wanprestasi yang sah melanggar perlindungan konsumen." }
+        ],
+        explanation: "Dalam skema Wakalah bil Ujrah, platform bertindak sebagai kuasa pembeli dan berhak menerima upah jasa riil (Fatwa DSN-MUI No. 117/2018).",
+        sourceIds: ["dsnmui-117-2018", "ojk-pojk-40-2024"]
+      },
+      {
+        id: "q8",
+        topic: "Emas Digital & Qabdh",
+        difficulty: "sedang",
+        q: "Kapan transaksi emas digital non-tunai dianggap memenuhi syarat serah terima yang sah (Qabdh Hukmi) menurut Fatwa DSN-MUI No. 77/2010?",
+        opts: [
+          { text: "Cukup jika pengguna melihat angka grafik harga emas tanpa ada emas fisik riil di mana pun.", correct: false, note: "Keliru. Angka fiktif tanpa underlying emas fisik nyata termasuk perjudian/spekulasi margin (maysir & gharar)." },
+          { text: "Ketika emas fisiknya nyata ada 100% di kustodian terdaftar berizin Bappebti dan nasabah memiliki hak cetak fisik kapan saja.", correct: true, note: "Tepat! Fatwa 77/2010 dan Peraturan Bappebti 4/2019 mewajibkan rasio fisik emas 1:1 di pedagang/kustodian terdaftar." },
+          { text: "Hanya sah apabila kurir mengantarkan emas fisik ke alamat rumah pembeli dalam tempo maksimal 10 menit.", correct: false, note: "Kurang tepat. Serah terima yuridis (qabdh hukmi) sah tanpa harus fisik diserahkan saat itu juga ke tangan pembeli." }
+        ],
+        explanation: "Qabdh Hukmi terpenuhi jika didukung fisik emas 100% di brankas kustodian resmi dan nasabah memiliki hak cetak fisik.",
+        sourceIds: ["dsnmui-77-2010", "bappebti-4-2019"]
+      },
+      {
+        id: "q9",
+        topic: "Emas Digital & Qabdh",
+        difficulty: "sulit",
+        q: "Aplikasi menawarkan perdagangan emas dengan leverage 1:100 tanpa alokasi emas fisik di brankas kustodian. Bagaimana tinjauan fiqihnya?",
+        opts: [
+          { text: "Boleh, karena leverage mempermudah modal kecil mendapatkan keuntungan besar.", correct: false, note: "Keliru. Potensi keuntungan cepat tidak melegalkan skema transaksi yang dilarang syariat." },
+          { text: "Dilarang karena merupakan perdagangan komoditas spekulatif tanpa serah terima fisik (gharar dan maysir).", correct: true, note: "Tepat! Emas adalah sarf/ribawi yang wajib bebas dari spekulasi fiktif dan wajib ada kepastian underlying aset." },
+          { text: "Boleh asalkan pengguna sudah berusia di atas 21 tahun.", correct: false, note: "Keliru. Syarat usia tidak mengubah status keharaman transaksi yang tidak memenuhi rukun syariah." }
+        ],
+        explanation: "Trading emas dengan leverage tanpa jaminan aset fisik nyata adalah transaksi derivatif spekulatif murni yang dilarang.",
+        sourceIds: ["dsnmui-77-2010", "bappebti-4-2019"]
+      },
+      {
+        id: "q10",
+        topic: "Dropshipping & E-Commerce",
+        difficulty: "sedang",
+        q: "Mengapa dropshipper tidak boleh langsung bertindak sebagai penjual tangan pertama jika barang belum dimiliki dan belum ada izin dari supplier?",
+        opts: [
+          { text: "Karena melanggar sabda Nabi SAW yang melarang menjual barang yang belum dimiliki (la tabi' ma laisa 'indak).", correct: true, note: "Tepat! Solusi syariahnya adalah dropshipper bertindak sebagai agen perwakilan (Wakalah bil Ujrah) atau menggunakan pesanan (Salam)." },
+          { text: "Karena harga e-commerce selalu lebih mahal dari pasar grosir tradisional.", correct: false, note: "Keliru. Perbedaan harga pasar bukan alasan dasar hukum larangan tersebut." },
+          { text: "Karena platform belanja daring melarang segala bentuk pengiriman barang antar pulau.", correct: false, note: "Keliru. E-commerce justru memfasilitasi logistik pengiriman nasional secara legal." }
+        ],
+        explanation: "Rasulullah SAW melarang seseorang menjual apa yang tidak dimilikinya tanpa ikatan kepemilikan maupun kuasa wakalah yang sah.",
+        sourceIds: ["dsnmui-05-2000", "dsnmui-111-2017"]
+      },
+      {
+        id: "q11",
+        topic: "Dropshipping & E-Commerce",
+        difficulty: "sulit",
+        q: "Skema apa yang paling tepat digunakan dropshipper agar transaksinya sesuai dengan prinsip syariah tanpa melanggar larangan menjual barang orang lain?",
+        opts: [
+          { text: "Akad Wakalah bil Ujrah (menjadi agen pemasar resmi supplier dengan upah komisi yang jelas).", correct: true, note: "Tepat! Wakalah bil Ujrah adalah solusi praktis dan sah dalam literatur fiqih muamalah kontemporer untuk reseller/dropshipper." },
+          { text: "Akad Rahn dengan menggadaikan foto produk supplier di media sosial.", correct: false, note: "Keliru. Rahn adalah akad gadai jaminan utang, tidak relevan untuk penjualan dropship." },
+          { text: "Akad Mudharabah di mana pembeli menanggung 100% risiko kehilangan paket ekspedisi.", correct: false, note: "Keliru. Membebankan kerugian sepihak ke pembeli tanpa akad yang adil melanggar hak konsumen." }
+        ],
+        explanation: "Dengan akad Wakalah bil Ujrah, dropshipper bertindak sah sebagai wakil penjual resmi dan memperoleh komisi jasa yang halal.",
+        sourceIds: ["dsnmui-05-2000", "dsnmui-117-2018"]
+      },
+      {
+        id: "q12",
+        topic: "Langganan & Donasi",
+        difficulty: "sedang",
+        q: "Aplikasi streaming menawarkan uji coba gratis 7 hari, lalu otomatis memotong saldo bulanan tanpa notifikasi pembatalan. Apa prinsip syariah yang diuji?",
+        opts: [
+          { text: "Prinsip kejelasan akad dan kerelaan bertransaksi (Antaradin Minkum) dalam Ijarah Jasa.", correct: true, note: "Tepat! Pengguna wajib diberi pemberitahuan sebelum masa uji coba berakhir agar pemotongan biaya berjalan atas dasar kerelaan sadar." },
+          { text: "Prinsip jual beli emas ribawi.", correct: false, note: "Keliru. Kasus ini mengenai penyewaan hak akses jasa digital, bukan komoditas emas." },
+          { text: "Prinsip bagi hasil bagi penonton film terbanyak.", correct: false, note: "Keliru. Menonton konten tidak mengubah akad menjadi mudharabah bagi hasil." }
+        ],
+        explanation: "Akad sewa jasa digital mensyaratkan transparansi masa pemanfaatan dan mekanisme pembatalan yang adil tanpa unsur jahalah.",
+        sourceIds: ["dsnmui-112-2017", "ojk-portal"]
+      },
+      {
+        id: "q13",
+        topic: "Langganan & Donasi",
+        difficulty: "mudah",
+        q: "Sebelum berdonasi atau menyalurkan wakaf melalui tautan media sosial, langkah kehati-hatian apa yang paling utama?",
+        opts: [
+          { text: "Memeriksa izin resmi lembaga di Kementerian Agama / BAZNAS / BWI dan kejelasan laporan penyaluran.", correct: true, note: "Tepat! Verifikasi otoritatif dan pelaporan berkala adalah standar integritas pengelolaan dana sosial umat." },
+          { text: "Cukup melihat banyaknya tanda suka (likes) dan komentar di unggahan tersebut.", correct: false, note: "Keliru. Tanda suka dan komentar media sosial mudah dimanipulasi dengan bot atau akun palsu." },
+          { text: "Memastikan logo aplikasi menggunakan warna hijau.", correct: false, note: "Keliru. Warna desain visual tidak ada kaitannya dengan keabsahan izin lembaga penyalur donasi." }
+        ],
+        explanation: "Transparansi rekening amil dan legalitas lembaga pengelola ZISWAF resmi melindungi donatur dari modus penipuan.",
+        sourceIds: ["ojk-portal", "bi-portal"]
+      },
+      {
+        id: "q14",
+        topic: "Etika PAUSE",
+        difficulty: "mudah",
+        q: "Apa fungsi utama tahapan PAUSE (Jeda Sadar 30 Detik) dalam aplikasi Syariah Digital Check?",
+        opts: [
+          { text: "Meredam desakan belanja impulsif agar pengguna dapat meneliti akad, rincian biaya, dan urgensi kebutuhan riil secara rasional.", correct: true, note: "Tepat! Jeda kognitif mengalihkan respons emosional menjadi pertimbangan sadar terhadap klausul dan transparansi biaya." },
+          { text: "Melarang masyarakat secara mutlak bertransaksi menggunakan perangkat ponsel pintar.", correct: false, note: "Keliru. Aplikasi mendorong pemanfaatan teknologi secara beretika dan bijak, bukan melarangnya." },
+          { text: "Menunggu sampai kupon diskon flash sale habis masa berlakunya.", correct: false, note: "Keliru. Tujuannya adalah literasi konsumen, bukan menunggu promo kedaluwarsa." }
+        ],
+        explanation: "Tahap PAUSE adalah instrumen literasi kognitif untuk membangun jeda sadar sebelum bertransaksi, selaras dengan prinsip hifzhul maal.",
+        sourceIds: ["dsnmui-portal", "ojk-portal"]
       }
     ];
 
+    // Quiz Engine Active State
+    let quizActiveTopic = 'Semua Topik';
+    let quizShuffleEnabled = false;
+    let currentQuizPool = [...quizMasterData];
     let currentQuizIndex = 0;
     let currentQuizAnswered = false;
     let currentQuizScore = 0;
+    let selectedQuizIndex = null;
+    let currentQuizUserAnswers = [];
+    let currentQuizStreak = 0;
 
     // --- Navigation System (Responsive Dual Navigation) ---
     function navigateTo(screenId) {
@@ -6622,23 +6947,37 @@
       closeModal('modalLessonReader');
     }
 
-    // --- Phase 4: Dynamic Progress Dashboard Calculator ---
+    // --- Phase 4 & 5: Dynamic Progress Dashboard Calculator ---
     function updateProgressDashboard() {
-      const checksCount = (appState.assessmentsHistory || []).length;
-      const lessonsCount = (appState.lessonsRead || []).length;
-      const scenariosCount = (appState.scenariosDone || []).length;
+      const checks = appState.assessmentsHistory || [];
+      const lessons = appState.lessonsRead || [];
+      const scenarios = appState.scenariosDone || [];
+      const quizAttempts = appState.quizAttempts || [];
 
-      // Quiz accuracy calculation
+      const checksCount = checks.length;
+      const lessonsCount = lessons.length;
+      const scenariosCount = scenarios.length;
+      const attemptsCount = quizAttempts.length;
+
+      // Honest First-time User Check: If totally fresh, show friendly onboarding banner
+      const emptyBanner = document.getElementById('progressEmptyBanner');
+      const isFreshUser = (checksCount === 0 && lessonsCount === 0 && scenariosCount === 0 && attemptsCount === 0);
+      if (emptyBanner) {
+        emptyBanner.style.display = isFreshUser ? 'block' : 'none';
+      }
+
+      // Quiz accuracy calculation (best score percentage across attempts)
       let bestQuizPct = 0;
-      if (Array.isArray(appState.quizAttempts) && appState.quizAttempts.length > 0) {
+      if (quizAttempts.length > 0) {
         bestQuizPct = Math.round(
-          appState.quizAttempts.reduce((m, a) => Math.max(m, a.total > 0 ? (a.score / a.total) * 100 : 0), 0)
+          quizAttempts.reduce((m, a) => Math.max(m, a.total > 0 ? (a.score / a.total) * 100 : 0), 0)
         );
-      } else if (appState.stats.quizScore > 0) {
+      } else if (appState.stats.quizScore > 0 && !isFreshUser) {
         bestQuizPct = 100;
       }
 
-      // Compute mathematical progress formula matching progress.ts
+      // Mathematical formula matching progress.ts:
+      // Checklist (min 1) 25%, Lessons (35%), Scenarios (15%), Best Quiz (25%)
       const raw =
         (checksCount > 0 ? 25 : 0) +
         (lessonsData.length > 0 ? (lessonsCount / lessonsData.length) * 35 : 0) +
@@ -6647,32 +6986,78 @@
 
       const literacyPercent = Math.min(100, Math.round(raw));
 
+      // Update stat cards
       const elCheck = document.getElementById('statChecksCount'); if (elCheck) elCheck.textContent = checksCount;
       const elLess = document.getElementById('statLessonsCount'); if (elLess) elLess.textContent = `${lessonsCount} / ${lessonsData.length}`;
       const elQuiz = document.getElementById('statQuizzesCount'); if (elQuiz) elQuiz.textContent = `${bestQuizPct}%`;
       const elHomeChecks = document.getElementById('homeChecksBadge'); if (elHomeChecks) elHomeChecks.textContent = `${checksCount} Evaluasi Selesai`;
 
-      // Level description
+      // Dynamic Level Classification
       let levelTitle = "Pemula Sadar";
       if (literacyPercent >= 75) levelTitle = "Duta Literasi Syariah";
-      else if (literacyPercent >= 45) levelTitle = "Konsumen Sadar";
+      else if (literacyPercent >= 45) levelTitle = "Konsumen Sadar & Kritis";
       else if (literacyPercent >= 20) levelTitle = "Konsumen Cermat";
 
-      const elLevel = document.getElementById('profileBadgeLevel'); if (elLevel) elLevel.textContent = levelTitle;
+      const elLevel = document.getElementById('statLiteracyLevel'); if (elLevel) elLevel.textContent = levelTitle;
+      const elProfLevel = document.getElementById('profileBadgeLevel'); if (elProfLevel) elProfLevel.textContent = levelTitle;
+
+      // Dynamic 4 Core Pillars Competency Calculation (matching computePillarCompetencies)
+      const readLessonsSet = new Set(lessons);
+      const doneScenariosSet = new Set(scenarios);
+      const checkCategories = new Set(checks.map(c => c.category || c.cat));
+
+      // Pillar 1: Akad & Perjanjian (0-100%)
+      const akadLessons = (readLessonsSet.has('akad-transaksi-digital') ? 20 : 0) + (readLessonsSet.has('transparansi-biaya') ? 20 : 0);
+      const akadChecks = (['paylater', 'lending', 'subscription'].some(c => checkCategories.has(c))) ? 35 : 0;
+      const akadScenarios = doneScenariosSet.has('paylater') ? 25 : 0;
+      const akadTotal = isFreshUser ? 0 : Math.min(100, akadLessons + akadChecks + akadScenarios);
+
+      // Pillar 2: Deteksi Biaya & Denda Riba (0-100%)
+      const ribaLessons = readLessonsSet.has('riba-denda-keterlambatan') ? 45 : 0;
+      const ribaScenarios = doneScenariosSet.has('paylater') ? 30 : 0;
+      const ribaQuiz = attemptsCount > 0 ? 25 : 0;
+      const ribaTotal = isFreshUser ? 0 : Math.min(100, ribaLessons + ribaScenarios + ribaQuiz);
+
+      // Pillar 3: Kepemilikan & Qabdh (0-100%)
+      const qabdhLessons = (readLessonsSet.has('risiko-investasi') ? 20 : 0) + (readLessonsSet.has('dropshipping-kepemilikan') ? 20 : 0);
+      const qabdhChecks = (['gold', 'shopping'].some(c => checkCategories.has(c))) ? 35 : 0;
+      const qabdhScenarios = (doneScenariosSet.has('emas-digital') ? 12.5 : 0) + (doneScenariosSet.has('dropshipping') ? 12.5 : 0);
+      const qabdhTotal = isFreshUser ? 0 : Math.min(100, Math.round(qabdhLessons + qabdhChecks + qabdhScenarios));
+
+      // Pillar 4: Etika Konsumsi & Kemandirian (0-100%)
+      const etikaLessons = (readLessonsSet.has('sumber-tepercaya') ? 20 : 0) + (readLessonsSet.has('donasi-ziswaf') ? 20 : 0);
+      const etikaChecks = (['donation', 'subscription'].some(c => checkCategories.has(c))) ? 35 : 0;
+      const etikaScenarios = doneScenariosSet.has('langganan-otomatis') ? 25 : 0;
+      const etikaTotal = isFreshUser ? 0 : Math.min(100, etikaLessons + etikaChecks + etikaScenarios);
+
+      // Update pillar UI elements
+      const elAkadPct = document.getElementById('pillarAkadPct'); if (elAkadPct) elAkadPct.textContent = `${akadTotal}%`;
+      const elAkadBar = document.getElementById('pillarAkadBar'); if (elAkadBar) elAkadBar.style.width = `${akadTotal}%`;
+
+      const elRibaPct = document.getElementById('pillarRibaPct'); if (elRibaPct) elRibaPct.textContent = `${ribaTotal}%`;
+      const elRibaBar = document.getElementById('pillarRibaBar'); if (elRibaBar) elRibaBar.style.width = `${ribaTotal}%`;
+
+      const elQabdhPct = document.getElementById('pillarQabdhPct'); if (elQabdhPct) elQabdhPct.textContent = `${qabdhTotal}%`;
+      const elQabdhBar = document.getElementById('pillarQabdhBar'); if (elQabdhBar) elQabdhBar.style.width = `${qabdhTotal}%`;
+
+      const elEtikaPct = document.getElementById('pillarEtikaPct'); if (elEtikaPct) elEtikaPct.textContent = `${etikaTotal}%`;
+      const elEtikaBar = document.getElementById('pillarEtikaBar'); if (elEtikaBar) elEtikaBar.style.width = `${etikaTotal}%`;
 
       // Activity timeline
       const actContainer = document.getElementById('activityTimelineList');
       if (actContainer) {
         const activities = appState.activity || [];
-        if (activities.length === 0 && checksCount === 0 && lessonsCount === 0) {
+        if (activities.length === 0) {
           actContainer.innerHTML = `
-            <p class="text-muted text-xs text-center py-2">Belum ada riwayat aktivitas. Mulai pelajari modul atau evaluasi transaksi pertamamu!</p>
+            <div class="text-center py-3 text-muted text-xs" style="background: var(--ivory-base); border-radius: var(--radius-md); padding: 16px;">
+              Belum ada riwayat aktivitas pembelajaran. Mulai pelajari modul atau periksa transaksi pertamamu!
+            </div>
           `;
         } else {
-          actContainer.innerHTML = activities.slice(0, 5).map(act => `
+          actContainer.innerHTML = activities.slice(0, 6).map(act => `
             <div class="timeline-item">
               <span class="timeline-dot"></span>
-              <div style="font-size: 12px; color: var(--text-primary);">${act.text}</div>
+              <div style="font-size: 12px; color: var(--text-primary); font-weight: 500;">${act.text}</div>
               <span class="text-muted text-xs">${act.date}</span>
             </div>
           `).join('');
@@ -6680,35 +7065,113 @@
       }
     }
 
-    // --- Interactive Quiz Logic ---
+    // --- Phase 5: Modular Quiz Engine with Topics & Analytics ---
+    function filterQuizPool() {
+      let filtered = [...quizMasterData];
+      if (quizActiveTopic && quizActiveTopic !== 'Semua Topik') {
+        filtered = filtered.filter(q => q.topic.toLowerCase().includes(quizActiveTopic.toLowerCase()));
+      }
+      if (quizShuffleEnabled) {
+        // Fisher-Yates shuffle
+        for (let i = filtered.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const tmp = filtered[i];
+          filtered[i] = filtered[j];
+          filtered[j] = tmp;
+        }
+      }
+      currentQuizPool = filtered.length > 0 ? filtered : [...quizMasterData];
+    }
+
+    function setQuizTopicFilter(topic) {
+      quizActiveTopic = topic;
+      document.querySelectorAll('#quizTopicFilterBar .quiz-topic-btn').forEach(btn => {
+        const btnText = btn.textContent.trim();
+        btn.classList.toggle('active', btnText.toLowerCase().includes(topic.toLowerCase()) || (topic === 'Semua Topik' && btnText === 'Semua Topik'));
+      });
+      retakeCurrentQuiz();
+    }
+
+    function toggleQuizShuffle() {
+      quizShuffleEnabled = !quizShuffleEnabled;
+      const btn = document.getElementById('btnQuizShuffle');
+      if (btn) btn.textContent = quizShuffleEnabled ? '🔀 Acak: On' : '🔀 Acak: Off';
+      showToast(quizShuffleEnabled ? "Urutan pertanyaan kuis diacak." : "Urutan kuis berurutan normal.");
+      retakeCurrentQuiz();
+    }
+
+    function retakeCurrentQuiz() {
+      filterQuizPool();
+      currentQuizIndex = 0;
+      currentQuizAnswered = false;
+      currentQuizScore = 0;
+      selectedQuizIndex = null;
+      currentQuizUserAnswers = [];
+
+      // Restore quiz card & button
+      const cardWrap = document.getElementById('quizCardWrap'); if (cardWrap) cardWrap.style.display = 'block';
+      const btnAct = document.getElementById('btnQuizAction'); if (btnAct) btnAct.style.display = 'block';
+      const pBarWrap = document.getElementById('quizProgressBarWrap'); if (pBarWrap) pBarWrap.style.display = 'block';
+      const metaHdr = document.getElementById('quizMetaHeader'); if (metaHdr) metaHdr.style.display = 'flex';
+      const sumCard = document.getElementById('quizResultSummaryCard'); if (sumCard) sumCard.style.display = 'none';
+
+      renderQuizQuestion();
+    }
+
     function renderQuizQuestion() {
-      const q = quizData[currentQuizIndex];
-      document.getElementById('quizProgressLabel').textContent = `PERTANYAAN ${currentQuizIndex + 1} DARI ${quizData.length}`;
-      document.getElementById('quizProgressBar').style.width = `${((currentQuizIndex + 1) / quizData.length) * 100}%`;
-      document.getElementById('quizScoreBadge').textContent = `Skor: ${currentQuizScore}`;
-      document.getElementById('quizTopicTag').textContent = q.topic;
-      document.getElementById('quizQuestionText').textContent = q.q;
+      if (!currentQuizPool || currentQuizPool.length === 0) filterQuizPool();
+      if (currentQuizIndex >= currentQuizPool.length) {
+        finishQuizAndShowSummary();
+        return;
+      }
+
+      const q = currentQuizPool[currentQuizIndex];
+      const progLabel = document.getElementById('quizProgressLabel');
+      if (progLabel) progLabel.textContent = `PERTANYAAN ${currentQuizIndex + 1} DARI ${currentQuizPool.length}`;
+
+      const pBar = document.getElementById('quizProgressBar');
+      if (pBar) pBar.style.width = `${((currentQuizIndex + 1) / currentQuizPool.length) * 100}%`;
+
+      const scoreBadge = document.getElementById('quizScoreBadge');
+      if (scoreBadge) scoreBadge.textContent = `Skor: ${currentQuizScore}`;
+
+      const streakEl = document.getElementById('quizStreakText');
+      if (streakEl) streakEl.textContent = `Streak: ${currentQuizStreak}`;
+
+      const diffBadge = document.getElementById('quizDifficultyBadge');
+      if (diffBadge) {
+        diffBadge.textContent = q.difficulty ? (q.difficulty.charAt(0).toUpperCase() + q.difficulty.slice(1)) : 'Sedang';
+        diffBadge.className = q.difficulty === 'sulit' ? 'pill pill-warn' : (q.difficulty === 'mudah' ? 'pill pill-emerald' : 'pill pill-sage');
+      }
+
+      const topicTag = document.getElementById('quizTopicTag');
+      if (topicTag) topicTag.textContent = q.topic.toUpperCase();
+
+      const qText = document.getElementById('quizQuestionText');
+      if (qText) qText.textContent = q.q;
 
       // Reset feedback box
       const fbBox = document.getElementById('quizFeedbackBox');
-      fbBox.style.display = 'none';
+      if (fbBox) fbBox.style.display = 'none';
 
-      // Options
+      // Render Options
       const container = document.getElementById('quizOptionsContainer');
-      container.innerHTML = q.opts.map((opt, i) => `
-        <div class="option-radio" id="quizOpt_${i}" onclick="selectQuizOption(${i})">
-          <div class="option-indicator"></div>
-          <div>
-            <div class="option-label">${opt.text}</div>
+      if (container) {
+        container.innerHTML = q.opts.map((opt, i) => `
+          <div class="option-radio" id="quizOpt_${i}" onclick="selectQuizOption(${i})">
+            <div class="option-indicator"></div>
+            <div>
+              <div class="option-label" style="font-size: 13.5px; line-height: 1.45;">${opt.text}</div>
+            </div>
           </div>
-        </div>
-      `).join('');
+        `).join('');
+      }
 
       currentQuizAnswered = false;
-      document.getElementById('btnQuizAction').innerHTML = '<span>Periksa Jawaban</span>';
+      const btn = document.getElementById('btnQuizAction');
+      if (btn) btn.innerHTML = '<span>Periksa Jawaban</span>';
     }
 
-    let selectedQuizIndex = null;
     function selectQuizOption(idx) {
       if (currentQuizAnswered) return;
       selectedQuizIndex = idx;
@@ -6724,46 +7187,161 @@
           return;
         }
 
-        const q = quizData[currentQuizIndex];
-        const isCorrect = q.opts[selectedQuizIndex].correct;
-        if (isCorrect) currentQuizScore++;
+        const q = currentQuizPool[currentQuizIndex];
+        const chosenOpt = q.opts[selectedQuizIndex];
+        const isCorrect = chosenOpt.correct === true;
+
+        if (isCorrect) {
+          currentQuizScore++;
+          currentQuizStreak++;
+        } else {
+          currentQuizStreak = 0;
+        }
+
+        currentQuizUserAnswers.push({
+          questionId: q.id,
+          question: q.q,
+          topic: q.topic,
+          chosenText: chosenOpt.text,
+          correctText: q.opts.find(o => o.correct)?.text || '',
+          isCorrect: isCorrect,
+          explanation: q.explanation + " " + (chosenOpt.note || '')
+        });
 
         currentQuizAnswered = true;
         const fbBox = document.getElementById('quizFeedbackBox');
-        fbBox.style.display = 'block';
-
-        if (isCorrect) {
-          fbBox.className = 'quiz-feedback-box notice-success';
-          document.getElementById('quizFeedbackHeader').innerHTML = `
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <strong id="quizFeedbackTitle">Jawaban Benar!</strong>
-          `;
-        } else {
-          fbBox.className = 'quiz-feedback-box notice-danger';
-          document.getElementById('quizFeedbackHeader').innerHTML = `
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-            <strong id="quizFeedbackTitle">Kurang Tepat.</strong>
-          `;
+        if (fbBox) {
+          fbBox.style.display = 'block';
+          if (isCorrect) {
+            fbBox.className = 'quiz-feedback-box notice-success';
+            document.getElementById('quizFeedbackHeader').innerHTML = `
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <strong id="quizFeedbackTitle">Jawaban Benar!</strong>
+            `;
+          } else {
+            fbBox.className = 'quiz-feedback-box notice-danger';
+            document.getElementById('quizFeedbackHeader').innerHTML = `
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              <strong id="quizFeedbackTitle">Kurang Tepat.</strong>
+            `;
+          }
+          document.getElementById('quizFeedbackText').textContent = q.explanation + " " + (chosenOpt.note || '');
         }
-        document.getElementById('quizFeedbackText').textContent = q.explanation + " " + q.opts[selectedQuizIndex].note;
 
-        document.getElementById('quizScoreBadge').textContent = `Skor: ${currentQuizScore}`;
+        const scoreBadge = document.getElementById('quizScoreBadge');
+        if (scoreBadge) scoreBadge.textContent = `Skor: ${currentQuizScore}`;
+
+        const streakEl = document.getElementById('quizStreakText');
+        if (streakEl) streakEl.textContent = `Streak: ${currentQuizStreak}`;
+
         const btn = document.getElementById('btnQuizAction');
-        if (currentQuizIndex < quizData.length - 1) {
-          btn.innerHTML = '<span>Pertanyaan Berikutnya</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-        } else {
-          btn.innerHTML = '<span>Selesaikan Kuis</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
+        if (btn) {
+          if (currentQuizIndex < currentQuizPool.length - 1) {
+            btn.innerHTML = '<span>Pertanyaan Berikutnya</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+          } else {
+            btn.innerHTML = '<span>Lihat Hasil Kuis 🏆</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
+          }
         }
       } else {
         selectedQuizIndex = null;
-        if (currentQuizIndex < quizData.length - 1) {
+        if (currentQuizIndex < currentQuizPool.length - 1) {
           currentQuizIndex++;
           renderQuizQuestion();
         } else {
-          showToast(`Kuis Selesai! Skor Akhir: ${currentQuizScore} dari ${quizData.length}`);
-          navigateTo('screenProgress');
+          finishQuizAndShowSummary();
         }
       }
+    }
+
+    function finishQuizAndShowSummary() {
+      const total = currentQuizPool.length;
+      const score = currentQuizScore;
+      const pct = total > 0 ? Math.round((score / total) * 100) : 0;
+
+      // Hide question elements
+      const cardWrap = document.getElementById('quizCardWrap'); if (cardWrap) cardWrap.style.display = 'none';
+      const btnAct = document.getElementById('btnQuizAction'); if (btnAct) btnAct.style.display = 'none';
+      const pBarWrap = document.getElementById('quizProgressBarWrap'); if (pBarWrap) pBarWrap.style.display = 'none';
+      const metaHdr = document.getElementById('quizMetaHeader'); if (metaHdr) metaHdr.style.display = 'none';
+
+      // Show Result Summary Card
+      const sumCard = document.getElementById('quizResultSummaryCard');
+      if (sumCard) {
+        sumCard.style.display = 'block';
+
+        const tit = document.getElementById('quizResultTitle');
+        if (tit) tit.textContent = `Skor Akhir: ${pct}%`;
+
+        const sub = document.getElementById('quizResultSubtitle');
+        if (sub) sub.textContent = `Kamu menjawab ${score} dari ${total} pertanyaan dengan benar pada kategori ${quizActiveTopic}.`;
+
+        const badgeText = document.getElementById('quizResultBadgeText');
+        const adviceText = document.getElementById('quizResultAdviceText');
+        const advBox = document.getElementById('quizResultAdviceBox');
+
+        if (pct >= 85) {
+          if (badgeText) badgeText.textContent = "Sangat Baik (Mumtaz) ★★★";
+          if (adviceText) adviceText.textContent = "Pemahamanmu terhadap kaidah fiqih muamalah kontemporer sangat mendalam dan kritis.";
+          if (advBox) advBox.className = "notice-box notice-success mt-3";
+        } else if (pct >= 60) {
+          if (badgeText) badgeText.textContent = "Cukup Baik (Jayyid) ★★";
+          if (adviceText) adviceText.textContent = "Konsep dasar sudah dikuasai dengan baik. Pertajam telaah klausul denda ta'zir dan serah terima emas digital.";
+          if (advBox) advBox.className = "notice-box notice-warning mt-3";
+        } else {
+          if (badgeText) badgeText.textContent = "Perlu Penguatan (Maqbul) ★";
+          if (adviceText) adviceText.textContent = "Disarankan mempelajari kembali materi modul Akad dan Denda Keterlambatan sebelum mencoba kuis berikutnya.";
+          if (advBox) advBox.className = "notice-box notice-danger mt-3";
+        }
+
+        // Render question review list
+        const revList = document.getElementById('quizResultReviewList');
+        if (revList) {
+          revList.innerHTML = currentQuizUserAnswers.map((item, idx) => `
+            <div class="quiz-review-item">
+              <div class="flex-between mb-1">
+                <span class="text-xs" style="font-weight: 700; color: var(--emerald-950);">Soal #${idx + 1} (${item.topic})</span>
+                <span class="pill ${item.isCorrect ? 'pill-emerald' : 'pill-warn'}" style="font-size: 9.5px; padding: 2px 7px;">
+                  ${item.isCorrect ? '✓ Benar' : '✗ Kurang Tepat'}
+                </span>
+              </div>
+              <p style="font-size: 12px; margin-bottom: 6px; font-weight: 600; color: var(--text-primary);">${item.question}</p>
+              <div style="font-size: 11.5px; margin-bottom: 4px;">
+                <span class="text-muted">Jawabanmu:</span> <strong style="color: ${item.isCorrect ? 'var(--emerald-800)' : 'var(--danger-700)'};">${item.chosenText}</strong>
+              </div>
+              ${!item.isCorrect ? `
+                <div style="font-size: 11.5px; margin-bottom: 4px; color: var(--emerald-900);">
+                  <span class="text-muted">Kunci Jawaban:</span> <strong>${item.correctText}</strong>
+                </div>
+              ` : ''}
+              <div class="text-xs text-muted" style="line-height: 1.45; border-top: 1px solid var(--ivory-border); padding-top: 4px; margin-top: 4px;">
+                💡 <em>${item.explanation}</em>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+
+      // Persist attempt to localStorage
+      if (!appState.quizAttempts) appState.quizAttempts = [];
+      const newAttempt = {
+        id: 'quiz-' + Date.now(),
+        date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short' }),
+        score: score,
+        total: total,
+        topic: quizActiveTopic,
+        accuracyPercent: pct
+      };
+      appState.quizAttempts.push(newAttempt);
+
+      if (!appState.activity) appState.activity = [];
+      appState.activity.unshift({
+        date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short' }),
+        text: `Menyelesaikan Kuis ${quizActiveTopic}: Skor ${score}/${total} (${pct}%)`
+      });
+
+      savePersistedState();
+      updateProgressDashboard();
+      showToast(`Kuis Selesai! Skor Akhir: ${pct}%`);
     }
 
     // --- Profile & Local Storage Save ---
@@ -6790,11 +7368,24 @@
     function confirmResetData() {
       if (confirm("Apakah kamu yakin ingin mereset seluruh progres dan data evaluasi lokal?")) {
         appState.stats.checksCount = 0;
+        appState.stats.quizScore = 0;
+        appState.stats.bestQuizPercent = 0;
         appState.checkAnswers = [null, null, null, null, null];
-        document.getElementById('statChecksCount').textContent = '0';
-        document.getElementById('homeChecksBadge').textContent = '0 Evaluasi Selesai';
+        appState.assessmentsHistory = [];
+        appState.lessonsRead = [];
+        appState.scenariosDone = [];
+        appState.quizAttempts = [];
+        appState.activity = [];
+        currentQuizStreak = 0;
+
         savePersistedState();
-        showToast("Seluruh riwayat lokal telah direset bersih.");
+        updateReadingProgressUI();
+        renderContinueReadingCard();
+        renderAssessmentHistory();
+        updateProgressDashboard();
+        retakeCurrentQuiz();
+
+        showToast("Seluruh progres lokal telah direset bersih ke status awal.");
       }
     }
 
@@ -6895,6 +7486,24 @@
             const cId = hashId.replace('case:', '');
             navigateTo('screenCaseStudies');
             openCaseDetail(cId);
+          } else if (hashId.startsWith('screenQuiz:')) {
+            navigateTo('screenQuiz');
+            if (hashId === 'screenQuiz:test-feedback') {
+              selectQuizOption(0);
+              handleQuizAction();
+            } else if (hashId === 'screenQuiz:test-summary') {
+              currentQuizScore = currentQuizPool.length;
+              currentQuizUserAnswers = currentQuizPool.map(q => ({
+                questionId: q.id,
+                question: q.q,
+                topic: q.topic,
+                chosenText: q.opts[0].text,
+                correctText: q.opts.find(o => o.correct)?.text || '',
+                isCorrect: q.opts[0].correct === true,
+                explanation: q.explanation + " " + (q.opts[0].note || '')
+              }));
+              finishQuizAndShowSummary();
+            }
           } else if (document.getElementById(hashId)) {
             if (hashId === 'screenResult') {
               if (appState.checkAnswers.every(a => a === null)) {
@@ -6904,6 +7513,10 @@
               calculateAndShowResult();
             } else if (hashId === 'screenChecklist') {
               renderCheckStage();
+            } else if (hashId === 'screenQuiz') {
+              renderQuizQuestion();
+            } else if (hashId === 'screenProgress') {
+              updateProgressDashboard();
             }
             navigateTo(hashId);
           }

@@ -134,6 +134,8 @@ export interface QuizAttempt {
   date: string;
   score: number;
   total: number;
+  topic?: string;
+  accuracyPercent?: number;
 }
 
 export interface ActivityEntry {
@@ -277,13 +279,19 @@ export interface Scenario {
   reviewer?: string;
 }
 
+export type QuizDifficulty = 'mudah' | 'sedang' | 'sulit';
+
 export interface QuizQuestion {
   id: string;
+  topic?: string;
+  difficulty?: QuizDifficulty;
   question: string;
   options: string[];
   correctIndex: number;
   explanation: string;
+  optionExplanations?: string[];
   sourceIds?: string[];
   reviewStatus?: ContentStatus;
   reviewedAt?: string;
+  reviewer?: string;
 }
