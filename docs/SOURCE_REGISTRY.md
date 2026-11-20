@@ -196,6 +196,112 @@ graph LR
 
 ---
 
+#### 12. `dsnmui-01-2004` (Bunga / Interest / Fa'idah)
+- **Judul Dokumen:** Fatwa DSN-MUI No. 1 Tahun 2004 tentang Bunga (Interest/Fa'idah)
+- **Nomor Dokumen:** `01 Tahun 2004`
+- **Lembaga Penerbit:** Dewan Syariah Nasional – Majelis Ulama Indonesia
+- **Tanggal Penetapan:** 24 Januari 2004 (2 Dzulqa'dah 1424 H)
+- **Status Keberlakuan:** `Berlaku`
+- **Status Review:** `Published` (Terverifikasi Ijma Nasional)
+- **URL Resmi:** `https://dsnmui.or.id`
+- **Klausul Pokok:**
+  1. Praktek pembungaan uang yang dilakukan oleh lembaga keuangan konvensional memenuhi kriteria Riba Nasi'ah yang diharamkan secara syar'i.
+  2. Bunga atas pinjaman uang adalah haram mutlak, baik bersifat konsumtif maupun produktif.
+- **Konteks Edukasi:** `transparansi-biaya`, `pembiayaan-digital`, Larangan Riba Pokok.
+
+---
+
+#### 13. `dsnmui-19-2001` (Akad al-Qardh)
+- **Judul Dokumen:** Fatwa DSN-MUI No. 19/DSN-MUI/IV/2001 tentang al-Qardh
+- **Nomor Dokumen:** `19/DSN-MUI/IV/2001`
+- **Lembaga Penerbit:** Dewan Syariah Nasional – Majelis Ulama Indonesia
+- **Tanggal Penetapan:** 18 April 2001 (24 Muharram 1422 H)
+- **Status Keberlakuan:** `Berlaku`
+- **Status Review:** `Published`
+- **URL Resmi:** `https://dsnmui.or.id`
+- **Klausul Pokok:**
+  1. Akad Qardh adalah penyediaan dana pinjaman kebajikan tanpa meminta imbalan tambahan apa pun dari penerima pinjaman.
+  2. Biaya administrasi hanya boleh dibebankan sebesar biaya riil operasional (*real cost*) dan **dilarang ditetapkan dalam bentuk persentase dari pokok pinjaman**.
+- **Konteks Edukasi:** `pembiayaan-digital`, `transparansi-biaya`, Kategori PayLater/Pinjol.
+
+---
+
+#### 14. `dsnmui-80-2011` (Pasar Modal Syariah / Efek Ekuitas)
+- **Judul Dokumen:** Fatwa DSN-MUI No. 80/DSN-MUI/III/2011 tentang Penerapan Prinsip Syariah dalam Mekanisme Perdagangan Efek Bersifat Ekuitas di Pasar Reguler Bursa Efek
+- **Nomor Dokumen:** `80/DSN-MUI/III/2011`
+- **Lembaga Penerbit:** Dewan Syariah Nasional – Majelis Ulama Indonesia
+- **Tanggal Penetapan:** 8 Maret 2011 (3 Rabiul Akhir 1432 H)
+- **Status Keberlakuan:** `Berlaku`
+- **Status Review:** `Published`
+- **URL Resmi:** `https://dsnmui.or.id`
+- **Klausul Pokok:**
+  1. Perdagangan saham di pasar reguler bursa efek sah jika emiten memenuhi prinsip syariah dan terdaftar pada Daftar Efek Syariah (DES).
+  2. Larangan transaksi spekulatif dan manipulatif: *short selling* (menjual saham yang belum dimiliki), *margin trading* berbunga, *insider trading*, *cornering*, dan *wash sale* (*najsy*).
+- **Konteks Edukasi:** `risiko-investasi`, Kategori Investasi Saham Syariah.
+
+---
+
+#### 15. `dsnmui-82-2011` (Tawarruq / Murabahah Komoditi)
+- **Judul Dokumen:** Fatwa DSN-MUI No. 82/DSN-MUI/VIII/2011 tentang Perdagangan Komoditi Berdasarkan Prinsip Syariah di Bursa Komoditi
+- **Nomor Dokumen:** `82/DSN-MUI/VIII/2011`
+- **Lembaga Penerbit:** Dewan Syariah Nasional – Majelis Ulama Indonesia
+- **Tanggal Penetapan:** 25 Agustus 2011 (25 Ramadhan 1432 H)
+- **Status Keberlakuan:** `Berlaku`
+- **Status Review:** `Published`
+- **URL Resmi:** `https://dsnmui.or.id`
+- **Klausul Pokok:**
+  1. Penggunaan skema komoditi syariah (Tawarruq / Murabahah Komoditi) untuk kebutuhan likuiditas sah apabila komoditas nyata ada di bursa dan terjadi serah terima sah.
+  2. Larangan keras rekayasa lingkaran semu (*bai' al-'inah*) di mana komoditas kembali dibeli oleh penjual pertama tanpa pengalihan kepemilikan riil.
+- **Konteks Edukasi:** `pembiayaan-digital`, `risiko-investasi`.
+
+---
+
+#### 16. `dsnmui-135-2020` (Saham Syariah)
+- **Judul Dokumen:** Fatwa DSN-MUI No. 135/DSN-MUI/V/2020 tentang Saham
+- **Nomor Dokumen:** `135/DSN-MUI/V/2020`
+- **Lembaga Penerbit:** Dewan Syariah Nasional – Majelis Ulama Indonesia
+- **Tanggal Penetapan:** 20 Mei 2020
+- **Status Keberlakuan:** `Berlaku`
+- **Status Review:** `Published`
+- **URL Resmi:** `https://dsnmui.or.id`
+- **Klausul Pokok:**
+  1. Saham diakui sebagai bukti kepemilikan proporsional atas aset dan modal perseroan yang halal.
+  2. Hak dividen dan suara dalam RUPS sah dimiliki oleh pemegang saham syariah.
+- **Konteks Edukasi:** `risiko-investasi`, Kategori Investasi Saham Syariah.
+
+---
+
+#### 17. `mui-ijtima-kripto-2021` (Cryptocurrency & Aset Kripto)
+- **Judul Dokumen:** Keputusan Ijtima Ulama Komisi Fatwa MUI VII Tahun 2021 tentang Hukum Uang Kripto (Cryptocurrency)
+- **Nomor Dokumen:** `Ijtima Ulama VII/2021`
+- **Lembaga Penerbit:** Komisi Fatwa Majelis Ulama Indonesia
+- **Tanggal Penetapan:** 11 November 2021
+- **Status Keberlakuan:** `Berlaku`
+- **Status Review:** `Published` (Keputusan Ijtima Nasional)
+- **URL Resmi:** `https://mui.or.id`
+- **Klausul Pokok:**
+  1. Cryptocurrency **haram sebagai mata uang** karena mengandung gharar, dharar, dan melanggar UU No. 7 Tahun 2011 (alat tukar resmi di Indonesia hanyalah Rupiah).
+  2. Cryptocurrency sebagai aset digital/komoditas **tidak sah diperjualbelikan** jika mengandung gharar, dharar, spekulasi judi (qimar/maysir), tidak ada underlying asset riil, dan tanpa manfaat halal yang jelas.
+  3. Aset kripto yang memiliki underlying asset nyata dan memiliki manfaat riil (*sil'ah*) sah untuk diperdagangkan.
+- **Konteks Edukasi:** `risiko-investasi`, Kategori Kripto & Aset Digital.
+
+---
+
+#### 18. `ojk-pojk-15-2015` (Prinsip Syariah di Pasar Modal)
+- **Judul Dokumen:** Peraturan Otoritas Jasa Keuangan No. 15/POJK.04/2015 tentang Penerapan Prinsip Syariah di Pasar Modal
+- **Nomor Dokumen:** `POJK No. 15/POJK.04/2015`
+- **Lembaga Penerbit:** Otoritas Jasa Keuangan
+- **Tanggal Penetapan:** 3 November 2015
+- **Status Keberlakuan:** `Berlaku`
+- **Status Review:** `Published`
+- **URL Resmi:** `https://ojk.go.id`
+- **Klausul Pokok:**
+  1. Kriteria penapisan (*screening*) Daftar Efek Syariah (DES): rasio utang berbasis bunga dibanding total aset maksimal 45%, dan pendapatan non-halal dibanding total pendapatan usaha maksimal 10%.
+  2. Kewajiban sertifikasi Ahli Pasar Modal Syariah (ASPM) dan Dewan Pengawas Syariah bagi manajer investasi syariah.
+- **Konteks Edukasi:** `risiko-investasi`, Kategori Investasi Saham Syariah.
+
+---
+
 ### C. Portal Resmi Lembaga Otoritas
 - **`dsnmui-portal`**: Portal Resmi DSN-MUI (`https://dsnmui.or.id`) — Basis naskah fatwa ekonomi syariah.
 - **`ojk-portal`**: Portal Resmi OJK (`https://ojk.go.id`) — Pengecekan daftar entitas berizin dan portal pengaduan konsumen.

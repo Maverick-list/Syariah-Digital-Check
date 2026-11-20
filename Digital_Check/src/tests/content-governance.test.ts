@@ -107,6 +107,45 @@ describe('Source Registry & Knowledge Governance', () => {
     expect(seojk19).toBeDefined();
     expect(seojk19.validityStatus).toBe('Berlaku');
   });
+
+  it('verifies Riba (Fatwa 01/2004) and Qardh (Fatwa 19/2001) primary references', () => {
+    const fatwaRiba = SOURCES_BY_ID['dsnmui-01-2004'];
+    const fatwaQardh = SOURCES_BY_ID['dsnmui-19-2001'];
+
+    expect(fatwaRiba).toBeDefined();
+    expect(fatwaRiba.title).toContain('Bunga');
+    expect(fatwaRiba.validityStatus).toBe('Berlaku');
+
+    expect(fatwaQardh).toBeDefined();
+    expect(fatwaQardh.documentNumber).toBe('19/DSN-MUI/IV/2001');
+    expect(fatwaQardh.relevantClauses.join(' ')).toContain('real cost');
+  });
+
+  it('verifies Capital Markets, Tawarruq, and Crypto governance references', () => {
+    const fatwaPasarModal = SOURCES_BY_ID['dsnmui-80-2011'];
+    const fatwaTawarruq = SOURCES_BY_ID['dsnmui-82-2011'];
+    const fatwaSaham = SOURCES_BY_ID['dsnmui-135-2020'];
+    const ijtimaKripto = SOURCES_BY_ID['mui-ijtima-kripto-2021'];
+    const pojkPasarModal = SOURCES_BY_ID['ojk-pojk-15-2015'];
+
+    expect(fatwaPasarModal).toBeDefined();
+    expect(fatwaPasarModal.documentNumber).toBe('80/DSN-MUI/III/2011');
+    expect(fatwaPasarModal.relevantClauses.join(' ')).toContain('short selling');
+
+    expect(fatwaTawarruq).toBeDefined();
+    expect(fatwaTawarruq.documentNumber).toBe('82/DSN-MUI/VIII/2011');
+    expect(fatwaTawarruq.relevantClauses.join(' ')).toContain('bai\' al-\'inah');
+
+    expect(fatwaSaham).toBeDefined();
+    expect(fatwaSaham.documentNumber).toBe('135/DSN-MUI/V/2020');
+
+    expect(ijtimaKripto).toBeDefined();
+    expect(ijtimaKripto.relevantClauses.join(' ')).toContain('sil\'ah');
+
+    expect(pojkPasarModal).toBeDefined();
+    expect(pojkPasarModal.documentNumber).toBe('POJK No. 15/POJK.04/2015');
+    expect(pojkPasarModal.relevantClauses.join(' ')).toContain('Daftar Efek Syariah');
+  });
 });
 
 describe('Editorial Standards for Learning Modules', () => {
