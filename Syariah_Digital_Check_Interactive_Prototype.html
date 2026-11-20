@@ -266,9 +266,24 @@
       font-size: 12.5px;
       border-radius: var(--radius-pill);
     }
-    @media (min-width: 768px) {
+    @media (max-width: 640px) {
+      .header-inner {
+        padding: 10px 16px;
+      }
+      .brand-name {
+        font-size: 15px;
+      }
+      .brand-tagline {
+        display: none !important;
+      }
+      .btn-header-spec {
+        display: none !important;
+      }
       .btn-header-cta {
-        display: inline-flex;
+        display: none !important;
+      }
+      .header-actions {
+        gap: 6px;
       }
     }
     .header-user-badge {
