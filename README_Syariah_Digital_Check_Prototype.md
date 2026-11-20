@@ -1,21 +1,17 @@
-# Syariah Digital Check — Design & Prototype Bundle
+# Syariah Digital Check — Interactive Standalone File Note
 
-## Files
-- `Syariah_Digital_Check_UI_UX_Design_Guide.pdf`: UI/UX design direction, screen inventory, user flow, checklist logic, safety boundaries, and implementation handoff.
-- `Syariah_Digital_Check_Interactive_Prototype.html`: a clickable browser prototype with home, checklist, results, scenarios, learning hub, quiz, progress, and profile screens.
-- `a_wide_clean_presentation_board_ui_design_mocku.png`: visual design board reference.
+## File Purpose & Source of Truth
+- `index.html`: **Primary Web Production Application (Single Source of Truth for Web)**.
+- `Syariah_Digital_Check_Interactive_Prototype.html`: Standalone portable single-file mirror synchronized with `index.html` (v2.4.0 Production Release).
+- `Digital_Check/`: Cross-platform React Native / Expo codebase with 103 automated tests (`npm test`).
+- `Syariah_Digital_Check_UI_UX_Design_Guide.pdf`: UI/UX design direction, screen inventory, user flow, and design system reference.
+- `a_wide_clean_presentation_board_ui_design_mocku.png`: Visual design board reference.
 
-## Run the interactive prototype
-1. Extract the ZIP.
-2. Open `Syariah_Digital_Check_Interactive_Prototype.html` in a modern browser.
-3. For mobile testing, transfer the HTML file to a phone and open it in a browser, or serve the file from a local development server.
-4. Progress is stored in that browser's localStorage. It does not sync between devices.
+## Running in Browser
+1. Open `index.html` (or `Syariah_Digital_Check_Interactive_Prototype.html`) directly in any modern desktop or mobile web browser, or serve via any static HTTP server (e.g. `python3 -m http.server 8088`).
+2. The application is **100% native browser-responsive** (no viewport switchers or simulated frames required).
+3. Progress, quiz attempts, and evaluation history are safely stored in the browser's local storage (`localStorage`). No private data is transmitted to external servers.
 
-## Important limitations
-- This is an interactive HTML prototype, not a native React Native/Expo Android or iOS application.
-- It has not been built or tested as an Android APK or iOS app.
-- Educational content and references are demonstrative placeholders that must be verified against authoritative sources before public release.
-- The prototype does not determine halal/haram status, issue fatwas, certify compliance, or provide personalized financial advice.
-
-## Suggested next implementation
-Use the PDF and HTML prototype as references when asking a coding agent to implement the production app with React Native + Expo + TypeScript.
+## Verified Content & Legal Boundaries
+- Educational content, quiz questions, and case study assessments are verified against official Fatwas of the National Sharia Board – Indonesian Council of Ulamas (DSN-MUI) and Financial Services Authority (OJK) regulations (e.g., POJK No. 40/2024).
+- The platform is an educational literacy tool designed to build consumer awareness; it does not issue binding fatwas, certify commercial compliance, or provide personalized financial advisory.

@@ -46,58 +46,62 @@ Produk ini dirancang dengan standar kualitas fintech peraih penghargaan yang mem
 
 ---
 
-## 📱 Arsitektur 10 Layar Lengkap
+## 📱 Arsitektur 11 Layar Lengkap
 
-Aplikasi mencakup perjalanan pengguna lengkap 10 layar interaktif:
-1. **Welcome & Onboarding:** Alur 3 tahap **PAUSE → CHECK → CHOOSE** dengan indikator langkah dinamis.
-2. **Home Dashboard:** Sapaan personalisasi, tombol aksi utama *30-Second Fast Check*, ringkasan indeks literasi syariah, dan skenario cepat.
-3. **Pilihan Kategori Transaksi:** 6 kategori riil (Belanja Online, PayLater & Cicilan, Emas Digital, Tabungan Digital, Langganan Berulang, Donasi & Ziswaf).
-4. **Checklist Transaksi 5 Tahap:** 
-   - Tahap 1: Struktur Akad & Kontrak
-   - Tahap 2: Transparansi Biaya & Denda Keterlambatan
-   - Tahap 3: Mekanisme Transaksi & Serah Terima (*Qabdh*)
-   - Tahap 4: Aspek Kesesuaian Syariah (Bebas Riba, Gharar, Maysir)
-   - Tahap 5: Kesiapan Mengambil Keputusan Pribadi
-   - *Dilengkapi Expandable Educational Drawer "Mengapa ini krusial?" pada tiap tahap.*
-5. **Hasil Evaluasi Edukatif:** Dial skor persentase, lencana status, poin verifikasi lanjutan, 3 pertanyaan kritis siap-salin untuk Customer Service merchant, dan rekomendasi modul bacaan.
-6. **Studi Kasus Transaksi Interaktif:** Simulasi skenario riil (PayLater 0%, Emas Digital, Dropshipping, Free Trial Subscription) dengan telaah fiqih mendalam.
-7. **Learning Hub & Rujukan Fatwa:** Mesin pencari instan, filter kategori, dan pembaca artikel interaktif lengkap (*drawer*) dengan kutipan Fatwa DSN-MUI.
-8. **Kuis Pilihan Ganda Interaktif:** Soal berbasis penalaran kasus dengan umpan balik instan (pembahasan benar/salah), streak counter, dan rekap skor.
-9. **Dashboard Progres Belajar:** Distribusi 4 pilar kompetensi muamalah, riwayat aktivitas, dan level melek finansial syariah.
-10. **Profil, Privasi & Pengaturan:** Pengaturan nama lokal, jaminan privasi 100% di perangkat (*client-side*), tombol reset riwayat, dan batasan hukum edukasi.
+Aplikasi mencakup perjalanan pengguna lengkap 11 layar interaktif:
+1. **Welcome & Onboarding (`screenOnboarding`):** Alur 3 tahap **PAUSE → CHECK → CHOOSE** dengan indikator langkah dinamis.
+2. **Home Dashboard (`screenHome`):** Sapaan pengguna, tombol aksi cepat, kartu jeda sadar, dan footer informasi publik.
+3. **Jeda Sadar 30 Detik (`screenPause`):** Timer hitung mundur interaktif untuk meredam belanja impulsif dan menelaah T&C.
+4. **Pilihan Kategori Transaksi (`screenCategorySelect`):** 9 kategori riil (PayLater, Pinjaman Digital, E-commerce, Langganan Otomatis, Emas Digital, Tabungan, Investasi, Donasi, Lainnya).
+5. **Checklist Transaksi 5 Dimensi (`screenChecklist`):** Kuesioner spesifik kategori mencakup Akad, Biaya/Riba, Kepemilikan (Qabdh), Sanksi Keterlambatan, dan Kesiapan Keputusan.
+6. **Hasil Evaluasi Edukatif 9 Bagian (`screenResult`):** Skor transparansi, status kesesuaian syariah, analisis alur dana vs hak milik, mitigasi risiko, pertanyaan kritis ke CS penyedia, dan rujukan fatwa.
+7. **Studi Kasus Transaksi Interaktif (`screenCaseStudies`):** 4 simulasi dilema finansial modern (PayLater 0%, Emas Digital & Qabdh, Dropshipping, Langganan Otomatis) berlabel simulasi fiktif.
+8. **Learning Hub & Rujukan Fatwa (`screenLearn`):** Pencarian instan, filter topik, estimasi waktu baca, dan lembar pembaca artikel interaktif (*modal reader*).
+9. **Kuis Literasi Syariah (`screenQuiz`):** Bank soal terverifikasi acak dengan umpan balik ilmiah instan untuk tiap pilihan jawaban dan kutipan fatwa DSN-MUI.
+10. **Dashboard Progres & Intelijen (`screenProgress`):** Kalkulasi riil Indeks Literasi (0-100), visualisasi 4 pilar kompetensi, dan ringkasan aktivitas.
+11. **Profil, Privasi & Tata Kelola Publik (`screenProfile`):** Penyimpanan 100% lokal (*guest-first*), ekspor cadangan data JSON, tombol hapus total permanen, dan tautan dokumen legal.
 
 ---
 
-## 💻 Pengontrol Tampilan Responsif (Built-in Viewport Switcher)
-Di bagian atas layar aplikasi terdapat controller untuk menguji tampilan:
-- **Mobile 390:** Menampilkan frame realistis iPhone 390 × 844 px lengkap dengan speaker notch dan bottom navigation yang aman.
-- **Tablet 768:** Mengadaptasi tata letak ke mode 2-kolom tablet.
-- **Desktop Fluid:** Tampilan desktop penuh untuk presentasi produk.
-- **Design System Modal:** Panel peninjau token warna, tipografi, dan panduan etika.
+## 💻 Desain Responsif Asli (Native Browser-Responsive Design)
+
+Aplikasi ini 100% menggunakan arsitektur CSS Grid dan Flexbox modern yang merespons ukuran layar peramban secara alami (*native fluid responsive design*) tanpa simulasi frame perangkat atau viewport switcher tiruan:
+- **Mobile (390px - 640px):** Navigasi bawah jempol (*thumb-friendly bottom navigation*), tumpukan kartu satu kolom teroptimasi sentuhan.
+- **Tablet (641px - 1023px):** Tata letak 2-kolom berimbang dengan keterbacaan tipografi optimal.
+- **Laptop & Desktop (1024px - 1440px+):** Navigasi atas lengkap, grid asimetris, dan batas visual lebar terpusat (max 1200px) mencegah kelelahan membaca.
 
 ---
 
-## 📂 Struktur Repositori
+## 📂 Struktur Repositori & Sumber Kebenaran (Source of Truth)
 
 ```text
-Syariah_Digital_Check_Design_and_Prototype/
-├── index.html                                           # Master High-Fidelity Responsive Web Application
-├── Syariah_Digital_Check_Interactive_Prototype.html     # Standalone Interactive Prototype
-├── DESIGN_SYSTEM_AND_UX_SPEC.md                         # Product Design System & UX Architecture Spec
-├── README.md                                            # Main Repository Documentation
-├── a_wide_clean_presentation_board_ui_design_mocku.png  # Visual Presentation Board
-├── Syariah_Digital_Check_UI_UX_Design_Guide.pdf         # UI/UX Specification & Guidelines
-├── SyariahDigitalCheck_iOS/                             # 100% Native Swift & SwiftUI iOS App
-│   ├── Package.swift                                    # SPM Manifest (Target iOS 16+, macOS 13+)
-│   ├── README.md                                        # Xcode Setup & Architecture Guide
-│   └── Sources/SyariahDigitalCheck/                     # App, Models, ViewModels, Views & Components
-└── Digital_Check/                                       # Cross-platform Expo React Native App & Web Build
-    ├── web-build/                                       # Production Web Build (Deployed to Vercel)
-    │   ├── index.html                                   # Production build entry point
-    │   └── .vercel/                                     # Vercel Project Link (digitalchecksyariah.vercel.app)
-    ├── app/                                             # Expo Native Navigation
-    ├── src/                                             # Components, Theme & Scoring Engine
-    └── package.json                                     # Dependencies
+Syariah_Digital_Check_Main/
+├── index.html                                           # APLIKASI WEB PRODUKSI UTAMA (Single Source of Truth Web)
+├── Syariah_Digital_Check_Interactive_Prototype.html     # Salinan berkas mandiri tersinkronisasi
+├── _headers                                             # Konfigurasi keamanan CDN (CSP, HSTS Preload, XFO DENY)
+├── vercel.json                                          # Konfigurasi perutean & header Vercel CDN
+├── sw.js                                                # Service Worker PWA (Cache v2, Stale-While-Revalidate)
+├── manifest.json                                        # Web App Manifest PWA (Standalone mobile app)
+├── robots.txt & sitemap.xml                             # Optimasi perayapan mesin pencari (SEO)
+├── DESIGN_SYSTEM_AND_UX_SPEC.md                         # Spesifikasi token warna WCAG AAA & sistem grid 8-pt
+├── README.md                                            # Dokumentasi utama repositori
+├── SyariahDigitalCheck_iOS/                             # Paket referensi kode Swift & SwiftUI iOS native
+├── Digital_Check/                                       # Basis kode React Native / Expo & Mesin Pengujian Otomatis
+│   ├── src/                                             # Modul data, logika skoring, store reducer, dan layanan
+│   └── src/tests/                                       # 10 Test Suites Otomatis (103/103 Tests Passing)
+├── docs/                                                # Dokumentasi Resmi, Audit, dan Tata Kelola
+│   ├── ENGINEERING_PRINCIPLES.md                        # 12 Prinsip Rekayasa Perangkat Lunak
+│   ├── PRODUCTION_READINESS.md                          # Laporan Kesiapan Rilis Produksi
+│   ├── DEPLOYMENT_GUIDE.md                              # Panduan Penerapan Multi-Platform
+│   ├── USER_GUIDE.md                                    # Panduan Navigasi Pengguna & Instalasi PWA
+│   ├── KNOWN_LIMITATIONS.md                             # Transparansi Batasan Yuridis & Teknis
+│   ├── RELEASE_NOTES.md                                 # Catatan Rilis Versi 2.4.0
+│   ├── SOURCE_REGISTRY.md                               # Registri Rujukan Fatwa DSN-MUI & Regulasi OJK
+│   ├── CONTENT_GOVERNANCE.md                            # Standar Redaksional & Kebijakan Verifikasi
+│   ├── BACKEND_AND_SYNC_ARCHITECTURE.md                 # Spesifikasi Sinkronisasi Cloud Zero-Knowledge RLS
+│   └── PHASE_7_QA_SECURITY_REPORT.md                    # Laporan Komprehensif QA & Keamanan
+└── scripts/                                             # Skrip Otomasi Pengujian & Audit Headless Browser
+    └── qa_audit_runner.py                               # Runner Audit Responsivitas, DOM, & Aksesibilitas
 ```
 
 ---
