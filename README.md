@@ -88,8 +88,17 @@ Syariah_Digital_Check_Main/
 ├── SyariahDigitalCheck_iOS/                             # Paket referensi kode Swift & SwiftUI iOS native
 ├── Digital_Check/                                       # Basis kode React Native / Expo & Mesin Pengujian Otomatis
 │   ├── src/                                             # Modul data, logika skoring, store reducer, dan layanan
-│   └── src/tests/                                       # 10 Test Suites Otomatis (108/108 Tests Passing)
+│   │   └── services/cloudSync.ts                        # Mesin Rekonsiliasi & Resolusi Konflik Sinkronisasi Cloud
+│   └── src/tests/                                       # 11 Test Suites Otomatis (115/115 Tests Passing)
+├── supabase/                                            # Infrastruktur Cloud & Skema PostgreSQL (Fase 13)
+│   ├── migrations/                                      # Skrip Migrasi DDL Relasional & Kebijakan RLS
+│   └── seed.sql                                         # Data Inisialisasi Lingkungan Pengembangan
 ├── docs/                                                # Dokumentasi Resmi, Audit, dan Tata Kelola
+│   ├── PHASE_13_BACKEND_ARCHITECTURE.md                 # Arsitektur Hybrid Privacy-First Cloud Infrastructure (Fase 13)
+│   ├── PHASE_13_DATABASE_DESIGN.md                      # Desain Relasional Database PostgreSQL & Skema 3NF (Fase 13)
+│   ├── PHASE_13_SECURITY_AND_RLS.md                     # Matriks Kebijakan Row Level Security & Minimisasi Data (Fase 13)
+│   ├── PHASE_13_CLOUD_SYNC.md                           # Protokol Sinkronisasi & Algoritma Resolusi Konflik (Fase 13)
+│   ├── PHASE_13_DEPLOYMENT_GUIDE.md                     # Panduan Provisioning Supabase & Migrasi Database (Fase 13)
 │   ├── ENGINEERING_PRINCIPLES.md                        # 12 Prinsip Rekayasa Perangkat Lunak
 │   ├── PRODUCTION_READINESS.md                          # Laporan Kesiapan Rilis Produksi
 │   ├── PUBLIC_BETA_READINESS.md                         # Laporan Kesiapan Beta Publik (Fase 10)
