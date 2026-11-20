@@ -3077,6 +3077,7 @@
 
           <div class="main-content">
             <!-- Profile Identity Card -->
+            <!-- Profile Identity Card -->
             <div class="card text-center" style="padding: 24px 20px;">
               <div class="user-avatar" style="width: 64px; height: 64px; font-size: 24px; margin: 0 auto 12px;" id="profileAvatarLarge">
                 FP
@@ -3084,15 +3085,113 @@
               <h3 class="serif-title" style="font-size: 20px; color: var(--emerald-950);" id="profileDisplayName">
                 Fikri Pratama
               </h3>
-              <p class="text-muted text-xs mt-1">Pengguna Terverifikasi Lokal</p>
+              <div class="flex-row justify-center gap-2 mt-1">
+                <span class="pill pill-emerald" style="font-size: 11px;">✓ Akses Tamu (Guest-First)</span>
+                <span class="pill pill-sage" style="font-size: 11px;">Data 100% Lokal</span>
+              </div>
 
               <!-- Edit Name Input with Persistent LocalStorage Save -->
-              <div class="mt-3" style="text-align: left;">
-                <label for="inputProfileName" style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">Ubah Nama Panggilan</label>
+              <div class="mt-4" style="text-align: left;">
+                <label for="inputProfileName" style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">Nama Panggilan (Hanya Disimpan di Perangkatmu)</label>
                 <div class="flex-row gap-2 mt-1">
                   <input type="text" class="search-input" id="inputProfileName" placeholder="Masukkan nama..." value="Fikri Pratama" style="padding: 10px 14px;">
                   <button class="btn btn-primary btn-sm" onclick="saveProfileName()">Simpan</button>
                 </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Self-Sovereign Data Management (Portabilitas & Cadangan) -->
+            <div class="card">
+              <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> KENDALI & PORTABILITAS DATA</span>
+              <h4 style="font-size: 15px; font-weight: 700; margin-top: 4px; color: var(--emerald-950);">
+                Cadangkan & Pulihkan Data Belajarmu
+              </h4>
+              <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.55;">
+                Data kamu adalah milikmu seutuhnya. Kamu dapat mengekspor seluruh riwayat evaluasi transaksi, progres modul, dan skor kuis ke dalam berkas JSON mandiri, atau memulihkannya ke perangkat lain kapan saja.
+              </p>
+
+              <div class="flex-row gap-2 mt-3">
+                <button class="btn btn-secondary btn-sm" style="flex: 1;" onclick="exportUserDataJSONWeb()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span>Ekspor Data (JSON)</span>
+                </button>
+                <button class="btn btn-secondary btn-sm" style="flex: 1;" onclick="document.getElementById('importJsonFileInput').click()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  <span>Impor Cadangan</span>
+                </button>
+                <input type="file" id="importJsonFileInput" accept=".json,application/json" style="display: none;" onchange="handleImportJsonFile(event)">
+              </div>
+            </div>
+
+            <!-- Card 3: Privacy Pledge & Data Minimization Card -->
+            <div class="card">
+              <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> PIAGAM PRIVASI KONSUMEN (DATA MINIMIZATION)</span>
+              <h4 style="font-size: 15px; font-weight: 700; margin-top: 4px; color: var(--emerald-950);">
+                Jaminan Perlindungan Data Pribadi & Finansial
+              </h4>
+              <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.55;">
+                Syariah Digital Check dirancang dengan komitmen etis perlindungan privasi (*Privacy-by-Design*):
+              </p>
+
+              <div class="flex-column gap-2 mt-3" style="font-size: 12px; line-height: 1.45;">
+                <div class="flex-row gap-2 align-start">
+                  <span style="color: var(--emerald-800); font-weight: 800; font-size: 14px;">✓</span>
+                  <div><strong>Tanpa Kredensial Perbankan:</strong> Aplikasi TIDAK PERNAH meminta PIN ATM, kata sandi mobile banking, kode OTP, atau nomor kartu kredit/debit.</div>
+                </div>
+                <div class="flex-row gap-2 align-start">
+                  <span style="color: var(--emerald-800); font-weight: 800; font-size: 14px;">✓</span>
+                  <div><strong>Penyimpanan 100% Client-Side:</strong> Seluruh riwayat telaah akad dan skor kuis tersimpan di memori browser lokal perangkatmu.</div>
+                </div>
+                <div class="flex-row gap-2 align-start">
+                  <span style="color: var(--emerald-800); font-weight: 800; font-size: 14px;">✓</span>
+                  <div><strong>Bebas Akses Tanpa Registrasi:</strong> Seluruh modul edukasi dan alat periksa terbuka untuk umum tanpa kewajiban membuat akun.</div>
+                </div>
+                <div class="flex-row gap-2 align-start">
+                  <span style="color: var(--emerald-800); font-weight: 800; font-size: 14px;">✓</span>
+                  <div><strong>Tanpa Iklan / Pelacak Komersial:</strong> Tidak ada penjualan profil perilaku konsumen atau pelacak data pihak ketiga.</div>
+                </div>
+              </div>
+
+              <div class="flex-row gap-2 mt-4">
+                <button class="btn btn-outline btn-full btn-sm" onclick="openModal('modalPrivacyPolicy')">
+                  📖 Baca Kebijakan Privasi Lengkap
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 4: Architecture Recommendation Notice (Real Backend Sync Specification) -->
+            <div class="card" style="background: linear-gradient(135deg, #F9FAF9 0%, #EFF6F2 100%); border: 1px solid var(--emerald-200);">
+              <div class="flex-between">
+                <span class="pill pill-emerald" style="font-size: 10px;">ARSITEKTUR SINKRONISASI</span>
+                <span class="text-xs text-muted">Spesifikasi Backend RLS</span>
+              </div>
+              <h4 style="font-size: 14px; font-weight: 700; margin-top: 8px; color: var(--emerald-950);">
+                Sinkronisasi Lintas Perangkat (Terdokumentasi)
+              </h4>
+              <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.55;">
+                Aplikasi ini sengaja tidak menggunakan autentikasi tiruan (*no fake login mocks*). Arsitektur sinkronisasi multi-device telah dispesifikasikan secara formal menggunakan Supabase / PostgreSQL dengan <strong>Row Level Security (RLS)</strong> dan <strong>Zero-Knowledge Client-Side Encryption</strong> agar data evaluasi finansial tetap privat.
+              </p>
+              <div class="mt-2 text-xs" style="color: var(--emerald-900); font-weight: 600;">
+                Dokumen teknis: <code>docs/BACKEND_AND_SYNC_ARCHITECTURE.md</code>
+              </div>
+            </div>
+
+            <!-- Card 5: Deletion Controls (Right to Be Forgotten) -->
+            <div class="card" style="border-color: rgba(220, 38, 38, 0.25);">
+              <span class="eyebrow" style="color: var(--danger-text);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> KONTROL PENGHAPUSAN PERMANEN</span>
+              <h4 style="font-size: 14px; font-weight: 700; margin-top: 4px; color: var(--emerald-950);">
+                Hapus Data dari Perangkat Ini
+              </h4>
+              <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.55;">
+                Kamu memegang hak penuh atas data belajarmu (*Right to be Forgotten*). Tindakan di bawah ini akan menghapus data dari memori browser lokal perangkatmu.
+              </p>
+              <div class="flex-column gap-2 mt-3">
+                <button class="btn btn-ghost btn-sm" style="color: var(--text-primary); border-color: var(--ivory-border); justify-content: flex-start;" onclick="confirmResetData()">
+                  🔄 Reset Progres Belajar Saja (Pertahankan Nama Profil)
+                </button>
+                <button class="btn btn-ghost btn-sm" style="color: var(--danger-text); border-color: var(--danger-border); justify-content: flex-start;" onclick="wipeAllDataPermanently()">
+                  🗑️ Hapus Seluruh Data Permanen (Wipe Total Bersih)
+                </button>
               </div>
             </div>
 
@@ -3111,21 +3210,6 @@
               <button class="btn btn-primary btn-full mt-3" style="background: var(--gold-500); color: #032115; font-weight: 800;" onclick="openIOSInstallModal()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                 <span>Panduan Pasang di iPhone (3 Langkah)</span>
-              </button>
-            </div>
-
-            <!-- Privacy & Storage Safeguard Card -->
-            <div class="card">
-              <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> PRIVASI & KEAMANAN DATA</span>
-              <h4 style="font-size: 14px; font-weight: 700; margin-top: 4px;">
-                Penyimpanan 100% di Perangkat Kamu (Client-Side)
-              </h4>
-              <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.55;">
-                Aplikasi ini tidak menyimpan data nomor rekening, password, maupun identitas finansial sensitif ke server eksternal. Seluruh riwayat evaluasi dan modul hanya tersimpan di memori browser lokal perangkatmu.
-              </p>
-              <button class="btn btn-ghost btn-sm mt-3" style="color: var(--danger-text); border-color: var(--danger-border);" onclick="confirmResetData()">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                <span>Hapus Seluruh Data & Riwayat Lokal</span>
               </button>
             </div>
 
@@ -3189,6 +3273,61 @@
       </button>
     </nav>
   </main>
+
+  <!-- ========================================== -->
+  <!-- MODAL: KEBIJAKAN PRIVASI & JAMINAN KONSUMEN -->
+  <!-- ========================================== -->
+  <div class="modal-overlay" id="modalPrivacyPolicy" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle" onclick="closeModalOnOverlay(event, 'modalPrivacyPolicy')">
+    <div class="modal-sheet" style="max-height: 88vh; overflow-y: auto;">
+      <div class="sheet-handle"></div>
+      <div class="flex-between">
+        <div class="flex-row gap-2">
+          <span class="pill pill-emerald">PRIVASI & PERLINDUNGAN DATA</span>
+          <h3 id="privacyModalTitle" style="font-size: 16px; font-weight: 700; color: var(--emerald-950); margin: 0;">Kebijakan Privasi Resmi</h3>
+        </div>
+        <button class="btn-back" onclick="closeModal('modalPrivacyPolicy')" aria-label="Tutup Kebijakan Privasi" style="font-size: 18px; padding: 0;">✕</button>
+      </div>
+
+      <div class="mt-3 text-xs" style="line-height: 1.6; color: var(--text-secondary);">
+        <p><strong>Syariah Digital Check</strong> berkomitmen penuh melindungi hak privasi, integritas data, dan keamanan informasi finansial setiap pengguna.</p>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 12px 0 4px;">1. Prinsip Minimisasi Data (Data Minimization)</h4>
+        <p>Aplikasi ini menganut prinsip pengumpulan data seminimal mungkin yang diperlukan untuk menjalankan fungsi literasi edukasi:</p>
+        <ul style="padding-left: 18px; margin: 4px 0;">
+          <li>Nama panggilan opsional (hanya untuk personalisasi antarmuka).</li>
+          <li>Riwayat centang opsi transparansi pada fitur Cek Transaksi.</li>
+          <li>Riwayat membaca modul dan capaian skor kuis.</li>
+        </ul>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--danger-text); margin: 12px 0 4px;">2. Data yang DIJAMIN TIDAK AKAN PERNAH DIMINTA</h4>
+        <p>Aplikasi ini <strong>TIDAK PERNAH</strong> meminta, mencatat, mentransfer, atau menyimpan:</p>
+        <ul style="padding-left: 18px; margin: 4px 0;">
+          <li>PIN ATM, password akun bank, atau kata sandi e-wallet.</li>
+          <li>Kode otorisasi transaksi satu kali (OTP).</li>
+          <li>16-digit nomor kartu debit/kredit, tanggal kedaluwarsa, atau CVV.</li>
+          <li>Nomor rekening bank atau mutasi keuangan pribadi.</li>
+        </ul>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 12px 0 4px;">3. Tempat Penyimpanan (Client-Side Storage)</h4>
+        <p>Secara default, 100% data aktivitas pembelajaran disimpan secara eksklusif di dalam memori browser lokal perangkat Anda (via <code>localStorage</code> / <code>AsyncStorage</code>). Data tidak diunggah ke peladen (server) pihak ketiga.</p>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 12px 0 4px;">4. Hak Pengguna (Portabilitas & Penghapusan)</h4>
+        <p>Anda memiliki hak penuh untuk:</p>
+        <ul style="padding-left: 18px; margin: 4px 0;">
+          <li><strong>Mengekspor:</strong> Mengunduh salinan lengkap data aktivitas dalam format berkas JSON kapan saja.</li>
+          <li><strong>Menghapus:</strong> Menghapus seluruh riwayat lokal secara permanen melalui tombol penghapusan di menu Pengaturan.</li>
+          <li><strong>Mengakses Tanpa Akun:</strong> Menikmati seluruh modul belajar, kuis, dan simulasi tanpa kewajiban membuat akun.</li>
+        </ul>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 12px 0 4px;">5. Non-Komersialisasi</h4>
+        <p>Syariah Digital Check tidak memuat pelacak analitik iklan pihak ketiga, tidak menjual profil konsumen kepada lembaga pinjaman daring, dan tidak menyematkan tracker komersial.</p>
+      </div>
+
+      <button class="btn btn-primary btn-full mt-4" onclick="closeModal('modalPrivacyPolicy')">
+        Saya Memahami Kebijakan Ini
+      </button>
+    </div>
+  </div>
 
   <!-- ========================================== -->
   <!-- MODAL: DAFTAR RUJUKAN FATWA & REGULASI RESMI -->
@@ -3894,6 +4033,10 @@
         if (storedLessons) {
           appState.lessonsRead = JSON.parse(storedLessons) || [];
         }
+        const storedBookmarks = localStorage.getItem('syariah_digital_check_bookmarked_lessons');
+        if (storedBookmarks) {
+          appState.bookmarkedLessons = JSON.parse(storedBookmarks) || [];
+        }
         const storedScenarios = localStorage.getItem('syariah_digital_check_scenarios_done');
         if (storedScenarios) {
           appState.scenariosDone = JSON.parse(storedScenarios) || [];
@@ -3922,6 +4065,7 @@
         }));
         localStorage.setItem('syariah_digital_check_assessments', JSON.stringify(appState.assessmentsHistory));
         localStorage.setItem('syariah_digital_check_lessons_read', JSON.stringify(appState.lessonsRead));
+        localStorage.setItem('syariah_digital_check_bookmarked_lessons', JSON.stringify(appState.bookmarkedLessons || []));
         localStorage.setItem('syariah_digital_check_scenarios_done', JSON.stringify(appState.scenariosDone));
         localStorage.setItem('syariah_digital_check_quiz_attempts', JSON.stringify(appState.quizAttempts));
         localStorage.setItem('syariah_digital_check_activity', JSON.stringify(appState.activity));
@@ -7389,6 +7533,134 @@
       }
     }
 
+    // --- Phase 6: Privacy-Preserving Export, Import & Permanent Wipe ---
+    function exportUserDataJSONWeb() {
+      try {
+        const exportPackage = {
+          application: "Syariah Digital Check",
+          formatVersion: 1,
+          exportedAt: new Date().toISOString(),
+          data: {
+            version: 1,
+            displayName: appState.user.name,
+            assessmentsHistory: appState.assessmentsHistory || [],
+            lessonsRead: appState.lessonsRead || [],
+            bookmarkedLessons: appState.bookmarkedLessons || [],
+            scenariosDone: appState.scenariosDone || [],
+            quizAttempts: appState.quizAttempts || [],
+            activity: appState.activity || [],
+          }
+        };
+        const jsonString = JSON.stringify(exportPackage, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const dateStr = new Date().toISOString().split('T')[0];
+        a.href = url;
+        a.download = `syariah-digital-check-backup-${dateStr}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast("Berkas cadangan data berhasil diunduh.");
+      } catch (err) {
+        console.error("Export error", err);
+        showToast("Gagal mengunduh berkas cadangan.");
+      }
+    }
+
+    function handleImportJsonFile(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const content = e.target.result;
+          const parsed = JSON.parse(content);
+          if (!parsed || typeof parsed !== 'object') {
+            showToast("Format JSON cadangan tidak valid.");
+            return;
+          }
+
+          const d = (parsed.application === "Syariah Digital Check" && parsed.data) ? parsed.data : parsed;
+
+          if (d.displayName) {
+            appState.user.name = d.displayName;
+            appState.user.initials = d.displayName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'FP';
+          }
+          if (Array.isArray(d.assessmentsHistory)) appState.assessmentsHistory = d.assessmentsHistory;
+          if (Array.isArray(d.lessonsRead)) appState.lessonsRead = d.lessonsRead;
+          if (Array.isArray(d.bookmarkedLessons)) appState.bookmarkedLessons = d.bookmarkedLessons;
+          if (Array.isArray(d.scenariosDone)) appState.scenariosDone = d.scenariosDone;
+          if (Array.isArray(d.quizAttempts)) appState.quizAttempts = d.quizAttempts;
+          if (Array.isArray(d.activity)) appState.activity = d.activity;
+
+          savePersistedState();
+          updateReadingProgressUI();
+          renderContinueReadingCard();
+          renderAssessmentHistory();
+          updateProgressDashboard();
+          retakeCurrentQuiz();
+
+          const pDn = document.getElementById('profileDisplayName'); if (pDn) pDn.textContent = appState.user.name;
+          const pAl = document.getElementById('profileAvatarLarge'); if (pAl) pAl.textContent = appState.user.initials;
+          const inp = document.getElementById('inputProfileName'); if (inp) inp.value = appState.user.name;
+
+          showToast("Cadangan data berhasil dipulihkan!");
+        } catch (err) {
+          console.error("Import error", err);
+          showToast("Berkas JSON rusak atau tidak dapat dibaca.");
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    function wipeAllDataPermanently() {
+      if (confirm("PERINGATAN PRIVASI MUTLAK: Apakah kamu yakin ingin MENGHAPUS SELURUH DATA PERMANEN? Seluruh riwayat evaluasi transaksi, progres materi, skor kuis, dan nama akan dihapus bersih tanpa sisa dari memori browser perangkat ini.")) {
+        try {
+          localStorage.removeItem('syariah_digital_check_profile');
+          localStorage.removeItem('syariah_digital_check_assessments');
+          localStorage.removeItem('syariah_digital_check_lessons_read');
+          localStorage.removeItem('syariah_digital_check_bookmarked_lessons');
+          localStorage.removeItem('syariah_digital_check_scenarios_done');
+          localStorage.removeItem('syariah_digital_check_quiz_attempts');
+          localStorage.removeItem('syariah_digital_check_activity');
+          localStorage.removeItem('syariah_digital_check_last_lesson');
+        } catch (e) {
+          console.warn(e);
+        }
+
+        appState.user.name = "Tamu";
+        appState.user.initials = "TM";
+        appState.stats.checksCount = 0;
+        appState.stats.quizScore = 0;
+        appState.stats.bestQuizPercent = 0;
+        appState.checkAnswers = [null, null, null, null, null];
+        appState.assessmentsHistory = [];
+        appState.lessonsRead = [];
+        appState.bookmarkedLessons = [];
+        appState.scenariosDone = [];
+        appState.quizAttempts = [];
+        appState.activity = [];
+        currentQuizStreak = 0;
+
+        savePersistedState();
+        updateReadingProgressUI();
+        renderContinueReadingCard();
+        renderAssessmentHistory();
+        updateProgressDashboard();
+        retakeCurrentQuiz();
+
+        const pDn = document.getElementById('profileDisplayName'); if (pDn) pDn.textContent = "Tamu";
+        const pAl = document.getElementById('profileAvatarLarge'); if (pAl) pAl.textContent = "TM";
+        const inp = document.getElementById('inputProfileName'); if (inp) inp.value = "Tamu";
+
+        showToast("Seluruh data lokal telah dihapus permanen (Wipe Total).");
+      }
+    }
+
     // --- Modal Management ---
     function openModal(modalId) {
       const modal = document.getElementById(modalId);
@@ -7486,6 +7758,9 @@
             const cId = hashId.replace('case:', '');
             navigateTo('screenCaseStudies');
             openCaseDetail(cId);
+          } else if (hashId === 'privacy-policy') {
+            navigateTo('screenProfile');
+            openModal('modalPrivacyPolicy');
           } else if (hashId.startsWith('screenQuiz:')) {
             navigateTo('screenQuiz');
             if (hashId === 'screenQuiz:test-feedback') {

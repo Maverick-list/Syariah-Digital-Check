@@ -1,4 +1,4 @@
-import type { ChecklistDraft, PersistedState, TransactionCategory } from '../types';
+import type { ChecklistDraft, PersistedState, TransactionCategory, UserPreferences } from '../types';
 import { CATEGORY_BY_ID } from '../data/checklist';
 import { TOTAL_STEPS, sanitizeAnswers } from '../utils/checklist';
 
@@ -6,13 +6,22 @@ export const STORAGE_KEY = 'sdc.state.v1';
 export const MAX_ACTIVITY = 20;
 export const MAX_HISTORY = 100;
 
+export const defaultPreferences: UserPreferences = {
+  theme: 'system',
+  analyticsEnabled: false,
+  privacyPledgeAccepted: true,
+  cloudSyncNoticeDismissed: false,
+};
+
 export const initialState: PersistedState = {
   version: 1,
   onboardingDone: false,
   displayName: '',
+  preferences: { ...defaultPreferences },
   checks: [],
   draft: null,
   lessonsRead: [],
+  bookmarkedLessons: [],
   scenariosDone: [],
   quizAttempts: [],
   activity: [],
@@ -31,6 +40,19 @@ function parseDraft(v: unknown): ChecklistDraft | null {
   if (!isCategory(o.category) || !isNum(o.step) || !isStr(o.startedAt)) return null;
   const step = Math.min(TOTAL_STEPS - 1, Math.max(0, Math.trunc(o.step)));
   return { category: o.category, step, answers: sanitizeAnswers(o.answers), startedAt: o.startedAt };
+}
+
+function parsePreferences(v: unknown): UserPreferences {
+  if (!v || typeof v !== 'object') return { ...defaultPreferences };
+  const o = v as Record<string, unknown>;
+  return {
+    theme: ['system', 'light', 'dark'].includes(o.theme as string)
+      ? (o.theme as UserPreferences['theme'])
+      : 'system',
+    analyticsEnabled: o.analyticsEnabled === true,
+    privacyPledgeAccepted: o.privacyPledgeAccepted !== false,
+    cloudSyncNoticeDismissed: o.cloudSyncNoticeDismissed === true,
+  };
 }
 
 /** Memvalidasi & menormalkan data mentah dari penyimpanan; data rusak -> default aman. */
@@ -68,7 +90,16 @@ export function parsePersisted(raw: unknown): PersistedState {
     if (!isStr(r.id) || !isStr(r.date) || !isNum(r.score) || !isNum(r.total) || r.total <= 0)
       return [];
     if (r.score < 0 || r.score > r.total) return [];
-    return [{ id: r.id, date: r.date, score: r.score, total: r.total }];
+    return [
+      {
+        id: r.id,
+        date: r.date,
+        score: r.score,
+        total: r.total,
+        topic: isStr(r.topic) ? r.topic : undefined,
+        accuracyPercent: isNum(r.accuracyPercent) ? r.accuracyPercent : undefined,
+      },
+    ];
   });
 
   const activity = (Array.isArray(o.activity) ? o.activity : []).flatMap((a) => {
@@ -81,9 +112,11 @@ export function parsePersisted(raw: unknown): PersistedState {
     version: 1,
     onboardingDone: o.onboardingDone === true,
     displayName: isStr(o.displayName) ? o.displayName.slice(0, 30) : '',
+    preferences: parsePreferences(o.preferences),
     checks: checks.slice(-MAX_HISTORY),
     draft: parseDraft(o.draft),
     lessonsRead: strArray(o.lessonsRead),
+    bookmarkedLessons: strArray(o.bookmarkedLessons),
     scenariosDone: strArray(o.scenariosDone),
     quizAttempts: quizAttempts.slice(-MAX_HISTORY),
     activity: activity.slice(-MAX_ACTIVITY),
@@ -94,13 +127,17 @@ export type Action =
   | { type: 'HYDRATE'; state: PersistedState }
   | { type: 'COMPLETE_ONBOARDING' }
   | { type: 'SET_NAME'; name: string }
+  | { type: 'UPDATE_PREFERENCES'; preferences: Partial<UserPreferences> }
   | { type: 'SAVE_DRAFT'; draft: ChecklistDraft }
   | { type: 'CLEAR_DRAFT' }
   | { type: 'ADD_CHECK'; record: PersistedState['checks'][number]; text: string }
   | { type: 'MARK_LESSON_READ'; lessonId: string; title: string; at: string }
+  | { type: 'TOGGLE_BOOKMARK'; lessonId: string }
   | { type: 'MARK_SCENARIO_DONE'; scenarioId: string; title: string; at: string }
   | { type: 'ADD_QUIZ_ATTEMPT'; attempt: PersistedState['quizAttempts'][number] }
-  | { type: 'RESET_PROGRESS' };
+  | { type: 'RESET_PROGRESS' }
+  | { type: 'WIPE_ALL_DATA' }
+  | { type: 'IMPORT_BACKUP'; state: PersistedState };
 
 const pushActivity = (s: PersistedState, text: string, date: string) =>
   [...s.activity, { date, text }].slice(-MAX_ACTIVITY);
@@ -113,6 +150,14 @@ export function reducer(state: PersistedState, action: Action): PersistedState {
       return { ...state, onboardingDone: true };
     case 'SET_NAME':
       return { ...state, displayName: action.name };
+    case 'UPDATE_PREFERENCES':
+      return {
+        ...state,
+        preferences: {
+          ...(state.preferences || defaultPreferences),
+          ...action.preferences,
+        },
+      };
     case 'SAVE_DRAFT':
       return { ...state, draft: action.draft };
     case 'CLEAR_DRAFT':
@@ -131,6 +176,17 @@ export function reducer(state: PersistedState, action: Action): PersistedState {
         lessonsRead: [...state.lessonsRead, action.lessonId],
         activity: pushActivity(state, `Membaca materi: ${action.title}`, action.at),
       };
+    case 'TOGGLE_BOOKMARK': {
+      const current = state.bookmarkedLessons || [];
+      const exists = current.includes(action.lessonId);
+      const updated = exists
+        ? current.filter((id) => id !== action.lessonId)
+        : [...current, action.lessonId];
+      return {
+        ...state,
+        bookmarkedLessons: updated,
+      };
+    }
     case 'MARK_SCENARIO_DONE':
       if (state.scenariosDone.includes(action.scenarioId)) return state;
       return {
@@ -149,12 +205,18 @@ export function reducer(state: PersistedState, action: Action): PersistedState {
         ),
       };
     case 'RESET_PROGRESS':
-      // Nama & status onboarding dipertahankan; semua progres belajar dihapus.
+      // Nama, status onboarding & preferensi dipertahankan; semua progres belajar dihapus.
       return {
         ...initialState,
         displayName: state.displayName,
         onboardingDone: state.onboardingDone,
+        preferences: state.preferences,
       };
+    case 'WIPE_ALL_DATA':
+      // Reset total seluruh memori dan preferensi ke nol mutlak
+      return { ...initialState };
+    case 'IMPORT_BACKUP':
+      return { ...action.state };
     default:
       return state;
   }

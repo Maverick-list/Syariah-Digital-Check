@@ -33,12 +33,24 @@ export default function Profile() {
   const reset = () =>
     confirmAction({
       title: 'Reset progres?',
-      message: 'Semua riwayat check, materi dibaca, skenario, dan skor kuis di perangkat ini akan dihapus. Tindakan ini tidak dapat dibatalkan.',
+      message: 'Semua riwayat check, materi dibaca, skenario, dan skor kuis di perangkat ini akan dihapus. Nama dan preferensi tetap disimpan.',
       confirmText: 'Reset',
       destructive: true,
       onConfirm: () => {
         dispatch({ type: 'RESET_PROGRESS' });
         notify('Progres lokal direset.');
+      },
+    });
+
+  const wipeAll = () =>
+    confirmAction({
+      title: 'Hapus seluruh data permanen?',
+      message: 'Tindakan ini akan menghapus SELURUH data lokal termasuk nama, preferensi, riwayat cek, dan progres belajar tanpa sisa.',
+      confirmText: 'Hapus Semua',
+      destructive: true,
+      onConfirm: () => {
+        dispatch({ type: 'WIPE_ALL_DATA' });
+        notify('Seluruh data lokal telah dihapus bersih.');
       },
     });
 
@@ -73,9 +85,10 @@ export default function Profile() {
       </Card>
 
       <Disclaimer />
-      <Button label="Reset progres" variant="danger" full icon="trash-outline" onPress={reset} testID="profile-reset" style={{ marginTop: 14 }} />
+      <Button label="Reset progres belajar" variant="danger" full icon="refresh-outline" onPress={reset} testID="profile-reset" style={{ marginTop: 14 }} />
+      <Button label="Hapus seluruh data lokal permanen" variant="danger" full icon="trash-outline" onPress={wipeAll} testID="profile-wipe" style={{ marginTop: 8 }} />
       <Text style={[typography.tiny, { color: colors.muted, marginTop: 10 }]}>
-        Konten edukasi tersedia offline. Aplikasi ini tidak menentukan status halal/haram, tidak mengeluarkan fatwa, dan tidak memberikan nasihat keuangan personal.
+        Konten edukasi tersedia offline. Aplikasi ini tidak meminta PIN, kata sandi, maupun nomor kartu perbankan. Seluruh evaluasi tersimpan lokal di perangkat ini.
       </Text>
     </Screen>
   );

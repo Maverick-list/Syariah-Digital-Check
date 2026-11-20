@@ -143,13 +143,22 @@ export interface ActivityEntry {
   text: string;
 }
 
+export interface UserPreferences {
+  theme?: 'system' | 'light' | 'dark';
+  analyticsEnabled?: boolean;
+  privacyPledgeAccepted?: boolean;
+  cloudSyncNoticeDismissed?: boolean;
+}
+
 export interface PersistedState {
   version: 1;
   onboardingDone: boolean;
   displayName: string;
+  preferences?: UserPreferences;
   checks: CheckRecord[];
   draft: ChecklistDraft | null;
   lessonsRead: string[];
+  bookmarkedLessons?: string[];
   scenariosDone: string[];
   quizAttempts: QuizAttempt[];
   activity: ActivityEntry[];
