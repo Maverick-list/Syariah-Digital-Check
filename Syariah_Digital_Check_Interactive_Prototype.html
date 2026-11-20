@@ -639,10 +639,113 @@
       .ds-modal .modal-sheet {
         max-width: 820px !important;
       }
+      .wide-modal .modal-sheet {
+        max-width: 740px !important;
+      }
     }
     @keyframes modalPop {
       from { opacity: 0; transform: scale(0.96) translateY(8px); }
       to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Phase 4 Learning Hub & Case Studies Components */
+    .continue-reading-card {
+      background: linear-gradient(135deg, var(--emerald-900) 0%, #032115 100%);
+      color: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .continue-reading-card::after {
+      content: '';
+      position: absolute;
+      right: -20px;
+      bottom: -20px;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(200, 157, 66, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .learning-progress-wrap {
+      background: var(--emerald-950);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      color: #FFFFFF;
+    }
+    .obj-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .obj-item svg {
+      flex-shrink: 0;
+      color: var(--emerald-800);
+      margin-top: 3px;
+    }
+    .takeaway-box {
+      background: var(--ivory-warm);
+      border: 1px solid var(--ivory-border);
+      border-left: 4px solid var(--gold-600);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin: 16px 0;
+    }
+    .chronology-step {
+      display: flex;
+      gap: 12px;
+      position: relative;
+      padding-bottom: 16px;
+    }
+    .chronology-step:last-child {
+      padding-bottom: 0;
+    }
+    .chronology-step::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 24px;
+      bottom: 0;
+      width: 2px;
+      background: var(--sage-200);
+    }
+    .chronology-step:last-child::before {
+      display: none;
+    }
+    .chronology-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--emerald-900);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .multi-analysis-box {
+      background: #FFFFFF;
+      border: 1px solid var(--ivory-border);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+    .exercise-box {
+      background: var(--sage-50);
+      border: 1px solid var(--sage-200);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin-top: 20px;
     }
 /* Screen View Transitions */
     .screen {
@@ -2466,7 +2569,10 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
               <span>Beranda</span>
             </button>
-            <span class="pill pill-gold">STUDI KASUS NYATA</span>
+            <div class="flex-row gap-2">
+              <span class="pill pill-warn" style="font-size: 10px;">SIMULASI EDUKASI</span>
+              <span class="pill pill-gold" id="caseStudiesDonePill">0 Diteliti</span>
+            </div>
           </div>
 
           <div class="main-content">
@@ -2475,16 +2581,22 @@
               Studi Kasus Transaksi Digital
             </h2>
             <p class="text-muted mt-1" style="font-size: 13px;">
-              Pelajari skenario fiktif yang terinspirasi dari praktik fintech sehari-hari untuk mengasah kepekaan terhadap klausul berisiko.
+              Pelajari skenario simulasi fiktif yang terinspirasi dari praktik fintech sehari-hari untuk mengasah kepekaan terhadap klausul berisiko dan latihan mengambil keputusan bijak.
             </p>
+
+            <div class="notice-box notice-disclaimer mt-2" style="font-size: 11px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+              <span><strong>Catatan Simulasi:</strong> Seluruh nama pihak dan alur transaksi adalah simulasi edukasi fiktif untuk pembelajaran nalar kritis muamalah, tidak mewakili produk/merek spesifik.</span>
+            </div>
 
             <!-- Case Study Filter Chips -->
             <div class="filter-scroll mt-3" id="caseFilterChips">
               <button class="filter-chip active" onclick="filterCases('Semua')">Semua Kasus</button>
-              <button class="filter-chip" onclick="filterCases('PayLater')">PayLater & Kredit</button>
+              <button class="filter-chip" onclick="filterCases('PayLater')">PayLater & Cicilan</button>
               <button class="filter-chip" onclick="filterCases('Emas')">Emas & Investasi</button>
-              <button class="filter-chip" onclick="filterCases('E-Commerce')">E-Commerce</button>
-              <button class="filter-chip" onclick="filterCases('Subscription')">Langganan</button>
+              <button class="filter-chip" onclick="filterCases('E-Commerce')">E-Commerce & Dropship</button>
+              <button class="filter-chip" onclick="filterCases('Subscription')">Langganan Digital</button>
+              <button class="filter-chip" onclick="filterCases('Sosial')">Sosial ZISWAF</button>
             </div>
 
             <!-- Case Studies List -->
@@ -2517,11 +2629,36 @@
           </header>
 
           <div class="main-content">
+            <!-- Learning Progress Tracker Banner (Real User Activity) -->
+            <div class="learning-progress-wrap" id="learnProgressWrap">
+              <div class="flex-between" style="font-size: 12px; margin-bottom: 6px;">
+                <span id="learnProgressTitle" style="font-weight: 600;">Progres Membaca Modul</span>
+                <span id="learnProgressFraction" style="color: var(--gold-400); font-weight: 700;">0 / 9 Selesai (0%)</span>
+              </div>
+              <div class="step-progress-bar" style="background: rgba(255,255,255,0.15); height: 6px; margin: 0;">
+                <div class="step-progress-fill" id="learnProgressFill" style="width: 0%; background: var(--gold-500);"></div>
+              </div>
+            </div>
+
+            <!-- Continue Reading Card -->
+            <div class="continue-reading-card" id="continueReadingCard" style="display: none;">
+              <span class="pill pill-gold" style="font-size: 9.5px; padding: 2px 8px; margin-bottom: 6px; display: inline-block;">LANJUTKAN BELAJAR</span>
+              <h3 style="font-size: 15px; font-weight: 700; margin: 4px 0 2px; color: #FFFFFF;" id="continueReadingTitle">
+                Modul Berikutnya
+              </h3>
+              <p style="font-size: 12px; color: #D1E5DA; margin: 0 0 12px; line-height: 1.45;" id="continueReadingMeta">
+                Waktu baca 5 menit · Akad Transaksi
+              </p>
+              <button class="btn btn-secondary btn-sm" id="btnContinueReading" onclick="openContinueReadingLesson()">
+                Lanjutkan Membaca →
+              </button>
+            </div>
+
             <!-- Search bar -->
             <div class="search-input-wrap">
               <label for="searchLessonInput" class="sr-only">Cari modul edukasi syariah</label>
               <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" class="search-input" id="searchLessonInput" placeholder="Cari modul (contoh: Riba, Murabahah, Emas)..." oninput="filterLessons()" aria-label="Cari modul edukasi">
+              <input type="text" class="search-input" id="searchLessonInput" placeholder="Cari modul (contoh: Riba, Murabahah, Qabdh, Dropship)..." oninput="filterLessons()" aria-label="Cari modul edukasi">
             </div>
 
             <!-- Category Chips -->
@@ -2529,8 +2666,9 @@
               <button class="filter-chip active" onclick="setLessonCategory('Semua')">Semua Modul</button>
               <button class="filter-chip" onclick="setLessonCategory('Dasar')">Prinsip Fiqih</button>
               <button class="filter-chip" onclick="setLessonCategory('Akad')">Jenis Akad</button>
-              <button class="filter-chip" onclick="setLessonCategory('Fintech')">Fintech & E-Wallet</button>
-              <button class="filter-chip" onclick="setLessonCategory('Investasi')">Investasi Digital</button>
+              <button class="filter-chip" onclick="setLessonCategory('Fintech')">Fintech & Pembiayaan</button>
+              <button class="filter-chip" onclick="setLessonCategory('Investasi')">Investasi & Emas</button>
+              <button class="filter-chip" onclick="setLessonCategory('Sosial')">Sosial ZISWAF</button>
             </div>
 
             <!-- Lessons List -->
@@ -3076,28 +3214,101 @@
   <!-- ========================================== -->
   <!-- MODAL 1: LESSON READER DRAWER -->
   <!-- ========================================== -->
-  <div class="modal-overlay" id="modalLessonReader" role="dialog" aria-modal="true" aria-labelledby="lessonModalTitle" onclick="closeModalOnOverlay(event, 'modalLessonReader')">
+  <div class="modal-overlay wide-modal" id="modalLessonReader" role="dialog" aria-modal="true" aria-labelledby="lessonModalTitle" onclick="closeModalOnOverlay(event, 'modalLessonReader')">
     <div class="modal-sheet">
       <div class="sheet-handle"></div>
       <div class="flex-between">
-        <span class="pill pill-emerald" id="lessonModalCategory">AKAD JUAL BELI</span>
-        <button class="btn-back" onclick="closeModal('modalLessonReader')" style="font-size: 18px; padding: 0;">✕</button>
+        <div class="flex-row gap-2" style="align-items: center; flex-wrap: wrap;">
+          <span class="pill pill-emerald" id="lessonModalCategory">AKAD JUAL BELI</span>
+          <span class="pill pill-gold" id="lessonModalTime">5 Menit</span>
+          <span class="pill" id="lessonModalStatusBadge" style="font-size: 10px;">Belum Dibaca</span>
+        </div>
+        <button class="btn-back" onclick="closeModal('modalLessonReader')" aria-label="Tutup Modul" style="font-size: 18px; padding: 0;">✕</button>
       </div>
-      <h2 class="serif-title mt-2" style="font-size: 20px; color: var(--emerald-950);" id="lessonModalTitle">
-        Membedah Struktur Akad Murabahah vs Kredit Konvensional
+
+      <h2 class="serif-title mt-2" style="font-size: 21px; color: var(--emerald-950); line-height: 1.3;" id="lessonModalTitle">
+        Judul Modul
       </h2>
-      <div class="text-xs text-muted mt-1" id="lessonModalMeta">
-        Waktu baca: 5 menit · Referensi Fatwa DSN-MUI No. 04/DSN-MUI/IV/2000
+
+      <!-- 1. Introduction -->
+      <div class="card mt-3" style="background: var(--ivory-warm); border-color: var(--ivory-border); font-size: 13px; line-height: 1.6; color: var(--text-primary);" id="lessonModalIntro">
       </div>
 
-      <div style="font-size: 13px; line-height: 1.65; color: var(--text-secondary); margin-top: 16px;" id="lessonModalBody">
-        <!-- Content inserted dynamically -->
+      <!-- 2. Learning Objectives -->
+      <div class="mt-3">
+        <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-bottom: 6px;">
+          Tujuan Pembelajaran (Learning Objectives):
+        </strong>
+        <div id="lessonModalObjectives"></div>
       </div>
 
-      <div class="flex-row gap-3 mt-4">
-        <button class="btn btn-primary btn-full" onclick="markLessonCompleted()">
+      <!-- 3. Main Concept Explanation & Body -->
+      <div class="mt-4">
+        <strong style="font-size: 14px; color: var(--emerald-950); display: block; margin-bottom: 6px;">
+          Konsep & Landasan Fiqih Muamalah:
+        </strong>
+        <div class="card" style="background: #FFFFFF; border-left: 4px solid var(--emerald-800); font-size: 13px; line-height: 1.65; color: var(--emerald-950);" id="lessonModalConcept"></div>
+        <div style="font-size: 13px; line-height: 1.65; color: var(--text-secondary); margin-top: 10px;" id="lessonModalBody"></div>
+      </div>
+
+      <!-- 4. Practical Example -->
+      <div class="card mt-3" style="background: var(--sage-50); border-color: var(--sage-200);">
+        <strong style="font-size: 12.5px; color: var(--sage-900); display: block;">Contoh Kasus Praktis Transaksi Digital:</strong>
+        <p class="mt-1" style="font-size: 12.5px; line-height: 1.6; color: var(--text-primary); margin: 0;" id="lessonModalExample"></p>
+      </div>
+
+      <!-- 5. Key Takeaways -->
+      <div class="takeaway-box">
+        <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-bottom: 6px;">
+          Poin Inti Pembelajaran (Key Takeaways):
+        </strong>
+        <ul id="lessonModalKeyPoints" style="padding-left: 18px; margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--text-primary);"></ul>
+      </div>
+
+      <!-- 6. Supporting References -->
+      <div class="mt-3">
+        <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-bottom: 6px;">
+          Rujukan Fatwa DSN-MUI & Regulasi Otoritas:
+        </strong>
+        <div id="lessonModalSources"></div>
+      </div>
+
+      <!-- 7. Further Reading -->
+      <div class="mt-3">
+        <strong style="font-size: 12.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">
+          Bacaan & Portal Rujukan Lanjutan:
+        </strong>
+        <div id="lessonModalFurtherReading"></div>
+      </div>
+
+      <!-- 8. Important Limitations -->
+      <div class="notice-box notice-disclaimer mt-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span id="lessonModalLimitations">Materi modul ini bersifat edukasi konsep fikih umum, bukan fatwa hukum atau audit kepatuhan atas aplikasi spesifik.</span>
+      </div>
+
+      <!-- 9. Related Lessons Recommendations -->
+      <div class="mt-3" style="border-top: 1px solid var(--ivory-border); padding-top: 12px;">
+        <strong style="font-size: 12.5px; color: var(--emerald-950); display: block; margin-bottom: 8px;">
+          Rekomendasi Modul Terkait:
+        </strong>
+        <div id="lessonModalRelated" class="flex-row gap-2" style="flex-wrap: wrap;"></div>
+      </div>
+
+      <!-- 10. Navigation & Completion Actions -->
+      <div style="border-top: 1px solid var(--ivory-border); margin-top: 18px; padding-top: 14px;">
+        <div class="flex-between mb-3">
+          <button class="btn btn-outline btn-sm" id="btnPrevLesson" onclick="navigateLesson(-1)">
+            ← Modul Sebelumnya
+          </button>
+          <button class="btn btn-outline btn-sm" id="btnNextLesson" onclick="navigateLesson(1)">
+            Modul Selanjutnya →
+          </button>
+        </div>
+
+        <button class="btn btn-primary btn-full" id="btnToggleLessonRead" onclick="toggleCurrentLessonRead()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>Selesai Membaca & Simpan Progres</span>
+          <span id="btnToggleLessonReadText">Tandai Selesai Dibaca</span>
         </button>
       </div>
     </div>
@@ -3106,35 +3317,144 @@
   <!-- ========================================== -->
   <!-- MODAL 2: CASE STUDY DETAIL DRAWER -->
   <!-- ========================================== -->
-  <div class="modal-overlay" id="modalCaseDetail" role="dialog" aria-modal="true" aria-labelledby="caseModalTitle" onclick="closeModalOnOverlay(event, 'modalCaseDetail')">
+  <div class="modal-overlay wide-modal" id="modalCaseDetail" role="dialog" aria-modal="true" aria-labelledby="caseModalTitle" onclick="closeModalOnOverlay(event, 'modalCaseDetail')">
     <div class="modal-sheet">
       <div class="sheet-handle"></div>
       <div class="flex-between">
-        <span class="pill pill-gold" id="caseModalCategory">PAYLATER</span>
+        <div class="flex-row gap-2" style="align-items: center; flex-wrap: wrap;">
+          <span class="pill pill-gold" id="caseModalCategory">PAYLATER</span>
+          <span class="pill pill-warn" style="font-size: 10px;">SIMULASI EDUKASI</span>
+          <span class="pill" id="caseModalStatusBadge" style="font-size: 10px;">Belum Diteliti</span>
+        </div>
         <button class="btn-back" onclick="closeModal('modalCaseDetail')" aria-label="Tutup Detail Kasus" style="font-size: 18px; padding: 0;">✕</button>
       </div>
-      <h2 class="serif-title mt-2" style="font-size: 20px; color: var(--emerald-950);" id="caseModalTitle">
-        Promo PayLater 0% dengan Biaya Langganan Bulanan
+
+      <!-- Simulation Disclaimer Banner -->
+      <div class="notice-box notice-disclaimer mt-2" style="font-size: 11px; margin-bottom: 4px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span id="caseModalNotice">Simulasi Edukasi Fiktif: Skenario ini disusun untuk tujuan literasi dan analisis kritis terhadap klausul muamalah digital, tidak merepresentasikan merek tertentu.</span>
+      </div>
+
+      <h2 class="serif-title mt-2" style="font-size: 20px; color: var(--emerald-950); line-height: 1.3;" id="caseModalTitle">
+        Judul Studi Kasus
       </h2>
 
-      <div class="card mt-3" style="background: var(--sage-50); border-color: var(--sage-200);">
-        <strong style="font-size: 12px; color: var(--sage-900);">Deskripsi Kasus Nyata:</strong>
-        <p class="mt-1 text-muted" style="font-size: 12px; line-height: 1.55;" id="caseModalStory"></p>
+      <!-- 1. Background & Narrative -->
+      <div class="card mt-3" style="background: var(--ivory-warm); border-color: var(--ivory-border);">
+        <strong style="font-size: 12.5px; color: var(--emerald-950); display: block;">Latar Belakang Skenario Transaksi:</strong>
+        <p class="mt-1" style="font-size: 12.5px; line-height: 1.6; color: var(--text-primary); margin: 0;" id="caseModalStory"></p>
       </div>
 
+      <!-- 2. Parties Involved -->
       <div class="mt-3">
-        <strong style="font-size: 13px; color: var(--emerald-950);">Titik Kritis Analisis Syariah:</strong>
-        <p class="mt-1 text-muted" style="font-size: 12px; line-height: 1.55;" id="caseModalAnalysis"></p>
+        <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-bottom: 6px;">
+          Pihak-Pihak yang Terlibat:
+        </strong>
+        <ul id="caseModalParties" style="padding-left: 18px; margin: 0; font-size: 12.5px; line-height: 1.55; color: var(--text-secondary);"></ul>
       </div>
 
-      <div class="card mt-3" style="border-left: 4px solid var(--emerald-800);">
-        <strong style="font-size: 12px; color: var(--emerald-950);">Rekomendasi Tindakan Konsumen Bijak:</strong>
-        <p class="mt-1 text-muted" style="font-size: 12px; line-height: 1.55;" id="caseModalAdvice"></p>
+      <!-- 3. Transaction Chronology -->
+      <div class="mt-3">
+        <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-bottom: 8px;">
+          Kronologi Terjadinya Transaksi:
+        </strong>
+        <div id="caseModalChronology"></div>
       </div>
 
-      <button class="btn btn-primary btn-full mt-3" onclick="closeModal('modalCaseDetail'); navigateTo('screenCategorySelect');">
-        Terapkan pada Transaksi Serupa
-      </button>
+      <!-- 4. Contract Structure & Money/Ownership Flow -->
+      <div class="card mt-3" style="background: #FFFFFF; border-left: 4px solid var(--emerald-800);">
+        <strong style="font-size: 13px; color: var(--emerald-950); display: block;">Struktur Akad & Alur Transaksi:</strong>
+        <div class="mt-2" style="font-size: 12.5px; line-height: 1.6;">
+          <div style="margin-bottom: 6px;">
+            <strong style="color: var(--emerald-900);">Struktur yang Terjadi:</strong>
+            <span id="caseModalContractName" style="display: block; color: var(--text-secondary);"></span>
+          </div>
+          <div style="margin-bottom: 6px;">
+            <strong style="color: var(--emerald-900);">Rekomendasi Akad Ideal Syariah:</strong>
+            <span id="caseModalContractIdeal" style="display: block; color: var(--text-secondary);"></span>
+          </div>
+          <div style="margin-bottom: 6px;">
+            <strong style="color: var(--emerald-900);">Alur Finansial (Money Flow):</strong>
+            <span id="caseModalMoneyFlow" style="display: block; color: var(--text-secondary);"></span>
+          </div>
+          <div>
+            <strong style="color: var(--emerald-900);">Alur Kepemilikan (Ownership & Risk Flow):</strong>
+            <span id="caseModalOwnershipFlow" style="display: block; color: var(--text-secondary);"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Fiqh Principles -->
+      <div class="mt-3">
+        <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-bottom: 6px;">
+          Prinsip & Kaidah Fiqih Terkait:
+        </strong>
+        <div id="caseModalPrinciples"></div>
+      </div>
+
+      <!-- 6. Critical Questions -->
+      <div class="mt-3">
+        <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-bottom: 6px;">
+          Pertanyaan Kritis untuk Diteliti:
+        </strong>
+        <ul id="caseModalQuestions" style="padding-left: 18px; margin: 0; font-size: 12px; line-height: 1.55; color: var(--text-secondary);"></ul>
+      </div>
+
+      <!-- 7. Educational Analysis Grid (Facts, Assumptions, Interpretations, Conclusions) -->
+      <div class="mt-3">
+        <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-bottom: 8px;">
+          Telaah Edukatif Multidimensi:
+        </strong>
+        <div class="multi-analysis-box">
+          <strong style="color: var(--emerald-950); font-size: 12px;">1. Fakta yang Teridentifikasi (Facts):</strong>
+          <ul id="caseModalFacts" style="padding-left: 16px; margin: 4px 0 0; font-size: 12px; color: var(--text-secondary); line-height: 1.5;"></ul>
+        </div>
+        <div class="multi-analysis-box">
+          <strong style="color: var(--emerald-950); font-size: 12px;">2. Asumsi Umum yang Perlu Dikonfirmasi (Assumptions):</strong>
+          <ul id="caseModalAssumptions" style="padding-left: 16px; margin: 4px 0 0; font-size: 12px; color: var(--text-secondary); line-height: 1.5;"></ul>
+        </div>
+        <div class="multi-analysis-box">
+          <strong style="color: var(--emerald-950); font-size: 12px;">3. Interpretasi Hukum Fiqih (Interpretations):</strong>
+          <ul id="caseModalInterpretations" style="padding-left: 16px; margin: 4px 0 0; font-size: 12px; color: var(--text-secondary); line-height: 1.5;"></ul>
+        </div>
+        <div class="multi-analysis-box" style="border-left: 3px solid var(--gold-600); background: var(--ivory-warm);">
+          <strong style="color: var(--emerald-950); font-size: 12px;">4. Kesimpulan Hasil Telaah (Conclusion):</strong>
+          <p id="caseModalConclusion" style="margin: 4px 0 0; font-size: 12px; color: var(--text-primary); line-height: 1.55;"></p>
+        </div>
+      </div>
+
+      <!-- 8. Supporting References -->
+      <div class="mt-3">
+        <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-bottom: 6px;">
+          Rujukan Fatwa DSN-MUI & Regulasi Terkait:
+        </strong>
+        <div id="caseModalSources"></div>
+      </div>
+
+      <!-- 9. Limitations & Practical Lessons -->
+      <div class="card mt-3" style="background: var(--sage-50); border-color: var(--sage-200);">
+        <strong style="font-size: 12.5px; color: var(--sage-900); display: block;">Pelajaran Praktis bagi Konsumen Bijak:</strong>
+        <ul id="caseModalLessons" style="padding-left: 18px; margin: 6px 0 0; font-size: 12px; line-height: 1.55; color: var(--text-secondary);"></ul>
+      </div>
+
+      <!-- 10. Interactive Case-Based Exercise -->
+      <div class="exercise-box" id="caseExerciseBox">
+        <span class="pill pill-gold" style="font-size: 10px;">LATIHAN STUDI KASUS</span>
+        <h4 style="font-size: 14px; font-weight: 700; color: var(--emerald-950); margin: 6px 0 4px;" id="caseExerciseQuestion">
+          Pertanyaan Latihan
+        </h4>
+        <div id="caseExerciseOptions" style="margin-top: 10px;"></div>
+        <div id="caseExerciseFeedback" style="display: none; margin-top: 12px; padding: 12px; border-radius: var(--radius-md); font-size: 12px; line-height: 1.55;"></div>
+        <button class="btn btn-secondary btn-full mt-3" id="btnSubmitCaseExercise" onclick="submitCaseExercise()">
+          Periksa Keputusan Kasus
+        </button>
+      </div>
+
+      <div class="flex-between mt-4" style="border-top: 1px solid var(--ivory-border); padding-top: 14px;">
+        <button class="btn btn-primary btn-full" onclick="closeModal('modalCaseDetail'); navigateTo('screenPause');">
+          Terapkan pada Pemeriksaan Transaksi Nyata
+        </button>
+      </div>
     </div>
   </div>
 
@@ -3312,12 +3632,22 @@
       checkStep: 0,
       checkAnswers: [null, null, null, null, null],
       stats: {
-        checksCount: 5,
-        lessonsRead: ["Anatomi Riba dalam Fintech", "Syarat Qabdh Emas Digital", "Transparansi Biaya & Denda"],
-        quizScore: 5
+        checksCount: 0,
+        lessonsRead: [],
+        scenariosDone: [],
+        quizScore: 0,
+        bestQuizPercent: 0
       },
       onboardStep: 0,
-      assessmentsHistory: []
+      assessmentsHistory: [],
+      lessonsRead: [],
+      scenariosDone: [],
+      quizAttempts: [],
+      activity: [],
+      activeLessonId: 'akad-transaksi-digital',
+      lastOpenedLessonId: null,
+      activeCaseId: 'paylater',
+      selectedCaseOption: null
     };
 
     // --- Phase 3 Conscious Pause Timer (Jeda Sadar 30 Detik) ---
@@ -3377,13 +3707,31 @@
             appState.user.name = parsed.name;
             appState.user.initials = parsed.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'FP';
           }
-          if (parsed.checksCount !== undefined) {
-            appState.stats.checksCount = parsed.checksCount;
-          }
         }
         const storedHist = localStorage.getItem('syariah_digital_check_assessments');
         if (storedHist) {
           appState.assessmentsHistory = JSON.parse(storedHist) || [];
+          appState.stats.checksCount = appState.assessmentsHistory.length;
+        }
+        const storedLessons = localStorage.getItem('syariah_digital_check_lessons_read');
+        if (storedLessons) {
+          appState.lessonsRead = JSON.parse(storedLessons) || [];
+        }
+        const storedScenarios = localStorage.getItem('syariah_digital_check_scenarios_done');
+        if (storedScenarios) {
+          appState.scenariosDone = JSON.parse(storedScenarios) || [];
+        }
+        const storedQuiz = localStorage.getItem('syariah_digital_check_quiz_attempts');
+        if (storedQuiz) {
+          appState.quizAttempts = JSON.parse(storedQuiz) || [];
+        }
+        const lastLesson = localStorage.getItem('syariah_digital_check_last_lesson');
+        if (lastLesson) {
+          appState.lastOpenedLessonId = lastLesson;
+        }
+        const storedAct = localStorage.getItem('syariah_digital_check_activity');
+        if (storedAct) {
+          appState.activity = JSON.parse(storedAct) || [];
         }
       } catch (e) {
         console.warn('LocalStorage not accessible', e);
@@ -3393,9 +3741,16 @@
     function savePersistedState() {
       try {
         localStorage.setItem('syariah_digital_check_profile', JSON.stringify({
-          name: appState.user.name,
-          checksCount: appState.stats.checksCount
+          name: appState.user.name
         }));
+        localStorage.setItem('syariah_digital_check_assessments', JSON.stringify(appState.assessmentsHistory));
+        localStorage.setItem('syariah_digital_check_lessons_read', JSON.stringify(appState.lessonsRead));
+        localStorage.setItem('syariah_digital_check_scenarios_done', JSON.stringify(appState.scenariosDone));
+        localStorage.setItem('syariah_digital_check_quiz_attempts', JSON.stringify(appState.quizAttempts));
+        localStorage.setItem('syariah_digital_check_activity', JSON.stringify(appState.activity));
+        if (appState.lastOpenedLessonId) {
+          localStorage.setItem('syariah_digital_check_last_lesson', appState.lastOpenedLessonId);
+        }
       } catch (e) {
         console.warn('LocalStorage save failed', e);
       }
@@ -4294,108 +4649,774 @@
       ]
     };
 
-    // --- Case Studies Dataset ---
+    // --- Case Studies Dataset (Fiktif untuk Simulasi Pembelajaran) ---
     const caseStudiesData = [
       {
-        id: 0,
+        id: "paylater",
+        numericId: 0,
         category: "PayLater",
         title: "Promo PayLater 0% dengan Biaya Layanan Bulanan Tetap",
-        story: "Rian ingin membeli headphone seharga Rp 1.000.000 di e-commerce. Layanan PayLater menawarkan 'Bunga 0%' untuk tenor 3 bulan, namun mewajibkan 'biaya administrasi bulanan' sebesar Rp 45.000 per bulan ditambah denda Rp 50.000 jika terlambat 1 hari.",
-        analysis: "Meskipun dilabeli 'Bunga 0%', biaya administrasi bulanan tetap sebesar Rp 45.000 x 3 = Rp 135.000 (13.5% dari pokok pinjaman) yang tidak berbasis biaya operasional riil merupakan bentuk pertambahan manfaat atas pinjaman (kullu qardhin jarra manfa'atan fahuwa riba). Selain itu, denda keterlambatan tidak dialokasikan ke dana sosial kebajikan.",
-        advice: "Tolak atau tunda cicilan tersebut jika tidak memiliki landasan akad murabahah riil dari perbankan syariah terdaftar. Lebih bijak menabung atau membayar tunai secara penuh."
+        notice: "Simulasi Edukasi Fiktif: Skenario ini disusun untuk tujuan literasi dan analisis kritis terhadap klausul muamalah digital, tidak merepresentasikan merek tertentu.",
+        story: "Rian (21 tahun, mahasiswa) ingin membeli laptop seharga Rp6.000.000 untuk tugas akhir. Layanan PayLater menawarkan cicilan tenor 3 bulan dengan promosi mencolok 'Bunga 0%'. Namun pada rincian tagihan, ada biaya layanan platform bulanan tetap sebesar Rp90.000 per bulan ditambah denda keterlambatan Rp50.000 per kejadian jika terlambat 1 hari.",
+        parties: [
+          "Konsumen / Pengguna (Rian - Pembeli/Debitur)",
+          "Platform Marketplace E-Commerce",
+          "Perusahaan Fintech P2P / Multifinance (Penyedia dana talangan)",
+          "Mitra Penjual / Merchant Laptop"
+        ],
+        chronology: [
+          "Rian memilih laptop seharga Rp6.000.000 di keranjang belanja e-commerce.",
+          "Rian memilih metode cicilan PayLater 3 bulan berlabel 'Bunga 0%'.",
+          "Sistem menampilkan rincian: Pokok Rp2.000.000 + Biaya Layanan Rp90.000 = Rp2.090.000/bulan (Total bayar: Rp6.270.000).",
+          "Terdapat klausul denda keterlambatan Rp50.000 yang dibukukan sebagai laba operasional perusahaan fintech.",
+          "Rian diminta menyetujui syarat digital dalam hitungan menit sebelum kupon diskon hangus."
+        ],
+        contractName: "Qardh (Pinjaman Talangan) dengan Biaya Layanan Bulanan vs Murabahah Riil",
+        contractIdeal: "Akad Murabahah di mana lembaga keuangan syariah membeli laptop dari merchant terlebih dahulu, menanggung risiko barang, lalu menjualnya ke konsumen dengan margin keuntungan tetap disepakati di muka tanpa denda ribawi.",
+        moneyFlow: "Fintech membayar Rp6.000.000 ke merchant. Rian mengangsur Rp2.090.000/bulan x 3 bulan = Rp6.270.000 ke fintech.",
+        ownershipFlow: "Laptop langsung dikirim merchant ke alamat Rian. Fintech tidak pernah memiliki kepemilikan fisik maupun menanggung risiko barang (al-kharaj bid-dhaman).",
+        principles: [
+          {
+            arabic: "كُلُّ قَرْضٍ جَرَّ مَنْفَعَةً فَهُوَ رِبًا",
+            translit: "Kullu qardhin jarra manfa'atan fahuwa riba",
+            translation: "Setiap pinjaman yang mendatangkan keuntungan/manfaat tambahan (bagi kreditur) adalah riba.",
+            application: "Biaya bulanan tetap Rp90.000 yang dikaitkan dengan jangka waktu pinjaman uang pada hakikatnya adalah penambahan imbalan atas utang."
+          },
+          {
+            arabic: "الْغُرْمُ بِالْغُنْمِ",
+            translit: "Al-Ghurmu bil-ghunmi",
+            translation: "Keuntungan diperoleh sebanding dengan kesiapan menanggung risiko kerugian.",
+            application: "Penyedia yang hanya menyalurkan dana tanpa menanggung risiko komoditas tidak berhak mengambil laba atas jual beli."
+          }
+        ],
+        questions: [
+          "Apakah biaya platform bulanan Rp90.000 mencerminkan biaya operasional riil yang sah atau bunga terselubung?",
+          "Ke mana alokasi dana denda keterlambatan: apakah disalurkan ke dana sosial kebajikan atau diakui sebagai laba?",
+          "Apakah akad yang mendasari adalah Murabahah (jual beli riil) atau Qardh (utang uang berbunga)?"
+        ],
+        analysis: {
+          facts: [
+            "Produk dipromosikan sebagai 'Bunga 0%'.",
+            "Terdapat biaya layanan bulanan tetap Rp90.000 x 3 = Rp270.000 (4,5% dari pokok pinjaman).",
+            "Denda keterlambatan Rp50.000 masuk ke pendapatan perusahaan penyedia."
+          ],
+          assumptions: [
+            "Konsumen sering berasumsi bahwa 'Bunga 0%' berarti sama sekali tidak ada biaya tambahan di atas harga tunai laptop."
+          ],
+          interpretations: [
+            "Secara substansi hukum fiqih, biaya layanan bulanan yang dihitung proporsional terhadap waktu utang merupakan penambahan imbalan atas pinjaman uang (ziyadah 'alal qardh).",
+            "Sanksi keterlambatan yang dijadikan laba perusahaan bertentangan dengan Fatwa DSN-MUI No. 17/2000."
+          ],
+          conclusion: "Skema ini memiliki risiko ketidakpatuhan syariah yang tinggi jika berlandaskan utang uang. Konsumen disarankan memilih pembiayaan syariah berakad Murabahah riil atau menabung tunai."
+        },
+        sources: ["dsnmui-117-2018", "dsnmui-17-2000", "dsnmui-43-2004", "ojk-pojk-40-2024"],
+        limitations: "Skenario ini tidak menilai legalitas izin OJK platform secara individual; rincian klausul harus diperiksa pada lembar perjanjian masing-masing penyelenggara.",
+        lessons: [
+          "Jangan terkecoh jargon 'Bunga 0%'. Selalu hitung total biaya riil (harga barang + seluruh biaya bulanan).",
+          "Periksa apakah denda keterlambatan dialokasikan ke pos dana sosial kebajikan atau menjadi laba kreditur.",
+          "Pertimbangkan opsi menabung tunai daripada berutang untuk barang konsumtif."
+        ],
+        exercise: {
+          q: "Apa langkah paling bijak bagi Rian sebelum menyetujui cicilan PayLater tersebut?",
+          opts: [
+            "Langsung klik setuju karena prosesnya cepat dan tergiur promo bunga 0%",
+            "Meneliti rincian biaya bulanan, struktur akad, alokasi denda, serta membandingkan dengan harga tunai",
+            "Menganggap semua layanan PayLater di pasar sudah otomatis halal tanpa perlu membaca dokumen"
+          ],
+          correct: 1,
+          exp: "Tepat! Langkah bijak adalah meneliti seluruh komponen biaya, akad pokok, dan alokasi denda. Label bunga 0% sering menyamarkan biaya layanan tetap yang substansinya menyerupai bunga."
+        }
       },
       {
-        id: 1,
+        id: "emas-digital",
+        numericId: 1,
         category: "Emas",
         title: "Investasi Emas Digital: Kapan Qabdh Sah Terjadi?",
-        story: "Siti membeli emas senilai Rp 500.000 di platform online. Di layar tertulis saldo emas 0.45 gram bertambah seketika, namun cetak fisik baru bisa dilakukan dengan biaya cetak dan harus menunggu 14 hari kerja.",
-        analysis: "Menurut Fatwa DSN-MUI No. 77/DSN-MUI/V/2010 tentang Jual Beli Emas secara Tidak Tunai, jual beli emas diperbolehkan selama emas tersebut menjadi hak pembeli secara sah (qabdh hukmi/yuridis) dan emas fisiknya benar-benar ada di brankas terpisah milik kustodian berizin (bukan emas fiktif/margin trading).",
-        advice: "Pastikan platform emas digital tersebut memiliki izin Bappebti, bekerja sama dengan Lembaga Kliring Berjangka, dan memiliki kustodian fisik terpercaya (seperti Antam/Pegadaian)."
+        notice: "Simulasi Edukasi Fiktif: Skenario ini disusun untuk tujuan literasi dan analisis kritis terhadap klausul muamalah digital, tidak merepresentasikan merek tertentu.",
+        story: "Siti (26 tahun) membeli emas senilai Rp1.000.000 pada aplikasi investasi digital. Saldo emas 0,85 gram langsung masuk ke akun aplikasi seketika setelah pembayaran, namun pencetakan fisik baru bisa dilakukan dengan biaya cetak tambahan dan batas minimal 5 gram.",
+        parties: [
+          "Konsumen / Investor (Siti - Pembeli)",
+          "Pedagang Fisik Emas Digital (Aplikasi Penyelenggara)",
+          "Lembaga Kustodian Terdaftar (Brankas Penyimpan Emas Fisik)",
+          "Lembaga Kliring Berjangka (Pencatat mutasi hak milik)"
+        ],
+        chronology: [
+          "Siti menyetor dana Rp1.000.000 melalui virtual account aplikasi.",
+          "Aplikasi mengkreditkan saldo 0,85 gram emas ke portofolio Siti seketika.",
+          "Lembaga Kliring mencatat mutasi hak atas kuota emas fisik di brankas kustodian.",
+          "Siti berhak menjual kembali saldo emas secara real-time atau meminta cetak fisik lempengan riil."
+        ],
+        contractName: "Jual Beli Emas secara Tidak Tunai dengan Qabdh Hukmi",
+        contractIdeal: "Fatwa DSN-MUI No. 77/2010: Jual beli emas non-tunai mubah selama emas fisik ada pada penjual/kustodian berizin Bappebti dan harga tidak bertambah selama masa cicilan.",
+        moneyFlow: "Siti membayar tunai penuh Rp1.000.000 di muka via kanal pembayaran digital.",
+        ownershipFlow: "Emas fisik tersimpan di brankas kustodian; hak milik berpindah ke Siti melalui pencatatan saldo terpisah (segregated account).",
+        principles: [
+          {
+            arabic: "الْقَبْضُ الْحُكْمِيُّ كَالْقَبْضِ الْحِسِّيِّ",
+            translit: "Al-Qabdhu al-hukmiyyu kal-qabdhi al-hissiyyi",
+            translation: "Serah terima secara yuridis/sistem setara dengan serah terima secara fisik langsung.",
+            application: "Pencatatan saldo emas digital yang didukung alokasi emas fisik riil di kustodian memenuhi syarat taqabudh kontemporer."
+          }
+        ],
+        questions: [
+          "Apakah emas fisik 0,85 gram tersebut benar-benar dialokasikan 100% di brankas kustodian berizin Bappebti?",
+          "Apakah platform memiliki izin Pedagang Fisik Emas Digital dari Bappebti dan bekerjasama dengan Lembaga Kliring?",
+          "Berapa batas minimal dan rincian biaya cetak fisik jika konsumen ingin mengambil lempengan emas riil?"
+        ],
+        analysis: {
+          facts: [
+            "Pembelian tunai menghasilkan saldo gramasi emas seketika di aplikasi.",
+            "Pencetakan fisik memiliki syarat batas gramatur minimal dan ongkos cetak."
+          ],
+          assumptions: [
+            "Sebagian masyarakat mengira emas digital tidak boleh karena emas tidak langsung dipegang tangan saat transaksi."
+          ],
+          interpretations: [
+            "Fatwa DSN-MUI No. 77/2010 dan regulasi Bappebti No. 4/2019 menegaskan serah terima yuridis (qabdh hukmi) sah selama didukung emas fisik 1:1 di kustodian."
+          ],
+          conclusion: "Investasi emas digital sah secara syariah apabila platform berizin resmi, cadangan fisik 1:1 diaudit berkala, dan bukan skema perdagangan margin fiktif."
+        },
+        sources: ["dsnmui-77-2010", "bappebti-4-2019", "ojk-portal"],
+        limitations: "Audit fisik brankas dilakukan oleh otoritas Bappebti dan Lembaga Kliring, bukan oleh pengguna perorangan.",
+        lessons: [
+          "Pastikan platform berizin resmi Bappebti sebagai Pedagang Fisik Emas Digital.",
+          "Ketahui biaya penyimpanan (jika ada) dan ongkos cetak sebelum membeli.",
+          "Hindari platform yang menjanjikan imbal hasil tetap bulanan dari tabungan emas."
+        ],
+        exercise: {
+          q: "Kapan jual beli emas digital dianggap sah memenuhi syarat Qabdh Hukmi menurut syariah?",
+          opts: [
+            "Hanya jika lempengan emas langsung dikirim ke rumah di hari yang sama",
+            "Ketika saldo emas tercatat secara sah dan didukung 100% oleh cadangan emas fisik riil di kustodian berizin",
+            "Boleh tanpa cadangan emas fisik asalkan aplikasi memiliki banyak pengguna"
+          ],
+          correct: 1,
+          exp: "Tepat! Fatwa DSN-MUI No. 77/2010 dan Peraturan Bappebti No. 4/2019 mensyaratkan serah terima yuridis (Qabdh Hukmi) dengan kepastian cadangan fisik emas 100% di brankas kustodian resmi."
+        }
       },
       {
-        id: 2,
+        id: "dropshipping",
+        numericId: 2,
         category: "E-Commerce",
-        title: "Model Dropshipping Tanpa Hak Kepemilikan Barang",
-        story: "Budi membuat toko online. Ketika ada pesanan masuk, Budi baru memesankan barang ke supplier di kota lain dan meminta supplier mengirimkannya langsung atas nama Budi.",
-        analysis: "Jika Budi menjual barang seolah-olah barang itu miliknya padahal belum dibeli dan belum ada kesepakatan hak perwakilan (wakalah), transaksi ini melanggar larangan bai' ma laisa 'indak. Solusi syariahnya: Budi harus bertindak resmi sebagai agen/wakil pembeli (akad Wakalah bil Ujrah) atau menggunakan akad Salam.",
-        advice: "Jelaskan status secara jujur kepada pembeli bahwa kamu adalah perantara pemesanan resmi dari supplier atau beli terlebih dahulu stok barang tersebut."
+        title: "Model Dropshipping: Menjual Barang Sebelum Memiliki (Bai' Ma La Yamlik)",
+        notice: "Simulasi Edukasi Fiktif: Skenario ini disusun untuk tujuan literasi dan analisis kritis terhadap klausul muamalah digital, tidak merepresentasikan merek tertentu.",
+        story: "Budi membuat toko online di marketplace dengan memajang foto produk jaket kulit milik supplier grosir di kota lain tanpa izin keagenan resmi. Ketika ada pembeli memesan dan membayar Rp350.000, Budi baru memesankan barang ke supplier seharga Rp280.000 dan meminta paket dikirim atas nama toko Budi.",
+        parties: [
+          "Konsumen / Pembeli Akhir",
+          "Dropshipper (Budi - Penjual Perantara)",
+          "Supplier Grosir / Pemilik Stok Barang Riil",
+          "Platform Marketplace & Jasa Logistik Ekspedisi"
+        ],
+        chronology: [
+          "Budi mengunggah foto produk jaket kulit di marketplace dengan harga Rp350.000.",
+          "Pembeli membeli jaket dan mentransfer pembayaran Rp350.000 ke rekening marketplace.",
+          "Budi menghubungi supplier dan membeli jaket seharga Rp280.000 secara online.",
+          "Budi menginstruksikan supplier untuk mengirim jaket langsung ke alamat pembeli dengan label pengirim toko Budi.",
+          "Budi mengambil selisih margin keuntungan Rp70.000 tanpa menanggung risiko kerusakan barang."
+        ],
+        contractName: "Penjualan Barang yang Belum Dimiliki (Bai' Ma Laisa 'Indak) vs Wakalah bil Ujrah",
+        contractIdeal: "1. Akad Wakalah bil Ujrah: Budi menjadi agen perantara resmi supplier dengan komisi upah jasa (ujrah) yang transparan.\n2. Akad Salam: Jual beli pesanan di mana pembeli membayar lunas di depan dan Budi menanggung risiko pemenuhan spesifikasi barang.",
+        moneyFlow: "Pembeli mentransfer Rp350.000. Budi membayar Rp280.000 ke supplier.",
+        ownershipFlow: "Barang langsung dikirim dari supplier ke pembeli tanpa pernah masuk ke dalam kepemilikan maupun tanggungan risiko (dhaman) Budi.",
+        principles: [
+          {
+            arabic: "لَا تَبِعْ مَا لَيْسَ عِنْدَكَ",
+            translit: "La tabi' ma laisa 'indak",
+            translation: "Janganlah kamu menjual sesuatu yang tidak ada padamu / belum kamu miliki (HR. Abu Dawud).",
+            application: "Menjual barang milik pihak lain seolah-olah milik sendiri tanpa izin keagenan dilarang untuk mencegah gharar dan sengketa."
+          },
+          {
+            arabic: "الْخَرَاجُ بِالضَّمَانِ",
+            translit: "Al-Kharaju bid-dhaman",
+            translation: "Hak mendapatkan hasil sebanding dengan kesiapan menanggung risiko kerugian.",
+            application: "Keuntungan halal diperoleh jika penjual siap menanggung risiko retur/kerusakan barang jika terjadi cacat."
+          }
+        ],
+        questions: [
+          "Apakah penjual memiliki perjanjian keagenan resmi (Wakalah) dengan supplier pemilik barang?",
+          "Siapa yang menanggung risiko finansial jika barang rusak atau hilang di perjalanan ekspedisi?",
+          "Apakah pembeli mengetahui bahwa barang dikirim langsung dari supplier pihak ketiga?"
+        ],
+        analysis: {
+          facts: [
+            "Penjual belum memiliki barang saat akad jual beli dilakukan.",
+            "Tidak ada stok barang fisik pada penjual perantara.",
+            "Barang dikirim langsung oleh pihak ketiga (supplier) ke pembeli."
+          ],
+          assumptions: [
+            "Pembeli mengira penjual memiliki stok barang di gudangnya sendiri dan siap kirim seketika."
+          ],
+          interpretations: [
+            "Jika penjual bertindak sebagai penjual langsung (bukan wakil/agen), transaksi melanggar larangan bai' ma la yamlik.",
+            "Skema ini menjadi sah jika diubah menjadi akad Wakalah bil Ujrah (agen komisi) atau akad Salam (jual beli pesanan)."
+          ],
+          conclusion: "Model dropshipping tanpa izin supplier dan tanpa menanggung risiko barang bertentangan dengan kaidah muamalah. Dropshipper wajib membuat akad keagenan resmi (Wakalah) atau akad Salam."
+        },
+        sources: ["dsnmui-05-2000", "dsnmui-04-2000", "dsnmui-portal"],
+        limitations: "Dropshipping pada marketplace modern memiliki variasi fitur (seperti resi otomatis) yang perlu disesuaikan dengan akad keagenan tertulis.",
+        lessons: [
+          "Buat perjanjian keagenan resmi (Wakalah bil Ujrah) dengan supplier pemilik barang.",
+          "Berlaku jujur kepada konsumen mengenai asal pengiriman dan estimasi waktu sampai.",
+          "Siap menanggung risiko garansi pengembalian dana jika barang cacat atau tidak sesuai deskripsi."
+        ],
+        exercise: {
+          q: "Bagaimana solusi syariah agar bisnis dropshipping menjadi sah dan halal?",
+          opts: [
+            "Cukup merahasiakan identitas supplier agar pembeli tidak tahu",
+            "Menjadi agen resmi supplier dengan akad Wakalah bil Ujrah (komisi jasa) atau menanggung garansi penuh dengan akad Salam",
+            "Menaikkan harga setinggi-tingginya untuk menutupi biaya komisi"
+          ],
+          correct: 1,
+          exp: "Tepat! Fiqih muamalah memberikan solusi berupa akad Wakalah bil Ujrah (agen perantara resmi dengan komisi upah) atau akad Salam (pesanan dengan tanggung jawab spesifikasi penuh)."
+        }
       },
       {
-        id: 3,
+        id: "langganan",
+        numericId: 3,
         category: "Subscription",
-        title: "Free Trial Otomatis Berbayar Tanpa Konfirmasi Ulang",
-        story: "Dina mengaktifkan fitur coba gratis aplikasi editing selama 7 hari. Pada hari ke-8, kartu debitnya otomatis terpotong Rp 299.000 untuk langganan setahun penuh tanpa notifikasi persetujuan di muka.",
-        analysis: "Terdapat unsur ketidakjelasan (Gharar) mengenai waktu pemotongan dan minimnya klausul konfirmasi aktif (shighat persetujuan sukarela). Dalam transaksi sewa jasa (Ijarah), jangka waktu pemanfaatan dan kerelaan kedua belah pihak ('an taradhin) merupakan rukun keabsahan.",
-        advice: "Pasang alarm pengingat 2 hari sebelum free trial berakhir, atau gunakan virtual account sekali pakai untuk menghindari tagihan tersembunyi."
+        title: "Langganan Digital Otomatis: Batasan Ijarah & Risiko Gharar",
+        notice: "Simulasi Edukasi Fiktif: Skenario ini disusun untuk tujuan literasi dan analisis kritis terhadap klausul muamalah digital, tidak merepresentasikan merek tertentu.",
+        story: "Dina (23 tahun) mendaftar 'Uji Coba Gratis 14 Hari' aplikasi editing video dengan mengisi data kartu debit. Pada hari ke-15, saldo tabungannya terpotong otomatis Rp450.000 untuk langganan tahunan tanpa notifikasi persetujuan di muka, padahal Dina sudah tidak menggunakan aplikasi tersebut.",
+        parties: [
+          "Konsumen / Penyewa Manfaat (Dina)",
+          "Pengembang Aplikasi / Penyedia Layanan Software",
+          "Payment Gateway / Penerbit Kartu Pembayaran Otomatis"
+        ],
+        chronology: [
+          "Dina mengaktifkan fitur free trial 14 hari dengan memasukkan detail pembayaran.",
+          "Dina menggunakan aplikasi selama 5 hari lalu berhenti menggunakan dan menghapusnya.",
+          "Pada hari ke-15, payment gateway memotong Rp450.000 dari rekening tabungan Dina secara otomatis.",
+          "Dina mengajukan permohonan pengembalian dana (refund) namun ditolak berdasarkan klausul tersembunyi."
+        ],
+        contractName: "Ijarah Manfaat Jasa Digital Berulang (Recurring Ijarah Service)",
+        contractIdeal: "Akad Ijarah transparan di mana penyedia mengirimkan notifikasi pengingat 2-3 hari sebelum masa uji coba berakhir dan meminta persetujuan aktif (opt-in) perpanjangan.",
+        moneyFlow: "Rp450.000 didebit otomatis dari rekening Dina ke rekening penyedia layanan.",
+        ownershipFlow: "Dina menerima hak akses lisensi software selama 1 tahun, meskipun tidak berniat memanfaatkannya.",
+        principles: [
+          {
+            arabic: "إِلَّا أَنْ تَكُونَ تِجَارَةً عَنْ تَرَاضٍ مِنْكُمْ",
+            translit: "Illa an takuna tijaratan 'an taradhin minkum",
+            translation: "Kecuali dengan perniagaan yang berlaku atas dasar suka sama suka / kerelaan di antara kamu (QS. An-Nisa: 29).",
+            application: "Klausul penarikan dana otomatis tanpa notifikasi konfirmasi di muka mencederai rukun kerelaan dalam akad muamalah."
+          }
+        ],
+        questions: [
+          "Apakah klausul penagihan berulang disajikan secara jelas di muka sebelum konsumen memasukkan data kartu?",
+          "Apakah ada notifikasi peringatan sebelum masa gratis berakhir dan dana dipotong?",
+          "Seberapa mudah mekanisme pembatalan langganan bagi konsumen?"
+        ],
+        analysis: {
+          facts: [
+            "Promosi berlabel 'Uji Coba Gratis 14 Hari'.",
+            "Penarikan otomatis terjadi pada hari ke-15 sebesar Rp450.000 untuk durasi satu tahun penuh.",
+            "Tidak ada notifikasi pengingat sebelum tanggal pendebitan saldo."
+          ],
+          assumptions: [
+            "Konsumen mengira menghapus (uninstall) aplikasi otomatis membatalkan kewajiban langganan."
+          ],
+          interpretations: [
+            "Mengikat konsumen pada komitmen keuangan jangka panjang tanpa notifikasi aktif mengandung unsur gharar dan pemaksaan terselubung."
+          ],
+          conclusion: "Akad sewa manfaat (Ijarah) sah jika jadwal dan biaya disepakati sukarela. Penyedia wajib transparan dan memberikan opsi pembatalan yang mudah."
+        },
+        sources: ["dsnmui-112-2017", "ojk-portal", "bi-portal"],
+        limitations: "Kebijakan refund tunduk pada ketentuan toko aplikasi internasional (Apple App Store / Google Play Store).",
+        lessons: [
+          "Menghapus aplikasi tidak membatalkan langganan. Batalkan selalu lewat menu pengaturan akun.",
+          "Pasang pengingat di kalender 2 hari sebelum masa coba gratis berakhir.",
+          "Gunakan kartu virtual atau e-wallet dengan saldo terbatas untuk mencegah tagihan tak terduga."
+        ],
+        exercise: {
+          q: "Apa langkah pencegahan terbaik saat mendaftar fitur free trial aplikasi digital?",
+          opts: [
+            "Langsung menghapus aplikasi di layar utama HP setelah selesai mencoba",
+            "Mencatat tanggal berakhirnya free trial di kalender dan segera membatalkan langganan jika tidak berniat lanjut",
+            "Mengabaikan rincian tagihan karena mengira free trial selalu 100% gratis selamanya"
+          ],
+          correct: 1,
+          exp: "Tepat! Menghapus aplikasi dari layar HP tidak membatalkan langganan di sistem billing. Selalu pasang alarm pengingat dan batalkan secara manual melalui menu langganan akun."
+        }
+      },
+      {
+        id: "diskon-online",
+        numericId: 4,
+        category: "E-Commerce",
+        title: "Diskon Kilat (Flash Sale) & Manipulasi Urgensi Transaksi",
+        notice: "Simulasi Edukasi Fiktif: Skenario ini disusun untuk tujuan literasi dan analisis kritis terhadap klausul muamalah digital, tidak merepresentasikan merek tertentu.",
+        story: "Sebuah toko online menawarkan diskon 70% yang hanya berlaku 5 menit dengan timer hitung mundur. Rincian ongkir, biaya proteksi tambahan, dan kebijakan retur belum sempat diperiksa karena panik kehabisan kuota diskon.",
+        parties: ["Konsumen / Pembeli", "Toko Online / Penjual", "Platform E-Commerce"],
+        chronology: [
+          "Konsumen melihat barang diskon 70% dengan timer hitung mundur 5 menit.",
+          "Konsumen terburu-buru checkout tanpa membaca deskripsi kondisi barang.",
+          "Saat pembayaran, terdapat biaya asuransi proteksi yang dicentang otomatis.",
+          "Barang sampai dalam kondisi cacat minor dan toko menolak retur barang diskon."
+        ],
+        contractName: "Jual Beli Murabahah/Muthlaq dengan Batasan Khiyar Cacat",
+        contractIdeal: "Jual beli yang memenuhi rukun kejelasan objek dan menjamin hak khiyar aib (hak membatalkan akad jika barang cacat).",
+        moneyFlow: "Konsumen membayar total harga termasuk biaya asuransi otomatis.",
+        ownershipFlow: "Kepemilikan barang berpindah kepada pembeli.",
+        principles: [
+          {
+            arabic: "الْبَيِّعَانِ بِالْخِيَارِ مَا لَمْ يَتَفَرَّقَا",
+            translit: "Al-Bayyi'ani bil-khiyari ma lam yatafarraqa",
+            translation: "Penjual dan pembeli memiliki hak khiyar (memilih melanjutkan atau membatalkan) selama belum berpisah.",
+            application: "Penjual dilarang menghilangkan hak pembeli untuk menolak barang yang cacat (khiyar aib)."
+          }
+        ],
+        questions: [
+          "Apakah harga coret diskon mencerminkan harga riil atau kenaikan harga fiktif di awal?",
+          "Apakah ada biaya tambahan tersembunyi yang dicentang secara otomatis saat checkout?",
+          "Bagaimana syarat retur jika barang yang diterima rusak?"
+        ],
+        analysis: {
+          facts: ["Diskon besar 70% disertai hitung mundur urgensi.", "Adanya centang otomatis biaya tambahan."],
+          assumptions: ["Konsumen mengasumsikan barang pasti original dan bebas cacat."],
+          interpretations: ["Manipulasi harga dan peniadaan hak khiyar aib mencederai asas keadilan syariah."],
+          conclusion: "Urgensi buatan tidak boleh menggantikan kehati-hatian dalam meneliti barang dan rincian harga akhir."
+        },
+        sources: ["ojk-portal", "bi-portal"],
+        limitations: "Kebijakan promo dan retur ditentukan oleh aturan operasional masing-masing marketplace.",
+        lessons: [
+          "Jangan biarkan timer hitung mundur mematikan nalar kritis.",
+          "Periksa kembali seluruh komponen biaya sebelum memasukkan PIN pembayaran.",
+          "Pastikan toko memiliki garansi pengembalian barang jika terdapat cacat."
+        ],
+        exercise: {
+          q: "Apa tindakan paling bijak saat melihat diskon kilat dengan hitung mundur cepat?",
+          opts: [
+            "Langsung klik bayar secepatnya tanpa membaca rincian biaya akhir",
+            "Tetap tenang, periksa rincian biaya akhir, ulasan pembeli, dan syarat garansi sebelum membayar",
+            "Meminjam dana PayLater agar tidak ketinggalan promo"
+          ],
+          correct: 1,
+          exp: "Tepat! Urgensi waktu promo sering kali digunakan untuk memicu keputusan impulsif. Tetap teliti rincian harga akhir dan reputasi penjual."
+        }
+      },
+      {
+        id: "donasi",
+        numericId: 5,
+        category: "Sosial",
+        title: "Donasi & Penggalangan Dana Digital: Verifikasi Legalitas Penyalur",
+        notice: "Simulasi Edukasi Fiktif: Skenario ini disusun untuk tujuan literasi dan analisis kritis terhadap klausul muamalah digital, tidak merepresentasikan merek tertentu.",
+        story: "Ajakan donasi kemanusiaan beredar di grup percakapan dengan foto menyentuh dan nomor rekening perorangan. Laporan penyaluran dan bukti izin pengumpulan dana tidak tercantum.",
+        parties: ["Donatur / Muzakki", "Penyelenggara Penggalangan Dana", "Penerima Manfaat (Mustahiq)"],
+        chronology: [
+          "Pesan donasi disebarkan massal di grup obrolan.",
+          "Donatur tergerak emosi dan ingin berdonasi Rp100.000.",
+          "Rekening tujuan merupakan rekening pribadi bukan yayasan resmi berizin.",
+          "Tidak ada laporan pertanggungjawaban penyaluran dana yang dapat diakses publik."
+        ],
+        contractName: "Hibah / Tabarru' dan Wakalah Penyaluran Dana Sosial",
+        contractIdeal: "Akad Tabarru' yang difasilitasi oleh Lembaga Amil Zakat (LAZ) resmi berizin dengan tata kelola amanah dan pelaporan transparan.",
+        moneyFlow: "Donatur mentransfer dana ke rekening penampung.",
+        ownershipFlow: "Dana berpindah kepemilikan menjadi hak penerima manfaat yang berhak (mustahiq).",
+        principles: [
+          {
+            arabic: "إِنَّ اللَّهَ يَأْمُرُكُمْ أَنْ تُؤَدُّوا الْأَمَانَاتِ إِلَى أَهْلِهَا",
+            translit: "Innallaha ya'murukum an tu'addul amanati ila ahliha",
+            translation: "Sesungguhnya Allah menyuruh kamu menyampaikan amanat kepada yang berhak menerimanya (QS. An-Nisa: 58).",
+            application: "Pengelola dana sosial wajib memegang teguh amanah penyaluran secara tepat sasaran."
+          }
+        ],
+        questions: [
+          "Apakah lembaga penyelenggara memiliki izin resmi dari Kemensos / BAZNAS / Kemenag?",
+          "Berapa persentase potongan hak operasional yang diambil oleh platform penggalang dana?",
+          "Apakah tersedia laporan pertanggungjawaban publik mengenai realisasi penyaluran dana?"
+        ],
+        analysis: {
+          facts: ["Penggalangan menggunakan rekening pribadi.", "Tidak ada bukti izin resmi."],
+          assumptions: ["Masyarakat sering berasumsi bahwa niat baik berdonasi pasti sampai ke penerima yang benar."],
+          interpretations: ["Menyalurkan dana kepada perantara tanpa verifikasi berisiko disalahgunakan dan memakan harta batil."],
+          conclusion: "Niat beramal harus dibarengi kecermatan tabayyun memilih lembaga penyalur resmi yang akuntabel."
+        },
+        sources: ["ojk-portal", "bi-portal"],
+        limitations: "Aplikasi ini tidak menyediakan fitur donasi langsung dan tidak mengaudit yayasan sosial secara mandiri.",
+        lessons: [
+          "Salurkan donasi dan zakat melalui LAZ/BAZNAS berizin resmi.",
+          "Hindari mentransfer donasi publik ke rekening bank pribadi tanpa legalitas jelas.",
+          "Minta bukti setor donasi atau pantau laporan berkala program penyaluran."
+        ],
+        exercise: {
+          q: "Apa langkah paling tepat saat ingin berdonasi secara digital?",
+          opts: [
+            "Langsung transfer ke nomor rekening mana pun yang ada di poster media sosial",
+            "Memverifikasi legalitas izin lembaga penyalur (BAZNAS/Kemensos) dan memastikan rekening tujuan atas nama lembaga resmi",
+            "Mengabaikan laporan penyaluran karena yang penting sudah berniat"
+          ],
+          correct: 1,
+          exp: "Tepat! Menyalurkan dana melalui lembaga resmi berizin menjamin akuntabilitas penyaluran dan memastikan dana sampai kepada mustahiq yang berhak."
+        }
+      },
+      {
+        id: "tabungan-digital",
+        numericId: 6,
+        category: "PayLater",
+        title: "Tabungan Digital: Membedakan Akad Wadi'ah dan Mudharabah",
+        notice: "Simulasi Edukasi Fiktif: Skenario ini disusun untuk tujuan literasi dan analisis kritis terhadap klausul muamalah digital, tidak merepresentasikan merek tertentu.",
+        story: "Dua aplikasi bank digital menawarkan produk tabungan dengan tampilan modern. Aplikasi A menawarkan 'bunga harian 6%', sedangkan Aplikasi B menawarkan 'bagi hasil nisbah 30:70 dengan akad Mudharabah'.",
+        parties: ["Nasabah / Shahibul Maal", "Bank Syariah Digital / Mudharib", "Dewan Pengawas Syariah (DPS)"],
+        chronology: [
+          "Nasabah membuka rekening via aplikasi bank digital.",
+          "Nasabah memilih jenis rekening simpanan harian atau deposito digital.",
+          "Sistem menyajikan lembar akad digital (Wadi'ah titipan atau Mudharabah bagi hasil).",
+          "Imbal hasil dibagikan berdasarkan keuntungan riil penyaluran pembiayaan bank, bukan bunga berbunga."
+        ],
+        contractName: "Wadi'ah Yad Dhamanah (Titipan Bergaransi) / Mudharabah Muthlaqah (Bagi Hasil)",
+        contractIdeal: "Fatwa DSN-MUI No. 116/2017 dan standar perbankan syariah OJK.",
+        moneyFlow: "Dana nasabah disimpan pada rekening bank syariah dan disalurkan ke sektor riil halal.",
+        ownershipFlow: "Nasabah memegang hak kepemilikan dana; bank bertanggung jawab menjamin keutuhan pokok titipan.",
+        principles: [
+          {
+            arabic: "الرِّبْحُ عَلَى مَا شَرَطَا وَالْوَضِيعَةُ عَلَى قَدْرِ الْمَالِ",
+            translit: "Ar-Ribhu 'ala ma syaratha wal-wadhi'atu 'ala qadril-maal",
+            translation: "Keuntungan dibagi sesuai kesepakatan nisbah, sedangkan kerugian modal ditanggung pemilik modal.",
+            application: "Pada akad Mudharabah, hasil keuntungan dibagi berdasarkan nisbah, bukan jaminan nominal pasti di muka."
+          }
+        ],
+        questions: [
+          "Akad apa yang digunakan: apakah Wadi'ah (titipan murni tanpa janji bunga) atau Mudharabah (bagi hasil riil)?",
+          "Siapa Dewan Pengawas Syariah (DPS) yang mengawasi operasional bank digital tersebut?",
+          "Apakah bank terdaftar sebagai peserta penjaminan Lembaga Penjamin Simpanan (LPS)?"
+        ],
+        analysis: {
+          facts: ["Aplikasi syariah menggunakan akad Wadi'ah/Mudharabah.", "Tidak ada jaminan bunga tetap yang dipatok di muka."],
+          assumptions: ["Banyak masyarakat mengira semua tabungan bank sama saja."],
+          interpretations: ["Bunga pasti di muka atas simpanan uang merupakan riba qardh yang diharamkan."],
+          conclusion: "Tabungan syariah digital memisahkan secara tegas antara titipan murni dan investasi bagi hasil riil."
+        },
+        sources: ["dsnmui-116-2017", "ojk-portal", "bi-portal"],
+        limitations: "Tingkat imbal hasil nisbah masa lalu tidak mencerminkan jaminan kepastian hasil masa depan.",
+        lessons: [
+          "Pilih akad Wadi'ah jika membutuhkan rekening transaksi harian yang aman dan likuid.",
+          "Pilih akad Mudharabah jika ingin menginvestasikan dana dengan skema bagi hasil.",
+          "Pastikan bank digital berizin OJK dan memiliki rekomendasi DPS DSN-MUI."
+        ],
+        exercise: {
+          q: "Apa perbedaan mendasar antara tabungan berbunga konvensional dengan tabungan Mudharabah syariah?",
+          opts: [
+            "Tabungan konvensional menjanjikan bunga pasti atas utang simpanan, sedangkan tabungan Mudharabah membagi hasil dari keuntungan riil pembiayaan bank",
+            "Tidak ada perbedaan, keduanya sama-sama menghasilkan uang tambahan",
+            "Tabungan syariah tidak boleh ditarik uangnya sewaktu-waktu"
+          ],
+          correct: 0,
+          exp: "Tepat! Bunga konvensional dipatok di muka sebagai tambahan atas uang simpanan (riba), sedangkan tabungan syariah Mudharabah membagikan nisbah keuntungan riil usaha yang dikelola bank."
+        }
       }
     ];
 
-    // --- Learning Hub Dataset ---
+    // --- Learning Hub Dataset (9 Modul Edukasi Terstruktur) ---
     const lessonsData = [
       {
-        id: 0,
-        title: "Perbedaan Esensial Murabahah vs Pinjaman Berbunga",
+        id: "akad-transaksi-digital",
+        numericId: 0,
+        title: "Apa itu akad dalam transaksi digital?",
         cat: "Akad",
         categoryTag: "AKAD JUAL BELI",
         time: "5 menit",
-        fatwa: "Fatwa DSN-MUI No. 04/DSN-MUI/IV/2000",
-        desc: "Memahami mengapa margin laba dalam jual beli riil sah secara syariah, sementara tambahan uang atas utang diharamkan.",
-        body: `<p>Banyak masyarakat mengira akad <strong>Murabahah</strong> pada perbankan syariah sama persis dengan kredit berbunga di bank konvensional karena sama-sama menghasilkan cicilan bulanan. Padahal, secara substansi hukum terdapat perbedaan fundamental:</p>
-        <br>
-        <p><strong>1. Keberadaan Objek Transaksi (Real Asset Underlying):</strong><br>
-        Dalam Murabahah, bank syariah bertindak sebagai penjual barang riil. Bank membeli komoditas tersebut dari pemasok, memilikinya secara sah, lalu menjualnya kembali kepada nasabah dengan harga pokok ditambah margin keuntungan yang disepakati di muka. Keuntungan berasal dari selisih jual beli, bukan bunga atas sewa uang.</p>
-        <br>
-        <p><strong>2. Kepastian Nilai Tidak Bertambah:</strong><br>
-        Begitu akad Murabahah ditandatangani, total harga tidak boleh bertambah meskipun suku bunga pasar naik. Pada kredit konvensional, beban bunga bisa berubah (floating rate) dan denda keterlambatan menghasilkan bunga majemuk (compound interest).</p>`
+        fatwa: "Fatwa DSN-MUI No. 04/2000 & No. 111/2017",
+        desc: "Memahami mengapa struktur perjanjian dan kewajiban para pihak penting untuk dipelajari sebelum checkout.",
+        intro: "Di era belanja serba satu klik, perjanjian hukum sering kali tereduksi menjadi sekadar mencentang kotak 'Saya menyetujui Syarat & Ketentuan'. Padahal, di balik tombol tersebut terdapat kesepakatan akad yang mengikat hak, kewajiban, dan konsekuensi hukum finansialmu.",
+        objectives: [
+          "Memahami hakikat akad sebagai penentu hak dan kewajiban hukum dalam muamalah.",
+          "Mengenali perbedaan struktur akad (Murabahah, Ijarah, Qardh, Wakalah) pada aplikasi digital.",
+          "Mampu mengidentifikasi klausul akad sebelum menekan tombol persetujuan digital."
+        ],
+        concept: "Dalam kaidah fiqih 'al-Ibratu fil 'uqud lil-maqashid wal-ma'ani la lil-alfazh wal-mabani' (yang menjadi patokan dalam akad adalah maksud dan substansinya, bukan sekadar kata-kata dan bentuk lahiriahnya). Nama produk di layar boleh berupa promo modern, namun keabsahan transaksinya diukur dari akad pokok yang melandasinya.",
+        example: "Pada pembelian barang secara cicilan di marketplace: jika penyedia membeli barang terlebih dahulu lalu menjualnya kepadamu dengan margin keuntungan tetap, akadnya adalah Murabahah. Jika penyedia hanya meminjamkan uang tunai berbunga untuk membayar belanjaanmu, itu adalah pinjaman ribawi.",
+        body: [
+          "Akad adalah kesepakatan antara para pihak yang menentukan hak dan kewajiban masing-masing. Dalam transaksi digital, akad sering muncul dalam bentuk syarat dan ketentuan yang disetujui dengan satu ketukan tombol.",
+          "Dua transaksi yang terlihat mirip di layar bisa memiliki struktur yang berbeda: misalnya jual beli, sewa, pembiayaan, atau layanan berbasis imbalan jasa. Nama produk yang sama tidak otomatis berarti struktur yang sama.",
+          "Karena itu pertanyaan pertama yang berguna adalah: apa sebenarnya yang sedang terjadi, siapa pihaknya, dan apa kewajiban saya? Jika jawabannya belum jelas, itu tanda untuk berhenti sejenak dan bertanya."
+        ],
+        keyPoints: [
+          "Akad menentukan hak dan kewajiban para pihak.",
+          "Nama produk yang sama bisa memiliki struktur berbeda secara substansi.",
+          "Baca syarat dan ketentuan sebelum menyetujui transaksi."
+        ],
+        sources: ["dsnmui-04-2000", "dsnmui-111-2017", "dsnmui-portal"],
+        furtherReading: [
+          { title: "Fatwa DSN-MUI No. 04/2000 tentang Murabahah", url: "https://dsnmui.or.id" },
+          { title: "Fatwa DSN-MUI No. 111/2017 tentang Akad Jual Beli Murabahah", url: "https://dsnmui.or.id" }
+        ],
+        relatedIds: ["pembiayaan-digital", "transparansi-biaya", "sumber-tepercaya"],
+        limitations: "Penjelasan modul ini bersifat edukasi konsep fiqih umum, bukan verifikasi hukum atas aplikasi spesifik."
       },
       {
-        id: 1,
-        title: "Transparansi Biaya & Denda Keterlambatan dalam Fiqih",
+        id: "transparansi-biaya",
+        numericId: 1,
+        title: "Transparansi biaya, denda keterlambatan, dan ganti rugi",
         cat: "Fintech",
         categoryTag: "FINTECH & DENDA",
         time: "4 menit",
         fatwa: "Fatwa DSN-MUI No. 17/2000 (Ta'zir) & No. 43/2004 (Ta'widh)",
-        desc: "Membedakan sanksi sosial (ta'zir), ganti rugi riil (ta'widh), dan batasan regulasi POJK 40/2024.",
-        body: `<p>Dalam akad syariah, nasabah yang mampu namun sengaja menunda pembayaran kewajibannya dapat dikenakan sanksi finansial (Ta'zir) agar tidak meremehkan akad. Namun, ada aturan ketat:</p>
-        <br>
-        <p><strong>1. Pos Dana Kebajikan (Fatwa DSN-MUI No. 17/2000):</strong><br>
-        Seluruh penerimaan denda ta'zir <em>wajib disalurkan 100% untuk kepentingan sosial</em> (dana kebajikan fakir miskin atau kemaslahatan umat). Lembaga syariah dilarang mengakuinya sebagai keuntungan atau pendapatan operasional perusahaan.</p>
-        <br>
-        <p><strong>2. Ganti Rugi Riil (Fatwa DSN-MUI No. 43/2004 - Ta'widh):</strong><br>
-        Jika keterlambatan nasabah menimbulkan kerugian riil yang bisa dihitung secara pasti (real cost incurred), kreditur hanya boleh meminta penggantian biaya riil tersebut, bukan margin bunga spekulatif.</p>
-        <br>
-        <p><strong>3. Batasan Regulasi OJK (POJK No. 40/2024 & SEOJK No. 19/2023):</strong><br>
-        Regulasi OJK terbaru membatasi batas manfaat ekonomi harian dan membatasi total akumulasi denda maksimal 100% dari nilai pokok pendanaan.</p>`
+        desc: "Cara membedakan biaya operasional riil, sanksi finansial (ta'zir), dan ganti rugi (ta'widh).",
+        intro: "Banyak pengguna fintech terjebak utang menumpuk akibat ketidaktahuan atas rincian biaya tersembunyi dan denda harian yang berlipat ganda. Modul ini membongkar batas syariah antara ganti rugi riil yang diperbolehkan dan denda ribawi yang dilarang keras.",
+        objectives: [
+          "Membedakan konsep sanksi keterlambatan (ta'zir) dalam Fatwa 17/2000 dengan ganti rugi riil (ta'widh) dalam Fatwa 43/2004.",
+          "Mengetahui batasan regulasi OJK terbaru mengenai batas manfaat ekonomi dan denda pada fintech pendanaan.",
+          "Menghindari jebakan denda berlipat ganda yang berpotensi menjadi Riba Nasi'ah."
+        ],
+        concept: "Dalam syariah, denda keterlambatan tidak boleh menjadi sumber laba atau pendapatan kreditur. Fatwa DSN-MUI No. 17/2000 membolehkan sanksi (ta'zir) pada nasabah mampu yang menunda pembayaran HANYA JIKA disalurkan 100% untuk dana sosial kebajikan. Sementara itu, Fatwa DSN-MUI No. 43/2004 mengatur ganti rugi (ta'widh) yang hanya boleh menutupi kerugian riil operasional yang pasti timbul.",
+        example: "Jika sebuah aplikasi menetapkan denda Rp50.000 atas keterlambatan, periksa apakah dana denda tersebut masuk ke rekening keuntungan perusahaan (ini berpotensi riba) atau disalurkan ke pos kebajikan sosial yang diawasi DPS.",
+        body: [
+          "Transparansi berarti informasi penting dapat ditemukan dan dipahami sebelum kamu setuju: harga akhir, biaya tambahan, denda keterlambatan, jadwal pembayaran, dan cara membatalkan.",
+          "Waspadai urgensi buatan seperti hitung mundur promo yang mendorong keputusan cepat. Tekanan waktu bukan alasan untuk melewatkan pemeriksaan.",
+          "Simpan bukti syarat, tangkapan layar rincian biaya, dan komunikasi dengan penyedia. Bila ada bagian yang tidak jelas, minta penjelasan tertulis."
+        ],
+        keyPoints: [
+          "Cek harga akhir, biaya operasional riil, dan alur dana denda.",
+          "Denda ta'zir wajib disalurkan untuk dana sosial, bukan pendapatan perusahaan.",
+          "Simpan bukti dan minta penjelasan tertulis sebelum transaksi."
+        ],
+        sources: ["dsnmui-17-2000", "dsnmui-43-2004", "ojk-pojk-40-2024", "ojk-seojk-19-2023"],
+        furtherReading: [
+          { title: "Fatwa DSN-MUI No. 17/2000 tentang Sanksi Ta'zir", url: "https://dsnmui.or.id" },
+          { title: "Fatwa DSN-MUI No. 43/2004 tentang Ganti Rugi Ta'widh", url: "https://dsnmui.or.id" },
+          { title: "SEOJK No. 19/SEOJK.06/2023 tentang Manfaat Ekonomi LPBBTI", url: "https://ojk.go.id" }
+        ],
+        relatedIds: ["pembiayaan-digital", "akad-transaksi-digital", "langganan-digital-ijarah"],
+        limitations: "Aplikasi tidak menghitungkan besaran kerugian riil spesifik setiap sengketa konsumen."
       },
       {
-        id: 2,
-        title: "Syarat Sah Qabdh Hukmi pada Tabungan Emas Digital",
-        cat: "Investasi",
-        categoryTag: "INVESTASI EMAS",
-        time: "6 menit",
-        fatwa: "Fatwa DSN-MUI No. 77/DSN-MUI/V/2010",
-        desc: "Bagaimana hukum membeli emas melalui saldo aplikasi tanpa menerima lempengan fisik seketika.",
-        body: `<p>Jual beli emas (Sharf) dalam fiqih aslinya mensyaratkan tunai dan serah terima seketika di majelis akad (Yadan bi Yadin). Lalu bagaimana dengan aplikasi tabungan emas modern?</p>
-        <br>
-        <p>Para ulama kontemporer di DSN-MUI menetapkan bahwa transaksi emas digital diperbolehkan dengan ketentuan:</p>
-        <br>
-        <p>1. Penyerahan dapat bersifat yuridis (<strong>Qabdh Hukmi</strong>), yaitu pembeli secara hukum dan sistem telah menerima kepemilikan saldo emas yang tertera di sertifikat digitalnya.</p>
-        <p>2. Emas fisiknya <strong>wajib benar-benar ada</strong> di brankas kustodian resmi dalam jumlah minimal setara dengan total saldo seluruh nasabah (bukan skema fractional reserve atau margin trading tanpa emas fisik).</p>
-        <p>3. Nasabah memiliki hak mutlak untuk mencetak emas fisiknya kapan saja sesuai batasan gramasi standar.</p>`
-      },
-      {
-        id: 3,
-        title: "Anatomi Riba, Gharar, dan Maysir dalam Transaksi Digital",
+        id: "sumber-tepercaya",
+        numericId: 2,
+        title: "Memeriksa sumber keuangan yang tepercaya",
         cat: "Dasar",
         categoryTag: "PRINSIP DASAR",
+        time: "3 menit",
+        fatwa: "Portal OJK, BI, dan DSN-MUI",
+        desc: "Membedakan dokumen hukum resmi, izin otoritas, promosi marketing, dan opini media sosial.",
+        intro: "Di tengah membanjirnya promosi influencer finansial dan klaim sepihak di media sosial, kemampuan verifikasi (tabayyun) adalah benteng utama menjaga keamanan finansial dan kehalalan muamalah keluarga.",
+        objectives: [
+          "Mampu memverifikasi legalitas entitas finansial melalui portal resmi OJK dan Bank Indonesia.",
+          "Memahami hierarki bobot sumber: dokumen hukum resmi vs iklan promosi media sosial.",
+          "Mengetahui tanggal pembaruan regulasi hukum agar tidak berpedoman pada peraturan yang telah dicabut."
+        ],
+        concept: "Prinsip tabayyun (verifikasi teliti) diperintahkan dalam Al-Qur'an (QS. Al-Hujurat: 6). Dalam muamalah digital, tabayyun dilakukan dengan memverifikasi izin entitas ke OJK/BI dan mencocokkan akad ke fatwa DSN-MUI.",
+        example: "Sebelum menyetor dana ke aplikasi investasi berlabel syariah, cek nama perusahaannya di daftar penyelenggara berizin di situs ojk.go.id, bukan sekadar percaya pada logo OJK yang ditempel di banner iklan.",
+        body: [
+          "Tidak semua informasi setara. Dokumen resmi penyedia, publikasi regulator, dan fatwa dari lembaga yang berwenang memiliki bobot berbeda dari iklan, komentar anonim, atau opini di media sosial.",
+          "Untuk memeriksa legalitas penyelenggara layanan keuangan di Indonesia, gunakan situs resmi regulator seperti OJK dan Bank Indonesia. Untuk rujukan syariah, baca fatwa pada situs resmi DSN-MUI atau tanyakan kepada pihak yang kompeten.",
+          "Periksa juga tanggal informasi: ketentuan dapat berubah, sehingga sumber yang lama perlu dicek ulang."
+        ],
+        keyPoints: [
+          "Utamakan dokumen resmi dan portal regulator.",
+          "Iklan dan ulasan influencer bukan jaminan legalitas syariah.",
+          "Periksa status keberlakuan dokumen rujukan."
+        ],
+        sources: ["ojk-portal", "bi-portal", "dsnmui-portal"],
+        furtherReading: [
+          { title: "Pusat Edukasi Konsumen OJK (Sikapi Uangmu)", url: "https://sikapiuangmu.ojk.go.id" }
+        ],
+        relatedIds: ["akad-transaksi-digital", "layanan-keuangan-syariah", "risiko-investasi"],
+        limitations: "Izin OJK menjamin legalitas operasional, namun kesesuaian syariah produk diverifikasi oleh DPS."
+      },
+      {
+        id: "layanan-keuangan-syariah",
+        numericId: 3,
+        title: "Mengenal layanan keuangan syariah digital",
+        cat: "Fintech",
+        categoryTag: "FINTECH & DOMPET",
+        time: "6 menit",
+        fatwa: "Fatwa DSN-MUI No. 116/DSN-MUI/IX/2017",
+        desc: "Pertanyaan awal untuk memahami struktur uang elektronik, e-wallet, dan bank digital syariah.",
+        intro: "Transformasi perbankan syariah dan dompet digital syariah menghadirkan kemudahan transaksi tanpa uang tunai. Bagaimana fikih memandang saldo uang elektronik, kartu debit syariah, dan sistem pembayaran QRIS?",
+        objectives: [
+          "Memahami akad penempatan dana uang elektronik syariah menurut Fatwa DSN-MUI No. 116/2017.",
+          "Mengenali peran Dewan Pengawas Syariah (DPS) pada bank dan fintech digital.",
+          "Mengetahui perbedaan perlakuan saldo titipan (Wadi'ah) dan investasi bagi hasil (Mudharabah)."
+        ],
+        concept: "Layanan keuangan syariah digital beroperasi di bawah pengawasan ganda: OJK/BI untuk kepatuhan regulasi finansial nasional, dan Dewan Pengawas Syariah (DPS) yang direkomendasikan DSN-MUI untuk kepatuhan syariah.",
+        example: "Pada e-wallet syariah, dana mengendap (float fund) ditempatkan pada rekening giro wadiah di bank syariah dan tidak dibungakan, serta tidak digunakan untuk membiayai bisnis haram.",
+        body: [
+          "Layanan keuangan yang menyebut dirinya syariah biasanya menjelaskan akad yang dipakai dan berada di bawah pengawasan dewan pengawas syariah. Namun klaim di iklan tetap perlu diperiksa pada dokumen produknya.",
+          "Pertanyaan awal yang membantu: akad apa yang dipakai untuk produk ini? Siapa dewan pengawas syariahnya? Apa biaya dan ketentuan yang berlaku? Di mana dokumen resminya?",
+          "Untuk uang elektronik dan produk pembayaran digital, terdapat fatwa DSN-MUI tersendiri yang bisa dibaca sebagai rujukan. Aplikasi ini tidak menyimpulkan apakah produk tertentu sesuai syariah."
+        ],
+        keyPoints: [
+          "Tanyakan akad yang dipakai dan siapa pengawas syariahnya.",
+          "Klaim di iklan perlu dicek pada dokumen produk.",
+          "Baca fatwa terkait langsung di situs resmi."
+        ],
+        sources: ["dsnmui-116-2017", "dsnmui-portal", "ojk-portal", "bi-portal"],
+        furtherReading: [
+          { title: "Fatwa DSN-MUI No. 116/2017 tentang Uang Elektronik Syariah", url: "https://dsnmui.or.id" }
+        ],
+        relatedIds: ["transparansi-biaya", "pembiayaan-digital", "sumber-tepercaya"],
+        limitations: "Status syariah produk diterbitkan oleh otoritas terkait, bukan oleh aplikasi ini."
+      },
+      {
+        id: "zisw-digital",
+        numericId: 4,
+        title: "Zakat, infak, sedekah, dan wakaf digital",
+        cat: "Sosial",
+        categoryTag: "KEUANGAN SOSIAL",
         time: "5 menit",
-        fatwa: "Kompilasi Hukum Ekonomi Syariah (KHES)",
-        desc: "Memahami 3 pilar larangan muamalah dan cara mengidentifikasinya pada aplikasi sehari-hari.",
-        body: `<p>Tiga penyakit utama yang merusak keabsahan transaksi ekonomi dalam Islam adalah:</p>
-        <br>
-        <p><strong>• Riba:</strong> Tambahan tanpa imbalan pengganti yang disyaratkan dalam utang piutang atau pertukaran barang ribawi sejenis yang tidak sama takaran/timbangannya.</p>
-        <p><strong>• Gharar:</strong> Ketidakjelasan atau ketidakpastian ekstrem mengenai kualitas, kuantitas, harga, atau waktu penyerahan barang yang memicu kerugian sepihak.</p>
-        <p><strong>• Maysir:</strong> Perjudian atau taruhan di mana keuntungan satu pihak diperoleh semata-mata dari kerugian pihak lain yang bertransaksi atas hasil untung-untungan.</p>`
+        fatwa: "Regulasi Kemenag & Badan Wakaf Indonesia",
+        desc: "Memeriksa tujuan donasi, pengelola berizin BAZNAS/BWI, kanal pembayaran, dan laporan penyaluran.",
+        intro: "Platform penggalangan dana dan donasi digital mempermudah beramal jariyah dalam hitungan detik. Namun, konsumen perlu berhati-hati memastikan lembaga amil/nazhir memiliki izin resmi dan laporan penyaluran yang akuntabel.",
+        objectives: [
+          "Memahami syarat sah serah terima donasi dan wakaf uang secara digital.",
+          "Mampu memverifikasi izin lembaga amil zakat (BAZNAS/LAZ resmi) dan Badan Wakaf Indonesia (BWI).",
+          "Menghindari penggalangan dana ilegal berkedok donasi keagamaan."
+        ],
+        concept: "Penyaluran zakat dan wakaf uang memiliki aturan fiqih yang ketat mengenai mustahiq (penerima berhak) dan kekekalan pokok wakaf (nazhir wajib menjaga pokok aset wakaf).",
+        example: "Saat berwakaf uang secara digital, pastikan platform terafiliasi dengan Lembaga Keuangan Syariah Penerima Wakaf Uang (LKS-PWU) yang ditunjuk Menteri Agama dan terdaftar di BWI.",
+        body: [
+          "Ajakan donasi di media sosial semakin mudah dibuat, sehingga verifikasi menjadi penting. Periksa siapa penyelenggaranya, apakah identitasnya dapat dihubungi, dan ke rekening atas nama siapa dana dikirim.",
+          "Lembaga pengelola yang kredibel biasanya menyampaikan laporan penyaluran secara berkala. Jika informasi penyaluran tidak ada atau samar, tanyakan atau cari penyelenggara lain yang lebih transparan.",
+          "Gunakan kanal resmi penyelenggara, bukan tautan yang diterima dari pesan berantai, untuk menghindari penipuan."
+        ],
+        keyPoints: [
+          "Verifikasi identitas penyelenggara dan rekening tujuan.",
+          "Cari laporan penyaluran dana berkala.",
+          "Gunakan kanal resmi LAZ/BWI terdaftar."
+        ],
+        sources: ["ojk-portal", "bi-portal"],
+        furtherReading: [
+          { title: "Portal Resmi Badan Wakaf Indonesia (BWI)", url: "https://www.bwi.go.id" }
+        ],
+        relatedIds: ["sumber-tepercaya", "akad-transaksi-digital"],
+        limitations: "Aplikasi ini tidak mengumpulkan atau menyalurkan dana zakat/wakaf apa pun."
+      },
+      {
+        id: "risiko-investasi",
+        numericId: 5,
+        title: "Memahami risiko investasi dan emas digital",
+        cat: "Investasi",
+        categoryTag: "INVESTASI & EMAS",
+        time: "5 menit",
+        fatwa: "Fatwa DSN-MUI No. 77/2010 & Bappebti 4/2019",
+        desc: "Kenali syarat qabdh hukmi emas digital, kustodian fisik 100%, dan mitigasi spekulasi.",
+        intro: "Emas merupakan aset pelindung nilai terfavorit masyarakat. Aplikasi tabungan emas digital menjanjikan kemudahan membeli emas mulai dari Rp10.000. Bagaimana keabsahan serah terima saldo emas digital tanpa memegang emas batangan fisik?",
+        objectives: [
+          "Memahami ketentuan Fatwa DSN-MUI No. 77/2010 tentang jual beli emas secara tidak tunai.",
+          "Mengetahui syarat Qabdh Hukmi (serah terima yuridis) dan keberadaan emas fisik nyata di kustodian berizin Bappebti.",
+          "Membedakan investasi emas komoditas nyata dengan perdagangan margin emas fiktif/spekulatif."
+        ],
+        concept: "Emas dikategorikan sebagai komoditas ribawi dalam sabda Nabi SAW. Transaksinya wajib memenuhi kaidah penyerahan yang jelas. Fatwa DSN-MUI No. 77/2010 membolehkan jual beli emas non-tunai dengan syarat harga tetap dan emas fisiknya nyata ada serta dapat dicetak kapan saja.",
+        example: "Ketika kamu membeli 1 gram emas digital, saldo emas bertambah di aplikasi dan di saat yang sama pihak kustodian (seperti Antam atau Pegadaian) mengalokasikan 1 gram emas fisik riil di brankas terdaftar.",
+        body: [
+          "Sebelum menaruh dana pada produk investasi, termasuk emas digital, pahami bagaimana kepemilikan dicatat, di mana aset disimpan, apa biaya transaksi dan penyimpanan, serta bagaimana cara menarik atau menjual kembali.",
+          "Harga dapat naik dan turun. Jangan mengandalkan janji imbal hasil pasti atau popularitas aplikasi sebagai satu-satunya dasar keputusan.",
+          "Untuk pembelian emas secara tidak tunai terdapat fatwa DSN-MUI tersendiri yang membahas ketentuannya; bacalah naskah resminya dan tanyakan kepada pihak yang kompeten tentang produk spesifik yang kamu pertimbangkan."
+        ],
+        keyPoints: [
+          "Pahami kepemilikan, penyimpanan, biaya, dan cara cetak fisik.",
+          "Emas fisik wajib 100% dialokasikan di kustodian resmi berizin Bappebti.",
+          "Hindari janji keuntungan tetap pada komoditas fluktuatif."
+        ],
+        sources: ["dsnmui-77-2010", "bappebti-4-2019", "ojk-portal"],
+        furtherReading: [
+          { title: "Fatwa DSN-MUI No. 77/2010 tentang Jual Beli Emas Tidak Tunai", url: "https://dsnmui.or.id" },
+          { title: "Peraturan Bappebti No. 4/2019 tentang Pasar Fisik Emas Digital", url: "https://bappebti.go.id" }
+        ],
+        relatedIds: ["akad-transaksi-digital", "sumber-tepercaya", "dropshipping-kepemilikan"],
+        limitations: "Kesesuaian syariah platform emas digital bergantung pada audit berkala saldo fisik emas di kustodian."
+      },
+      {
+        id: "pembiayaan-digital",
+        numericId: 6,
+        title: "Pembiayaan digital dan PayLater: apa yang harus dicek?",
+        cat: "Fintech",
+        categoryTag: "PAYLATER & P2P",
+        time: "5 menit",
+        fatwa: "Fatwa DSN-MUI No. 117/2018 & POJK 40/2024",
+        desc: "Daftar periksa menyeluruh untuk PayLater dan fintech pendanaan LPBBTI syariah.",
+        intro: "Layanan PayLater telah menjadi gaya hidup generasi digital. Namun, kemudahan belanja sekarang bayar nanti sering menyamarkan beban biaya finansial yang sesungguhnya. Pelajari cara memeriksa akad dan mitigasi risiko utang.",
+        objectives: [
+          "Mengetahui ketentuan Fatwa DSN-MUI No. 117/2018 tentang fintech pembiayaan syariah.",
+          "Memahami regulasi POJK No. 40 Tahun 2024 yang menggantikan POJK No. 10/2022.",
+          "Mampu menghitung total biaya sampai lunas dan membandingkannya dengan belanja tunai."
+        ],
+        concept: "Layanan pembiayaan berbasis teknologi informasi syariah wajib menggunakan akad sah (seperti Murabahah, Ijarah, atau Qardh) dan tidak boleh memungut tambahan bunga atas utang. POJK No. 40 Tahun 2024 dan SEOJK No. 19/SEOJK.06/2023 mengatur pembatasan manfaat ekonomi dan perlindungan hak pengguna.",
+        example: "Jika platform PayLater syariah bekerja sama dengan perbankan syariah melalui akad murabahah, rincian margin keuntungan disepakati di depan secara tetap, dan denda keterlambatan disalurkan ke pos kebajikan sosial sesuai Fatwa 17/2000.",
+        body: [
+          "Layanan PayLater dan pembiayaan berbasis teknologi dapat memiliki struktur yang berbeda-beda. Pahami apakah transaksi berupa jual beli dengan pembayaran bertahap, pinjaman, atau struktur lain, karena konsekuensi dan ketentuannya berbeda.",
+          "Hitung total yang harus dibayar sampai lunas, termasuk biaya layanan dan denda keterlambatan. Bandingkan dengan harga jika dibayar tunai.",
+          "Terdapat fatwa DSN-MUI mengenai layanan pembiayaan berbasis teknologi informasi berdasarkan prinsip syariah serta fatwa tentang akad murabahah yang dapat dibaca sebagai rujukan. Periksa juga apakah penyelenggara terdaftar atau berizin pada regulator."
+        ],
+        keyPoints: [
+          "Identifikasi struktur akad transaksi sebelum menyetujui.",
+          "Hitung total pengeluaran sampai lunas, jangan tergiur jargon bunga 0%.",
+          "Pastikan platform berizin OJK di bawah POJK No. 40 Tahun 2024 dan diawasi DPS."
+        ],
+        sources: ["dsnmui-117-2018", "dsnmui-04-2000", "dsnmui-17-2000", "ojk-pojk-40-2024", "ojk-seojk-19-2023"],
+        furtherReading: [
+          { title: "Fatwa DSN-MUI No. 117/2018 tentang Layanan Pembiayaan Berbasis TI Syariah", url: "https://dsnmui.or.id" },
+          { title: "Peraturan OJK No. 40 Tahun 2024 tentang LPBBTI", url: "https://ojk.go.id" }
+        ],
+        relatedIds: ["akad-transaksi-digital", "transparansi-biaya", "layanan-keuangan-syariah"],
+        limitations: "Keberadaan akad syariah di syarat dan ketentuan wajib dijalankan secara substantif, bukan sekadar tempelan administrasi."
+      },
+      {
+        id: "dropshipping-kepemilikan",
+        numericId: 7,
+        title: "Fikih dropshipping: hak kepemilikan barang dan bai' ma laisa 'indak",
+        cat: "Akad",
+        categoryTag: "E-COMMERCE & DROPSHIP",
+        time: "6 menit",
+        fatwa: "Fatwa DSN-MUI No. 05/2000 & No. 04/2000",
+        desc: "Menghindari larangan menjual barang yang belum dimiliki melalui akad Wakalah atau Salam.",
+        intro: "Bisnis dropshipping sangat populer karena memungkinkan seseorang berjualan online tanpa modal stok barang. Namun dalam fikih muamalah, terdapat larangan tegas menjual barang yang belum dimiliki (bai' ma laisa 'indak). Bagaimana solusi syariah agar dropshipping halal dan berkah?",
+        objectives: [
+          "Memahami sabda Nabi SAW tentang larangan menjual barang yang belum dimiliki (bai' ma laisa 'indak).",
+          "Mengenal 2 solusi akad syariah dalam dropshipping: Akad Wakalah bil Ujrah (keagenan jasa) dan Akad Salam (jual beli pesanan).",
+          "Mengetahui pembagian risiko (dhaman) dan perlindungan konsumen saat barang rusak atau cacat."
+        ],
+        concept: "Rasulullah SAW bersabda: 'Janganlah kamu menjual sesuatu yang tidak ada padamu / belum kamu miliki' (HR. Abu Dawud dan Tirmidzi). Larangan ini bertujuan mencegah gharar dan sengketa karena penjual belum tentu bisa menyerahkan barang. Namun syariah memberikan jalan keluar sah: dropshipper dapat bertindak resmi sebagai agen perantara (Wakil) yang menerima komisi jasa (Ujrah), atau menggunakan akad Salam dengan spesifikasi barang terukur dan penjaminan penuh.",
+        example: "Budi membuat kesepakatan tertulis dengan supplier untuk menjadi agen resmi dropship (Wakalah bil Ujrah). Setiap jaket yang terjual seharga Rp350.000, Budi mendapatkan hak ujrah Rp70.000 secara transparan, dan supplier menanggung garansi pengiriman barang fisik.",
+        body: [
+          "Dropshipping adalah model bisnis di mana penjual memajang foto produk milik supplier dan meneruskan pesanan pembeli langsung ke supplier tanpa menyimpan stok fisik.",
+          "Jika dropshipper memposisikan diri sebagai penjual langsung padahal barang belum dibeli dan belum ada izin dari supplier, transaksi tersebut berpotensi haram karena menjual barang milik orang lain tanpa hak.",
+          "Solusi syariah yang diakui DSN-MUI: dropshipper berterus terang kepada pembeli dan supplier sebagai agen perantara (Wakalah bil Ujrah) atau menanggung seluruh kewajiban penyerahan barang dengan akad Salam sesuai Fatwa No. 05/2000."
+        ],
+        keyPoints: [
+          "Dilarang menjual barang orang lain tanpa izin atau kepemilikan sah.",
+          "Gunakan akad Wakalah bil Ujrah resmi sebagai agen komisi jasa dari supplier.",
+          "Alternatif lain: gunakan akad Salam dengan deskripsi spesifikasi barang yang presisi."
+        ],
+        sources: ["dsnmui-05-2000", "dsnmui-04-2000", "dsnmui-portal"],
+        furtherReading: [
+          { title: "Fatwa DSN-MUI No. 05/2000 tentang Jual Beli Salam", url: "https://dsnmui.or.id" },
+          { title: "Fatwa DSN-MUI No. 04/2000 tentang Murabahah", url: "https://dsnmui.or.id" }
+        ],
+        relatedIds: ["akad-transaksi-digital", "transparansi-biaya", "risiko-investasi"],
+        limitations: "Dropshipper wajib memastikan barang yang dijual bukan komoditas ribawi (seperti emas atau perak) yang mensyaratkan serah terima tunai seketika."
+      },
+      {
+        id: "langganan-digital-ijarah",
+        numericId: 8,
+        title: "Akad Ijarah layanan digital dan otomasi perpanjangan langganan",
+        cat: "Fintech",
+        categoryTag: "LANGGANAN DIGITAL",
+        time: "5 menit",
+        fatwa: "Fatwa DSN-MUI No. 112/2017 tentang Ijarah",
+        desc: "Meninjau keabsahan sewa manfaat software, free trial, dan klausul auto-renewal.",
+        intro: "Layanan streaming musik, aplikasi produktivitas, dan penyimpanan cloud menggunakan model berlangganan berulang (recurring subscription). Pelajari bagaimana fikih Ijarah memandang pemanfaatan jasa digital dan klausul perpanjangan otomatis.",
+        objectives: [
+          "Memahami konsep akad Ijarah atas manfaat jasa non-fisik (software as a service) menurut Fatwa DSN-MUI No. 112/2017.",
+          "Mengenali potensi ketidakjelasan (Gharar) dan pemaksaan terselubung dalam fitur perpanjangan otomatis (auto-renewal).",
+          "Mengetahui hak pembatalan (khiyar) dan transparansi notifikasi sebelum pendebitan saldo terjadi."
+        ],
+        concept: "Akad Ijarah adalah transaksi pemindahan hak guna (manfaat) atas suatu barang atau jasa dalam jangka waktu tertentu dengan pembayaran sewa (ujrah). Syarat sah Ijarah adalah manfaatnya mubah, diketahui kadarnya, dan besaran sewanya jelas. Pada layanan digital berulang, transparansi tanggal penagihan dan kebebasan membatalkan sewa adalah syarat mutlak kerelaan ('an taradhin).",
+        example: "Aplikasi video editing syariah memberikan masa coba gratis 7 hari, lalu mengirim notifikasi pengingat 2 hari sebelum masa coba berakhir dengan opsi satu klik: 'Lanjutkan Berlangganan Rp50.000/bulan' atau 'Batalkan Tanpa Biaya'. Ini memenuhi syarat transparansi akad.",
+        body: [
+          "Model bisnis langganan digital didasarkan pada akad Ijarah atas manfaat piranti lunak atau hak akses konten berdurasi tertentu.",
+          "Tantangan syariah sering muncul pada fitur auto-renewal yang menagih saldo kartu konsumen secara otomatis tanpa notifikasi konfirmasi di muka setelah periode uji coba (free trial) selesai.",
+          "Jika konsumen tidak mengetahui waktu pemotongan atau kesulitan membatalkan langganan, transaksi mengandung unsur gharar dan memakan harta orang lain secara batil."
+        ],
+        keyPoints: [
+          "Langganan digital berlandaskan akad Ijarah manfaat jasa.",
+          "Penyedia wajib transparan mengenai jadwal penagihan dan nominal perpanjangan.",
+          "Konsumen memiliki hak pembatalan mudah tanpa dipersulit."
+        ],
+        sources: ["dsnmui-112-2017", "ojk-portal", "bi-portal"],
+        furtherReading: [
+          { title: "Fatwa DSN-MUI No. 112/2017 tentang Akad Ijarah", url: "https://dsnmui.or.id" }
+        ],
+        relatedIds: ["transparansi-biaya", "akad-transaksi-digital", "pembiayaan-digital"],
+        limitations: "Kebijakan pengembalian dana (refund) atas masa langganan yang tidak terpakai bergantung pada ketentuan toko aplikasi dan hukum perlindungan konsumen yang berlaku."
       }
     ];
 
@@ -5065,28 +6086,59 @@
       showToast(`Memuat hasil evaluasi ${rec.categoryName}`);
     }
 
-    // --- Case Studies Rendering ---
+    // --- Phase 4: Case Studies Rendering & Interaction ---
     function renderCaseStudies(filter = 'Semua') {
       const container = document.getElementById('caseStudyListContainer');
-      const filtered = caseStudiesData.filter(c => filter === 'Semua' || c.category === filter);
-      container.innerHTML = filtered.map(c => `
-        <div class="card hoverable mt-3" onclick="openCaseDetail(${c.id})">
-          <div class="flex-between">
-            <span class="pill pill-gold">${c.category}</span>
-            <span class="text-xs text-muted">Kasus #${c.id + 1}</span>
+      const pillEl = document.getElementById('caseStudiesDonePill');
+      const doneSet = new Set(appState.scenariosDone || []);
+
+      if (pillEl) {
+        pillEl.textContent = `${doneSet.size} dari ${caseStudiesData.length} Diteliti`;
+      }
+      if (!container) return;
+
+      const filtered = caseStudiesData.filter(c => {
+        if (filter === 'Semua') return true;
+        if (filter === 'PayLater') return c.category === 'PayLater';
+        if (filter === 'Emas') return c.category === 'Emas';
+        if (filter === 'E-Commerce') return c.category === 'E-Commerce';
+        if (filter === 'Subscription') return c.category === 'Subscription';
+        if (filter === 'Sosial') return c.category === 'Sosial';
+        return c.category === filter;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<p class="text-muted text-center mt-4">Tidak ada studi kasus untuk kategori ini.</p>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(c => {
+        const isDone = doneSet.has(c.id);
+        const excerpt = c.story.length > 125 ? c.story.substring(0, 125) + '...' : c.story;
+        return `
+          <div class="card hoverable mt-3" onclick="openCaseDetail('${c.id}')" style="cursor: pointer;">
+            <div class="flex-between">
+              <div class="flex-row gap-2" style="align-items: center; flex-wrap: wrap;">
+                <span class="pill pill-gold">${c.category}</span>
+                <span class="pill pill-warn" style="font-size: 9.5px; padding: 1px 7px;">SIMULASI</span>
+              </div>
+              <span class="pill ${isDone ? 'pill-emerald' : 'pill-sage'}" style="font-size: 10px;">
+                ${isDone ? '✓ Diteliti' : 'Belum Diteliti'}
+              </span>
+            </div>
+            <h3 style="font-size: 15px; font-weight: 700; color: var(--emerald-950); margin-top: 8px; line-height: 1.35;">
+              ${c.title}
+            </h3>
+            <p class="text-muted mt-2" style="font-size: 12px; line-height: 1.55;">
+              ${excerpt}
+            </p>
+            <div class="flex-between mt-3">
+              <span class="text-xs" style="color: var(--emerald-800); font-weight: 700;">Buka Telaah Kasus Lengkap →</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--emerald-800);"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
           </div>
-          <h3 style="font-size: 15px; font-weight: 700; color: var(--emerald-950); margin-top: 6px;">
-            ${c.title}
-          </h3>
-          <p class="text-muted mt-2" style="font-size: 12px; line-height: 1.55;">
-            ${c.story.substring(0, 110)}...
-          </p>
-          <div class="flex-between mt-3">
-            <span class="text-xs" style="color: var(--emerald-800); font-weight: 700;">Baca Telaah Fiqih →</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--emerald-800);"><path d="M9 18l6-6-6-6"/></svg>
-          </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     function filterCases(cat) {
@@ -5097,49 +6149,243 @@
     }
 
     function openCaseDetail(id) {
-      const c = caseStudiesData.find(item => item.id === id);
+      const c = caseStudiesData.find(item => item.id === id || item.numericId === id);
       if (!c) return;
-      document.getElementById('caseModalCategory').textContent = c.category.toUpperCase();
-      document.getElementById('caseModalTitle').textContent = c.title;
-      document.getElementById('caseModalStory').textContent = c.story;
-      document.getElementById('caseModalAnalysis').textContent = c.analysis;
-      document.getElementById('caseModalAdvice').textContent = c.advice;
+
+      appState.activeCaseId = c.id;
+      appState.selectedCaseOption = null;
+
+      // Header pills & title
+      const catEl = document.getElementById('caseModalCategory'); if (catEl) catEl.textContent = c.category.toUpperCase();
+      const notEl = document.getElementById('caseModalNotice'); if (notEl) notEl.textContent = c.notice || "Simulasi Edukasi Fiktif: Skenario ini disusun untuk tujuan literasi muamalah.";
+      const titEl = document.getElementById('caseModalTitle'); if (titEl) titEl.textContent = c.title;
+
+      const isDone = (appState.scenariosDone || []).includes(c.id);
+      const stEl = document.getElementById('caseModalStatusBadge');
+      if (stEl) {
+        stEl.textContent = isDone ? '✓ Selesai Diteliti' : 'Belum Diteliti';
+        stEl.className = isDone ? 'pill pill-emerald' : 'pill pill-sage';
+      }
+
+      // Background & Story
+      const stStory = document.getElementById('caseModalStory'); if (stStory) stStory.textContent = c.story;
+
+      // Parties
+      const partiesEl = document.getElementById('caseModalParties');
+      if (partiesEl && c.parties) {
+        partiesEl.innerHTML = c.parties.map(p => `<li>${p}</li>`).join('');
+      }
+
+      // Chronology
+      const chronoEl = document.getElementById('caseModalChronology');
+      if (chronoEl && c.chronology) {
+        chronoEl.innerHTML = c.chronology.map((step, idx) => `
+          <div class="chronology-step">
+            <div class="chronology-badge">${idx + 1}</div>
+            <div style="font-size: 12px; line-height: 1.5; color: var(--text-secondary); padding-top: 3px;">
+              ${step}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Contract & Flow
+      const cNameEl = document.getElementById('caseModalContractName'); if (cNameEl) cNameEl.textContent = c.contractName || '-';
+      const cIdealEl = document.getElementById('caseModalContractIdeal'); if (cIdealEl) cIdealEl.textContent = c.contractIdeal || '-';
+      const mFlowEl = document.getElementById('caseModalMoneyFlow'); if (mFlowEl) mFlowEl.textContent = c.moneyFlow || '-';
+      const oFlowEl = document.getElementById('caseModalOwnershipFlow'); if (oFlowEl) oFlowEl.textContent = c.ownershipFlow || '-';
+
+      // Principles
+      const princEl = document.getElementById('caseModalPrinciples');
+      if (princEl && c.principles) {
+        princEl.innerHTML = c.principles.map(p => `
+          <div class="arabic-quote-box" style="margin-bottom: 8px;">
+            ${p.arabic ? `<span class="arabic-text" style="font-size: 15px;">${p.arabic}</span>` : ''}
+            ${p.translit ? `<span class="arabic-translit">${p.translit}</span>` : ''}
+            <span class="arabic-meaning">"${p.translation}"</span>
+            <span class="arabic-app"><strong>Aplikasi Fiqih:</strong> ${p.application}</span>
+          </div>
+        `).join('');
+      }
+
+      // Questions
+      const questEl = document.getElementById('caseModalQuestions');
+      if (questEl && c.questions) {
+        questEl.innerHTML = c.questions.map(q => `<li>"${q}"</li>`).join('');
+      }
+
+      // Multi-dimensional analysis
+      if (c.analysis) {
+        const fEl = document.getElementById('caseModalFacts'); if (fEl) fEl.innerHTML = (c.analysis.facts || []).map(f => `<li>${f}</li>`).join('');
+        const aEl = document.getElementById('caseModalAssumptions'); if (aEl) aEl.innerHTML = (c.analysis.assumptions || []).map(a => `<li>${a}</li>`).join('');
+        const iEl = document.getElementById('caseModalInterpretations'); if (iEl) iEl.innerHTML = (c.analysis.interpretations || []).map(i => `<li>${i}</li>`).join('');
+        const conEl = document.getElementById('caseModalConclusion'); if (conEl) conEl.textContent = c.analysis.conclusion || '';
+      }
+
+      // Sources
+      const srcEl = document.getElementById('caseModalSources');
+      if (srcEl && c.sources) {
+        srcEl.innerHTML = c.sources.map(sId => `
+          <div class="flex-between hoverable" style="padding: 8px 12px; background: #FFFFFF; border: 1px solid var(--ivory-border); border-radius: var(--radius-md); margin-bottom: 6px; cursor: pointer;" onclick="openSourceRefModal()">
+            <span style="font-size: 12px; font-weight: 600; color: var(--emerald-950);">${sId.toUpperCase()}</span>
+            <span class="text-xs" style="color: var(--emerald-800); font-weight: 700;">Lihat Rujukan Dokumen →</span>
+          </div>
+        `).join('');
+      }
+
+      // Lessons
+      const lessEl = document.getElementById('caseModalLessons');
+      if (lessEl && c.lessons) {
+        lessEl.innerHTML = c.lessons.map(l => `<li>${l}</li>`).join('');
+      }
+
+      // Interactive Exercise
+      renderCaseExercise(c);
+
       openModal('modalCaseDetail');
     }
 
-    // --- Learning Hub Rendering & Filter ---
-    function renderLessonsList(filterCat = 'Semua', query = '') {
-      const container = document.getElementById('lessonListContainer');
-      const q = query.toLowerCase();
-      const filtered = lessonsData.filter(l => {
-        const matchCat = filterCat === 'Semua' || l.cat === filterCat;
-        const matchQ = l.title.toLowerCase().includes(q) || l.desc.toLowerCase().includes(q);
-        return matchCat && matchQ;
-      });
+    function renderCaseExercise(c) {
+      const qText = document.getElementById('caseExerciseQuestion');
+      const optContainer = document.getElementById('caseExerciseOptions');
+      const fbBox = document.getElementById('caseExerciseFeedback');
+      const btnSubmit = document.getElementById('btnSubmitCaseExercise');
 
-      if (filtered.length === 0) {
-        container.innerHTML = '<p class="text-muted text-center mt-4">Modul tidak ditemukan. Coba kata kunci lain.</p>';
+      if (!c.exercise) return;
+      if (qText) qText.textContent = c.exercise.q;
+      if (fbBox) fbBox.style.display = 'none';
+      if (btnSubmit) btnSubmit.style.display = 'inline-block';
+
+      if (optContainer) {
+        optContainer.innerHTML = c.exercise.opts.map((optText, i) => `
+          <div class="option-radio" id="caseExerciseOpt_${i}" onclick="selectCaseExerciseOption(${i})">
+            <div class="option-indicator"></div>
+            <div class="option-label" style="font-size: 12px; line-height: 1.45;">${optText}</div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function selectCaseExerciseOption(idx) {
+      appState.selectedCaseOption = idx;
+      document.querySelectorAll('#caseExerciseOptions .option-radio').forEach((el, i) => {
+        el.classList.toggle('selected', i === idx);
+      });
+    }
+
+    function submitCaseExercise() {
+      if (appState.selectedCaseOption === null) {
+        showToast("Pilih salah satu keputusan terlebih dahulu!");
         return;
       }
 
-      container.innerHTML = filtered.map(l => `
-        <div class="card hoverable mt-3" onclick="openLessonModal(${l.id})">
-          <div class="flex-between">
-            <span class="pill pill-emerald">${l.categoryTag}</span>
-            <span class="text-xs text-muted">${l.time}</span>
+      const c = caseStudiesData.find(item => item.id === appState.activeCaseId);
+      if (!c || !c.exercise) return;
+
+      const isCorrect = appState.selectedCaseOption === c.exercise.correct;
+      const fbBox = document.getElementById('caseExerciseFeedback');
+      const btnSubmit = document.getElementById('btnSubmitCaseExercise');
+
+      if (fbBox) {
+        fbBox.style.display = 'block';
+        if (isCorrect) {
+          fbBox.className = 'quiz-feedback-box notice-success';
+          fbBox.innerHTML = `
+            <div class="flex-row gap-2" style="color: var(--emerald-900); font-weight: 700; font-size: 12.5px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Keputusan Tepat & Kritis!</span>
+            </div>
+            <p style="margin: 4px 0 0; color: var(--text-primary);">${c.exercise.exp}</p>
+          `;
+
+          if (!appState.scenariosDone.includes(c.id)) {
+            appState.scenariosDone.push(c.id);
+            savePersistedState();
+            renderCaseStudies();
+            updateProgressDashboard();
+            const stEl = document.getElementById('caseModalStatusBadge');
+            if (stEl) {
+              stEl.textContent = '✓ Selesai Diteliti';
+              stEl.className = 'pill pill-emerald';
+            }
+          }
+          showToast("Jawaban tepat! Progres studi kasus berhasil disimpan.");
+        } else {
+          fbBox.className = 'quiz-feedback-box notice-error';
+          fbBox.innerHTML = `
+            <div class="flex-row gap-2" style="color: var(--wine-700); font-weight: 700; font-size: 12.5px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Belum Tepat — Periksa Kembali Prinsip Fiqih</span>
+            </div>
+            <p style="margin: 4px 0 0; color: var(--text-primary);">${c.exercise.exp}</p>
+          `;
+        }
+      }
+    }
+
+    // --- Phase 4: Learning Hub Rendering, Search, and Complete Reader ---
+    function renderLessonsList(filterCat = 'Semua', query = '') {
+      const container = document.getElementById('lessonListContainer');
+      const q = query.trim().toLowerCase();
+      const readSet = new Set(appState.lessonsRead || []);
+
+      const filtered = lessonsData.filter(l => {
+        const matchCat =
+          filterCat === 'Semua' ||
+          l.cat.toLowerCase() === filterCat.toLowerCase() ||
+          (filterCat === 'Dasar' && l.cat === 'Dasar') ||
+          (filterCat === 'Fintech' && (l.cat === 'Fintech' || l.cat === 'Bank')) ||
+          (filterCat === 'Akad' && l.cat === 'Akad') ||
+          (filterCat === 'Investasi' && l.cat === 'Investasi') ||
+          (filterCat === 'Sosial' && l.cat === 'Sosial');
+
+        const searchBlob = `${l.title} ${l.desc} ${l.intro || ''} ${l.concept || ''} ${l.example || ''} ${l.cat} ${(l.body || []).join(' ')} ${(l.keyPoints || []).join(' ')}`.toLowerCase();
+        const matchQ = q === '' || searchBlob.includes(q);
+        return matchCat && matchQ;
+      });
+
+      updateReadingProgressUI();
+      renderContinueReadingCard();
+
+      if (!container) return;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-4 card">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--sage-400)" stroke-width="1.8" style="margin: 0 auto 8px; display: block;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <strong style="color: var(--emerald-950); font-size: 14px;">Modul Tidak Ditemukan</strong>
+            <p class="text-muted text-xs mt-1">Tidak ada modul yang cocok dengan kata kunci "${query}". Coba cari kata kunci lain seperti Murabahah, Qabdh, Riba, atau Dropship.</p>
           </div>
-          <h3 style="font-size: 15px; font-weight: 700; color: var(--emerald-950); margin-top: 6px;">
-            ${l.title}
-          </h3>
-          <p class="text-muted mt-2" style="font-size: 12px; line-height: 1.55;">
-            ${l.desc}
-          </p>
-          <div class="flex-between mt-3 text-xs" style="color: var(--text-muted);">
-            <span>${l.fatwa}</span>
-            <span style="color: var(--emerald-800); font-weight: 700;">Pelajari Modul →</span>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(l => {
+        const isRead = readSet.has(l.id);
+        return `
+          <div class="card hoverable mt-3" onclick="openLessonModal('${l.id}')" style="cursor: pointer;">
+            <div class="flex-between">
+              <div class="flex-row gap-2" style="align-items: center; flex-wrap: wrap;">
+                <span class="pill pill-emerald">${l.categoryTag}</span>
+                <span class="text-xs text-muted">${l.time}</span>
+              </div>
+              <span class="pill ${isRead ? 'pill-emerald' : 'pill-sage'}" style="font-size: 10px;">
+                ${isRead ? '✓ Selesai Dibaca' : 'Belum Dibaca'}
+              </span>
+            </div>
+            <h3 style="font-size: 15px; font-weight: 700; color: var(--emerald-950); margin-top: 8px; line-height: 1.35;">
+              ${l.title}
+            </h3>
+            <p class="text-muted mt-2" style="font-size: 12px; line-height: 1.55;">
+              ${l.desc}
+            </p>
+            <div class="flex-between mt-3 text-xs" style="color: var(--text-muted); border-top: 1px solid var(--ivory-border); padding-top: 8px;">
+              <span style="font-size: 11px;">${l.fatwa}</span>
+              <span style="color: var(--emerald-800); font-weight: 700;">Pelajari Modul →</span>
+            </div>
           </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     let activeLessonCategory = 'Semua';
@@ -5156,21 +6402,282 @@
       renderLessonsList(activeLessonCategory, q);
     }
 
-    let currentOpenedLessonId = 0;
+    function updateReadingProgressUI() {
+      const readSet = new Set(appState.lessonsRead || []);
+      const total = lessonsData.length;
+      const count = readSet.size;
+      const pct = Math.round((count / total) * 100);
+
+      const fEl = document.getElementById('learnProgressFraction');
+      if (fEl) fEl.textContent = `${count} / ${total} Selesai (${pct}%)`;
+
+      const barEl = document.getElementById('learnProgressFill');
+      if (barEl) barEl.style.width = `${pct}%`;
+    }
+
+    function renderContinueReadingCard() {
+      const card = document.getElementById('continueReadingCard');
+      if (!card) return;
+
+      const readSet = new Set(appState.lessonsRead || []);
+      // Find either last opened uncompleted lesson, or the first unread lesson
+      let nextLesson = null;
+      if (appState.lastOpenedLessonId && !readSet.has(appState.lastOpenedLessonId)) {
+        nextLesson = lessonsData.find(l => l.id === appState.lastOpenedLessonId);
+      }
+      if (!nextLesson) {
+        nextLesson = lessonsData.find(l => !readSet.has(l.id));
+      }
+
+      if (!nextLesson) {
+        // All lessons read!
+        card.style.display = 'block';
+        card.innerHTML = `
+          <div class="flex-between">
+            <span class="pill pill-gold" style="font-size: 9.5px; padding: 2px 8px;">SEMUA MODUL SELESAI</span>
+            <span style="font-size: 18px;">🎉</span>
+          </div>
+          <h3 style="font-size: 15px; font-weight: 700; margin: 6px 0 2px; color: #FFFFFF;">
+            Alhamdulillah! Kamu telah mempelajari 9 modul.
+          </h3>
+          <p style="font-size: 12px; color: #D1E5DA; margin: 0 0 10px; line-height: 1.45;">
+            Lanjutkan dengan menguji pemahamanmu di Kuis Literasi Finansial atau teliti Studi Kasus.
+          </p>
+          <button class="btn btn-secondary btn-sm" onclick="navigateTo('screenQuiz')">
+            Uji Pemahaman di Kuis →
+          </button>
+        `;
+        return;
+      }
+
+      card.style.display = 'block';
+      const tit = document.getElementById('continueReadingTitle'); if (tit) tit.textContent = nextLesson.title;
+      const meta = document.getElementById('continueReadingMeta'); if (meta) meta.textContent = `Waktu baca: ${nextLesson.time} · ${nextLesson.categoryTag}`;
+      const btn = document.getElementById('btnContinueReading');
+      if (btn) btn.onclick = () => openLessonModal(nextLesson.id);
+    }
+
+    function openContinueReadingLesson() {
+      const readSet = new Set(appState.lessonsRead || []);
+      const nextLesson = lessonsData.find(l => !readSet.has(l.id)) || lessonsData[0];
+      if (nextLesson) openLessonModal(nextLesson.id);
+    }
+
     function openLessonModal(id) {
-      const l = lessonsData.find(item => item.id === id);
+      const l = lessonsData.find(item => item.id === id || item.numericId === id);
       if (!l) return;
-      currentOpenedLessonId = id;
-      document.getElementById('lessonModalCategory').textContent = l.categoryTag;
-      document.getElementById('lessonModalTitle').textContent = l.title;
-      document.getElementById('lessonModalMeta').textContent = `Waktu baca: ${l.time} · ${l.fatwa}`;
-      document.getElementById('lessonModalBody').innerHTML = l.body;
+
+      appState.activeLessonId = l.id;
+      appState.lastOpenedLessonId = l.id;
+      savePersistedState();
+
+      // Header fields
+      const catEl = document.getElementById('lessonModalCategory'); if (catEl) catEl.textContent = l.categoryTag;
+      const timEl = document.getElementById('lessonModalTime'); if (timEl) timEl.textContent = l.time;
+      const titEl = document.getElementById('lessonModalTitle'); if (titEl) titEl.textContent = l.title;
+
+      const isRead = (appState.lessonsRead || []).includes(l.id);
+      const stBadge = document.getElementById('lessonModalStatusBadge');
+      if (stBadge) {
+        stBadge.textContent = isRead ? '✓ Selesai Dibaca' : 'Belum Dibaca';
+        stBadge.className = isRead ? 'pill pill-emerald' : 'pill pill-sage';
+      }
+
+      // Introduction
+      const introEl = document.getElementById('lessonModalIntro');
+      if (introEl) introEl.textContent = l.intro || l.desc;
+
+      // Objectives
+      const objEl = document.getElementById('lessonModalObjectives');
+      if (objEl && l.objectives) {
+        objEl.innerHTML = l.objectives.map(ob => `
+          <div class="obj-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>${ob}</span>
+          </div>
+        `).join('');
+      }
+
+      // Concept & Body
+      const cEl = document.getElementById('lessonModalConcept');
+      if (cEl) cEl.textContent = l.concept || '';
+
+      const bEl = document.getElementById('lessonModalBody');
+      if (bEl && l.body) {
+        bEl.innerHTML = l.body.map(p => `<p style="margin-bottom: 8px;">${p}</p>`).join('');
+      }
+
+      // Practical Example
+      const exEl = document.getElementById('lessonModalExample');
+      if (exEl) exEl.textContent = l.example || '';
+
+      // Key Points
+      const kpEl = document.getElementById('lessonModalKeyPoints');
+      if (kpEl && l.keyPoints) {
+        kpEl.innerHTML = l.keyPoints.map(kp => `<li>${kp}</li>`).join('');
+      }
+
+      // Sources
+      const srcEl = document.getElementById('lessonModalSources');
+      if (srcEl && l.sources) {
+        srcEl.innerHTML = l.sources.map(sId => `
+          <div class="flex-between hoverable" style="padding: 8px 12px; background: #FFFFFF; border: 1px solid var(--ivory-border); border-radius: var(--radius-md); margin-bottom: 6px; cursor: pointer;" onclick="openSourceRefModal()">
+            <span style="font-size: 12px; font-weight: 600; color: var(--emerald-950);">${sId.toUpperCase()}</span>
+            <span class="text-xs" style="color: var(--emerald-800); font-weight: 700;">Lihat Teks Fatwa →</span>
+          </div>
+        `).join('');
+      }
+
+      // Further Reading
+      const frEl = document.getElementById('lessonModalFurtherReading');
+      if (frEl && l.furtherReading) {
+        frEl.innerHTML = l.furtherReading.map(f => `
+          <a href="${f.url}" target="_blank" rel="noopener noreferrer" style="display: block; font-size: 12px; color: var(--emerald-800); text-decoration: underline; margin-bottom: 4px;">
+            🔗 ${f.title}
+          </a>
+        `).join('');
+      }
+
+      // Limitations
+      const limEl = document.getElementById('lessonModalLimitations');
+      if (limEl) limEl.textContent = l.limitations || "Materi modul ini bersifat edukasi konsep fikih umum, bukan fatwa hukum resmi.";
+
+      // Related Lessons
+      const relEl = document.getElementById('lessonModalRelated');
+      if (relEl && l.relatedIds) {
+        relEl.innerHTML = l.relatedIds.map(rId => {
+          const relLesson = lessonsData.find(item => item.id === rId);
+          if (!relLesson) return '';
+          return `
+            <button class="pill pill-sage hoverable" style="font-size: 11px; cursor: pointer; border: 1px solid var(--sage-300);" onclick="openLessonModal('${relLesson.id}')">
+              ${relLesson.title.substring(0, 32)}...
+            </button>
+          `;
+        }).join('');
+      }
+
+      // Navigation Prev/Next
+      const idx = lessonsData.findIndex(item => item.id === l.id);
+      const btnPrev = document.getElementById('btnPrevLesson');
+      const btnNext = document.getElementById('btnNextLesson');
+      if (btnPrev) btnPrev.disabled = idx <= 0;
+      if (btnNext) btnNext.disabled = idx >= lessonsData.length - 1;
+
+      // Completion toggle button text
+      const btnToggle = document.getElementById('btnToggleLessonReadText');
+      if (btnToggle) {
+        btnToggle.textContent = isRead ? '✓ Sudah Dibaca (Tandai Belum)' : 'Tandai Selesai Dibaca';
+      }
+
       openModal('modalLessonReader');
     }
 
+    function navigateLesson(direction) {
+      const idx = lessonsData.findIndex(item => item.id === appState.activeLessonId);
+      const targetIdx = idx + direction;
+      if (targetIdx >= 0 && targetIdx < lessonsData.length) {
+        openLessonModal(lessonsData[targetIdx].id);
+      }
+    }
+
+    function toggleCurrentLessonRead() {
+      const id = appState.activeLessonId;
+      const l = lessonsData.find(item => item.id === id);
+      if (!l) return;
+
+      const idx = appState.lessonsRead.indexOf(id);
+      if (idx > -1) {
+        appState.lessonsRead.splice(idx, 1);
+        showToast("Modul ditandai belum selesai dibaca.");
+      } else {
+        appState.lessonsRead.push(id);
+        if (!appState.activity) appState.activity = [];
+        appState.activity.unshift({
+          date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short' }),
+          text: `Membaca modul: ${l.title}`
+        });
+        showToast("Modul berhasil ditandai selesai dibaca! ✓");
+      }
+
+      savePersistedState();
+
+      // Refresh reader state
+      const isRead = appState.lessonsRead.includes(id);
+      const stBadge = document.getElementById('lessonModalStatusBadge');
+      if (stBadge) {
+        stBadge.textContent = isRead ? '✓ Selesai Dibaca' : 'Belum Dibaca';
+        stBadge.className = isRead ? 'pill pill-emerald' : 'pill pill-sage';
+      }
+      const btnToggle = document.getElementById('btnToggleLessonReadText');
+      if (btnToggle) {
+        btnToggle.textContent = isRead ? '✓ Sudah Dibaca (Tandai Belum)' : 'Tandai Selesai Dibaca';
+      }
+
+      renderLessonsList(activeLessonCategory, document.getElementById('searchLessonInput')?.value || '');
+      updateProgressDashboard();
+    }
+
     function markLessonCompleted() {
+      toggleCurrentLessonRead();
       closeModal('modalLessonReader');
-      showToast("Progres materi berhasil disimpan!");
+    }
+
+    // --- Phase 4: Dynamic Progress Dashboard Calculator ---
+    function updateProgressDashboard() {
+      const checksCount = (appState.assessmentsHistory || []).length;
+      const lessonsCount = (appState.lessonsRead || []).length;
+      const scenariosCount = (appState.scenariosDone || []).length;
+
+      // Quiz accuracy calculation
+      let bestQuizPct = 0;
+      if (Array.isArray(appState.quizAttempts) && appState.quizAttempts.length > 0) {
+        bestQuizPct = Math.round(
+          appState.quizAttempts.reduce((m, a) => Math.max(m, a.total > 0 ? (a.score / a.total) * 100 : 0), 0)
+        );
+      } else if (appState.stats.quizScore > 0) {
+        bestQuizPct = 100;
+      }
+
+      // Compute mathematical progress formula matching progress.ts
+      const raw =
+        (checksCount > 0 ? 25 : 0) +
+        (lessonsData.length > 0 ? (lessonsCount / lessonsData.length) * 35 : 0) +
+        (caseStudiesData.length > 0 ? (scenariosCount / caseStudiesData.length) * 15 : 0) +
+        (bestQuizPct / 100) * 25;
+
+      const literacyPercent = Math.min(100, Math.round(raw));
+
+      const elCheck = document.getElementById('statChecksCount'); if (elCheck) elCheck.textContent = checksCount;
+      const elLess = document.getElementById('statLessonsCount'); if (elLess) elLess.textContent = `${lessonsCount} / ${lessonsData.length}`;
+      const elQuiz = document.getElementById('statQuizzesCount'); if (elQuiz) elQuiz.textContent = `${bestQuizPct}%`;
+      const elHomeChecks = document.getElementById('homeChecksBadge'); if (elHomeChecks) elHomeChecks.textContent = `${checksCount} Evaluasi Selesai`;
+
+      // Level description
+      let levelTitle = "Pemula Sadar";
+      if (literacyPercent >= 75) levelTitle = "Duta Literasi Syariah";
+      else if (literacyPercent >= 45) levelTitle = "Konsumen Sadar";
+      else if (literacyPercent >= 20) levelTitle = "Konsumen Cermat";
+
+      const elLevel = document.getElementById('profileBadgeLevel'); if (elLevel) elLevel.textContent = levelTitle;
+
+      // Activity timeline
+      const actContainer = document.getElementById('activityTimelineList');
+      if (actContainer) {
+        const activities = appState.activity || [];
+        if (activities.length === 0 && checksCount === 0 && lessonsCount === 0) {
+          actContainer.innerHTML = `
+            <p class="text-muted text-xs text-center py-2">Belum ada riwayat aktivitas. Mulai pelajari modul atau evaluasi transaksi pertamamu!</p>
+          `;
+        } else {
+          actContainer.innerHTML = activities.slice(0, 5).map(act => `
+            <div class="timeline-item">
+              <span class="timeline-dot"></span>
+              <div style="font-size: 12px; color: var(--text-primary);">${act.text}</div>
+              <span class="text-muted text-xs">${act.date}</span>
+            </div>
+          `).join('');
+        }
+      }
     }
 
     // --- Interactive Quiz Logic ---
@@ -5370,14 +6877,25 @@
       renderOnboardStep();
       renderCaseStudies();
       renderLessonsList();
+      renderContinueReadingCard();
+      updateReadingProgressUI();
       renderQuizQuestion();
       renderAssessmentHistory();
+      updateProgressDashboard();
 
       // Deep Linking & Hash Routing Support
       const handleHashRoute = () => {
         if (window.location.hash) {
           const hashId = window.location.hash.replace('#', '');
-          if (document.getElementById(hashId)) {
+          if (hashId.startsWith('lesson:')) {
+            const lId = hashId.replace('lesson:', '');
+            navigateTo('screenLearn');
+            openLessonModal(lId);
+          } else if (hashId.startsWith('case:')) {
+            const cId = hashId.replace('case:', '');
+            navigateTo('screenCaseStudies');
+            openCaseDetail(cId);
+          } else if (document.getElementById(hashId)) {
             if (hashId === 'screenResult') {
               if (appState.checkAnswers.every(a => a === null)) {
                 appState.selectedCategory = 'paylater';

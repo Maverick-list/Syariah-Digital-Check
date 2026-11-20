@@ -1,5 +1,6 @@
 import { QUIZ } from '../data/quiz';
 import { SCENARIOS } from '../data/scenarios';
+import { LESSONS } from '../data/lessons';
 import { evaluateQuizAnswer, evaluateScenario, scorePercent, scoreQuiz } from '../utils/scoring';
 import { computeProgress } from '../utils/progress';
 import { validateDisplayName } from '../utils/text';
@@ -48,7 +49,7 @@ describe('progress', () => {
   it('reaches 100 with everything done and a perfect quiz', () => {
     const p = computeProgress({
       checks: [{ id: 'c', date: '2026-01-01', category: 'paylater', answers: {}, resultState: 'understood', unresolvedCount: 0 }],
-      lessonsRead: ['akad-transaksi-digital', 'transparansi-biaya', 'sumber-tepercaya', 'layanan-keuangan-syariah', 'zisw-digital', 'risiko-investasi', 'pembiayaan-digital'],
+      lessonsRead: LESSONS.map((l) => l.id),
       scenariosDone: SCENARIOS.map((s) => s.id),
       quizAttempts: [{ id: 'q', date: '2026-01-01', score: 8, total: 8 }],
     });

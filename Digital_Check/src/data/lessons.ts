@@ -6,11 +6,12 @@ const REVIEWED = '2026-11-20';
  * Modul Edukasi Literasi Keuangan Syariah.
  *
  * Standar Editorial (Editorial Standards):
- * 1. Menjelaskan tujuan pembelajaran (learning objectives) secara terukur.
+ * 1. Menjelaskan pengantar dan tujuan pembelajaran (learning objectives) secara terukur.
  * 2. Penjelasan konsep fiqih murni terpisah dari interpretasi aplikatif.
- * 3. Menyertakan contoh kasus praktis di era digital.
- * 4. Merujuk fatwa DSN-MUI dan regulasi otoritas yang telah diverifikasi status hukumnya.
- * 5. Menegaskan batasan penting (important limitations): edukasi bukanlah fatwa atau audit kepatuhan.
+ * 3. Menyertakan contoh kasus praktis di era digital Indonesia.
+ * 4. Merujuk fatwa DSN-MUI dan regulasi otoritas (OJK/BI/Bappebti) yang telah diverifikasi status hukumnya.
+ * 5. Menegaskan batasan penting (important limitations): edukasi bukanlah fatwa atau audit kepatuhan spesifik.
+ * 6. Menyediakan rekomendasi materi lanjutan (relatedLessonIds).
  */
 export const LESSONS: Lesson[] = [
   {
@@ -19,6 +20,8 @@ export const LESSONS: Lesson[] = [
     category: 'Akad',
     readingMinutes: 5,
     summary: 'Memahami mengapa struktur perjanjian dan kewajiban para pihak penting untuk dipelajari.',
+    introduction:
+      'Di era belanja serba satu klik, perjanjian hukum sering kali tereduksi menjadi sekadar mencentang kotak "Saya menyetujui Syarat & Ketentuan". Padahal, di balik tombol tersebut terdapat kesepakatan akad yang mengikat hak, kewajiban, dan konsekuensi hukum finansialmu di hadapan Allah SWT dan hukum negara.',
     learningObjectives: [
       'Memahami hakikat akad sebagai penentu hak dan kewajiban hukum dalam muamalah.',
       'Mengenali perbedaan struktur akad (Murabahah, Ijarah, Qardh, Wakalah) pada aplikasi digital.',
@@ -56,6 +59,7 @@ export const LESSONS: Lesson[] = [
         url: 'https://dsnmui.or.id',
       },
     ],
+    relatedLessonIds: ['pembiayaan-digital', 'transparansi-biaya', 'sumber-tepercaya'],
     reviewStatus: 'Published',
     reviewedAt: REVIEWED,
     reviewer: 'Tim Riset & Edukasi Syariah Digital Check',
@@ -63,9 +67,11 @@ export const LESSONS: Lesson[] = [
   {
     id: 'transparansi-biaya',
     title: 'Transparansi biaya, denda keterlambatan, dan ganti rugi',
-    category: 'Digital',
+    category: 'Fintech',
     readingMinutes: 4,
     summary: 'Cara membedakan biaya operasional, sanksi finansial (ta\'zir), dan ganti rugi (ta\'widh).',
+    introduction:
+      'Banyak pengguna fintech terjebak utang menumpuk akibat ketidaktahuan atas rincian biaya tersembunyi dan denda harian yang berlipat ganda. Modul ini membongkar batas syariah antara ganti rugi riil yang diperbolehkan dan denda ribawi yang dilarang keras.',
     learningObjectives: [
       'Membedakan konsep sanksi keterlambatan (ta\'zir) dalam Fatwa 17/2000 dengan ganti rugi riil (ta\'widh) dalam Fatwa 43/2004.',
       'Mengetahui batasan regulasi OJK terbaru mengenai batas manfaat ekonomi dan denda pada fintech pendanaan.',
@@ -107,6 +113,7 @@ export const LESSONS: Lesson[] = [
         url: 'https://ojk.go.id',
       },
     ],
+    relatedLessonIds: ['pembiayaan-digital', 'akad-transaksi-digital', 'langganan-digital-ijarah'],
     reviewStatus: 'Published',
     reviewedAt: REVIEWED,
     reviewer: 'Tim Riset & Edukasi Syariah Digital Check',
@@ -117,6 +124,8 @@ export const LESSONS: Lesson[] = [
     category: 'Dasar',
     readingMinutes: 3,
     summary: 'Membedakan dokumen resmi, promosi, opini, dan informasi yang belum terverifikasi.',
+    introduction:
+      'Di tengah membanjirnya promosi influencer finansial dan klaim sepihak di media sosial, kemampuan verifikasi (tabayyun) adalah benteng utama menjaga keamanan finansial dan kehalalan muamalah keluarga.',
     learningObjectives: [
       'Mampu memverifikasi legalitas entitas finansial melalui portal resmi OJK dan Bank Indonesia.',
       'Memahami hierarki bobot sumber: dokumen hukum resmi vs iklan promosi media sosial.',
@@ -149,6 +158,7 @@ export const LESSONS: Lesson[] = [
         url: 'https://sikapiuangmu.ojk.go.id',
       },
     ],
+    relatedLessonIds: ['akad-transaksi-digital', 'layanan-keuangan-syariah', 'risiko-investasi'],
     reviewStatus: 'Published',
     reviewedAt: REVIEWED,
     reviewer: 'Tim Riset & Edukasi Syariah Digital Check',
@@ -156,9 +166,11 @@ export const LESSONS: Lesson[] = [
   {
     id: 'layanan-keuangan-syariah',
     title: 'Mengenal layanan keuangan syariah digital',
-    category: 'Bank',
+    category: 'Fintech',
     readingMinutes: 6,
     summary: 'Pertanyaan awal untuk memahami struktur uang elektronik dan bank digital syariah.',
+    introduction:
+      'Transformasi perbankan syariah dan dompet digital syariah menghadirkan kemudahan transaksi tanpa uang tunai. Bagaimana fikih memandang saldo uang elektronik, kartu debit syariah, dan sistem pembayaran QRIS?',
     learningObjectives: [
       'Memahami akad penempatan dana uang elektronik syariah menurut Fatwa DSN-MUI No. 116/2017.',
       'Mengenali peran Dewan Pengawas Syariah (DPS) pada bank dan fintech digital.',
@@ -191,6 +203,7 @@ export const LESSONS: Lesson[] = [
         url: 'https://dsnmui.or.id',
       },
     ],
+    relatedLessonIds: ['transparansi-biaya', 'pembiayaan-digital', 'sumber-tepercaya'],
     reviewStatus: 'Published',
     reviewedAt: REVIEWED,
     reviewer: 'Tim Riset & Edukasi Syariah Digital Check',
@@ -201,6 +214,8 @@ export const LESSONS: Lesson[] = [
     category: 'Sosial',
     readingMinutes: 5,
     summary: 'Memeriksa tujuan, pengelola, kanal pembayaran, dan informasi penyaluran.',
+    introduction:
+      'Platform penggalangan dana dan donasi digital mempermudah beramal jariyah dalam hitungan detik. Namun, konsumen perlu berhati-hati memastikan lembaga amil/nazhir memiliki izin resmi dan laporan penyaluran yang akuntabel.',
     learningObjectives: [
       'Memahami syarat sah serah terima donasi dan wakaf uang secara digital.',
       'Mampu memverifikasi izin lembaga amil zakat (BAZNAS/LAZ resmi) dan Badan Wakaf Indonesia (BWI).',
@@ -233,6 +248,7 @@ export const LESSONS: Lesson[] = [
         url: 'https://www.bwi.go.id',
       },
     ],
+    relatedLessonIds: ['sumber-tepercaya', 'akad-transaksi-digital'],
     reviewStatus: 'Published',
     reviewedAt: REVIEWED,
     reviewer: 'Tim Riset & Edukasi Syariah Digital Check',
@@ -243,6 +259,8 @@ export const LESSONS: Lesson[] = [
     category: 'Investasi',
     readingMinutes: 5,
     summary: 'Kenali syarat qabdh hukmi emas digital, kustodian fisik, dan mitigasi spekulasi.',
+    introduction:
+      'Emas merupakan aset pelindung nilai terfavorit masyarakat. Aplikasi tabungan emas digital menjanjikan kemudahan membeli emas mulai dari Rp10.000. Bagaimana keabsahan serah terima saldo emas digital tanpa memegang emas batangan fisik?',
     learningObjectives: [
       'Memahami ketentuan Fatwa DSN-MUI No. 77/2010 tentang jual beli emas secara tidak tunai.',
       'Mengetahui syarat Qabdh Hukmi (serah terima yuridis) dan keberadaan emas fisik nyata di kustodian berizin Bappebti.',
@@ -279,6 +297,7 @@ export const LESSONS: Lesson[] = [
         url: 'https://bappebti.go.id',
       },
     ],
+    relatedLessonIds: ['akad-transaksi-digital', 'sumber-tepercaya', 'dropshipping-kepemilikan'],
     reviewStatus: 'Published',
     reviewedAt: REVIEWED,
     reviewer: 'Tim Riset & Edukasi Syariah Digital Check',
@@ -286,9 +305,11 @@ export const LESSONS: Lesson[] = [
   {
     id: 'pembiayaan-digital',
     title: 'Pembiayaan digital dan PayLater: apa yang harus dicek?',
-    category: 'Pembiayaan',
+    category: 'Fintech',
     readingMinutes: 5,
     summary: 'Daftar periksa menyeluruh untuk PayLater dan fintech pendanaan LPBBTI syariah.',
+    introduction:
+      'Layanan PayLater telah menjadi gaya hidup generasi digital. Namun, kemudahan belanja sekarang bayar nanti sering menyamarkan beban biaya finansial yang sesungguhnya. Pelajari cara memeriksa akad dan mitigasi risiko utang.',
     learningObjectives: [
       'Mengetahui ketentuan Fatwa DSN-MUI No. 117/2018 tentang fintech pembiayaan syariah.',
       'Memahami regulasi POJK No. 40 Tahun 2024 yang menggantikan POJK No. 10/2022.',
@@ -325,6 +346,101 @@ export const LESSONS: Lesson[] = [
         url: 'https://ojk.go.id',
       },
     ],
+    relatedLessonIds: ['akad-transaksi-digital', 'transparansi-biaya', 'layanan-keuangan-syariah'],
+    reviewStatus: 'Published',
+    reviewedAt: REVIEWED,
+    reviewer: 'Tim Riset & Edukasi Syariah Digital Check',
+  },
+  {
+    id: 'dropshipping-kepemilikan',
+    title: 'Fikih dropshipping: hak kepemilikan barang dan bai\' ma laisa \'indak',
+    category: 'Akad',
+    readingMinutes: 6,
+    summary: 'Menghindari larangan menjual barang yang belum dimiliki melalui akad Wakalah atau Salam.',
+    introduction:
+      'Bisnis dropshipping sangat populer karena memungkinkan seseorang berjualan online tanpa modal stok barang. Namun dalam fikih muamalah, terdapat larangan tegas menjual barang yang belum dimiliki (bai\' ma laisa \'indak). Bagaimana solusi syariah agar dropshipping halal dan berkah?',
+    learningObjectives: [
+      'Memahami sabda Nabi SAW tentang larangan menjual barang yang belum dimiliki (bai\' ma laisa \'indak).',
+      'Mengenal 2 solusi akad syariah dalam dropshipping: Akad Wakalah bil Ujrah (keagenan jasa) dan Akad Salam (jual beli pesanan).',
+      'Mengetahui pembagian risiko (dhaman) dan perlindungan konsumen saat barang rusak atau cacat.',
+    ],
+    conceptExplanation:
+      'Rasulullah SAW bersabda: "Janganlah kamu menjual sesuatu yang tidak ada padamu / belum kamu miliki" (HR. Abu Dawud dan Tirmidzi). Larangan ini bertujuan mencegah gharar dan sengketa karena penjual belum tentu bisa menyerahkan barang. Namun syariah memberikan jalan keluar sah: dropshipper dapat bertindak resmi sebagai agen perantara (Wakil) yang menerima komisi jasa (Ujrah), atau menggunakan akad Salam dengan spesifikasi barang terukur dan penjaminan penuh.',
+    applicableContext:
+      'Bisnis toko online tanpa modal stok, affiliate marketing, dan perantara e-commerce.',
+    practicalExample:
+      'Budi membuat kesepakatan tertulis dengan supplier untuk menjadi agen resmi dropship (Wakalah bil Ujrah). Setiap jaket yang terjual seharga Rp350.000, Budi mendapatkan hak ujrah Rp70.000 secara transparan, dan supplier menanggung garansi pengiriman barang fisik.',
+    relevantPrinciples: ['Al-Kharaj bid-Dhaman (Hasil Sebanding Risiko)', 'Larangan Bai\' Ma La Yamlik', 'Kejujuran Perantara'],
+    body: [
+      'Dropshipping adalah model bisnis di mana penjual memajang foto produk milik supplier dan meneruskan pesanan pembeli langsung ke supplier tanpa menyimpan stok fisik.',
+      'Jika dropshipper memposisikan diri sebagai penjual langsung padahal barang belum dibeli dan belum ada izin dari supplier, transaksi tersebut berpotensi haram karena menjual barang milik orang lain tanpa hak.',
+      'Solusi syariah yang diakui DSN-MUI: dropshipper berterus terang kepada pembeli dan supplier sebagai agen perantara (Wakalah bil Ujrah) atau menanggung seluruh kewajiban penyerahan barang dengan akad Salam sesuai Fatwa No. 05/2000.',
+    ],
+    keyPoints: [
+      'Dilarang menjual barang orang lain tanpa izin atau kepemilikan sah.',
+      'Gunakan akad Wakalah bil Ujrah resmi sebagai agen komisi jasa dari supplier.',
+      'Alternatif lain: gunakan akad Salam dengan deskripsi spesifikasi barang yang presisi.',
+    ],
+    sourceIds: ['dsnmui-05-2000', 'dsnmui-04-2000', 'dsnmui-portal'],
+    importantLimitations: [
+      'Dropshipper wajib memastikan barang yang dijual bukan komoditas ribawi (seperti emas atau perak) yang mensyaratkan serah terima tunai seketika.',
+    ],
+    furtherReading: [
+      {
+        title: 'Fatwa DSN-MUI No. 05/2000 tentang Jual Beli Salam',
+        url: 'https://dsnmui.or.id',
+      },
+      {
+        title: 'Fatwa DSN-MUI No. 04/2000 tentang Murabahah',
+        url: 'https://dsnmui.or.id',
+      },
+    ],
+    relatedLessonIds: ['akad-transaksi-digital', 'transparansi-biaya', 'risiko-investasi'],
+    reviewStatus: 'Published',
+    reviewedAt: REVIEWED,
+    reviewer: 'Tim Riset & Edukasi Syariah Digital Check',
+  },
+  {
+    id: 'langganan-digital-ijarah',
+    title: 'Akad Ijarah layanan digital dan otomasi perpanjangan langganan',
+    category: 'Fintech',
+    readingMinutes: 5,
+    summary: 'Meninjau keabsahan sewa manfaat software, free trial, dan klausul auto-renewal.',
+    introduction:
+      'Layanan streaming musik, aplikasi produktivitas, dan penyimpanan cloud menggunakan model berlangganan berulang (recurring subscription). Pelajari bagaimana fikih Ijarah memandang pemanfaatan jasa digital dan klausul perpanjangan otomatis.',
+    learningObjectives: [
+      'Memahami konsep akad Ijarah atas manfaat jasa non-fisik (software as a service) menurut Fatwa DSN-MUI No. 112/2017.',
+      'Mengenali potensi ketidakjelasan (Gharar) dan pemaksaan terselubung dalam fitur perpanjangan otomatis (auto-renewal).',
+      'Mengetahui hak pembatalan (khiyar) dan transparansi notifikasi sebelum pendebitan saldo terjadi.',
+    ],
+    conceptExplanation:
+      'Akad Ijarah adalah transaksi pemindahan hak guna (manfaat) atas suatu barang atau jasa dalam jangka waktu tertentu dengan pembayaran sewa (ujrah). Syarat sah Ijarah adalah manfaatnya mubah, diketahui kadarnya, dan besaran sewanya jelas. Pada layanan digital berulang, transparansi tanggal penagihan dan kebebasan membatalkan sewa adalah syarat mutlak kerelaan (\'an taradhin).',
+    applicableContext:
+      'Aplikasi berbayar (SaaS), platform streaming media, membership klub digital, dan komputasi awan.',
+    practicalExample:
+      'Aplikasi video editing syariah memberikan masa coba gratis 7 hari, lalu mengirim notifikasi pengingat 2 hari sebelum masa coba berakhir dengan opsi satu klik: "Lanjutkan Berlangganan Rp50.000/bulan" atau "Batalkan Tanpa Biaya". Ini memenuhi syarat transparansi akad.',
+    relevantPrinciples: ['Kerelaan Kedua Pihak (\'An Taradhin)', 'Kejelasan Waktu dan Ujrah Ijarah', 'Bebas Penagihan Tersembunyi'],
+    body: [
+      'Model bisnis langganan digital didasarkan pada akad Ijarah atas manfaat piranti lunak atau hak akses konten berdurasi tertentu.',
+      'Tantangan syariah sering muncul pada fitur auto-renewal yang menagih saldo kartu konsumen secara otomatis tanpa notifikasi konfirmasi di muka setelah periode uji coba (free trial) selesai.',
+      'Jika konsumen tidak mengetahui waktu pemotongan atau kesulitan membatalkan langganan, transaksi mengandung unsur gharar dan memakan harta orang lain secara batil.',
+    ],
+    keyPoints: [
+      'Langganan digital berlandaskan akad Ijarah manfaat jasa.',
+      'Penyedia wajib transparan mengenai jadwal penagihan dan nominal perpanjangan.',
+      'Konsumen memiliki hak pembatalan mudah tanpa dipersulit.',
+    ],
+    sourceIds: ['dsnmui-112-2017', 'ojk-portal', 'bi-portal'],
+    importantLimitations: [
+      'Kebijakan pengembalian dana (refund) atas masa langganan yang tidak terpakai bergantung pada ketentuan toko aplikasi dan hukum perlindungan konsumen yang berlaku.',
+    ],
+    furtherReading: [
+      {
+        title: 'Fatwa DSN-MUI No. 112/2017 tentang Akad Ijarah',
+        url: 'https://dsnmui.or.id',
+      },
+    ],
+    relatedLessonIds: ['transparansi-biaya', 'akad-transaksi-digital', 'pembiayaan-digital'],
     reviewStatus: 'Published',
     reviewedAt: REVIEWED,
     reviewer: 'Tim Riset & Edukasi Syariah Digital Check',

@@ -197,6 +197,7 @@ export interface Lesson {
   category: string;
   readingMinutes: number;
   summary: string;
+  introduction?: string;
   learningObjectives: string[];
   conceptExplanation: string;
   applicableContext: string;
@@ -207,9 +208,42 @@ export interface Lesson {
   sourceIds: string[];
   importantLimitations: string[];
   furtherReading?: FurtherReading[];
+  relatedLessonIds?: string[];
   reviewStatus: ContentStatus;
   reviewedAt: string;
   reviewer?: string;
+}
+
+export interface ScenarioFiqhPrinciple {
+  arabic?: string;
+  translit?: string;
+  translation: string;
+  application: string;
+}
+
+export interface ScenarioAnalysis {
+  facts: string[];
+  assumptions: string[];
+  interpretations: string[];
+  conclusion: string;
+}
+
+export interface ScenarioContractStructure {
+  name: string;
+  description: string;
+  idealAkad: string;
+}
+
+export interface ScenarioFlow {
+  moneyFlow: string;
+  ownershipFlow: string;
+}
+
+export interface ScenarioExercise {
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
 }
 
 export interface Scenario {
@@ -218,7 +252,20 @@ export interface Scenario {
   icon: string;
   category: TransactionCategory;
   categoryLabel: string;
+  isSimulation?: boolean;
+  simulationNotice?: string;
   story: string;
+  background?: string;
+  partiesInvolved?: string[];
+  chronology?: string[];
+  contractStructure?: ScenarioContractStructure;
+  moneyAndOwnershipFlow?: ScenarioFlow;
+  fiqhPrinciples?: ScenarioFiqhPrinciple[];
+  criticalQuestions?: string[];
+  analysis?: ScenarioAnalysis;
+  limitations?: string[];
+  practicalLessons?: string[];
+  exercise?: ScenarioExercise;
   question: string;
   options: string[];
   correctIndex: number;
@@ -227,6 +274,7 @@ export interface Scenario {
   sourceIds?: string[];
   reviewStatus?: ContentStatus;
   reviewedAt?: string;
+  reviewer?: string;
 }
 
 export interface QuizQuestion {

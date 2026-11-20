@@ -151,6 +151,46 @@ export const SOURCES: SourceRef[] = [
     relatedContentIds: ['pembiayaan-digital', 'akad-transaksi-digital'],
   },
   {
+    id: 'dsnmui-05-2000',
+    title: 'Fatwa DSN-MUI No. 05/DSN-MUI/IV/2000 tentang Jual Beli Salam',
+    documentNumber: '05/DSN-MUI/IV/2000',
+    publisher: 'Dewan Syariah Nasional – Majelis Ulama Indonesia',
+    publicationDate: '2000-04-01',
+    validityStatus: 'Berlaku',
+    url: 'https://dsnmui.or.id',
+    kind: 'fatwa',
+    relevantClauses: [
+      'Jual beli salam adalah jual beli barang pesanan dengan penyerahan barang di kemudian hari sementara pembayaran dilakukan di muka secara tunai.',
+      'Spesifikasi barang (jenis, tipe, ukuran, kualitas, dan kuantitas) harus jelas dan disepakati di muka untuk mencegah gharar dan sengketa.',
+      'Penjual wajib menyerahkan barang tepat waktu sesuai spesifikasi yang dijanjikan.',
+    ],
+    lastVerified: CHECKED,
+    reviewStatus: 'Published',
+    verificationNote:
+      'Fatwa resmi DSN-MUI tentang jual beli pesanan salam. Menjadi rujukan utama transaksi dropshipping dan pre-order syariah.',
+    relatedContentIds: ['dropshipping-kepemilikan', 'akad-transaksi-digital'],
+  },
+  {
+    id: 'dsnmui-112-2017',
+    title: 'Fatwa DSN-MUI No. 112/DSN-MUI/IX/2017 tentang Akad Ijarah',
+    documentNumber: '112/DSN-MUI/IX/2017',
+    publisher: 'Dewan Syariah Nasional – Majelis Ulama Indonesia',
+    publicationDate: '2017-09-28',
+    validityStatus: 'Berlaku',
+    url: 'https://dsnmui.or.id',
+    kind: 'fatwa',
+    relevantClauses: [
+      'Ijarah adalah akad sewa-menyewa atas manfaat suatu barang atau jasa dengan imbalan ujrah (biaya sewa/upah).',
+      'Objek manfaat dan besaran ujrah harus diketahui dengan jelas oleh kedua pihak saat akad (ma\'lum).',
+      'Perpanjangan masa pemanfaatan harus didasarkan atas kerelaan bersama tanpa klausul pemaksaan tersembunyi.',
+    ],
+    lastVerified: CHECKED,
+    reviewStatus: 'Published',
+    verificationNote:
+      'Fatwa standar komprehensif DSN-MUI tentang akad Ijarah (sewa manfaat dan jasa), relevan untuk langganan software/aplikasi digital.',
+    relatedContentIds: ['langganan-digital-ijarah', 'transparansi-biaya'],
+  },
+  {
     id: 'ojk-pojk-40-2024',
     title:
       'Peraturan OJK No. 40 Tahun 2024 tentang Layanan Pendanaan Bersama Berbasis Teknologi Informasi (LPBBTI)',
