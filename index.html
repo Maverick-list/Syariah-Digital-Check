@@ -1117,8 +1117,19 @@
       align-items: center;
       gap: 6px;
       cursor: pointer;
-      padding: 6px 0;
-      min-height: 38px;
+      padding: 6px 8px;
+      min-height: 44px;
+      min-width: 44px;
+      border-radius: var(--radius-sm);
+    }
+    .modal-sheet .btn-back {
+      font-size: 20px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0;
     }
 
     /* Onboarding Screen */
@@ -3445,10 +3456,10 @@
                 Sinkronisasi Lintas Perangkat (Terdokumentasi)
               </h4>
               <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.55;">
-                Aplikasi ini sengaja tidak menggunakan autentikasi tiruan (*no fake login mocks*). Arsitektur sinkronisasi multi-device telah dispesifikasikan secara formal menggunakan Supabase / PostgreSQL dengan <strong>Row Level Security (RLS)</strong> dan <strong>Zero-Knowledge Client-Side Encryption</strong> agar data evaluasi finansial tetap privat.
+                Aplikasi ini sengaja tidak menggunakan autentikasi tiruan (*no fake login mocks*). <strong>Penting:</strong> Data riwayat transaksi dan skor kuis tersimpan secara lokal di memori peramban perangkat ini saja dan <strong>TIDAK OTOMATIS TERSINKRONISASI</strong> jika Anda membuka situs ini di ponsel atau komputer lain. Gunakan tombol <strong>Ekspor Data (JSON)</strong> di atas untuk memindahkan cadangan data ke perangkat baru.
               </p>
               <div class="mt-2 text-xs" style="color: var(--emerald-900); font-weight: 600;">
-                Dokumen teknis: <code>docs/BACKEND_AND_SYNC_ARCHITECTURE.md</code>
+                Spesifikasi arsitektur cloud masa depan: <code>docs/BACKEND_AND_SYNC_ARCHITECTURE.md</code>
               </div>
             </div>
 
@@ -8198,14 +8209,48 @@
       }
     }
 
-    // --- Modal Management ---
+    // --- Modal Management (WCAG 2.2 AA Focus Management) ---
+    let lastFocusedElementBeforeModal = null;
+
+    function getModalFocusableElements(container) {
+      if (!container) return [];
+      return Array.from(container.querySelectorAll(
+        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )).filter(el => {
+        return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+      });
+    }
+
     function openModal(modalId) {
       const modal = document.getElementById(modalId);
-      if (modal) modal.classList.add('open');
+      if (!modal) return;
+      lastFocusedElementBeforeModal = document.activeElement;
+      modal.classList.add('open');
+
+      // Autofocus the first interactive control (close button or input)
+      setTimeout(() => {
+        const focusables = getModalFocusableElements(modal);
+        if (focusables.length > 0) {
+          focusables[0].focus();
+        } else {
+          modal.setAttribute('tabindex', '-1');
+          modal.focus();
+        }
+      }, 50);
     }
+
     function closeModal(modalId) {
       const modal = document.getElementById(modalId);
-      if (modal) modal.classList.remove('open');
+      if (!modal) return;
+      modal.classList.remove('open');
+      if (lastFocusedElementBeforeModal && typeof lastFocusedElementBeforeModal.focus === 'function') {
+        try {
+          lastFocusedElementBeforeModal.focus();
+        } catch (e) {
+          // ignore focus error
+        }
+        lastFocusedElementBeforeModal = null;
+      }
     }
     function closeModalOnOverlay(e, modalId) {
       if (e.target.id === modalId) {
@@ -8252,12 +8297,35 @@
       showToast('Jazakallahu khair! Masukan Anda telah kami simpan demi penyempurnaan platform.');
     }
 
-    // --- Global Keyboard Accessibility (WCAG 2.2 AA) ---
+    // --- Global Keyboard Accessibility & Focus Trap (WCAG 2.2 AA) ---
     window.addEventListener('keydown', (e) => {
+      const openModals = document.querySelectorAll('.modal-overlay.open');
+      if (openModals.length === 0) return;
+      const currentModal = openModals[openModals.length - 1];
+
       if (e.key === 'Escape') {
-        document.querySelectorAll('.modal-overlay.open').forEach(modal => {
-          closeModal(modal.id);
-        });
+        closeModal(currentModal.id);
+        return;
+      }
+
+      // Tab trap inside modal dialog
+      if (e.key === 'Tab') {
+        const focusables = getModalFocusableElements(currentModal);
+        if (focusables.length === 0) return;
+        const firstElement = focusables[0];
+        const lastElement = focusables[focusables.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement || !currentModal.contains(document.activeElement)) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement || !currentModal.contains(document.activeElement)) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
       }
     });
 
