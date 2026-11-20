@@ -97,7 +97,7 @@ export const CATEGORIES: CategoryDef[] = [
       'Bagaimana kebijakan retur dan pengembalian dana?',
     ],
     lessonIds: ['transparansi-biaya', 'sumber-tepercaya'],
-    sourceIds: ['ojk-portal', 'bi-portal'],
+    sourceIds: ['dsnmui-04-2000', 'ojk-portal', 'bi-portal'],
     scenarioId: 'diskon-online',
   },
   {
@@ -108,10 +108,10 @@ export const CATEGORIES: CategoryDef[] = [
     extraQuestions: [
       'Apa akad atau struktur yang dipakai (jual beli, pembiayaan, atau lainnya)?',
       'Berapa total yang harus dibayar sampai lunas, termasuk biaya dan denda keterlambatan?',
-      'Apakah penyedia terdaftar atau berizin di OJK?',
+      'Apakah penyedia terdaftar atau berizin di OJK di bawah POJK No. 40 Tahun 2024?',
     ],
     lessonIds: ['akad-transaksi-digital', 'transparansi-biaya', 'pembiayaan-digital'],
-    sourceIds: ['dsnmui-117-2018', 'dsnmui-111-2017', 'ojk-portal'],
+    sourceIds: ['dsnmui-117-2018', 'dsnmui-17-2000', 'dsnmui-43-2004', 'dsnmui-111-2017', 'ojk-pojk-40-2024'],
     scenarioId: 'paylater',
   },
   {
@@ -125,7 +125,7 @@ export const CATEGORIES: CategoryDef[] = [
       'Apakah pembayaran tunai atau tidak tunai, dan ketentuan apa yang berlaku?',
     ],
     lessonIds: ['risiko-investasi', 'akad-transaksi-digital'],
-    sourceIds: ['dsnmui-77-2010', 'ojk-portal'],
+    sourceIds: ['dsnmui-77-2010', 'bappebti-4-2019', 'ojk-portal'],
     scenarioId: 'emas-digital',
   },
   {

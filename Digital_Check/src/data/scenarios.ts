@@ -23,6 +23,9 @@ export const SCENARIOS: Scenario[] = [
       'Belum tepat: produk bernama sama bisa memiliki akad, biaya, dan ketentuan yang berbeda.',
     ],
     lessonId: 'pembiayaan-digital',
+    sourceIds: ['dsnmui-117-2018', 'dsnmui-17-2000', 'ojk-pojk-40-2024'],
+    reviewStatus: 'Published',
+    reviewedAt: '2026-11-20',
   },
   {
     id: 'diskon-online',
@@ -45,6 +48,9 @@ export const SCENARIOS: Scenario[] = [
       'Komentar promosi bukan sumber yang cukup; periksa ketentuan resmi penjual.',
     ],
     lessonId: 'transparansi-biaya',
+    sourceIds: ['ojk-portal', 'bi-portal'],
+    reviewStatus: 'Published',
+    reviewedAt: '2026-11-20',
   },
   {
     id: 'emas-digital',
@@ -67,6 +73,9 @@ export const SCENARIOS: Scenario[] = [
       'Produk emas digital dapat berbeda dalam kepemilikan, penyimpanan, dan biaya.',
     ],
     lessonId: 'risiko-investasi',
+    sourceIds: ['dsnmui-77-2010', 'bappebti-4-2019'],
+    reviewStatus: 'Published',
+    reviewedAt: '2026-11-20',
   },
   {
     id: 'langganan',
@@ -89,6 +98,9 @@ export const SCENARIOS: Scenario[] = [
       'Ketentuan menjelaskan biaya berulang dan pembatalan; baca sebelum menyetujui.',
     ],
     lessonId: 'transparansi-biaya',
+    sourceIds: ['ojk-portal'],
+    reviewStatus: 'Published',
+    reviewedAt: '2026-11-20',
   },
   {
     id: 'donasi',
@@ -111,6 +123,9 @@ export const SCENARIOS: Scenario[] = [
       'Tidak semua tautan donasi terpercaya; verifikasi dulu.',
     ],
     lessonId: 'zisw-digital',
+    sourceIds: ['ojk-portal', 'bi-portal'],
+    reviewStatus: 'Published',
+    reviewedAt: '2026-11-20',
   },
   {
     id: 'tabungan-digital',
@@ -133,6 +148,9 @@ export const SCENARIOS: Scenario[] = [
       'Iklan menarik bukan ukuran kesesuaian dengan kebutuhanmu.',
     ],
     lessonId: 'layanan-keuangan-syariah',
+    sourceIds: ['dsnmui-116-2017', 'ojk-portal', 'bi-portal'],
+    reviewStatus: 'Published',
+    reviewedAt: '2026-11-20',
   },
 ];
 

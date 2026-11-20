@@ -93,17 +93,42 @@ export interface PersistedState {
   activity: ActivityEntry[];
 }
 
+/** Status alur review tata kelola konten */
+export type ContentStatus =
+  | 'Draft'
+  | 'Needs Verification'
+  | 'Under Review'
+  | 'Approved'
+  | 'Published'
+  | 'Archived';
+
+/** Status keberlakuan hukum/fatwa */
+export type ValidityStatus = 'Berlaku' | 'Dicabut' | 'Diubah';
+
 export interface SourceRef {
   id: string;
   title: string;
+  documentNumber: string;
   publisher: string;
-  /** Hanya URL beranda situs resmi; tautan dalam tidak dipakai karena belum diverifikasi. */
+  publicationDate?: string;
+  effectiveDate?: string;
+  validityStatus: ValidityStatus;
+  revocationNote?: string;
+  /** URL dokumen resmi atau portal resmi regulator */
   url: string;
   kind: 'fatwa' | 'regulator' | 'portal';
-  /** Tanggal terakhir metadata sumber ini dicek (ISO). */
+  relevantClauses: string[];
+  /** Tanggal terakhir metadata sumber ini dicek (ISO: YYYY-MM-DD). */
   lastVerified: string;
-  /** Apa yang sudah diverifikasi, ditulis jujur. */
+  reviewStatus: ContentStatus;
+  /** Apa yang sudah diverifikasi, ditulis secara jujur dan transparan. */
   verificationNote: string;
+  relatedContentIds?: string[];
+}
+
+export interface FurtherReading {
+  title: string;
+  url: string;
 }
 
 export interface Lesson {
@@ -112,10 +137,19 @@ export interface Lesson {
   category: string;
   readingMinutes: number;
   summary: string;
+  learningObjectives: string[];
+  conceptExplanation: string;
+  applicableContext: string;
+  practicalExample: string;
+  relevantPrinciples: string[];
   body: string[];
   keyPoints: string[];
   sourceIds: string[];
+  importantLimitations: string[];
+  furtherReading?: FurtherReading[];
+  reviewStatus: ContentStatus;
   reviewedAt: string;
+  reviewer?: string;
 }
 
 export interface Scenario {
@@ -130,6 +164,9 @@ export interface Scenario {
   correctIndex: number;
   explanations: string[];
   lessonId: string;
+  sourceIds?: string[];
+  reviewStatus?: ContentStatus;
+  reviewedAt?: string;
 }
 
 export interface QuizQuestion {
@@ -138,4 +175,7 @@ export interface QuizQuestion {
   options: string[];
   correctIndex: number;
   explanation: string;
+  sourceIds?: string[];
+  reviewStatus?: ContentStatus;
+  reviewedAt?: string;
 }
