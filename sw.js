@@ -1,4 +1,4 @@
-const CACHE_NAME = 'syariah-check-v1';
+const CACHE_NAME = 'syariah-check-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -34,7 +34,10 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Network first, falling back to cache
+  // Hanya proses request metode GET (hindari intercept form post atau external data)
+  if (event.request.method !== 'GET') return;
+
+  // Stale-While-Revalidate untuk aset statis, Network-First untuk konten utama
   event.respondWith(
     fetch(event.request)
       .then((response) => {
@@ -46,6 +49,19 @@ self.addEventListener('fetch', (event) => {
         }
         return response;
       })
-      .catch(() => caches.match(event.request).then((res) => res || caches.match('/index.html')))
+      .catch(() => {
+        return caches.match(event.request).then((res) => {
+          if (res) return res;
+          // Fallback ke shell aplikasi utama
+          if (event.request.mode === 'navigate') {
+            return caches.match('/index.html') || caches.match('/');
+          }
+          return new Response('Aset tidak tersedia saat offline.', {
+            status: 503,
+            statusText: 'Service Unavailable',
+            headers: new Headers({ 'Content-Type': 'text/plain; charset=utf-8' })
+          });
+        });
+      })
   );
 });

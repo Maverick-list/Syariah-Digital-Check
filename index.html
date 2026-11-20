@@ -4,8 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Syariah Digital Check — Cerdas Sebelum Transaksi, Bijak dalam Pilihan</title>
-  <meta name="description" content="Platform edukasi literasi keuangan dan evaluasi kesesuaian prinsip syariah pada transaksi finansial digital modern Indonesia.">
+  <meta name="description" content="Platform edukasi literasi keuangan syariah dan evaluasi mandiri kesesuaian prinsip muamalah pada transaksi fintech, paylater, emas digital, dan e-commerce Indonesia.">
+  <meta name="keywords" content="syariah digital check, literasi keuangan syariah, fatwa dsn-mui, cek paylater syariah, emas digital qabdh, fiqih muamalah kontemporer, pojk 40 2024">
+  <meta name="author" content="Syariah Digital Check Initiative">
   <meta name="theme-color" content="#064E3B">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://syariahdigitalcheck.id/">
+
+  <!-- Open Graph / Facebook Metadata -->
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Syariah Digital Check — Cerdas Sebelum Transaksi, Bijak dalam Pilihan">
+  <meta property="og:description" content="Platform edukasi literasi keuangan syariah dan evaluasi mandiri transaksi fintech, paylater, dan emas digital berbasis fatwa resmi DSN-MUI.">
+  <meta property="og:url" content="https://syariahdigitalcheck.id/">
+  <meta property="og:site_name" content="Syariah Digital Check">
+  <meta property="og:image" content="https://syariahdigitalcheck.id/assets/icon-512.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:alt" content="Logo Syariah Digital Check">
+
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syariah Digital Check — Cerdas Sebelum Transaksi, Bijak dalam Pilihan">
+  <meta name="twitter:description" content="Periksa kesesuaian akad dan biaya transaksi digitalmu dengan kaidah fiqih muamalah kontemporer.">
+  <meta name="twitter:image" content="https://syariahdigitalcheck.id/assets/icon-512.png">
+
+  <!-- Structured Data (JSON-LD Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Syariah Digital Check",
+    "alternateName": "SyariahCheck",
+    "url": "https://syariahdigitalcheck.id",
+    "applicationCategory": "EducationalApplication, FinanceApplication",
+    "operatingSystem": "All",
+    "inLanguage": "id",
+    "description": "Platform edukasi literasi keuangan syariah dan evaluasi mandiri kesesuaian prinsip muamalah pada transaksi finansial digital modern Indonesia.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "IDR"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Syariah Digital Check Initiative",
+      "url": "https://syariahdigitalcheck.id"
+    }
+  }
+  </script>
   
   <!-- iOS PWA & Standalone Full Application Support -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1803,6 +1850,159 @@
     .text-muted { color: var(--text-muted); font-size: 12px; }
     .text-xs { font-size: 11px; }
     .gold-sparkle { color: var(--gold-500); font-size: 18px; vertical-align: middle; }
+
+    /* Offline Indicator Banner */
+    .offline-banner {
+      background: var(--gold-700);
+      color: #FFFFFF;
+      padding: 8px 16px;
+      font-size: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .offline-banner-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    /* Phase 8 Public Site Footer */
+    .public-site-footer {
+      background: var(--ivory-warm);
+      border-top: 1px solid var(--ivory-border);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px 24px;
+      margin-top: 36px;
+      margin-bottom: 24px;
+    }
+    .footer-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 768px) {
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+    .footer-brand-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .footer-brand-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--emerald-950);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .footer-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--emerald-950);
+      margin: 0;
+    }
+    .footer-tagline {
+      font-size: 11.5px;
+      color: var(--gold-700);
+      font-weight: 600;
+      margin: 0;
+    }
+    .footer-description {
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    .footer-heading {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--emerald-950);
+      margin: 0 0 10px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-links a {
+      font-size: 12.5px;
+      color: var(--emerald-900);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      cursor: pointer;
+    }
+    .footer-links a:hover,
+    .footer-links a:focus {
+      color: var(--emerald-600);
+      text-decoration: underline;
+    }
+    .footer-disclaimer-box {
+      background: var(--gold-50);
+      border: 1px solid var(--gold-200);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .footer-disclaimer-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .footer-disclaimer-text {
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: var(--emerald-950);
+    }
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px solid var(--ivory-border);
+      padding-top: 16px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+    .footer-bottom-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .badge-pill {
+      background: var(--sage-100);
+      color: var(--emerald-950);
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 10.5px;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
@@ -1870,6 +2070,14 @@
 
   <!-- Native Responsive Viewport Main Container -->
   <main class="site-main" id="siteMain" tabindex="-1">
+    <!-- Offline Indicator Banner (PWA Resilience) -->
+    <div id="offlineNotificationBanner" class="offline-banner" style="display: none;" role="status" aria-live="polite">
+      <div class="offline-banner-inner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.58 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        <span><strong>Mode Offline:</strong> Anda sedang menjelajahi salinan tersimpan. Modul belajar dan riwayat tetap dapat diakses penuh tanpa internet.</span>
+      </div>
+    </div>
+
     <div class="site-content-wrapper screen-scroller" id="screenScroller">
 
         <!-- ========================================== -->
@@ -2095,6 +2303,74 @@
                 </div>
               </div> <!-- /home-col-aside -->
             </div> <!-- /home-grid-layout -->
+
+            <!-- ========================================== -->
+            <!-- PUBLIC SITE FOOTER (BERANDA) -->
+            <!-- ========================================== -->
+            <footer class="public-site-footer" role="contentinfo">
+              <div class="footer-inner">
+                <div class="footer-top">
+                  <div class="footer-col footer-col-brand">
+                    <div class="footer-brand-header">
+                      <div class="footer-brand-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C89D42" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                      </div>
+                      <div>
+                        <h3 class="footer-title">Syariah Digital Check</h3>
+                        <p class="footer-tagline">Cerdas Sebelum Transaksi, Bijak dalam Pilihan</p>
+                      </div>
+                    </div>
+                    <p class="footer-description">
+                      Platform web independen nirlaba untuk edukasi literasi muamalah, evaluasi mandiri kesesuaian akad syariah, dan pencegahan jebakan biaya tersembunyi pada layanan finansial digital Indonesia.
+                    </p>
+                  </div>
+
+                  <div class="footer-col">
+                    <h4 class="footer-heading">Navigasi Fitur</h4>
+                    <ul class="footer-links">
+                      <li><a href="#screenPause" onclick="startTransactionCheck(); return false;">Cek Transaksi (PAUSE)</a></li>
+                      <li><a href="#screenLearn" onclick="navigateTo('screenLearn'); return false;">Modul Belajar Muamalah</a></li>
+                      <li><a href="#screenCaseStudies" onclick="navigateTo('screenCaseStudies'); return false;">Studi Kasus Digital</a></li>
+                      <li><a href="#screenQuiz" onclick="navigateTo('screenQuiz'); return false;">Kuis Literasi Syariah</a></li>
+                      <li><a href="#screenProgress" onclick="navigateTo('screenProgress'); return false;">Indeks & Kemajuan</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="footer-col">
+                    <h4 class="footer-heading">Informasi Publik</h4>
+                    <ul class="footer-links">
+                      <li><a href="#about" onclick="openModal('modalAbout'); return false;">Tentang Inisiatif</a></li>
+                      <li><a href="#methodology" onclick="openModal('modalMethodology'); return false;">Metodologi Evaluasi</a></li>
+                      <li><a href="#references" onclick="openModal('modalSourceRef'); return false;">Rujukan Fatwa & Regulasi</a></li>
+                      <li><a href="#disclaimer" onclick="openModal('modalDisclaimer'); return false;">Disclaimer & Sanggahan</a></li>
+                      <li><a href="#privacy" onclick="openModal('modalPrivacyPolicy'); return false;">Kebijakan Privasi</a></li>
+                      <li><a href="#terms" onclick="openModal('modalTerms'); return false;">Syarat & Ketentuan</a></li>
+                      <li><a href="#contact" onclick="openModal('modalContactFeedback'); return false;">Kontak & Umpan Balik</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Official Non-Affiliation Box -->
+                <div class="footer-disclaimer-box">
+                  <div class="footer-disclaimer-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B08428" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  </div>
+                  <div class="footer-disclaimer-text">
+                    <strong>Pemberitahuan Status & Batasan Edukatif:</strong>
+                    Syariah Digital Check adalah sarana literasi swadaya masyarakat. Platform ini <strong>BUKAN</strong> lembaga fatwa resmi dan <strong>TIDAK TERAFILIASI SECARA RESMI</strong> dengan Dewan Syariah Nasional – Majelis Ulama Indonesia (DSN-MUI), Otoritas Jasa Keuangan (OJK), maupun Bank Indonesia. Penggunaan kutipan fatwa dan regulasi bertujuan murni sebagai landasan edukatif dan transparansi konsumen.
+                  </div>
+                </div>
+
+                <div class="footer-bottom">
+                  <p>© 2026 Syariah Digital Check. Hak cipta materi edukasi di bawah lisensi CC-BY-NC-SA 4.0.</p>
+                  <div class="footer-bottom-badges">
+                    <span class="badge-pill">v2.4.0 Production</span>
+                    <span class="badge-pill">Privacy First</span>
+                    <span class="badge-pill">WCAG AAA Contrast</span>
+                  </div>
+                </div>
+              </div>
+            </footer>
           </div> <!-- /main-content -->
         </section>
 
@@ -3213,15 +3489,40 @@
               </button>
             </div>
 
-            <!-- Educational Boundary Disclaimer -->
+            <!-- Educational Boundary & Public Information Hub -->
             <div class="card" style="background: var(--ivory-warm); border-color: var(--ivory-border);">
-              <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> BATASAN LEGAL & OTORITAS</span>
-              <h4 style="font-size: 14px; font-weight: 700; margin-top: 4px; color: var(--emerald-950);">
-                Bukan Dewan Syariah Nasional atau Penasihat Finansial
+              <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> INFORMASI PUBLIK & TATA KELOLA</span>
+              <h4 style="font-size: 14.5px; font-weight: 700; margin-top: 4px; color: var(--emerald-950);">
+                Transparansi Tata Kelola & Batasan Edukatif
               </h4>
               <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.6;">
-                Syariah Digital Check dirancang eksklusif sebagai alat bantu literasi konsumen untuk membedah transparansi dan menghindari jebakan biaya digital. Evaluasi ini tidak mengklaim vonis halal/haram mutlak terhadap entitas bisnis manapun.
+                Syariah Digital Check dirancang eksklusif sebagai alat bantu literasi konsumen untuk membedah transparansi klausul kontrak dan menghindari jebakan denda majemuk. Platform ini bukan lembaga sertifikasi fatwa resmi dan tidak terafiliasi secara formal dengan DSN-MUI, OJK, maupun Bank Indonesia.
               </p>
+
+              <!-- Quick Links Grid to All Public Modals -->
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin-top: 14px;">
+                <button class="btn btn-outline btn-sm text-left" onclick="openModal('modalAbout')" style="justify-content: flex-start;">
+                  🏛️ Tentang Syariah Digital Check
+                </button>
+                <button class="btn btn-outline btn-sm text-left" onclick="openModal('modalMethodology')" style="justify-content: flex-start;">
+                  📐 Metodologi & Skoring
+                </button>
+                <button class="btn btn-outline btn-sm text-left" onclick="openModal('modalSourceRef')" style="justify-content: flex-start;">
+                  📜 Rujukan Fatwa & Regulasi
+                </button>
+                <button class="btn btn-outline btn-sm text-left" onclick="openModal('modalDisclaimer')" style="justify-content: flex-start;">
+                  ⚖️ Sanggahan Resmi (Disclaimer)
+                </button>
+                <button class="btn btn-outline btn-sm text-left" onclick="openModal('modalPrivacyPolicy')" style="justify-content: flex-start;">
+                  🔒 Kebijakan Privasi Lengkap
+                </button>
+                <button class="btn btn-outline btn-sm text-left" onclick="openModal('modalTerms')" style="justify-content: flex-start;">
+                  📋 Syarat & Ketentuan Layanan
+                </button>
+                <button class="btn btn-outline btn-sm text-left" onclick="openModal('modalContactFeedback')" style="justify-content: flex-start;">
+                  ✉️ Kontak & Kirim Masukan
+                </button>
+              </div>
             </div>
 
             <!-- Internal Development & Design Spec (Clearly Separated from Public Primary UI) -->
@@ -3326,6 +3627,247 @@
       <button class="btn btn-primary btn-full mt-4" onclick="closeModal('modalPrivacyPolicy')">
         Saya Memahami Kebijakan Ini
       </button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: TENTANG SYARIAH DIGITAL CHECK -->
+  <!-- ========================================== -->
+  <div class="modal-overlay wide-modal" id="modalAbout" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle" onclick="closeModalOnOverlay(event, 'modalAbout')">
+    <div class="modal-sheet" style="max-height: 88vh; overflow-y: auto;">
+      <div class="sheet-handle"></div>
+      <div class="flex-between">
+        <div class="flex-row gap-2">
+          <span class="pill pill-emerald">TENTANG INISIATIF</span>
+          <h3 id="aboutModalTitle" style="font-size: 16px; font-weight: 700; color: var(--emerald-950); margin: 0;">Tentang Syariah Digital Check</h3>
+        </div>
+        <button class="btn-back" onclick="closeModal('modalAbout')" aria-label="Tutup Tentang" style="font-size: 18px; padding: 0;">✕</button>
+      </div>
+
+      <div class="mt-3 text-xs" style="line-height: 1.6; color: var(--text-secondary);">
+        <p style="font-size: 13.5px; color: var(--emerald-950); font-weight: 600; line-height: 1.5;">
+          <strong>Syariah Digital Check</strong> adalah platform inisiatif publik independen yang dirancang untuk membantu masyarakat muslim Indonesia menelaah kesesuaian prinsip syariah dan transparansi biaya pada produk keuangan digital kontemporer.
+        </p>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 14px 0 4px;">1. Visi & Latar Belakang</h4>
+        <p>Perkembangan teknologi finansial (Fintech), skema PayLater (BNPL), tabungan emas digital berbasis aplikasi, hingga pinjaman online peer-to-peer (P2P) menawarkan kecepatan dan kenyamanan luar biasa. Namun, di balik kemudahan transaksi, seringkali terdapat klausul akad yang kabur, denda keterlambatan berbunga majemuk, serta biaya administrasi siluman yang luput dari pemahaman konsumen.</p>
+        <p>Platform ini hadir untuk menjembatani kesenjangan pemahaman antara akad fiqih muamalah klasik dan arsitektur produk finansial modern.</p>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 14px 0 4px;">2. Kerangka Berpikir: PAUSE → CHECK → CHOOSE</h4>
+        <ul style="padding-left: 18px; margin: 4px 0;">
+          <li><strong>PAUSE (Jeda Sadar):</strong> Menghentikan desakan psikologis impulsif ("FOMO") sebelum menyetujui transaksi digital.</li>
+          <li><strong>CHECK (Pemeriksaan Mandiri):</strong> Menilai 5 dimensi kritis: akad, transparansi biaya, hak kepemilikan (qabdh), klausul denda, dan perlindungan konsumen.</li>
+          <li><strong>CHOOSE (Pilihan Bijak):</strong> Mengambil keputusan finansial berdasarkan pengetahuan yang jelas dan kesadaran spiritual, bukan ketidaktahuan.</li>
+        </ul>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 14px 0 4px;">3. Sifat Independen & Non-Komersial</h4>
+        <p>Syariah Digital Check tidak menjual produk finansial, tidak menerima sponsorship dari platform pinjaman daring manapun, tidak terafiliasi dengan program komisi perantara, dan 100% bebas dari pelacak iklan komersial pihak ketiga.</p>
+
+        <div class="card mt-3" style="background: var(--ivory-warm); border: 1px solid var(--ivory-border); padding: 12px 14px;">
+          <strong style="color: var(--emerald-950); display: block; font-size: 12px; margin-bottom: 4px;">Pemberitahuan Status Hukum & Regulasi:</strong>
+          <p style="font-size: 11.5px; color: var(--text-muted); margin: 0; line-height: 1.5;">
+            Syariah Digital Check merupakan sarana edukasi nirlaba terbuka. Platform ini <strong>BUKAN</strong> otoritas fatwa resmi dan <strong>TIDAK</strong> mewakili Dewan Syariah Nasional MUI (DSN-MUI), Otoritas Jasa Keuangan (OJK), maupun Bank Indonesia.
+          </p>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-full mt-4" onclick="closeModal('modalAbout')">
+        Tutup & Kembali
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: METODOLOGI PEMERIKSAAN & SKORING -->
+  <!-- ========================================== -->
+  <div class="modal-overlay wide-modal" id="modalMethodology" role="dialog" aria-modal="true" aria-labelledby="methodologyModalTitle" onclick="closeModalOnOverlay(event, 'modalMethodology')">
+    <div class="modal-sheet" style="max-height: 88vh; overflow-y: auto;">
+      <div class="sheet-handle"></div>
+      <div class="flex-between">
+        <div class="flex-row gap-2">
+          <span class="pill pill-emerald">METODOLOGI ILMIAH</span>
+          <h3 id="methodologyModalTitle" style="font-size: 16px; font-weight: 700; color: var(--emerald-950); margin: 0;">Metodologi Evaluasi Transparansi Akad</h3>
+        </div>
+        <button class="btn-back" onclick="closeModal('modalMethodology')" aria-label="Tutup Metodologi" style="font-size: 18px; padding: 0;">✕</button>
+      </div>
+
+      <div class="mt-3 text-xs" style="line-height: 1.6; color: var(--text-secondary);">
+        <p>Metodologi evaluasi Syariah Digital Check dibangun atas sintesis kaidah <strong>Fiqih Muamalah Maaliyyah</strong>, fatwa resmi <strong>DSN-MUI</strong>, dan ketentuan regulasi perlindungan konsumen <strong>OJK (POJK No. 40/2024 & POJK No. 22/2023)</strong>.</p>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 14px 0 4px;">1. Lima Dimensi Pemeriksaan Transaksi</h4>
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+          <div class="card" style="padding: 10px 12px; background: var(--ivory-50); border: 1px solid var(--ivory-border);">
+            <strong style="color: var(--emerald-900); font-size: 12px;">Dimensi 1: Kejelasan Akad & Subjek Hukum (Al-Aqidani wa Shighat)</strong>
+            <p style="margin: 2px 0 0; font-size: 11.5px; color: var(--text-muted);">Memeriksa apakah akad didefinisikan secara tegas (Murabahah, Ijarah, Wakalah, dsb.) dan tidak mencampuradukkan dua akad yang kontradiktif (syarthani fi bai' / ba'ataini fi ba'ah).</p>
+          </div>
+          <div class="card" style="padding: 10px 12px; background: var(--ivory-50); border: 1px solid var(--ivory-border);">
+            <strong style="color: var(--emerald-900); font-size: 12px;">Dimensi 2: Transparansi Biaya & Ketiadaan Riba Jahiliyyah</strong>
+            <p style="margin: 2px 0 0; font-size: 11.5px; color: var(--text-muted);">Memeriksa apakah margin atau ujrah riil bersifat tetap dan disepakati di muka, tanpa persentase denda tersembunyi yang bertambah seiring bertambahnya waktu penundaan pinjaman uang murni.</p>
+          </div>
+          <div class="card" style="padding: 10px 12px; background: var(--ivory-50); border: 1px solid var(--ivory-border);">
+            <strong style="color: var(--emerald-900); font-size: 12px;">Dimensi 3: Kepemilikan & Penyerahan Barang (Qabdh Hakiki / Hukmi)</strong>
+            <p style="margin: 2px 0 0; font-size: 11.5px; color: var(--text-muted);">Memastikan barang yang diperjualbelikan (khususnya komoditas emas atau barang dropship) benar-benar telah menjadi milik penjual sebelum ditransaksikan, atau menggunakan skema salam/istishna' yang sah.</p>
+          </div>
+          <div class="card" style="padding: 10px 12px; background: var(--ivory-50); border: 1px solid var(--ivory-border);">
+            <strong style="color: var(--emerald-900); font-size: 12px;">Dimensi 4: Klausul Sanksi Keterlambatan (Ta'zir vs Riba)</strong>
+            <p style="margin: 2px 0 0; font-size: 11.5px; color: var(--text-muted);">Memeriksa apakah sanksi keterlambatan hanya dikenakan pada nasabah mampu yang sengaja menunda bayar (Fatwa 17/2000) dan dialokasikan sebagai dana kebajikan sosial (Qardhul Hasan / dana sosial), bukan pendapatan bunga bagi kreditur.</p>
+          </div>
+          <div class="card" style="padding: 10px 12px; background: var(--ivory-50); border: 1px solid var(--ivory-border);">
+            <strong style="color: var(--emerald-900); font-size: 12px;">Dimensi 5: Tata Kelola Risiko & Hak Pembatalan Konsumen</strong>
+            <p style="margin: 2px 0 0; font-size: 11.5px; color: var(--text-muted);">Memeriksa klausul pembaruan otomatis (auto-renewal subscription), kemudahan membatalkan langganan, dan ketiadaan klausul eksonerasi yang melepaskan penyedia platform dari tanggung jawab hukum.</p>
+          </div>
+        </div>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 14px 0 4px;">2. Formula Pembobotan Indeks Literasi (Literacy Index)</h4>
+        <p>Indeks Literasi Pengguna dihitung secara dinamis dari aktivitas nyata (tanpa angka statis buatan) dengan formula terkalibrasi:</p>
+        <div style="background: var(--emerald-950); color: #fff; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 11.5px; margin: 6px 0;">
+          Indeks = (30% × Skor Pilar Akad) + (30% × Skor Pilar Biaya & Riba) + (20% × Skor Pilar Kepemilikan) + (20% × Skor Pilar Tata Kelola)
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-full mt-4" onclick="closeModal('modalMethodology')">
+        Saya Mengerti Metodologi Ini
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: DISCLAIMER & BATASAN EDUKASI RESMI -->
+  <!-- ========================================== -->
+  <div class="modal-overlay" id="modalDisclaimer" role="dialog" aria-modal="true" aria-labelledby="disclaimerModalTitle" onclick="closeModalOnOverlay(event, 'modalDisclaimer')">
+    <div class="modal-sheet" style="max-height: 88vh; overflow-y: auto;">
+      <div class="sheet-handle"></div>
+      <div class="flex-between">
+        <div class="flex-row gap-2">
+          <span class="pill pill-gold">BATASAN & SANGGAHAN RESMI</span>
+          <h3 id="disclaimerModalTitle" style="font-size: 16px; font-weight: 700; color: var(--emerald-950); margin: 0;">Sanggahan Resmi (Disclaimer)</h3>
+        </div>
+        <button class="btn-back" onclick="closeModal('modalDisclaimer')" aria-label="Tutup Sanggahan" style="font-size: 18px; padding: 0;">✕</button>
+      </div>
+
+      <div class="mt-3 text-xs" style="line-height: 1.6; color: var(--text-secondary);">
+        <div class="card" style="background: var(--gold-50); border: 1px solid var(--gold-200); padding: 12px 14px; margin-bottom: 12px;">
+          <div style="display: flex; gap: 8px; align-items: flex-start;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-700)" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div>
+              <strong style="color: var(--gold-700); font-size: 12px; display: block;">Bukan Fatwa Formal & Bukan Nasihat Keuangan Berlisensi</strong>
+              <p style="margin: 2px 0 0; font-size: 11px; color: var(--emerald-950); line-height: 1.45;">
+                Platform ini adalah perangkat lunak edukasi literasi mandiri untuk memandu konsumen mengidentifikasi risiko klausul akad transaksi digital. Hasil kalkulator dan indikator evaluasi BUKAN fatwa formal atau legitimasi hukum perdata.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 12px 0 4px;">1. Pernyataan Non-Afiliasi Lembaga</h4>
+        <p><strong>Syariah Digital Check</strong> secara tegas menyatakan bahwa platform ini:</p>
+        <ul style="padding-left: 18px; margin: 4px 0;">
+          <li><strong>BUKAN</strong> organ, perwakilan, anak usaha, maupun unit resmi dari <strong>Dewan Syariah Nasional – Majelis Ulama Indonesia (DSN-MUI)</strong>.</li>
+          <li><strong>TIDAK</strong> disertifikasi, didanai, atau diawasi langsung oleh <strong>Otoritas Jasa Keuangan (OJK)</strong> maupun <strong>Bank Indonesia (BI)</strong>.</li>
+          <li>Pengutipan fatwa DSN-MUI dan regulasi POJK semata-mata dilakukan sebagai sumber rujukan primer publik untuk kepentingan kajian edukasi (academic / fair educational use).</li>
+        </ul>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 12px 0 4px;">2. Tanggung Jawab Keputusan Konsumen</h4>
+        <p>Setiap transaksi finansial, pendaftaran aplikasi fintech, atau persetujuan klausul kontrak yang dilakukan pengguna dengan penyedia pihak ketiga sepenuhnya merupakan keputusan dan tanggung jawab mandiri pengguna (istifta' qalbaka).</p>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 12px 0 4px;">3. Batasan Dinamika Produk Finansial</h4>
+        <p>Syarat & Ketentuan (Terms of Service) penyedia fintech dapat berubah sewaktu-waktu tanpa pemberitahuan kepada pengembang Syariah Digital Check. Pengguna dianjurkan untuk selalu memeriksa dokumen perjanjian terkini pada masing-masing aplikasi penyedia jasa.</p>
+      </div>
+
+      <button class="btn btn-primary btn-full mt-4" onclick="closeModal('modalDisclaimer')">
+        Saya Mengerti & Setuju
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: SYARAT DAN KETENTUAN PENGGUNAAN -->
+  <!-- ========================================== -->
+  <div class="modal-overlay wide-modal" id="modalTerms" role="dialog" aria-modal="true" aria-labelledby="termsModalTitle" onclick="closeModalOnOverlay(event, 'modalTerms')">
+    <div class="modal-sheet" style="max-height: 88vh; overflow-y: auto;">
+      <div class="sheet-handle"></div>
+      <div class="flex-between">
+        <div class="flex-row gap-2">
+          <span class="pill pill-emerald">KETENTUAN HUKUM</span>
+          <h3 id="termsModalTitle" style="font-size: 16px; font-weight: 700; color: var(--emerald-950); margin: 0;">Syarat dan Ketentuan Layanan</h3>
+        </div>
+        <button class="btn-back" onclick="closeModal('modalTerms')" aria-label="Tutup Syarat & Ketentuan" style="font-size: 18px; padding: 0;">✕</button>
+      </div>
+
+      <div class="mt-3 text-xs" style="line-height: 1.6; color: var(--text-secondary);">
+        <p>Selamat datang di <strong>Syariah Digital Check</strong>. Dengan mengakses dan menggunakan platform web ini, Anda menyatakan setuju untuk terikat pada Syarat dan Ketentuan berikut:</p>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 12px 0 4px;">1. Penggunaan Layanan untuk Edukasi</h4>
+        <p>Layanan ini disediakan secara gratis untuk kepentingan peningkatan literasi keuangan syariah, penelitian akademis, dan edukasi pribadi nirlaba. Anda tidak diperkenankan menggunakan platform ini untuk:</p>
+        <ul style="padding-left: 18px; margin: 4px 0;">
+          <li>Menyebarkan klaim fitnah, pencemaran nama baik, atau kampanye hitam terhadap merek atau badan usaha tertentu.</li>
+          <li>Mengkomersialkan hasil evaluasi simulasi sebagai sertifikat berbayar.</li>
+          <li>Melakukan penambangan data (scraping) liar atau serangan siber yang merusak ketersediaan sistem publik ini.</li>
+        </ul>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 12px 0 4px;">2. Batasan Tanggung Jawab (Limitation of Liability)</h4>
+        <p>Pengembang dan kontributor Syariah Digital Check tidak bertanggung jawab atas kerugian materiil, immateriil, wanprestasi kontrak, atau denda perdata yang mungkin dialami pengguna sehubungan dengan transaksi keuangan nyata yang dilakukan di luar platform ini.</p>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 12px 0 4px;">3. Hak Kekayaan Intelektual & Lisensi Konten</h4>
+        <p>Materi pembelajaran, ringkasan kaidah fiqih, dan desain UI dilisensikan di bawah <strong>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</strong>. Anda diperbolehkan membagikan dan menyadur materi dengan menyebutkan sumber asli tanpa tujuan komersial.</p>
+
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 12px 0 4px;">4. Perubahan Ketentuan</h4>
+        <p>Ketentuan ini dapat disesuaikan secara berkala seiring terbitnya fatwa baru DSN-MUI atau regulasi perbankan/fintech terkini dari regulator Republik Indonesia.</p>
+      </div>
+
+      <button class="btn btn-primary btn-full mt-4" onclick="closeModal('modalTerms')">
+        Saya Menyetujui Ketentuan Ini
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: KONTAK DAN UMPAN BALIK EDUKASI -->
+  <!-- ========================================== -->
+  <div class="modal-overlay" id="modalContactFeedback" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" onclick="closeModalOnOverlay(event, 'modalContactFeedback')">
+    <div class="modal-sheet" style="max-height: 88vh; overflow-y: auto;">
+      <div class="sheet-handle"></div>
+      <div class="flex-between">
+        <div class="flex-row gap-2">
+          <span class="pill pill-emerald">HUBUNGI KAMI</span>
+          <h3 id="contactModalTitle" style="font-size: 16px; font-weight: 700; color: var(--emerald-950); margin: 0;">Kontak & Umpan Balik</h3>
+        </div>
+        <button class="btn-back" onclick="closeModal('modalContactFeedback')" aria-label="Tutup Kontak" style="font-size: 18px; padding: 0;">✕</button>
+      </div>
+
+      <p class="text-muted mt-2" style="font-size: 12px; line-height: 1.55;">
+        Punya saran perbaikan rujukan fatwa, usulan modul baru, laporan anomali transaksi digital, atau saran tampilan? Kami sangat menghargai kontribusi Anda untuk menyempurnakan platform edukasi publik ini.
+      </p>
+
+      <form id="contactFeedbackForm" onsubmit="handleContactFeedbackSubmit(event)" class="mt-3" style="display: flex; flex-direction: column; gap: 12px;">
+        <div>
+          <label for="feedbackCategory" style="display: block; font-size: 12px; font-weight: 700; color: var(--emerald-950); margin-bottom: 4px;">Kategori Masukan *</label>
+          <select id="feedbackCategory" required style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--ivory-border); background: #fff; font-size: 13px; color: var(--emerald-950);">
+            <option value="Fatwa & Rujukan">Koreksi / Usulan Rujukan Fatwa & Regulasi</option>
+            <option value="Modul & Studi Kasus">Usulan Topik Modul atau Studi Kasus Baru</option>
+            <option value="Bug & Antarmuka">Laporan Masalah Tampilan atau Bug Teknis</option>
+            <option value="Pertanyaan Umum">Pertanyaan Umum Seputar Platform</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="feedbackEmail" style="display: block; font-size: 12px; font-weight: 700; color: var(--emerald-950); margin-bottom: 4px;">Email Anda (Opsional)</label>
+          <input type="email" id="feedbackEmail" placeholder="nama@domain.com (untuk balasan)" style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--ivory-border); background: #fff; font-size: 13px; box-sizing: border-box;">
+        </div>
+
+        <div>
+          <label for="feedbackMessage" style="display: block; font-size: 12px; font-weight: 700; color: var(--emerald-950); margin-bottom: 4px;">Pesan atau Masukan Anda *</label>
+          <textarea id="feedbackMessage" required rows="4" placeholder="Tuliskan ulasan atau usulan Anda dengan jelas..." style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--ivory-border); background: #fff; font-size: 13px; box-sizing: border-box; resize: vertical; line-height: 1.5;"></textarea>
+        </div>
+
+        <div class="card" style="background: var(--ivory-50); border: 1px solid var(--ivory-border); padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.45;">
+          Data masukan Anda disimpan secara lokal dan dapat langsung dibuka melalui email ke <code>halo@syariahdigitalcheck.id</code>.
+        </div>
+
+        <div class="flex-row gap-2 mt-2">
+          <button type="button" class="btn btn-outline" style="flex: 1;" onclick="closeModal('modalContactFeedback')">Batal</button>
+          <button type="submit" class="btn btn-primary" style="flex: 1;">Kirim Masukan</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -7688,6 +8230,33 @@
       openModal('modalIOSInstall');
     }
 
+    // --- Phase 8: Public Feedback Submission Handler ---
+    function handleContactFeedbackSubmit(e) {
+      if (e) e.preventDefault();
+      const cat = document.getElementById('feedbackCategory')?.value || 'Umum';
+      const email = document.getElementById('feedbackEmail')?.value || 'Anonim';
+      const msg = document.getElementById('feedbackMessage')?.value || '';
+      if (!msg.trim()) return;
+
+      try {
+        const feedbacks = JSON.parse(localStorage.getItem('sdc_user_feedbacks') || '[]');
+        feedbacks.push({
+          category: cat,
+          email: email,
+          message: msg,
+          timestamp: new Date().toISOString()
+        });
+        localStorage.setItem('sdc_user_feedbacks', JSON.stringify(feedbacks));
+      } catch (err) {
+        console.warn('Gagal menyimpan masukan ke localStorage:', err);
+      }
+
+      closeModal('modalContactFeedback');
+      const form = document.getElementById('contactFeedbackForm');
+      if (form) form.reset();
+      showToast('Jazakallahu khair! Masukan Anda telah kami simpan demi penyempurnaan platform.');
+    }
+
     // --- Global Keyboard Accessibility (WCAG 2.2 AA) ---
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
@@ -7746,59 +8315,129 @@
       renderAssessmentHistory();
       updateProgressDashboard();
 
-      // Deep Linking & Hash Routing Support
+      // Phase 8: Deep Linking, Public Info Modals, and Graceful Route Fallback
       const handleHashRoute = () => {
-        if (window.location.hash) {
-          const hashId = window.location.hash.replace('#', '');
-          if (hashId.startsWith('lesson:')) {
-            const lId = hashId.replace('lesson:', '');
-            navigateTo('screenLearn');
-            openLessonModal(lId);
-          } else if (hashId.startsWith('case:')) {
-            const cId = hashId.replace('case:', '');
-            navigateTo('screenCaseStudies');
-            openCaseDetail(cId);
-          } else if (hashId === 'privacy-policy') {
-            navigateTo('screenProfile');
-            openModal('modalPrivacyPolicy');
-          } else if (hashId.startsWith('screenQuiz:')) {
-            navigateTo('screenQuiz');
-            if (hashId === 'screenQuiz:test-feedback') {
-              selectQuizOption(0);
-              handleQuizAction();
-            } else if (hashId === 'screenQuiz:test-summary') {
-              currentQuizScore = currentQuizPool.length;
-              currentQuizUserAnswers = currentQuizPool.map(q => ({
-                questionId: q.id,
-                question: q.q,
-                topic: q.topic,
-                chosenText: q.opts[0].text,
-                correctText: q.opts.find(o => o.correct)?.text || '',
-                isCorrect: q.opts[0].correct === true,
-                explanation: q.explanation + " " + (q.opts[0].note || '')
-              }));
-              finishQuizAndShowSummary();
-            }
-          } else if (document.getElementById(hashId)) {
-            if (hashId === 'screenResult') {
-              if (appState.checkAnswers.every(a => a === null)) {
-                appState.selectedCategory = 'paylater';
-                appState.checkAnswers = ['clear', 'partial', 'clear', 'clear', 'clear'];
-              }
-              calculateAndShowResult();
-            } else if (hashId === 'screenChecklist') {
-              renderCheckStage();
-            } else if (hashId === 'screenQuiz') {
-              renderQuizQuestion();
-            } else if (hashId === 'screenProgress') {
-              updateProgressDashboard();
-            }
-            navigateTo(hashId);
+        if (!window.location.hash) return;
+        const hashId = window.location.hash.replace('#', '');
+        if (!hashId) return;
+
+        // Public information modals
+        if (hashId === 'about' || hashId === 'screenAbout') {
+          openModal('modalAbout');
+          return;
+        }
+        if (hashId === 'methodology' || hashId === 'screenMethodology') {
+          openModal('modalMethodology');
+          return;
+        }
+        if (hashId === 'references' || hashId === 'source-ref') {
+          openModal('modalSourceRef');
+          return;
+        }
+        if (hashId === 'disclaimer') {
+          openModal('modalDisclaimer');
+          return;
+        }
+        if (hashId === 'privacy' || hashId === 'privacy-policy') {
+          openModal('modalPrivacyPolicy');
+          return;
+        }
+        if (hashId === 'terms') {
+          openModal('modalTerms');
+          return;
+        }
+        if (hashId === 'contact' || hashId === 'feedback') {
+          openModal('modalContactFeedback');
+          return;
+        }
+
+        // Educational content deep links
+        if (hashId.startsWith('lesson:')) {
+          const lId = hashId.replace('lesson:', '');
+          navigateTo('screenLearn');
+          openLessonModal(lId);
+          return;
+        }
+        if (hashId.startsWith('case:')) {
+          const cId = hashId.replace('case:', '');
+          navigateTo('screenCaseStudies');
+          openCaseDetail(cId);
+          return;
+        }
+
+        // Quiz test states
+        if (hashId.startsWith('screenQuiz:')) {
+          navigateTo('screenQuiz');
+          if (hashId === 'screenQuiz:test-feedback') {
+            selectQuizOption(0);
+            handleQuizAction();
+          } else if (hashId === 'screenQuiz:test-summary') {
+            currentQuizScore = currentQuizPool.length;
+            currentQuizUserAnswers = currentQuizPool.map(q => ({
+              questionId: q.id,
+              question: q.q,
+              topic: q.topic,
+              chosenText: q.opts[0].text,
+              correctText: q.opts.find(o => o.correct)?.text || '',
+              isCorrect: q.opts[0].correct === true,
+              explanation: q.explanation + " " + (q.opts[0].note || '')
+            }));
+            finishQuizAndShowSummary();
           }
+          return;
+        }
+
+        // Screen routing
+        const targetScreen = document.getElementById(hashId);
+        if (targetScreen && targetScreen.classList.contains('screen')) {
+          if (hashId === 'screenResult') {
+            if (appState.checkAnswers.every(a => a === null)) {
+              appState.selectedCategory = 'paylater';
+              appState.checkAnswers = ['clear', 'partial', 'clear', 'clear', 'clear'];
+            }
+            calculateAndShowResult();
+          } else if (hashId === 'screenChecklist') {
+            renderCheckStage();
+          } else if (hashId === 'screenQuiz') {
+            renderQuizQuestion();
+          } else if (hashId === 'screenProgress') {
+            updateProgressDashboard();
+          }
+          navigateTo(hashId);
+        } else {
+          // Graceful 404 Route Fallback
+          console.warn(`Halaman atau rute "#${hashId}" tidak ditemukan. Mengalihkan ke Beranda.`);
+          navigateTo('screenHome');
+          showToast('Halaman yang diminta tidak ditemukan. Dialihkan ke Beranda.');
         }
       };
       handleHashRoute();
       window.addEventListener('hashchange', handleHashRoute);
+
+      // Phase 8: Offline Status Resilience
+      function updateOnlineState() {
+        const banner = document.getElementById('offlineNotificationBanner');
+        if (banner) {
+          banner.style.display = navigator.onLine ? 'none' : 'flex';
+        }
+      }
+      window.addEventListener('online', () => {
+        updateOnlineState();
+        showToast('Koneksi internet kembali aktif.');
+      });
+      window.addEventListener('offline', () => {
+        updateOnlineState();
+        showToast('Mode offline aktif. Anda tetap dapat membaca modul dan riwayat tersimpan.');
+      });
+      updateOnlineState();
+
+      // Phase 8: Window Error Trap to Prevent Internal Stack Trace Exposure
+      window.addEventListener('error', (event) => {
+        console.error('Terjadi anomali runtime:', event.error || event.message);
+      });
+      window.addEventListener('unhandledrejection', (event) => {
+        console.error('Unhandled Promise Rejection:', event.reason);
+      });
     });
   </script>
 </body>

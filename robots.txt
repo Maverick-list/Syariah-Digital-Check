@@ -1,0 +1,12 @@
+# robots.txt for Syariah Digital Check
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /manifest.json
+Allow: /sw.js
+Allow: /assets/
+Disallow: /#screenResult*
+Disallow: /#screenProfile*
+
+# Canonical Host & Sitemap
+Sitemap: https://syariahdigitalcheck.id/sitemap.xml
