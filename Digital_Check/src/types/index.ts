@@ -164,6 +164,17 @@ export interface PersistedState {
   activity: ActivityEntry[];
 }
 
+/** Entitas umpan balik pengguna beta terstruktur (Fase 11) */
+export interface UserBetaFeedback {
+  id: string;
+  rating: number; // 1 - 5
+  category: string;
+  issues: string[];
+  email?: string;
+  message: string;
+  timestamp: string;
+}
+
 /** Status alur review tata kelola konten */
 export type ContentStatus =
   | 'Draft'

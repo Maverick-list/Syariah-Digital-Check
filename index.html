@@ -1842,6 +1842,84 @@
       opacity: 1;
     }
 
+    /* Phase 11 Feedback & Rating UI */
+    .rating-button-group {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .rating-pill-btn {
+      flex: 1;
+      min-width: 58px;
+      padding: 8px 6px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--ivory-border);
+      background: #fff;
+      color: var(--emerald-950);
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+    .rating-pill-btn:hover {
+      background: var(--ivory-100);
+      border-color: var(--emerald-300);
+    }
+    .rating-pill-btn.active {
+      background: var(--emerald-900);
+      color: #fff;
+      border-color: var(--emerald-950);
+      box-shadow: 0 2px 6px rgba(11, 46, 36, 0.25);
+    }
+    .rating-pill-btn.active .star-icon {
+      color: var(--gold-400);
+    }
+    .star-icon {
+      font-size: 14px;
+      color: #E2A03F;
+    }
+    .rating-label {
+      font-size: 10px;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .problem-tags-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .problem-tag-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--ivory-border);
+      background: #fff;
+      font-size: 11.5px;
+      color: var(--sage-900);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .problem-tag-chip:hover {
+      background: var(--ivory-50);
+      border-color: var(--sage-400);
+    }
+    .problem-tag-chip input[type="checkbox"] {
+      width: 14px;
+      height: 14px;
+      accent-color: var(--emerald-700);
+      margin: 0;
+    }
+
     /* Utilities */
     .flex-row { display: flex; align-items: center; }
     .flex-between { display: flex; align-items: center; justify-content: space-between; }
@@ -2904,6 +2982,24 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
                   <span>Hasil ini merupakan sarana edukasi literasi, bukan fatwa, nasihat keuangan profesional, atau sertifikasi kepatuhan syariah. Konsultasikan pertanyaan hukum kepada asatidz atau Dewan Pengawas Syariah yang kompeten.</span>
                 </div>
+
+                <!-- Seksi 10: Umpan Balik Pengguna Beta -->
+                <div class="card mt-3" style="background: var(--ivory-50); border: 1px dashed var(--ivory-200); padding: 14px 16px;">
+                  <div class="flex-between" style="align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                      <div class="flex-row gap-2" style="align-items: center;">
+                        <span class="pill pill-gold text-xs" style="font-size: 9px; padding: 2px 6px;">BETA FEEDBACK</span>
+                        <h4 style="font-size: 13px; font-weight: 700; color: var(--emerald-950); margin: 0;">Apakah Evaluasi Ini Cukup Jelas & Membantu?</h4>
+                      </div>
+                      <p class="text-muted mt-1" style="font-size: 11.5px; margin: 0;">
+                        Berikan rating atau laporkan jika ada istilah fiqih yang membingungkan.
+                      </p>
+                    </div>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="openFeedbackWithCategory('Pemeriksaan Transaksi')">
+                      Beri Ulasan Evaluasi
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -3168,6 +3264,19 @@
                   </button>
                   <button class="btn btn-secondary" style="flex: 1;" onclick="navigateTo('screenProgress')">
                     Lihat Dashboard →
+                  </button>
+                </div>
+              </div>
+
+              <!-- Beta Feedback Prompt for Quiz -->
+              <div class="card mt-3" style="background: var(--ivory-50); border: 1px dashed var(--ivory-200); padding: 12px 14px; text-align: left;">
+                <div class="flex-between" style="align-items: center; flex-wrap: wrap; gap: 8px;">
+                  <div>
+                    <span class="pill pill-gold text-xs" style="font-size: 9px; padding: 2px 6px;">BETA FEEDBACK</span>
+                    <strong style="font-size: 12px; color: var(--emerald-950); display: block; margin-top: 2px;">Apakah Soal & Pembahasan Kuis Mudah Dipahami?</strong>
+                  </div>
+                  <button type="button" class="btn btn-outline btn-sm" onclick="openFeedbackWithCategory('Kuis & Dasbor Literasi')">
+                    Beri Masukan Soal
                   </button>
                 </div>
               </div>
@@ -3832,51 +3941,135 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- MODAL: KONTAK DAN UMPAN BALIK EDUKASI -->
+  <!-- MODAL: KONTAK DAN UMPAN BALIK EDUKASI (PHASE 11 ENHANCED) -->
   <!-- ========================================== -->
   <div class="modal-overlay" id="modalContactFeedback" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" onclick="closeModalOnOverlay(event, 'modalContactFeedback')">
-    <div class="modal-sheet" style="max-height: 88vh; overflow-y: auto;">
+    <div class="modal-sheet" style="max-height: 90vh; overflow-y: auto;">
       <div class="sheet-handle"></div>
       <div class="flex-between">
         <div class="flex-row gap-2">
-          <span class="pill pill-emerald">HUBUNGI KAMI</span>
-          <h3 id="contactModalTitle" style="font-size: 16px; font-weight: 700; color: var(--emerald-950); margin: 0;">Kontak & Umpan Balik</h3>
+          <span class="pill pill-gold text-xs" style="font-weight: 700;">BETA VALIDATION</span>
+          <h3 id="contactModalTitle" style="font-size: 16px; font-weight: 700; color: var(--emerald-950); margin: 0;">Evaluasi & Masukan Pengguna</h3>
         </div>
         <button class="btn-back" onclick="closeModal('modalContactFeedback')" aria-label="Tutup Kontak" style="font-size: 18px; padding: 0;">✕</button>
       </div>
 
       <p class="text-muted mt-2" style="font-size: 12px; line-height: 1.55;">
-        Punya saran perbaikan rujukan fatwa, usulan modul baru, laporan anomali transaksi digital, atau saran tampilan? Kami sangat menghargai kontribusi Anda untuk menyempurnakan platform edukasi publik ini.
+        Bantu kami menyempurnakan Syariah Digital Check. Masukan Anda mengenai kejelasan bahasa fiqih, kemudahan navigasi, atau akurasi rujukan sangat berharga untuk transparansi publik.
       </p>
 
-      <form id="contactFeedbackForm" onsubmit="handleContactFeedbackSubmit(event)" class="mt-3" style="display: flex; flex-direction: column; gap: 12px;">
+      <form id="contactFeedbackForm" onsubmit="handleContactFeedbackSubmit(event)" class="mt-3" style="display: flex; flex-direction: column; gap: 14px;">
+        <!-- 1. Tingkat Kepuasan & Kejelasan (1-5 Rating) -->
         <div>
-          <label for="feedbackCategory" style="display: block; font-size: 12px; font-weight: 700; color: var(--emerald-950); margin-bottom: 4px;">Kategori Masukan *</label>
+          <label style="display: block; font-size: 12px; font-weight: 700; color: var(--emerald-950); margin-bottom: 4px;">
+            1. Bagaimana Tingkat Kemudahan & Kejelasan Aplikasi? *
+          </label>
+          <input type="hidden" id="feedbackRating" value="5" required>
+          <div class="rating-button-group" role="radiogroup" aria-label="Skala Kepuasan Pengguna 1 sampai 5">
+            <button type="button" class="rating-pill-btn" data-value="1" onclick="selectFeedbackRating(1)" role="radio" aria-checked="false" aria-label="Rating 1 dari 5 Sangat Sulit">
+              <span class="star-icon">★</span>
+              <span class="rating-label">1 - Sulit</span>
+            </button>
+            <button type="button" class="rating-pill-btn" data-value="2" onclick="selectFeedbackRating(2)" role="radio" aria-checked="false" aria-label="Rating 2 dari 5 Kurang Jelas">
+              <span class="star-icon">★★</span>
+              <span class="rating-label">2 - Kurang</span>
+            </button>
+            <button type="button" class="rating-pill-btn" data-value="3" onclick="selectFeedbackRating(3)" role="radio" aria-checked="false" aria-label="Rating 3 dari 5 Cukup Jelas">
+              <span class="star-icon">★★★</span>
+              <span class="rating-label">3 - Cukup</span>
+            </button>
+            <button type="button" class="rating-pill-btn" data-value="4" onclick="selectFeedbackRating(4)" role="radio" aria-checked="false" aria-label="Rating 4 dari 5 Mudah Dipahami">
+              <span class="star-icon">★★★★</span>
+              <span class="rating-label">4 - Mudah</span>
+            </button>
+            <button type="button" class="rating-pill-btn active" data-value="5" onclick="selectFeedbackRating(5)" role="radio" aria-checked="true" aria-label="Rating 5 dari 5 Sangat Membantu">
+              <span class="star-icon">★★★★★</span>
+              <span class="rating-label">5 - Bagus</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Kategori Fitur yang Dinilai -->
+        <div>
+          <label for="feedbackCategory" style="display: block; font-size: 12px; font-weight: 700; color: var(--emerald-950); margin-bottom: 4px;">
+            2. Fitur / Bagian yang Ingin Diberi Masukan *
+          </label>
           <select id="feedbackCategory" required style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--ivory-border); background: #fff; font-size: 13px; color: var(--emerald-950);">
-            <option value="Fatwa & Rujukan">Koreksi / Usulan Rujukan Fatwa & Regulasi</option>
-            <option value="Modul & Studi Kasus">Usulan Topik Modul atau Studi Kasus Baru</option>
-            <option value="Bug & Antarmuka">Laporan Masalah Tampilan atau Bug Teknis</option>
-            <option value="Pertanyaan Umum">Pertanyaan Umum Seputar Platform</option>
+            <option value="Pemeriksaan Transaksi">Pemeriksaan Transaksi (PAUSE → CHECK → CHOOSE)</option>
+            <option value="Modul Pembelajaran & Kasus">Modul Pembelajaran & Analisis Studi Kasus</option>
+            <option value="Kuis & Dasbor Literasi">Kuis Mandiri & Dasbor Indeks Literasi</option>
+            <option value="Rujukan Fatwa & Dalil">Ketepatan Rujukan Fatwa DSN-MUI & Regulasi</option>
+            <option value="Antarmuka & Navigasi">Kemudahan Navigasi, Teks & Aksesibilitas Layar</option>
+            <option value="Pertanyaan Umum">Usulan Fitur Baru / Masukan Umum</option>
           </select>
         </div>
 
+        <!-- 3. Kendala Keterpakaian Spesifik (Usability Problem Tags) -->
         <div>
-          <label for="feedbackEmail" style="display: block; font-size: 12px; font-weight: 700; color: var(--emerald-950); margin-bottom: 4px;">Email Anda (Opsional)</label>
-          <input type="email" id="feedbackEmail" placeholder="nama@domain.com (untuk balasan)" style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--ivory-border); background: #fff; font-size: 13px; box-sizing: border-box;">
+          <label style="display: block; font-size: 12px; font-weight: 700; color: var(--emerald-950); margin-bottom: 4px;">
+            3. Apakah Anda Mengalami Kendala Berikut? (Pilih yang relevan)
+          </label>
+          <div class="problem-tags-grid">
+            <label class="problem-tag-chip">
+              <input type="checkbox" name="feedbackIssue" value="Istilah fiqih sulit dipahami">
+              <span>Istilah fiqih sulit</span>
+            </label>
+            <label class="problem-tag-chip">
+              <input type="checkbox" name="feedbackIssue" value="Alur navigasi membingungkan">
+              <span>Alur navigasi membingungkan</span>
+            </label>
+            <label class="problem-tag-chip">
+              <input type="checkbox" name="feedbackIssue" value="Langkah evaluasi terlalu panjang">
+              <span>Langkah terlalu panjang</span>
+            </label>
+            <label class="problem-tag-chip">
+              <input type="checkbox" name="feedbackIssue" value="Penjelasan hasil kurang spesifik">
+              <span>Hasil kurang spesifik</span>
+            </label>
+            <label class="problem-tag-chip">
+              <input type="checkbox" name="feedbackIssue" value="Teks terlalu kecil / kontras rendah">
+              <span>Teks kurang terbaca</span>
+            </label>
+            <label class="problem-tag-chip">
+              <input type="checkbox" name="feedbackIssue" value="Terkendala di layar ponsel">
+              <span>Kendala responsif ponsel</span>
+            </label>
+          </div>
         </div>
 
+        <!-- 4. Masukan Tertulis & Usulan Solusi -->
         <div>
-          <label for="feedbackMessage" style="display: block; font-size: 12px; font-weight: 700; color: var(--emerald-950); margin-bottom: 4px;">Pesan atau Masukan Anda *</label>
-          <textarea id="feedbackMessage" required rows="4" placeholder="Tuliskan ulasan atau usulan Anda dengan jelas..." style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--ivory-border); background: #fff; font-size: 13px; box-sizing: border-box; resize: vertical; line-height: 1.5;"></textarea>
+          <label for="feedbackMessage" style="display: block; font-size: 12px; font-weight: 700; color: var(--emerald-950); margin-bottom: 4px;">
+            4. Ceritakan Pengalaman atau Usulan Perbaikan Anda *
+          </label>
+          <textarea id="feedbackMessage" required rows="3" placeholder="Contoh: Bagian penjelasan denda keterlambatan PayLater perlu diperjelas perbedaannya dengan bunga..." style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--ivory-border); background: #fff; font-size: 13px; box-sizing: border-box; resize: vertical; line-height: 1.5;"></textarea>
+        </div>
+
+        <!-- 5. Email Pengguna (Opsional) -->
+        <div>
+          <label for="feedbackEmail" style="display: block; font-size: 12px; font-weight: 700; color: var(--emerald-950); margin-bottom: 4px;">
+            5. Email Anda (Opsional, jika berkenan dihubungi lebih lanjut)
+          </label>
+          <input type="email" id="feedbackEmail" placeholder="nama@domain.com" style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--ivory-border); background: #fff; font-size: 13px; box-sizing: border-box;">
         </div>
 
         <div class="card" style="background: var(--ivory-50); border: 1px solid var(--ivory-border); padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.45;">
-          Data masukan Anda disimpan secara lokal dan dapat langsung dibuka melalui email ke <code>halo@syariahdigitalcheck.id</code>.
+          Privasi Terjamin: Masukan Anda disimpan di penyimpanan lokal peramban. Anda juga dapat mengirimkannya langsung ke tim pengembang via email atau mengunduh riwayat masukan lokal.
         </div>
 
-        <div class="flex-row gap-2 mt-2">
-          <button type="button" class="btn btn-outline" style="flex: 1;" onclick="closeModal('modalContactFeedback')">Batal</button>
-          <button type="submit" class="btn btn-primary" style="flex: 1;">Kirim Masukan</button>
+        <div class="flex-column gap-2 mt-1">
+          <div class="flex-row gap-2">
+            <button type="button" class="btn btn-outline" style="flex: 1;" onclick="closeModal('modalContactFeedback')">Tutup</button>
+            <button type="submit" class="btn btn-primary" style="flex: 1.4;">Kirim Masukan</button>
+          </div>
+          <div class="flex-row gap-2">
+            <button type="button" class="btn btn-secondary btn-sm" style="flex: 1;" onclick="sendFeedbackViaMailto()">
+              ✉️ Kirim via Email
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" style="flex: 1;" onclick="exportUserFeedbacksJSON()">
+              📥 Ekspor Riwayat Masukan
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -8270,22 +8463,66 @@
       openModal('modalIOSInstall');
     }
 
-    // --- Phase 8: Public Feedback Submission Handler ---
+    // --- Phase 11: Real User Beta Feedback & Usability Collection System ---
+    function selectFeedbackRating(val) {
+      const hiddenInput = document.getElementById('feedbackRating');
+      if (hiddenInput) hiddenInput.value = val;
+      const btns = document.querySelectorAll('.rating-pill-btn');
+      btns.forEach(btn => {
+        if (btn.getAttribute('data-value') === String(val)) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-checked', 'true');
+        } else {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-checked', 'false');
+        }
+      });
+    }
+
+    function openFeedbackWithCategory(catName) {
+      openModal('modalContactFeedback');
+      const catSelect = document.getElementById('feedbackCategory');
+      if (catSelect && catName) {
+        for (let i = 0; i < catSelect.options.length; i++) {
+          if (catSelect.options[i].value.toLowerCase().includes(catName.toLowerCase()) || 
+              catSelect.options[i].text.toLowerCase().includes(catName.toLowerCase())) {
+            catSelect.selectedIndex = i;
+            break;
+          }
+        }
+      }
+    }
+
     function handleContactFeedbackSubmit(e) {
       if (e) e.preventDefault();
-      const cat = document.getElementById('feedbackCategory')?.value || 'Umum';
+      const rating = parseInt(document.getElementById('feedbackRating')?.value || '5', 10);
+      const cat = document.getElementById('feedbackCategory')?.value || 'Pemeriksaan Transaksi';
       const email = document.getElementById('feedbackEmail')?.value || 'Anonim';
       const msg = document.getElementById('feedbackMessage')?.value || '';
-      if (!msg.trim()) return;
+      
+      const checkedTags = [];
+      document.querySelectorAll('input[name="feedbackIssue"]:checked').forEach(cb => {
+        checkedTags.push(cb.value);
+      });
+
+      if (!msg.trim()) {
+        showToast('Mohon tuliskan masukan atau pengalaman Anda.');
+        return;
+      }
+
+      const feedbackEntry = {
+        id: 'fb_' + Date.now(),
+        rating: rating,
+        category: cat,
+        issues: checkedTags,
+        email: email.trim(),
+        message: msg.trim(),
+        timestamp: new Date().toISOString()
+      };
 
       try {
         const feedbacks = JSON.parse(localStorage.getItem('sdc_user_feedbacks') || '[]');
-        feedbacks.push({
-          category: cat,
-          email: email,
-          message: msg,
-          timestamp: new Date().toISOString()
-        });
+        feedbacks.push(feedbackEntry);
         localStorage.setItem('sdc_user_feedbacks', JSON.stringify(feedbacks));
       } catch (err) {
         console.warn('Gagal menyimpan masukan ke localStorage:', err);
@@ -8294,7 +8531,46 @@
       closeModal('modalContactFeedback');
       const form = document.getElementById('contactFeedbackForm');
       if (form) form.reset();
+      selectFeedbackRating(5);
       showToast('Jazakallahu khair! Masukan Anda telah kami simpan demi penyempurnaan platform.');
+    }
+
+    function exportUserFeedbacksJSON() {
+      try {
+        const raw = localStorage.getItem('sdc_user_feedbacks') || '[]';
+        const parsed = JSON.parse(raw);
+        if (!parsed || parsed.length === 0) {
+          showToast('Belum ada riwayat masukan yang tersimpan di perangkat ini.');
+          return;
+        }
+        const blob = new Blob([JSON.stringify(parsed, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `sdc_feedback_export_${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Berkas masukan berhasil diunduh.');
+      } catch (e) {
+        console.error('Gagal mengekspor masukan:', e);
+        showToast('Gagal mengekspor masukan.');
+      }
+    }
+
+    function sendFeedbackViaMailto() {
+      const rating = document.getElementById('feedbackRating')?.value || '5';
+      const cat = document.getElementById('feedbackCategory')?.value || 'Pemeriksaan Transaksi';
+      const msg = document.getElementById('feedbackMessage')?.value || '';
+      const checkedTags = [];
+      document.querySelectorAll('input[name="feedbackIssue"]:checked').forEach(cb => {
+        checkedTags.push(cb.value);
+      });
+
+      const subject = encodeURIComponent(`[SDC Beta Feedback] [Rating: ${rating}/5] ${cat}`);
+      const bodyText = `Rating: ${rating}/5\nKategori: ${cat}\nKendala: ${checkedTags.join(', ') || 'Tidak ada'}\n\nMasukan:\n${msg || '(Belum ditulis)'}\n\nTimestamp: ${new Date().toISOString()}`;
+      window.location.href = `mailto:halo@syariahdigitalcheck.id?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
     }
 
     // --- Global Keyboard Accessibility & Focus Trap (WCAG 2.2 AA) ---

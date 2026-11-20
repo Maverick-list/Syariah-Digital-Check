@@ -92,10 +92,16 @@ Syariah_Digital_Check_Main/
 ├── docs/                                                # Dokumentasi Resmi, Audit, dan Tata Kelola
 │   ├── ENGINEERING_PRINCIPLES.md                        # 12 Prinsip Rekayasa Perangkat Lunak
 │   ├── PRODUCTION_READINESS.md                          # Laporan Kesiapan Rilis Produksi
+│   ├── PUBLIC_BETA_READINESS.md                         # Laporan Kesiapan Beta Publik (Fase 10)
+│   ├── PHASE_10_USER_VALIDATION.md                      # Audit Kognitif & Heuristik Awal (Fase 10)
+│   ├── PHASE_10_ACCESSIBILITY_AUDIT.md                  # Audit Aksesibilitas WCAG 2.2 AA (Fase 10)
+│   ├── PHASE_11_USER_RESEARCH.md                        # Protokol Riset Pengguna Empiris 4 Kohort (Fase 11)
+│   ├── PHASE_11_USABILITY_REPORT.md                     # Laporan Evaluasi Keterpakaian Lengkap (Fase 11)
+│   ├── PHASE_11_IMPROVEMENT_BACKLOG.md                  # Backlog Prioritas P0, P1, P2 (Fase 11)
 │   ├── DEPLOYMENT_GUIDE.md                              # Panduan Penerapan Multi-Platform
 │   ├── USER_GUIDE.md                                    # Panduan Navigasi Pengguna & Instalasi PWA
 │   ├── KNOWN_LIMITATIONS.md                             # Transparansi Batasan Yuridis & Teknis
-│   ├── RELEASE_NOTES.md                                 # Catatan Rilis Versi 2.4.0
+│   ├── RELEASE_NOTES.md                                 # Catatan Rilis Versi 2.5.0
 │   ├── SOURCE_REGISTRY.md                               # Registri Rujukan Fatwa DSN-MUI & Regulasi OJK
 │   ├── CONTENT_GOVERNANCE.md                            # Standar Redaksional & Kebijakan Verifikasi
 │   ├── BACKEND_AND_SYNC_ARCHITECTURE.md                 # Spesifikasi Sinkronisasi Cloud Zero-Knowledge RLS

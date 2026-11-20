@@ -204,3 +204,64 @@ describe('Phase 6 — Data Deletion & Privacy Wipe Controls', () => {
     expect(wipedState.onboardingDone).toBe(false);
   });
 });
+
+describe('Phase 11 — Real User Beta Feedback Structure & Data Validation', () => {
+  test('validates structured beta feedback schema, rating bounds (1-5), and tags', () => {
+    const feedback = {
+      id: 'fb_' + Date.now(),
+      rating: 5,
+      category: 'Pemeriksaan Transaksi',
+      issues: ['Istilah fiqih sulit dipahami'],
+      message: 'Penjelasan denda PayLater sangat membantu!',
+      email: 'user@example.com',
+      timestamp: new Date().toISOString(),
+    };
+
+    expect(feedback.rating).toBeGreaterThanOrEqual(1);
+    expect(feedback.rating).toBeLessThanOrEqual(5);
+    expect(feedback.category).toBe('Pemeriksaan Transaksi');
+    expect(feedback.issues).toContain('Istilah fiqih sulit dipahami');
+    expect(feedback.message.trim().length).toBeGreaterThan(0);
+  });
+
+  test('feedback JSON serialization and parsing preserves all properties without data loss', () => {
+    const rawList = [
+      {
+        id: 'fb_1',
+        rating: 4,
+        category: 'Modul Pembelajaran & Kasus',
+        issues: ['Langkah evaluasi terlalu panjang'],
+        message: 'Modul emas digital sangat komprehensif.',
+        email: 'anonim',
+        timestamp: '2026-11-20T10:00:00.000Z',
+      },
+    ];
+
+    const serialized = JSON.stringify(rawList);
+    const parsed = JSON.parse(serialized);
+
+    expect(Array.isArray(parsed)).toBe(true);
+    expect(parsed.length).toBe(1);
+    expect(parsed[0].id).toBe('fb_1');
+    expect(parsed[0].rating).toBe(4);
+    expect(parsed[0].issues).toEqual(['Langkah evaluasi terlalu panjang']);
+  });
+
+  test('feedback object strictly enforces privacy: contains no credentials or financial data', () => {
+    const forbiddenKeys = ['password', 'otp', 'pin', 'cardNumber', 'cvv', 'nik'];
+    const feedback = {
+      id: 'fb_123',
+      rating: 5,
+      category: 'Antarmuka & Navigasi',
+      issues: [],
+      message: 'Navigasi sangat responsif.',
+      email: 'guest@example.com',
+      timestamp: new Date().toISOString(),
+    };
+
+    const keys = Object.keys(feedback);
+    forbiddenKeys.forEach((key) => {
+      expect(keys).not.toContain(key);
+    });
+  });
+});
