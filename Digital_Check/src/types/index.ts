@@ -148,6 +148,7 @@ export interface UserPreferences {
   analyticsEnabled?: boolean;
   privacyPledgeAccepted?: boolean;
   cloudSyncNoticeDismissed?: boolean;
+  language?: 'id' | 'en';
 }
 
 export interface PersistedState {

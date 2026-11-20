@@ -11,6 +11,7 @@ export const defaultPreferences: UserPreferences = {
   analyticsEnabled: false,
   privacyPledgeAccepted: true,
   cloudSyncNoticeDismissed: false,
+  language: 'id',
 };
 
 export const initialState: PersistedState = {
@@ -52,6 +53,7 @@ function parsePreferences(v: unknown): UserPreferences {
     analyticsEnabled: o.analyticsEnabled === true,
     privacyPledgeAccepted: o.privacyPledgeAccepted !== false,
     cloudSyncNoticeDismissed: o.cloudSyncNoticeDismissed === true,
+    language: o.language === 'en' ? 'en' : 'id',
   };
 }
 
