@@ -108,10 +108,58 @@
       width: 100%;
     }
 
-    /* Accessibility Focus Indicator */
-    button:focus-visible, input:focus-visible, a:focus-visible {
-      outline: 2px solid var(--emerald-700);
-      outline-offset: 2px;
+    /* Screen Reader Only Utility (WCAG 2.2 AA) */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Skip Link for Keyboard Accessibility (WCAG 2.2 AA) */
+    .skip-to-content {
+      position: absolute;
+      top: -120px;
+      left: 16px;
+      background: var(--emerald-900);
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 13px;
+      z-index: 99999;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      transition: top 0.2s ease;
+    }
+    .skip-to-content:focus {
+      top: 14px;
+      outline: 3px solid var(--gold-500);
+      outline-offset: 3px;
+    }
+
+    /* Comprehensive Focus Visible Indicators (WCAG 2.2 AA) */
+    button:focus-visible,
+    input:focus-visible,
+    a:focus-visible,
+    .desk-nav-link:focus-visible,
+    .nav-item:focus-visible,
+    .brand-group:focus-visible,
+    .header-user-badge:focus-visible,
+    .category-card:focus-visible,
+    .check-opt-card:focus-visible,
+    .case-card:focus-visible,
+    .filter-chip:focus-visible,
+    .pillar-card:focus-visible,
+    .btn-back:focus-visible {
+      outline: 3px solid var(--emerald-700) !important;
+      outline-offset: 3px !important;
+      box-shadow: 0 0 0 4px rgba(6, 78, 59, 0.25) !important;
     }
 
     /* Reduced Motion */
@@ -122,6 +170,20 @@
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
       }
+    }
+
+    /* Touch-friendly target minimum dimensions */
+    .nav-item {
+      min-height: 48px;
+    }
+    .desk-nav-link {
+      min-height: 40px;
+    }
+    .btn {
+      min-height: 44px;
+    }
+    .btn-sm {
+      min-height: 38px;
     }
 
         /* ========================================================= */
@@ -1390,12 +1452,15 @@
 </head>
 <body>
 
+  <!-- Skip Link for Keyboard Accessibility (WCAG 2.2 AA) -->
+  <a href="#siteMain" class="skip-to-content">Menuju ke Konten Utama (Skip to Content)</a>
+
   <!-- ========================================== -->
   <!-- NATIVE RESPONSIVE WEBSITE NAVIGATION HEADER -->
   <!-- ========================================== -->
-  <header class="site-header" id="siteHeader">
+  <header class="site-header" id="siteHeader" role="banner">
     <div class="header-inner">
-      <div class="brand-group" onclick="navigateTo('screenHome')" title="Kembali ke Beranda">
+      <div class="brand-group" onclick="navigateTo('screenHome')" title="Kembali ke Beranda" role="button" tabindex="0" aria-label="Syariah Digital Check Beranda" onkeydown="if(event.key==='Enter'||event.key===' ')navigateTo('screenHome')">
         <div class="brand-logo-shield">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
         </div>
@@ -1406,8 +1471,8 @@
       </div>
 
       <!-- Desktop Nav Links -->
-      <nav class="desktop-nav" aria-label="Navigasi Utama">
-        <button class="desk-nav-link active" id="deskNavHome" onclick="navigateTo('screenHome')">
+      <nav class="desktop-nav" aria-label="Navigasi Utama Desktop">
+        <button class="desk-nav-link active" id="deskNavHome" onclick="navigateTo('screenHome')" aria-current="page">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           <span>Beranda</span>
         </button>
@@ -1433,19 +1498,14 @@
         </button>
       </nav>
 
-      <!-- Right Header Actions -->
+      <!-- Right Header Actions (Design Spec removed from public navigation) -->
       <div class="header-actions">
-        <button class="btn-header-spec" onclick="openDesignSystemModal()" title="Buka Pedoman Desain & Fatwa">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-          <span>Design Spec</span>
-        </button>
-        
-        <button class="btn btn-gold btn-header-cta" onclick="navigateTo('screenCategorySelect')">
+        <button class="btn btn-gold btn-header-cta" onclick="navigateTo('screenCategorySelect')" aria-label="Mulai Cek Transaksi">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           <span>Mulai Cek</span>
         </button>
 
-        <div class="header-user-badge" onclick="navigateTo('screenProfile')" title="Buka Profil Pengguna">
+        <div class="header-user-badge" onclick="navigateTo('screenProfile')" title="Buka Profil Pengguna" role="button" tabindex="0" aria-label="Buka Profil Pengguna" onkeydown="if(event.key==='Enter'||event.key===' ')navigateTo('screenProfile')">
           <div class="user-avatar" id="headerUserAvatar">FP</div>
           <span id="headerUserName">Fikri</span>
         </div>
@@ -1454,7 +1514,7 @@
   </header>
 
   <!-- Native Responsive Viewport Main Container -->
-  <main class="site-main" id="siteMain">
+  <main class="site-main" id="siteMain" tabindex="-1">
     <div class="site-content-wrapper screen-scroller" id="screenScroller">
 
         <!-- ========================================== -->
@@ -1568,23 +1628,23 @@
               </button>
             </div>
 
-            <!-- 3 Core Pillars with Bespoke SVG Icons (Zero Childish Emojis) -->
-            <div class="pillar-row">
-              <div class="pillar-card">
+            <!-- 3 Core Pillars: PAUSE → CHECK → CHOOSE Framework -->
+            <div class="pillar-row" role="region" aria-label="Alur Kerangka Kerja Literasi Syariah">
+              <div class="pillar-card" onclick="navigateTo('screenOnboarding')" role="button" tabindex="0" aria-label="Langkah 1: PAUSE - Jeda Sejenak 30 Detik" onkeydown="if(event.key==='Enter'||event.key===' ')navigateTo('screenOnboarding')" title="Pelajari Panduan Jeda Kritis">
                 <div class="pillar-icon-box">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
                 </div>
                 <div class="pillar-title">PAUSE</div>
                 <div class="pillar-subtitle">Tunda 30 detik</div>
               </div>
-              <div class="pillar-card">
+              <div class="pillar-card" onclick="navigateTo('screenCategorySelect')" role="button" tabindex="0" aria-label="Langkah 2: CHECK - Periksa 5 Poin Akad Transaksi" onkeydown="if(event.key==='Enter'||event.key===' ')navigateTo('screenCategorySelect')" title="Mulai Evaluasi 5 Kaidah Fiqh">
                 <div class="pillar-icon-box">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
                 </div>
                 <div class="pillar-title">CHECK</div>
                 <div class="pillar-subtitle">Telaah akad</div>
               </div>
-              <div class="pillar-card">
+              <div class="pillar-card" onclick="navigateTo('screenCaseStudies')" role="button" tabindex="0" aria-label="Langkah 3: CHOOSE - Putuskan Bijak Berdasarkan Fiqh" onkeydown="if(event.key==='Enter'||event.key===' ')navigateTo('screenCaseStudies')" title="Lihat Studi Kasus Nyata & Solusi">
                 <div class="pillar-icon-box">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
@@ -2046,6 +2106,7 @@
           <div class="main-content">
             <!-- Search bar -->
             <div class="search-input-wrap">
+              <label for="searchLessonInput" class="sr-only">Cari modul edukasi syariah</label>
               <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               <input type="text" class="search-input" id="searchLessonInput" placeholder="Cari modul (contoh: Riba, Murabahah, Emas)..." oninput="filterLessons()" aria-label="Cari modul edukasi">
             </div>
@@ -2334,15 +2395,20 @@
               </p>
             </div>
 
-            <!-- About Platform -->
-            <div class="card">
-              <div class="flex-between">
+            <!-- Internal Development & Design Spec (Clearly Separated from Public Primary UI) -->
+            <div class="card dev-only-card" style="background: var(--ivory-100); border: 1px dashed var(--ivory-200); padding: 16px;">
+              <div class="flex-between" style="align-items: flex-start; gap: 12px;">
                 <div>
-                  <h4 style="font-size: 13.5px; font-weight: 700;">Syariah Digital Check</h4>
-                  <span class="text-muted text-xs">Versi 2.4.0 Production Build</span>
+                  <div class="flex-row gap-2" style="align-items: center;">
+                    <span class="pill pill-gold text-xs" style="font-size: 9px; padding: 2px 7px;">INTERNAL DEV</span>
+                    <h4 style="font-size: 13.5px; font-weight: 700; color: var(--emerald-950); margin: 0;">Spesifikasi Desain & Token</h4>
+                  </div>
+                  <p class="text-muted text-xs mt-1" style="line-height: 1.5;">
+                    Dokumentasi internal mengenai token warna WCAG AAA, sistem grid 8-pt, dan arsitektur UX Syariah Digital Check (v2.4.0).
+                  </p>
                 </div>
-                <button class="btn-ds-trigger" onclick="openDesignSystemModal()">
-                  UI Kit Spec
+                <button class="btn btn-outline btn-sm" onclick="openDesignSystemModal()" aria-label="Buka Dokumentasi Desain Internal" style="flex-shrink: 0;">
+                  Buka Spec
                 </button>
               </div>
             </div>
@@ -2355,8 +2421,8 @@
     <!-- ========================================== -->
     <!-- PERSISTENT MOBILE & TABLET BOTTOM NAVIGATION -->
     <!-- ========================================== -->
-    <nav class="bottom-nav" id="bottomNav">
-      <button class="nav-item active" id="navHome" onclick="navigateTo('screenHome')" aria-label="Beranda">
+    <nav class="bottom-nav" id="bottomNav" aria-label="Navigasi Bawah Mobile">
+      <button class="nav-item active" id="navHome" onclick="navigateTo('screenHome')" aria-label="Beranda" aria-current="page">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         <span>Beranda</span>
       </button>
@@ -2364,15 +2430,15 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         <span>Cek</span>
       </button>
-      <button class="nav-item" id="navLearn" onclick="navigateTo('screenLearn')" aria-label="Belajar">
+      <button class="nav-item" id="navLearn" onclick="navigateTo('screenLearn')" aria-label="Modul Belajar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         <span>Belajar</span>
       </button>
-      <button class="nav-item" id="navQuiz" onclick="navigateTo('screenQuiz')" aria-label="Kuis Syariah">
+      <button class="nav-item" id="navQuiz" onclick="navigateTo('screenQuiz')" aria-label="Kuis Literasi">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         <span>Kuis</span>
       </button>
-      <button class="nav-item" id="navProfile" onclick="navigateTo('screenProfile')" aria-label="Profil Pengguna">
+      <button class="nav-item" id="navProfile" onclick="navigateTo('screenProfile')" aria-label="Profil & Riwayat">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <span>Profil</span>
       </button>
@@ -2380,9 +2446,120 @@
   </main>
 
   <!-- ========================================== -->
+  <!-- MODAL: DAFTAR RUJUKAN FATWA & REGULASI RESMI -->
+  <!-- ========================================== -->
+  <div class="modal-overlay" id="modalSourceRef" role="dialog" aria-modal="true" aria-labelledby="sourceModalTitle" onclick="closeModalOnOverlay(event, 'modalSourceRef')">
+    <div class="modal-sheet" style="max-height: 88vh; overflow-y: auto;">
+      <div class="sheet-handle"></div>
+      <div class="flex-between">
+        <div class="flex-row gap-2">
+          <span class="pill pill-emerald">RUJUKAN RESMI</span>
+          <h3 id="sourceModalTitle" style="font-size: 16px; font-weight: 700; color: var(--emerald-950); margin: 0;">Fatwa DSN-MUI & Regulasi OJK</h3>
+        </div>
+        <button class="btn-back" onclick="closeModal('modalSourceRef')" aria-label="Tutup Rujukan" style="font-size: 18px; padding: 0;">✕</button>
+      </div>
+
+      <p class="text-muted mt-2" style="font-size: 12.5px; line-height: 1.6;">
+        Syariah Digital Check mendasarkan parameter analisis transparansi pada dokumen resmi Dewan Syariah Nasional – Majelis Ulama Indonesia (DSN-MUI), Otoritas Jasa Keuangan (OJK), dan Bappebti.
+      </p>
+
+      <div class="sources-list mt-3" style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="card" style="padding: 12px 14px; background: var(--ivory-50); border: 1px solid var(--ivory-border);">
+          <div class="flex-between">
+            <span class="pill pill-emerald" style="font-size: 10px; padding: 2px 7px;">Fatwa DSN-MUI</span>
+            <span class="text-xs text-muted">Terverifikasi: 18 Okt 2026</span>
+          </div>
+          <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-top: 6px;">
+            Fatwa No. 117/DSN-MUI/II/2018
+          </strong>
+          <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.5;">
+            Layanan Pembiayaan Berbasis Teknologi Informasi Berdasarkan Prinsip Syariah (Fintech P2P Financing).
+          </p>
+          <a href="https://dsnmui.or.id" target="_blank" rel="noopener noreferrer" class="link-external" style="display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; color: var(--emerald-800); margin-top: 6px;">
+            Kunjungi Portal Resmi DSN-MUI <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="card" style="padding: 12px 14px; background: var(--ivory-50); border: 1px solid var(--ivory-border);">
+          <div class="flex-between">
+            <span class="pill pill-emerald" style="font-size: 10px; padding: 2px 7px;">Fatwa DSN-MUI</span>
+            <span class="text-xs text-muted">Terverifikasi: 18 Okt 2026</span>
+          </div>
+          <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-top: 6px;">
+            Fatwa No. 111/DSN-MUI/IX/2017
+          </strong>
+          <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.5;">
+            Akad Jual Beli Murabahah (Kaidah kepemilikan komoditas sebelum dijual kembali).
+          </p>
+          <a href="https://dsnmui.or.id" target="_blank" rel="noopener noreferrer" class="link-external" style="display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; color: var(--emerald-800); margin-top: 6px;">
+            Kunjungi Portal Resmi DSN-MUI <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="card" style="padding: 12px 14px; background: var(--ivory-50); border: 1px solid var(--ivory-border);">
+          <div class="flex-between">
+            <span class="pill pill-emerald" style="font-size: 10px; padding: 2px 7px;">Fatwa DSN-MUI</span>
+            <span class="text-xs text-muted">Terverifikasi: 18 Okt 2026</span>
+          </div>
+          <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-top: 6px;">
+            Fatwa No. 77/DSN-MUI/V/2010
+          </strong>
+          <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.5;">
+            Jual Beli Emas Secara Tidak Tunai dan Ketentuan Qabdh Hukmi (Serah Terima Yuridis Sah).
+          </p>
+          <a href="https://dsnmui.or.id" target="_blank" rel="noopener noreferrer" class="link-external" style="display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; color: var(--emerald-800); margin-top: 6px;">
+            Kunjungi Portal Resmi DSN-MUI <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="card" style="padding: 12px 14px; background: var(--ivory-50); border: 1px solid var(--ivory-border);">
+          <div class="flex-between">
+            <span class="pill pill-emerald" style="font-size: 10px; padding: 2px 7px;">Fatwa DSN-MUI</span>
+            <span class="text-xs text-muted">Terverifikasi: 18 Okt 2026</span>
+          </div>
+          <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-top: 6px;">
+            Fatwa No. 43/DSN-MUI/VIII/2004
+          </strong>
+          <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.5;">
+            Ganti Rugi (Ta'widh) dan Sanksi Finansial (Ta'zir) atas Keterlambatan Pembayaran.
+          </p>
+          <a href="https://dsnmui.or.id" target="_blank" rel="noopener noreferrer" class="link-external" style="display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; color: var(--emerald-800); margin-top: 6px;">
+            Kunjungi Portal Resmi DSN-MUI <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="card" style="padding: 12px 14px; background: var(--ivory-50); border: 1px solid var(--ivory-border);">
+          <div class="flex-between">
+            <span class="pill pill-gold" style="font-size: 10px; padding: 2px 7px;">Regulasi Pemerintah</span>
+            <span class="text-xs text-muted">Terverifikasi: 18 Okt 2026</span>
+          </div>
+          <strong style="font-size: 13px; color: var(--emerald-950); display: block; margin-top: 6px;">
+            POJK No. 10/POJK.05/2022 & Peraturan Bappebti No. 4/2019
+          </strong>
+          <p class="text-muted mt-1" style="font-size: 12px; line-height: 1.5;">
+            Ketentuan batas manfaat ekonomi fintech, perlindungan konsumen, dan kustodian fisik emas digital.
+          </p>
+          <a href="https://ojk.go.id" target="_blank" rel="noopener noreferrer" class="link-external" style="display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; color: var(--emerald-800); margin-top: 6px;">
+            Kunjungi Portal Resmi OJK <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="notice-box notice-disclaimer mt-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span><strong>Catatan Verifikasi:</strong> Naskah fatwa lengkap dapat dibaca langsung pada portal resmi regulator. Aplikasi menyajikan rujukan ini guna memfasilitasi riset mandiri sebelum bertransaksi.</span>
+      </div>
+
+      <button class="btn btn-secondary btn-full mt-3" onclick="closeModal('modalSourceRef')">
+        Tutup Rujukan
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
   <!-- MODAL 1: LESSON READER DRAWER -->
   <!-- ========================================== -->
-  <div class="modal-overlay" id="modalLessonReader" onclick="closeModalOnOverlay(event, 'modalLessonReader')">
+  <div class="modal-overlay" id="modalLessonReader" role="dialog" aria-modal="true" aria-labelledby="lessonModalTitle" onclick="closeModalOnOverlay(event, 'modalLessonReader')">
     <div class="modal-sheet">
       <div class="sheet-handle"></div>
       <div class="flex-between">
@@ -2412,12 +2589,12 @@
   <!-- ========================================== -->
   <!-- MODAL 2: CASE STUDY DETAIL DRAWER -->
   <!-- ========================================== -->
-  <div class="modal-overlay" id="modalCaseDetail" onclick="closeModalOnOverlay(event, 'modalCaseDetail')">
+  <div class="modal-overlay" id="modalCaseDetail" role="dialog" aria-modal="true" aria-labelledby="caseModalTitle" onclick="closeModalOnOverlay(event, 'modalCaseDetail')">
     <div class="modal-sheet">
       <div class="sheet-handle"></div>
       <div class="flex-between">
         <span class="pill pill-gold" id="caseModalCategory">PAYLATER</span>
-        <button class="btn-back" onclick="closeModal('modalCaseDetail')" style="font-size: 18px; padding: 0;">✕</button>
+        <button class="btn-back" onclick="closeModal('modalCaseDetail')" aria-label="Tutup Detail Kasus" style="font-size: 18px; padding: 0;">✕</button>
       </div>
       <h2 class="serif-title mt-2" style="font-size: 20px; color: var(--emerald-950);" id="caseModalTitle">
         Promo PayLater 0% dengan Biaya Langganan Bulanan
@@ -2445,17 +2622,17 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- MODAL 3: DESIGN SYSTEM & SOURCE REFERENCES -->
+  <!-- MODAL 3: DESIGN SYSTEM & SOURCE REFERENCES (INTERNAL DEV) -->
   <!-- ========================================== -->
-  <div class="modal-overlay ds-modal" id="modalDesignSystem" onclick="closeModalOnOverlay(event, 'modalDesignSystem')">
+  <div class="modal-overlay ds-modal" id="modalDesignSystem" role="dialog" aria-modal="true" aria-labelledby="dsModalTitle" onclick="closeModalOnOverlay(event, 'modalDesignSystem')">
     <div class="modal-sheet">
       <div class="sheet-handle"></div>
       <div class="flex-between">
         <div class="flex-row gap-2">
           <span class="pill pill-gold">DESIGN SYSTEM & FATWA SPEC</span>
-          <strong style="font-size: 16px; color: var(--emerald-950);">Fintech UX Specification</strong>
+          <strong id="dsModalTitle" style="font-size: 16px; color: var(--emerald-950);">Fintech UX Specification</strong>
         </div>
-        <button class="btn-back" onclick="closeModal('modalDesignSystem')" style="font-size: 18px; padding: 0;">✕</button>
+        <button class="btn-back" onclick="closeModal('modalDesignSystem')" aria-label="Tutup Spesifikasi Desain" style="font-size: 18px; padding: 0;">✕</button>
       </div>
 
       <p class="text-muted mt-2" style="font-size: 12px;">
@@ -2520,15 +2697,15 @@
   <!-- ========================================== -->
   <!-- MODAL 4: INSTALL ON IOS (NATIVE STANDALONE) -->
   <!-- ========================================== -->
-  <div class="modal-overlay" id="modalIOSInstall" onclick="closeModalOnOverlay(event, 'modalIOSInstall')">
+  <div class="modal-overlay" id="modalIOSInstall" role="dialog" aria-modal="true" aria-labelledby="iosModalTitle" onclick="closeModalOnOverlay(event, 'modalIOSInstall')">
     <div class="modal-sheet" style="max-height: 88vh; overflow-y: auto;">
       <div class="sheet-handle"></div>
       <div class="flex-between">
         <div class="flex-row gap-2">
           <span class="pill pill-gold"> APLIKASI UTUH IOS</span>
-          <strong style="font-size: 15px; color: var(--emerald-950);">Pasang di iPhone / iPad</strong>
+          <strong id="iosModalTitle" style="font-size: 15px; color: var(--emerald-950);">Pasang di iPhone / iPad</strong>
         </div>
-        <button class="btn-back" onclick="closeModal('modalIOSInstall')" style="font-size: 18px; padding: 0;">✕</button>
+        <button class="btn-back" onclick="closeModal('modalIOSInstall')" aria-label="Tutup Panduan Pasang iOS" style="font-size: 18px; padding: 0;">✕</button>
       </div>
 
       <p class="text-muted mt-2" style="font-size: 12.5px; line-height: 1.55;">
@@ -2914,30 +3091,47 @@
       }
 
       // Update Bottom Navigation active state (Mobile & Tablet)
-      document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(b => {
+        b.classList.remove('active');
+        b.removeAttribute('aria-current');
+      });
       // Update Desktop Navigation active state (Desktop Top Bar)
-      document.querySelectorAll('.desk-nav-link').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.desk-nav-link').forEach(b => {
+        b.classList.remove('active');
+        b.removeAttribute('aria-current');
+      });
+
+      const markActive = (navId, deskId) => {
+        if (navId) {
+          const n = document.getElementById(navId);
+          if (n) {
+            n.classList.add('active');
+            n.setAttribute('aria-current', 'page');
+          }
+        }
+        if (deskId) {
+          const d = document.getElementById(deskId);
+          if (d) {
+            d.classList.add('active');
+            d.setAttribute('aria-current', 'page');
+          }
+        }
+      };
 
       if (screenId === 'screenHome') {
-        const nh = document.getElementById('navHome'); if (nh) nh.classList.add('active');
-        const dh = document.getElementById('deskNavHome'); if (dh) dh.classList.add('active');
+        markActive('navHome', 'deskNavHome');
       } else if (screenId === 'screenCategorySelect' || screenId === 'screenChecklist' || screenId === 'screenResult') {
-        const nc = document.getElementById('navCheck'); if (nc) nc.classList.add('active');
-        const dc = document.getElementById('deskNavCheck'); if (dc) dc.classList.add('active');
+        markActive('navCheck', 'deskNavCheck');
       } else if (screenId === 'screenLearn') {
-        const nl = document.getElementById('navLearn'); if (nl) nl.classList.add('active');
-        const dl = document.getElementById('deskNavLearn'); if (dl) dl.classList.add('active');
+        markActive('navLearn', 'deskNavLearn');
       } else if (screenId === 'screenCaseStudies') {
-        const nl = document.getElementById('navLearn'); if (nl) nl.classList.add('active');
-        const dc = document.getElementById('deskNavCase'); if (dc) dc.classList.add('active');
+        markActive('navLearn', 'deskNavCase');
       } else if (screenId === 'screenQuiz') {
-        const nq = document.getElementById('navQuiz'); if (nq) nq.classList.add('active');
-        const dq = document.getElementById('deskNavQuiz'); if (dq) dq.classList.add('active');
+        markActive('navQuiz', 'deskNavQuiz');
       } else if (screenId === 'screenProgress') {
-        const np = document.getElementById('navProfile'); if (np) np.classList.add('active');
-        const dp = document.getElementById('deskNavProgress'); if (dp) dp.classList.add('active');
+        markActive('navProfile', 'deskNavProgress');
       } else if (screenId === 'screenProfile') {
-        const np = document.getElementById('navProfile'); if (np) np.classList.add('active');
+        markActive('navProfile', null);
       }
     }
 
@@ -3390,12 +3584,21 @@
     }
 
     function openSourceRefModal() {
-      openModal('modalDesignSystem');
+      openModal('modalSourceRef');
     }
 
     function openIOSInstallModal() {
       openModal('modalIOSInstall');
     }
+
+    // --- Global Keyboard Accessibility (WCAG 2.2 AA) ---
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.open').forEach(modal => {
+          closeModal(modal.id);
+        });
+      }
+    });
 
     // --- Toast Notifications ---
     let toastTimeout;
