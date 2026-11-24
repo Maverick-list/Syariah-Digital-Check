@@ -138,16 +138,23 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+    html {
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
+      font-size: 16.5px;
+    }
     body {
       background-color: var(--ivory-base);
       color: var(--text-primary);
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.5;
+      font-size: 16px;
+      line-height: 1.65;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       justify-content: flex-start;
       -webkit-font-smoothing: antialiased;
       padding: 0;
@@ -250,13 +257,24 @@
       -webkit-backdrop-filter: blur(12px);
     }
     .header-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 12px 24px;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 14px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
+    }
+    @media (min-width: 768px) {
+      .header-inner {
+        padding: 16px 36px;
+      }
+    }
+    @media (min-width: 1200px) {
+      .header-inner {
+        padding: 18px 48px;
+      }
     }
     .brand-group {
       display: flex;
@@ -420,13 +438,13 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       background-color: var(--ivory-base);
     }
     .site-content-wrapper {
       width: 100%;
-      max-width: 1240px;
-      margin: 0 auto;
+      max-width: 100%;
+      margin: 0;
       padding: 0;
       flex: 1;
       display: flex;
@@ -472,26 +490,32 @@
     .home-grid-layout {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 24px;
     }
     @media (min-width: 1024px) {
       .home-grid-layout {
         display: grid;
-        grid-template-columns: 1.18fr 0.82fr;
-        gap: 32px;
+        grid-template-columns: 1.22fr 0.78fr;
+        gap: 36px;
         align-items: start;
+      }
+    }
+    @media (min-width: 1400px) {
+      .home-grid-layout {
+        grid-template-columns: 1.32fr 0.68fr;
+        gap: 44px;
       }
     }
     .home-cases-grid {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
     }
     @media (min-width: 640px) {
       .home-cases-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
+        gap: 16px;
       }
     }
 
@@ -499,15 +523,22 @@
     .checklist-grid-layout {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
     }
     @media (min-width: 1024px) {
       .checklist-grid-layout {
         display: grid;
-        grid-template-columns: 340px 1fr;
-        gap: 32px;
+        grid-template-columns: 360px 1fr;
+        gap: 36px;
         align-items: start;
       }
+    }
+    @media (min-width: 1400px) {
+      .checklist-grid-layout {
+        grid-template-columns: 400px 1fr;
+        gap: 44px;
+      }
+    }
       .checklist-sidebar {
         position: sticky;
         top: 96px;
@@ -624,13 +655,13 @@
     /* Emerald Banner Responsive Layout */
     @media (min-width: 768px) {
       .header-emerald {
-        padding: 40px 32px 32px !important;
+        padding: 48px 36px 36px !important;
         border-radius: 0 0 32px 32px !important;
       }
     }
     @media (min-width: 1024px) {
       .header-emerald {
-        padding: 48px 44px 38px !important;
+        padding: 56px 56px 44px !important;
         border-radius: 0 0 36px 36px !important;
       }
       .header-emerald-flex {
@@ -640,34 +671,58 @@
         gap: 32px;
       }
     }
+    @media (min-width: 1400px) {
+      .header-emerald {
+        padding: 64px 80px 48px !important;
+        border-radius: 0 0 40px 40px !important;
+      }
+    }
 
     /* Main Content Responsive Padding */
+    .main-content {
+      padding: 22px 18px;
+      width: 100%;
+      max-width: 100%;
+    }
     @media (min-width: 768px) {
       .main-content {
-        padding: 28px 24px !important;
+        padding: 32px 36px !important;
       }
     }
     @media (min-width: 1024px) {
       .main-content {
-        padding: 36px 32px !important;
+        padding: 40px 56px !important;
+      }
+    }
+    @media (min-width: 1400px) {
+      .main-content {
+        padding: 48px 80px !important;
       }
     }
 
     /* Top Subnavigation Responsive Padding */
+    .top-subnav {
+      padding: 16px 18px 8px;
+    }
     @media (min-width: 768px) {
       .top-subnav {
-        padding: 20px 24px 10px !important;
+        padding: 24px 36px 12px !important;
       }
     }
     @media (min-width: 1024px) {
       .top-subnav {
-        padding: 24px 32px 12px !important;
+        padding: 28px 56px 16px !important;
+      }
+    }
+    @media (min-width: 1400px) {
+      .top-subnav {
+        padding: 32px 80px 18px !important;
       }
     }
 
     /* Quiz Centered Container */
     .quiz-container {
-      max-width: 760px;
+      max-width: 1080px;
       margin: 0 auto;
       width: 100%;
     }
@@ -679,15 +734,15 @@
         padding: 24px !important;
       }
       .modal-sheet {
-        border-radius: 24px !important;
-        max-width: 600px !important;
+        border-radius: 28px !important;
+        max-width: 760px !important;
         animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
       }
       .ds-modal .modal-sheet {
-        max-width: 820px !important;
+        max-width: 960px !important;
       }
       .wide-modal .modal-sheet {
-        max-width: 740px !important;
+        max-width: 900px !important;
       }
     }
     @keyframes modalPop {
@@ -1942,22 +1997,39 @@
     .offline-banner-inner {
       display: flex;
       align-items: center;
-      gap: 8px;
-      max-width: 1000px;
+      gap: 10px;
+      max-width: 100%;
       width: 100%;
+      font-size: 13.5px;
     }
 
     /* Phase 8 Public Site Footer */
     .public-site-footer {
       background: var(--ivory-warm);
       border-top: 1px solid var(--ivory-border);
-      border-radius: var(--radius-lg);
-      padding: 32px 24px 24px;
-      margin-top: 36px;
+      border-radius: 0;
+      padding: 40px 24px 32px;
+      margin-top: 48px;
       margin-bottom: 24px;
+      width: 100%;
+    }
+    @media (min-width: 768px) {
+      .public-site-footer {
+        padding: 48px 40px 36px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .public-site-footer {
+        padding: 56px 56px 40px;
+      }
+    }
+    @media (min-width: 1400px) {
+      .public-site-footer {
+        padding: 60px 80px 48px;
+      }
     }
     .footer-inner {
-      max-width: 1000px;
+      max-width: 100%;
       margin: 0 auto;
     }
     .footer-top {
@@ -2077,6 +2149,243 @@
       font-size: 10.5px;
       font-weight: 600;
     }
+
+    /* ========================================================= */
+    /* ACCESSIBLE HIGH-LEGIBILITY TYPOGRAPHY & FULL-WIDTH SCALE  */
+    /* ========================================================= */
+    .brand-name {
+      font-size: 19px !important;
+      font-weight: 800 !important;
+    }
+    .brand-tagline {
+      font-size: 12.5px !important;
+    }
+    .desk-nav-link {
+      font-size: 15px !important;
+      padding: 9px 18px !important;
+      font-weight: 600 !important;
+    }
+    .btn-header-spec {
+      font-size: 13.5px !important;
+      padding: 8px 18px !important;
+    }
+    .header-user-badge {
+      font-size: 13.5px !important;
+      padding: 6px 14px 6px 8px !important;
+    }
+
+    h1.serif-title {
+      font-size: clamp(28px, 3.2vw, 42px) !important;
+      line-height: 1.25 !important;
+    }
+    h2.serif-title {
+      font-size: clamp(23px, 2.4vw, 32px) !important;
+      line-height: 1.3 !important;
+    }
+    h3.serif-title, h3 {
+      font-size: clamp(18px, 1.8vw, 24px) !important;
+    }
+    h4 {
+      font-size: 18px !important;
+    }
+
+    .eyebrow {
+      font-size: 12.5px !important;
+      letter-spacing: 0.08em !important;
+      gap: 7px !important;
+      margin-bottom: 6px !important;
+    }
+    .eyebrow svg {
+      width: 15px !important;
+      height: 15px !important;
+    }
+
+    .pill {
+      font-size: 12px !important;
+      padding: 5px 12px !important;
+      letter-spacing: 0.03em !important;
+    }
+
+    .btn {
+      font-size: 15.5px !important;
+      font-weight: 700 !important;
+      padding: 14px 24px !important;
+      min-height: 50px !important;
+      border-radius: var(--radius-lg) !important;
+    }
+    .btn-sm {
+      font-size: 14px !important;
+      padding: 9px 16px !important;
+      min-height: 42px !important;
+    }
+    .btn-back {
+      font-size: 14.5px !important;
+      padding: 8px 16px !important;
+    }
+
+    p, .text-muted, .text-secondary {
+      font-size: 15.5px;
+      line-height: 1.65;
+    }
+    .text-muted {
+      font-size: 14.5px !important;
+      color: #3E5B4B !important;
+    }
+
+    .card-hero-check {
+      padding: 28px !important;
+      border-radius: 24px !important;
+    }
+    .card-hero-check h2 {
+      font-size: clamp(21px, 2vw, 27px) !important;
+      margin-top: 8px !important;
+      margin-bottom: 8px !important;
+    }
+    .card-hero-check p {
+      font-size: 15.5px !important;
+      line-height: 1.6 !important;
+    }
+
+    .pillar-row {
+      gap: 16px !important;
+      margin: 20px 0 !important;
+    }
+    .pillar-card {
+      padding: 18px 14px !important;
+      border-radius: 20px !important;
+    }
+    .pillar-icon-box {
+      width: 50px !important;
+      height: 50px !important;
+      border-radius: 14px !important;
+      margin-bottom: 12px !important;
+    }
+    .pillar-icon-box svg {
+      width: 25px !important;
+      height: 25px !important;
+    }
+    .pillar-title {
+      font-size: 16px !important;
+      font-weight: 800 !important;
+    }
+    .pillar-subtitle {
+      font-size: 13.5px !important;
+      margin-top: 3px !important;
+    }
+
+    .cat-card {
+      padding: 22px 18px !important;
+      min-height: 155px !important;
+      border-radius: 20px !important;
+    }
+    .cat-card h4 {
+      font-size: 18px !important;
+      margin-top: 8px !important;
+      margin-bottom: 5px !important;
+    }
+    .cat-card p {
+      font-size: 13.5px !important;
+      line-height: 1.5 !important;
+    }
+    .cat-card .pill {
+      font-size: 11px !important;
+    }
+
+    .case-card {
+      padding: 22px !important;
+      border-radius: 20px !important;
+    }
+    .case-card strong {
+      font-size: 17px !important;
+      margin-top: 6px !important;
+    }
+    .case-card p {
+      font-size: 14.5px !important;
+      line-height: 1.6 !important;
+    }
+
+    .check-opt-card {
+      padding: 18px 20px !important;
+      border-radius: 18px !important;
+      margin-bottom: 12px !important;
+    }
+    .check-opt-card strong {
+      font-size: 16.5px !important;
+    }
+    .check-opt-card p {
+      font-size: 14.5px !important;
+      line-height: 1.55 !important;
+    }
+
+    .quiz-option-card {
+      padding: 18px 22px !important;
+      font-size: 16.5px !important;
+      border-radius: 18px !important;
+      margin-bottom: 12px !important;
+    }
+    .quiz-question-box {
+      font-size: clamp(19px, 2vw, 24px) !important;
+      line-height: 1.5 !important;
+      margin-bottom: 20px !important;
+    }
+    .quiz-feedback-box {
+      font-size: 15.5px !important;
+      line-height: 1.65 !important;
+      padding: 20px !important;
+      border-radius: 18px !important;
+    }
+
+    .modal-sheet {
+      max-width: 760px !important;
+      padding: 36px 36px 44px !important;
+      border-radius: 28px !important;
+    }
+    .modal-sheet h2 {
+      font-size: 26px !important;
+    }
+    .modal-sheet p, .modal-sheet li {
+      font-size: 15.5px !important;
+      line-height: 1.7 !important;
+    }
+    .ds-modal .modal-sheet, .wide-modal .modal-sheet {
+      max-width: 960px !important;
+    }
+
+    .footer-disclaimer-text {
+      font-size: 13.5px !important;
+      line-height: 1.6 !important;
+    }
+    .footer-bottom {
+      font-size: 13.5px !important;
+    }
+    .footer-col p, .footer-col a {
+      font-size: 14.5px !important;
+      line-height: 1.65 !important;
+    }
+    .badge-pill {
+      font-size: 12px !important;
+      padding: 4px 10px !important;
+    }
+
+    .bottom-nav {
+      height: 74px !important;
+    }
+    .bottom-nav .nav-item span {
+      font-size: 11.5px !important;
+      font-weight: 600 !important;
+    }
+
+    .onboarding-screen {
+      max-width: 1040px !important;
+      margin: 0 auto !important;
+      width: 100% !important;
+      padding: 40px 24px !important;
+    }
+    .onboard-step-card {
+      max-width: 820px !important;
+      margin: 24px auto !important;
+      padding: 36px 32px !important;
+    }
   </style>
 </head>
 <body>
@@ -2170,7 +2479,7 @@
               <h1 class="serif-title" style="font-size: 26px; color: var(--emerald-950); margin-top: 12px; line-height: 1.25;">
                 Cerdas Sebelum Transaksi,<br>Bijak dalam Pilihan
               </h1>
-              <p class="text-muted mt-2" style="max-width: 310px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+              <p class="text-muted mt-2" style="max-width: 680px; margin-left: auto; margin-right: auto; line-height: 1.6; font-size: 16px;">
                 Panduan edukasi literasi syariah untuk mendeteksi klausul tidak jelas, biaya tersembunyi, dan memastikan akad yang adil.
               </p>
             </div>
@@ -2230,18 +2539,18 @@
 
             <div class="header-emerald-flex">
               <div>
-                <h1 class="serif-title" style="font-size: 26px; line-height: 1.25; color: #fff;">
+                <h1 class="serif-title" style="font-size: clamp(28px, 3.2vw, 40px); line-height: 1.25; color: #fff;">
                   Assalamu’alaikum, <br><span id="homeGreetingName">Fikri</span> <span class="gold-sparkle">✦</span>
                 </h1>
-                <p style="color: #CEE4D8; font-size: 13.5px; margin-top: 6px;">
+                <p style="color: #CEE4D8; font-size: 16px; margin-top: 8px;">
                   Cerdas sebelum transaksi, bijak dalam pilihan.
                 </p>
               </div>
-              <div class="hide-mobile" style="background: rgba(255,255,255,0.08); padding: 12px 18px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; gap: 14px;">
-                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(200, 157, 66, 0.22); border: 1px solid rgba(200, 157, 66, 0.4); display: grid; place-items: center; color: var(--gold-500); font-weight: 800; font-size: 15px;">84%</div>
+              <div class="hide-mobile" style="background: rgba(255,255,255,0.08); padding: 14px 20px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; gap: 16px;">
+                <div style="width: 50px; height: 50px; border-radius: 14px; background: rgba(200, 157, 66, 0.22); border: 1px solid rgba(200, 157, 66, 0.4); display: grid; place-items: center; color: var(--gold-500); font-weight: 800; font-size: 17px;">84%</div>
                 <div>
-                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: #9EC0AF; font-weight: 700;">Indeks Literasi</div>
-                  <div style="font-size: 13.5px; font-weight: 700; color: #FFFFFF;">Konsumen Sadar (Mahir)</div>
+                  <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; color: #9EC0AF; font-weight: 700;">Indeks Literasi</div>
+                  <div style="font-size: 15px; font-weight: 700; color: #FFFFFF;">Konsumen Sadar (Mahir)</div>
                 </div>
               </div>
             </div>
@@ -2257,10 +2566,10 @@
                 <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 30-SECOND FAST CHECK</span>
                 <span class="pill pill-gold">Rekomendasi</span>
               </div>
-              <h2 class="serif-title mt-2" style="font-size: 19px; color: var(--emerald-950); line-height: 1.3;">
+              <h2 class="serif-title mt-2" style="font-size: clamp(22px, 2.2vw, 28px); color: var(--emerald-950); line-height: 1.3;">
                 Ingin transaksi sekarang? Periksa akad & biayanya!
               </h2>
-              <p class="text-muted mt-2" style="font-size: 12.5px; line-height: 1.55;">
+              <p class="text-muted mt-2" style="font-size: 15.5px; line-height: 1.6;">
                 Pahami hak dan kewajiban, hindari denda tersembunyi, dan pastikan transaksi sesuai nilai muamalah syariah.
               </p>
               <button class="btn btn-primary btn-full mt-3" onclick="startTransactionCheck()">
@@ -2466,10 +2775,10 @@
 
           <div class="main-content">
             <span class="eyebrow">LANGKAH PERTAMA : BERHENTI SEJENAK</span>
-            <h2 class="serif-title" style="font-size: 23px; color: var(--emerald-950); line-height: 1.3;">
+            <h2 class="serif-title" style="font-size: clamp(23px, 2.4vw, 32px); color: var(--emerald-950); line-height: 1.3;">
               Jeda Sadar Sebelum Berkomitmen Finansial
             </h2>
-            <p class="text-muted mt-1" style="font-size: 13.5px; line-height: 1.6;">
+            <p class="text-muted mt-1" style="font-size: 16px; line-height: 1.6;">
               Keputusan keuangan yang baik tidak diambil dalam ketergesa-gesaan. Luangkan waktu sejenak untuk menelaah akad, skema biaya, dan kesiapan sebelum menyetujui transaksi digital.
             </p>
 
@@ -2477,34 +2786,34 @@
             <div class="pause-hero-card mt-3">
               <div class="flex-row gap-2" style="align-items: center;">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-400)" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M10 15V9l5 3-5 3z"/></svg>
-                <span class="pill pill-gold" style="font-size: 9px; padding: 2px 8px;">MENGAPA PERLU MENGECEK?</span>
+                <span class="pill pill-gold" style="font-size: 11px; padding: 3px 10px;">MENGAPA PERLU MENGECEK?</span>
               </div>
-              <h3 class="serif-title">Mencegah Jebakan Biaya & Menjaga Keberkahan Harta</h3>
-              <p>
+              <h3 class="serif-title" style="font-size: 22px; margin-top: 10px;">Mencegah Jebakan Biaya & Menjaga Keberkahan Harta</h3>
+              <p style="font-size: 15.5px; line-height: 1.65; margin-top: 8px;">
                 Fintech dan platform digital modern sering kali menyamarkan bunga dalam bentuk "biaya administrasi bulanan tetap" atau denda keterlambatan majemuk. Mengetahui akad dan status pihak sebelum transaksi adalah hak sekaligus kewajiban perlindungan konsumen muslim (Hifzhul Maal).
               </p>
             </div>
 
             <!-- Zero Sensitive Credential Security Warning -->
-            <div class="security-notice-box" role="alert">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.2" style="flex-shrink: 0; margin-top: 1px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div class="security-notice-box" role="alert" style="padding: 18px 20px;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.2" style="flex-shrink: 0; margin-top: 1px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               <div>
-                <strong style="color: #92400E; display: block; font-size: 13px; margin-bottom: 3px;">
+                <strong style="color: #92400E; display: block; font-size: 15px; margin-bottom: 4px;">
                   Peringatan Keamanan: Jangan Pernah Masukkan Data Finansial Sensitif!
                 </strong>
-                <span>
+                <span style="font-size: 14.5px; line-height: 1.6;">
                   Aplikasi Syariah Digital Check <strong>TIDAK PERNAH</strong> meminta dan Anda <strong>DILARANG</strong> memasukkan PIN, kode OTP, kata sandi, nomor kartu ATM/kredit, atau kode CVV/CVC. Seluruh proses checklist di bawah ini bersifat edukatif berbasis dokumen syarat & ketentuan (T&C) umum yang Anda baca.
                 </span>
               </div>
             </div>
 
             <!-- Interactive Conscious Breathing Reflection Box -->
-            <div class="breathing-timer-box">
+            <div class="breathing-timer-box" style="padding: 28px 24px;">
               <span class="eyebrow" style="color: var(--emerald-800);">LATIHAN REFLEKSI DIRI</span>
-              <h4 style="font-size: 15px; font-weight: 700; color: var(--emerald-950); margin: 4px 0 8px;">
+              <h4 style="font-size: 18px; font-weight: 700; color: var(--emerald-950); margin: 6px 0 10px;">
                 Jeda Berpikir 30 Detik (Conscious Pause)
               </h4>
-              <p class="text-muted" style="font-size: 12px; max-width: 440px; margin: 0 auto 16px; line-height: 1.55;">
+              <p class="text-muted" style="font-size: 15.5px; max-width: 640px; margin: 0 auto 20px; line-height: 1.6;">
                 Tarik napas perlahan. Tanyakan pada diri Anda: <em>"Apakah transaksi ini benar-benar kebutuhan mendesak yang telah saya pahami, atau sekadar dorongan impulsif promo sesaat?"</em>
               </p>
 
@@ -2514,7 +2823,7 @@
               </div>
 
               <!-- Progress bar -->
-              <div class="step-progress-bar" style="max-width: 280px; margin: 0 auto 16px; height: 6px;">
+              <div class="step-progress-bar" style="max-width: 360px; margin: 0 auto 20px; height: 8px;">
                 <div class="step-progress-fill" id="pauseTimerProgressFill" style="width: 0%;"></div>
               </div>
 
@@ -2588,10 +2897,10 @@
 
           <div class="main-content">
             <span class="eyebrow">KLASIFIKASI TRANSAKSI</span>
-            <h2 class="serif-title" style="font-size: 22px; color: var(--emerald-950);">
+            <h2 class="serif-title" style="font-size: clamp(23px, 2.4vw, 32px); color: var(--emerald-950);">
               Pilih Jenis Transaksi yang Ingin Diperiksa
             </h2>
-            <p class="text-muted mt-1" style="font-size: 13px;">
+            <p class="text-muted mt-1" style="font-size: 16px; line-height: 1.6;">
               Tiap kategori memiliki pertanyaan terarah, batasan regulasi (OJK/BI/Bappebti), serta kaidah muamalah yang berbeda.
             </p>
 
